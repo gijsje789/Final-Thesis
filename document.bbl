@@ -1,0 +1,48 @@
+\begin{thebibliography}{7}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\providecommand{\urlprefix}{URL }
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi:\discretionary{}{}{}#1}\else
+  \providecommand{\doi}{doi:\discretionary{}{}{}\begingroup
+  \urlstyle{rm}\Url}\fi
+
+\bibitem[Barfoo, 1978]{bar}
+Barfoo (1978), \emph{Lorem Ipsum Lorei}, CE, Utwente, ISBN 0134456789.
+
+\bibitem[Broenink and Hilderink, 2001]{DesignTraject}
+Broenink, J.~F. and G.~H. Hilderink (2001), A structured approach to embedded
+  control systems implementation, in \emph{Proceedings of the 2001 IEEE
+  International Conference on Control Applications}, Eds. M.~W. Spong, D.~W.
+  Repperger and J.~M.~I. Zannatha, IEEE, pp. 761--766, ISBN 0-7803-6733-2,
+  \doi{10.1109/CCA.2001.973960}.
+\newline{}\raggedright{\url{http://www.ce.utwente.nl/rtweb/publications/2001/pdf-files/042R2001.pdf}}
+
+\bibitem[{Controllab Products}, 2008]{20sim}
+{Controllab Products} (2008), {20-sim}.
+\newline{}\raggedright{\url{http://www.20-sim.com/}}
+
+\bibitem[Foobar, 2030]{foo}
+Foobar (2030), \emph{Foobar Lorem Ipsum}, CE, Utwente, hundredth edition, ISBN
+  0123456789.
+
+\bibitem[Hilderink et~al., 1997]{CTlib}
+Hilderink, G., J.~Broenink and A.~Bakkers (1997), {Communicating Java Threads},
+  in \emph{Parallel Programming and Java, Proceedings of WoTUG 20}, volume ~50,
+  IOS Press, Netherlands, University of Twente, Netherlands, pp. 48--76.
+\newline{}\raggedright{\url{http://www.ce.utwente.nl/rtweb/publications/1999/pdf-files/014_R99.pdf}}
+
+\bibitem[Hoare, 1985]{Hoare}
+Hoare, C. A.~R. (1985), \emph{Communicating Sequential Processes}, Prentice
+  Hall International.
+\newline{}\raggedright{\url{http://www.usingcsp.com/cspbook.pdf}}
+
+\bibitem[Jovanovi{\'{c}} et~al., 2004]{gCSP}
+Jovanovi{\'{c}}, D.~S., B.~Orlic, G.~Liet and J.~F. Broenink (2004), {gCSP:} A
+  Graphical Tool for Designing {CSP} Systems, in \emph{Communicating Process
+  Architectures 2004}, volume ~62 of \emph{Concurrent Systems Engineering
+  Series}, Eds. I.~East, J.~Martin, P.~H. Welch, D.~Duce and M.~Green, IOS
+  press, Amsterdam, pp. 233--252, ISBN 1-58603-458-8, ISSN 1383-7575.
+\newline{}\raggedright{\url{http://doc.utwente.nl/49238/1/jovanovic04gcsp.pdf}}
+
+\end{thebibliography}
