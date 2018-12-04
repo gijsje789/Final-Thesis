@@ -1,8 +1,0 @@
-\babel@toc {UKenglish}{}
-\contentsline {chapter}{\numberline {1}Introduction}{1}{chapter.1}
-\contentsline {chapter}{\numberline {2}Literature}{2}{chapter.2}
-\contentsline {chapter}{\numberline {3}Research methodology}{3}{chapter.3}
-\contentsline {chapter}{\numberline {4}Planning}{4}{chapter.4}
-\contentsline {chapter}{\numberline {A}Appendix 1}{5}{appendix.A}
-\contentsline {section}{\numberline {A.1}Required TexLive packages}{5}{section.A.1}
-\contentsline {chapter}{Bibliography}{6}{hiddenchapter.3}
