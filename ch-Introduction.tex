@@ -1,6 +1,16 @@
 \chapter{Introduction}
 \label{ch:Intro}
 
-\rrow{Read into background information on D-SPECT}
-\rrow{Write global background information}
-\rrot{Introduce the rest of the document}
+\rrod{Read into background information on D-SPECT}
+\rrod{Write global background information}
+\rrow{Introduce the rest of the document}
+
+There are various types of scanners that use different techniques. Examples are Computed Tomography (CT), Magnetic Resonance Imaging (MRI), or Scintigraphy (SPECT/PET) scanners. In cardiology, the SPECT scanner is widely employed for coronary and myocardial perfusion measurements \citep{rahmim2008pet}. It is known that PET scans are generally more expensive \citep{hlatky2014economic, RadioPead2018}. \cite{hlatky2014economic} followed patients for two years, recording the costs and concluded that PET costs are 22\% higher than the costs for SPECT for patients with suspected Coronary Artery Disease (CAD).
+
+The imaging method in a typical SPECT scanner are scintillator-based gamma cameras, also known as Anger cameras. Gamma cameras use a scintillator to "transduce" gamma radiation, originating from an injected tracer, to photons. Part of these photons are directed towards a series of dynodes in Photomultiplier Tubes(PMTs), directly behind the scintillator, via a focusing electrode. Electrons that hit a dynode trigger the process of secondary emission (photoelectric effect), multiplying the number of electrons travelling through the tube. Electrons hitting the last dynode, also known as the anode, cause a current pulse which can be detected by measuring equipment. It is proportional to the amount of gamma ray photons entering the scintillator\citep{CZTTech2009}.
+
+Developments in imaging systems gave rise to the Digital SPECT scanner. In contrast to the analogue Anger cameras, the D-SPECT scanner utilises a direct conversion semiconductor: Cadmium Zinc Telluride (CZT). \cite{wagenaar2004cdte} used CZT to develop pixelated detector units which can be used for medical imaging. In a recent study, it is shown that a Digital SPECT scanner, using multiple pixelated CZT detectors, showed significant improvements in image sharpness and contrast\citep{goshen2018feasibility}. These detector units do not require PMTs and thus allow for a more compact and flexible design \citep{erlandsson2009performance}. The D-SPECT scanner, developed by Spectrum Dynamics\footnote{https://www.spectrum-dynamics.com/}, offers improvements in sensitivity and energy resolution \citep{SpectDynam2018} over Anger camera systems. However, these digital systems are relatively new and require proper validation to convince medical personnel of its value.
+
+\section{Document overview}
+\label{sec:doc_overview}
+The project plan consists of a (short) literature review of existing myocardial perfusion phantoms and more extensive information on D-SPECT scanners (their technical background, limitations, and so forth). The literature is followed by the research methodology containing the research questions and goals of the project. The detailed planning is the last section of the project plan.
