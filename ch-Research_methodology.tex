@@ -1,14 +1,39 @@
 \chapter{Research methodology}
 \label{ch:res_metho}
-\rrot{Define research questions}
-\rroi{Discuss main research question}
-\rroi{Define research boundaries}
+\rrow{Define research questions}
+\rrow{Discuss main research question}
+\rrot{Define research boundaries}
 \rrod{Define project goals}
+\rrot{Implement scanner descision}
+\rrot{Use limitations of phantoms to lead to research question}
 
-Many variations in myocardial perfusion work flow, but also the hard- and software involved, can (significantly) influence the outcome and in turn have consequences for patient treatment. These variations need to be validated against a known baseline such that the effects can be mapped to the outcome.
+Different perfusion phantoms have been developed. Some are specifically designed to simulate the myocardial perfusion \citep{chiribiri2013perfusion, otton2013direct, o2017effect, o2017feasibility, teslow1991x}, others for brain perfusion \citep{hashimoto2018effect, suzuki2017quantitative, boese2013performance, mathys2012phantom, ebrahimi2010microfabricated, wang2010flow, noguchi2007quantitative, ganguly2012vitro, klotz1999perfusion}, or capillaries in general \citep{kim2016efficiency, anderson2011semipermeable, driscoll2011development, gauthier2011perfusion, veltmann2002design, lohmaier2004vitro}, and even phantoms to simulate perfusion in rheumatoid finger joints \citep{sakano2015power} and skin \citep{kim2018multidimensional}. Most software packages are designed for human organs and look for recognition points such that it can perform the most optimal calculation. Part of these phantoms do not resemble the human anatomy of the parts they simulate, which will influence the reliability.
+
+\section{Research questions}
+\begin{figure}[b!]
+	\begin{center}
+		\includegraphics[width=0.5\linewidth]{images/vmodel.png}
+	\end{center}
+	\caption{V-Model as proposed by \cite{osborne2005clarus}}
+	\label{fig:vmodel}
+\end{figure}
+
+The project is carried out using the V-Model \citep{osborne2005clarus} approach, see figure \ref{fig:vmodel}. The research questions are defined based on the project definition phase.
+
+\subsection*{Concept of operations}
+What must the myocardial perfusion phantom be able to simulate?
+
+\subsection*{Requirements and Architecture}
+What are the requirements for a myocardial perfusion phantom that can be used in combination with commonly used clinical software?
+
+\subsection*{Detailed Design}
+How can the myocardial perfusion phantom meet the clinical requirements and mimic the perfusion of a human heart?
 
 \section{Project goal}
-The goal of the project is to develop a prototype myocardial phantom capable of repeated simulations in typical and cardiac defect situations using clinical software commonly used in myocardial perfusion scans. Most software packages require anatomical recognition points which imposes anatomical requirements on the phantom. In addition, the phantom can be used for educational and training purposes to demonstrate the impact of (poorly) chosen variables, e.g. pressure or flow, scanning parameters, cardiac defects, and so forth.
+The goal of the project is to develop a prototype myocardial perfusion phantom capable of repeated simulations of typical and cardiac defect situations using clinical software commonly used in myocardial perfusion scans. Most software packages require anatomical recognition points which imposes anatomical requirements on the phantom. In addition, the phantom can be used for educational and training purposes to demonstrate the impact of (poorly) chosen variables, e.g. pressure or flow, scanning parameters, cardiac defects, and so forth.
+
+\subsection*{Project sub-goal}
+During the individual project, a calibration set-up for flow and pressure sensors has been developed. The prototype version showed that flow sensors can be calibrated using the "emptying tank" principle. Pressure sensors have not been implemented in the prototype. Furthermore, the calibration set-up relies too much on human interaction. A sub-goal of the project will be to improve the existing calibration set-up such that flow and pressure sensors can be calibrated which in turn will increase the reliability of the flow set-up.
 \subsection{General concept}
 \begin{figure}[b!]
 	\begin{center}
@@ -25,5 +50,3 @@ During the individual project of Gijs de Vries, a prototype flow set-up, control
 The flow set-up uses simple, low costs pumps and available flow sensors. These might not be suitable for high precision flow systems. It is encouraged to look into alternatives.
 \subsection{Control module}
 The control module requires improvement when it is to be re-used. Two of the main improvements consist of improving the electro(magnetic) shielding to decrease the susceptibility to noise and to optimise the pump controllers.
-\subsection{Calibration set-up}
-The calibration set-up has been shown that it can be used to calibrate flow sensors. Pressure sensors have not been implemented. To increase the precision of the sensors, that are used in the flow set-up or, if decided upon, in a newly developed flow-set-up, the calibration set-up must be made more reliable. It relies too much on human interaction.
