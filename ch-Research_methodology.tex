@@ -7,26 +7,28 @@
 \rrot{Implement scanner descision}
 \rrot{Use limitations of phantoms to lead to research question}
 
-Different perfusion phantoms have been developed. Some are specifically designed to simulate the myocardial perfusion \citep{chiribiri2013perfusion, otton2013direct, o2017effect, o2017feasibility, teslow1991x}, others for brain perfusion \citep{hashimoto2018effect, suzuki2017quantitative, boese2013performance, mathys2012phantom, ebrahimi2010microfabricated, wang2010flow, noguchi2007quantitative, ganguly2012vitro, klotz1999perfusion}, or capillaries in general \citep{kim2016efficiency, anderson2011semipermeable, driscoll2011development, gauthier2011perfusion, veltmann2002design, lohmaier2004vitro}, and even phantoms to simulate perfusion in rheumatoid finger joints \citep{sakano2015power} and skin \citep{kim2018multidimensional}. Most software packages are designed for human organs and look for recognition points such that it can perform the most optimal calculation. Part of these phantoms do not resemble the human anatomy of the parts they simulate, which will influence the reliability.
+Different perfusion phantoms have been developed. Some are specifically designed to simulate the myocardial perfusion \footnote{\citep{chiribiri2013perfusion, otton2013direct, o2017effect, o2017feasibility, teslow1991x}}, others for brain perfusion \footnote{\citep{hashimoto2018effect, suzuki2017quantitative, boese2013performance, mathys2012phantom, ebrahimi2010microfabricated, wang2010flow, noguchi2007quantitative, ganguly2012vitro, klotz1999perfusion}}, or capillaries in general \footnote{\citep{kim2016efficiency, anderson2011semipermeable, driscoll2011development, gauthier2011perfusion, veltmann2002design, lohmaier2004vitro}}, and even phantoms to simulate perfusion in rheumatoid finger joints \citep{sakano2015power} and skin \citep{kim2018multidimensional}. Most software packages are designed for human organs and look for landmarks such that it can perform the most optimal calculation. Part of these phantoms do not resemble human anatomy, which will influence the reliability.
 
 \section{Research questions}
 \begin{figure}[b!]
 	\begin{center}
 		\includegraphics[width=0.5\linewidth]{images/vmodel.png}
 	\end{center}
-	\caption{V-Model as proposed by \cite{osborne2005clarus}}
+	\caption{V-Model\citep{rook1986controlling} as proposed by \cite{osborne2005clarus}}
 	\label{fig:vmodel}
 \end{figure}
 
-The project is carried out using the V-Model \citep{osborne2005clarus} approach, see figure \ref{fig:vmodel}. The research questions are defined based on the project definition phase.
+The project is carried out using the V-Model \citep{rook1986controlling,osborne2005clarus} approach, see figure \ref{fig:vmodel}. The research questions are defined based on the project definition phase.
 
-\subsection*{Concept of operations}
+\subsection{Concept of operations}
+Which type (CT, MRI, PET, or SPECT) of scanner should be used for myocardial perfusion imaging based on technology and availability?
+
 What must the myocardial perfusion phantom be able to simulate?
 
-\subsection*{Requirements and Architecture}
+\subsection{Requirements and Architecture}
 What are the requirements for a myocardial perfusion phantom that can be used in combination with commonly used clinical software?
 
-\subsection*{Detailed Design}
+\subsection{Detailed Design}
 How can the myocardial perfusion phantom meet the clinical requirements and mimic the perfusion of a human heart?
 
 \section{Project goal}
@@ -34,6 +36,26 @@ The goal of the project is to develop a prototype myocardial perfusion phantom c
 
 \subsection*{Project sub-goal}
 During the individual project, a calibration set-up for flow and pressure sensors has been developed. The prototype version showed that flow sensors can be calibrated using the "emptying tank" principle. Pressure sensors have not been implemented in the prototype. Furthermore, the calibration set-up relies too much on human interaction. A sub-goal of the project will be to improve the existing calibration set-up such that flow and pressure sensors can be calibrated which in turn will increase the reliability of the flow set-up.
+
+\section{Stakeholders}
+\label{sec:stakeholders}
+A distinction is made between direct stakeholders, actively involved in the development, indirect stakeholders, can provide knowledge or resources, and beneficial stakeholders, (potentially) benefit from the development.
+
+\begin{tabular}{lll}
+ 	\multicolumn{1}{c}{\textbf{Direct}} & \multicolumn{1}{c}{\textbf{Indirect}} & \multicolumn{1}{c}{\textbf{Beneficial}} \\
+	 - C.H. (Kees) Slump, &  - Marcel Greuter, & - Patients with suspected \ac{CAD}, \\
+	 - M.E. (Marije) Kamphuis, & - Riemer Slart, & - Scanner manufacturers,\\
+	 - Clinical Physicist, & - Willem van Meurs. & - Scanner software developers, \\
+	 - Lab technicians, & & - Hospitals. \\
+	 - Nuclear Medicine Physician, & & \\
+	 - Cardiologists. & & \\
+\end{tabular}
+
+\section{Approach}
+The research questions will primarily be answered by means of literature and by interviews with the stakeholders, see section \ref{sec:stakeholders}. They are regularly involved with myocardial perfusion imaging and are thus familiar with the clinical software, hardware, work flow, and requirements. These interviews will provide additional (practical) insight.
+
+Part of the V-Model approach is the continuous feedback. Requirements and designs are constantly updated according to new insights acquired during the development process. 
+
 \subsection{General concept}
 \begin{figure}[b!]
 	\begin{center}
