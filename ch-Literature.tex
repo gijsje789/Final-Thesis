@@ -1,15 +1,15 @@
 \chapter{Literature}
 \label{ch:literature}
-\rrow{Read available literature}
-\rrow{Write literature review to more accurately define research questions}
-\rrow{D-SPECT literature?}
+\rrod{Read available literature}
+\rrod{Write literature review to more accurately define research questions}
+\rrow{D-SPECT literature}
 \rrot{Discuss division of work}
 \rroi{Dialysis tube mimics capillaries and not tissue?}
 \rroi{Mathys reported that no literature was found that manufacturers calibrate their scanners.}
 
 \section{Phantoms}
 \subsection{Magnetic Resonance}
-\rrow{Shift the limitations to later section}
+\rrod{Shift the limitations to later section}
 \cite{noguchi2007quantitative} developed a simple phantom that consists of a syringe, diameter of 40mm, beads, and tubes, diameter of 4mm. The perfusate, 0.1mM GD-DTPA doped 8L water solution, flows through the beads, to disturb the flow, and then perfuses through parallel tubes, to prevent cross-current. The perfusate is tagged at the beads while the images are taken at 5 parallel planes, perpendicular to the tubes. The actual measured flow is the average obtained from the parallel planes. 
 
 \cite{ebrahimi2010microfabricated} created a phantom using microfabrication to create a microvasculature on 4-inch ($\approx$ 10cm) silicone wafers. The microvasculature is build up from four blocks, containing 4x2 (RxC) cells. Each cell is build up from 100 "features" separated by 25$\mu$m tracks. These tracks provide many different paths for perfusate to flow, effectively simulating capillaries in tissue. A $300\mu L$ bolus of a distilled water solution containing 25mM/L of Manganese.
@@ -59,25 +59,25 @@ The straight forward phantom of \cite{suzuki2017quantitative} does not resemble 
 \section{Physiology}
 \cite{slart2015Pres} performed absolute quantification with \textsuperscript{13}N-ammonia, using a 3-compartment Hutchins model, and determined some normal perfusion values: 60-95 mL/min/100g in rest, and 190-300 mL/min/100g in stress.
 
-\cite{uren1994relation} used \ac{PET} to quantitatively determine the blood flow for patients in control groups and 35 that have a form of stenosis. During these measurements, heart rate, diastolic blood pressure, and mean arterial pressure were similar between both groups. However, the systolic blood pressure was significantly higher for patients with a form of stenosis compared to the control group. The results are summarised in table \ref{tab:urenValues}. The measured myocardial blood flow is summarised in table \ref{tab:urenFlows}.
+\cite{uren1994relation} used \ac{PET} to quantitatively determine the blood flow for patients in control groups and 35 that have a form of stenosis. During these measurements, heart rate, diastolic blood pressure, and mean arterial pressure were similar between both groups. However, the systolic blood pressure was significantly higher for patients with a form of stenosis compared to the control group. The measured myocardial blood flow is summarised in table \ref{tab:urenFlows} and shows the importance of quantitative perfusion measurements. Patients with more than 40\% stenosis have 39 - 64\% less absolute blood flow. When converted to mL/min/100g, the perfusion estimates are slightly higher than the estimates made by \cite{slart2015Pres}. It is worth to note that the estimates by \cite{slart2015Pres} are 21 years later than the estimates of \cite{uren1994relation}.
 
-\begin{table} [h!]
-	\begin{tabular}{l|c|c|c|c|c|c|c|c}
-		\multicolumn{1}{c}{ } &\multicolumn{2}{c}{\textbf{Heart rate} [BPM]}  & \multicolumn{4}{c}{\textbf{Blood pressure} [mmHg]} & \multicolumn{2}{c}{\textbf{MAP*} [[mmHg]} \\
-		\multicolumn{1}{c}{ }& \multicolumn{2}{c}{ } &  \multicolumn{2}{c}{Diastolic} & \multicolumn{2}{c}{Systolic} & \multicolumn{2}{c}{ } \\
-		\multicolumn{1}{c|}{ }& \multicolumn{1}{c}{BL**} & \multicolumn{1}{c|}{\acs{MV}***} & \multicolumn{1}{c}{BL**} & \multicolumn{1}{c|}{\acs{MV}***} & \multicolumn{1}{c}{BL**} & \multicolumn{1}{c|}{\acs{MV}***} & \multicolumn{1}{c}{BL**} & \multicolumn{1}{c|}{\acs{MV}***}\\
-		\hline
-		\textbf{Control} 	& $65\pm 7$ 	& $84\pm 10$	& $76\pm 8$	& $75\pm 12$	& $132\pm 19$	& $140\pm 20$ 	& $ 100\pm 11 $ & $97\pm 13$\\
-		\textbf{Stenosis} 	& $63 \pm 10$ 	& $88\pm 16$	& $74\pm 11$	& $72\pm 12$	& $148\pm 22$	& $153\pm 21$  & $98\pm 13$	& $98 \pm 13$\\
-		\hline
-	\end{tabular} \\
-	\raggedright
-	\textit{* Mean Arterial Pressure (MAP)}\\
-	\textit{** Base Line (BL)}\\
-	\textit{***\acf{MV}}
-	\caption{Heart rates, blood pressures, and arterial pressures according to \cite{uren1994relation}}
-	\label{tab:urenValues}
-\end{table}
+%\begin{table} [h!]
+%	\begin{tabular}{l|c|c|c|c|c|c|c|c|}
+%		\multicolumn{1}{c}{ } &\multicolumn{2}{c}{\textbf{Heart rate} [BPM]}  & \multicolumn{4}{c}{\textbf{Blood pressure} [mmHg]} & \multicolumn{2}{c}{\textbf{MAP*} [[mmHg]} \\
+%		\multicolumn{1}{c}{ }& \multicolumn{2}{c}{ } &  \multicolumn{2}{c}{Diastolic} & \multicolumn{2}{c}{Systolic} & \multicolumn{2}{c}{ } \\
+%		\multicolumn{1}{c|}{ }& \multicolumn{1}{c}{BL**} & \multicolumn{1}{c|}{\acs{MV}***} & \multicolumn{1}{c}{BL**} & \multicolumn{1}{c|}{\acs{MV}***} & \multicolumn{1}{c}{BL**} & \multicolumn{1}{c|}{\acs{MV}***} & \multicolumn{1}{c}{BL**} & \multicolumn{1}{c|}{\acs{MV}***}\\
+%		\hline
+%		\textbf{Control} 	& $65\pm 7$ 	& $84\pm 10$	& $76\pm 8$	& $75\pm 12$	& $132\pm 19$	& $140\pm 20$ 	& $ 100\pm 11 $ & $97\pm 13$\\
+%		\textbf{Stenosis} 	& $63 \pm 10$ 	& $88\pm 16$	& $74\pm 11$	& $72\pm 12$	& $148\pm 22$	& $153\pm 21$  & $98\pm 13$	& $98 \pm 13$\\
+%		\hline
+%	\end{tabular} \\
+%	\raggedright
+%	\textit{* Mean Arterial Pressure (MAP)}\\
+%	\textit{** Base Line (BL)}\\
+%	\textit{***\acf{MV}}
+%	\caption{Heart rates, blood pressures, and arterial pressures according to \cite{uren1994relation}}
+%	\label{tab:urenValues}
+%\end{table}
 
 \begin{table}[h!]
 \begin{tabular}{l|c|c|c|c|c|}
@@ -85,38 +85,65 @@ The straight forward phantom of \cite{suzuki2017quantitative} does not resemble 
           &         & \textless{}40\% & 40-59\% & 60-79\% & \textgreater{}80\% \\
           \hline
 Base line &     $1.13\pm 0.26$    &         $0.96\pm 0.19$        &    $1.25\pm 0.34$     &    $1.23\pm 0.57$     &	$0.92\pm 0.33$\\
-MV        &     $3.37\pm 1.25$    &  $3.44\pm 1.47$  &   $2.07\pm 0.83$          &    $1.51\pm 0.37$     & $1.22\pm 0.36$
-\end{tabular}
-\caption{Myocardial blood flow according to \cite{uren1994relation}}
+MV*        &     $3.37\pm 1.25$    &  $3.44\pm 1.47$  &   $2.07\pm 0.83$          &    $1.51\pm 0.37$     & $1.22\pm 0.36$ \\
+\hline
+\end{tabular} \\
+\raggedright
+\textit{* \acf{MV}}
+\caption{Myocardial blood flow according to \cite{uren1994relation}. Perfusion values in mL/min/g.}
 \label{tab:urenFlows}
 \end{table}
 
+\cite{chiribiri2013normal} used high-resolution pixel-wise perfusion maps using MRI to determine normal reference values of myocardial blood flow during rest and stress. Hyperaemia is induced by means of adenosine. They found normal values of $0.9\pm 0.3$  and $2.3\pm 1.4$ mL/min/g for rest and  stress, respectively. Converted to mL/min/100g, it more closely corresponds to the estimates made by \cite{slart2015Pres}.
+
+\cite{ho2014dynamic} scanned 35 low-risk patients and 35 patients with documented \ac{CAD} using dynamic CT perfusion imaging on a dual-source CT scanner. Their results are summarised in table \ref{tab:hoFlows}. The rest myocardial blood flow is in the same range as found by \cite{chiribiri2013normal} and \cite{slart2015Pres}. However, during stress, the perfusion is significantly lower than the estimate of \cite{chiribiri2013normal} and \cite{slart2015Pres}. A potential reason is the stress-inducing method used by the authors; \cite{ho2014dynamic} uses  dipyridamole-stress CT protocol, \cite{chiribiri2013normal} uses adenosine, and \cite{slart2015Pres} is unknown. Furthermore, the differences can be a result of the used technique; \cite{ho2014dynamic} used CT, \cite{chiribiri2013normal} used \ac{MRI} and \cite{slart2015Pres} used \ac{PET}.
+\begin{table}[h!]
+\begin{tabular}{l|c|c|c|c|c|}
+			& Low risk & Historic ischaemia & Previous infarction \\
+          \hline
+Global rest 	& $74.08\pm 16.3$ & $82.29\pm 16.87$ & $81.98\pm 18.54$\\
+Global stress   & $141.92\pm 30.83$ & $107.95\pm 25.25$ & $106.93\pm 32.91$\\
+\hline
+\end{tabular} \\
+\raggedright
+\textit{* \acf{MV}}
+\caption{Myocardial blood flow according to \cite{ho2014dynamic}. Perfusion values in mL/min/g.}
+\label{tab:hoFlows}
+\end{table}
+
+These results show that, although there are similarities, there is still a difference in the quantitative myocardial perfusion results. With these results, it is not known what the true myocardial perfusion is, further showing the need for a proper baseline.
 
 \section{Technology}
 \subsection{CT}
-\ac{CT} utilises a rotating X-Ray source, positioned in a gantry. The X-Ray source projects a narrow beam through the patient, which in turn is captured by a sensor at the other side. Different tissues have different linear attenuation coefficients, i.e. \ac{HU} values. The \ac{HU} scale is a linear transformation based on the linear attenuation coefficients of both water and air. Images taken while the X-Ray source is quickly rotated around the patient, are processed to create cross-sectional images. After a full rotation, a slice, the patient is moved further into the \ac{CT} scanner and a new slice is made. The slice thickness depends on the specific scanner used, but according to the \cite{CTscan2016}, a slice is typically between 1 and 10mm. \cite{suzuki2017quantitative} used 8mm, \cite{mathys2012phantom} used both 8 and 10mm, and \cite{otton2013direct} even used 0.6mm. In aditional to creating cross-sectional slices, consecutive slices can be stacked to create a 3D image. 
+\ac{CT} utilises a rotating X-Ray source, positioned in a gantry. The X-Ray source projects a narrow beam through the patient, which in turn is captured by a sensor at the other side. Different tissues have different linear attenuation coefficients, i.e. \ac{HU} values. The \ac{HU} scale is a linear transformation based on the linear attenuation coefficients of both water and air. Images taken while the X-Ray source is quickly rotated around the patient, are processed to create cross-sectional images by using, for example, smearing. After a full rotation, also known as a slice, the patient is moved further into the \ac{CT} scanner and a new slice is made. The slice thickness depends on the specific scanner used, but according to the \cite{CTscan2016}, a slice is typically between 1 and 10mm. \cite{suzuki2017quantitative} used 8mm, \cite{mathys2012phantom} used both 8 and 10mm, and \cite{otton2013direct} even used 0.6mm. In addition to creating cross-sectional slices, consecutive slices can be stacked to create a 3D-image. 
 
 \subsection{MRI}
-\ac{MRI} scanners align protons in hydrogen nuclei using a magnetic field that is 60.000 times stronger than earth's magnetic field. This magnetic field aligns the axis of rotation of the protons parallel or anti-parallel to itself. A radio transmitter introduces energy by means of an electromagnetic wave to tip the magnetisation by 90 degrees which creates a transverse magnetisation. The axis of rotation remains untouched and is perpendicular to this transverse magnetisation. The magnetisation then rotates and generates an alternating voltage in the receiver coil of the \ac{MRI} scanner which is called the \acs{MRI} signal\citep{weishaupt2008does}. \ac{MRI} scanners can differentiate between different tissues since the protons in the tissues return to their normal spins at different rates\citep{MRIscan2017}.
+\ac{MRI} scanners align protons in hydrogen nuclei using a magnetic field that is 60.000 times stronger than earth's magnetic field. This magnetic field aligns the axis of rotation of the protons parallel or anti-parallel to itself. A radio transmitter introduces energy by means of an electromagnetic wave to tip the magnetisation by 90 degrees which creates a transverse magnetisation. The axis of rotation remains untouched and is perpendicular to this transverse magnetisation. The magnetisation then generates an alternating voltage in the receiver coil of the \ac{MRI} scanner which is called the \acs{MRI} signal\citep{weishaupt2008does}. \ac{MRI} scanners can differentiate between different tissues since the protons in the tissues return to their normal spins at different rates \citep{MRIscan2017}.
 
 \subsection{PET}
-\ac{PET} scanner use radionuclides to produce an image of underlying tissue. These radionuclides are bonded to nutrients, e.g. glucose, to create radiotracers. \ac{PET} scanners can, for example, determine the rate of consumption for glucose when the radiolabelled glucose accumulates in tissue \citep{PETscan2003} which can provide information on tumours (whether it is benign or malignant). The radionuclide decays, beta decay, and releases a positron, also known as an anti-electron. The lifetime of such positron is very short in electron rich tissue. The kinetic energy is quickly lost, typically within 1 to 10mm, and will combine with an electron to form a positronium. The positronium state last approximately $10^-10$ seconds before it annihilates. During this annihilation, two high-energy photons\citep{PETscan1999}, in the gamma-ray region of the electromagnetic spectrum with ten times more energy than X-Rays, are released. These photons travel in opposite directions. Using coincidence detection, the photon's path can be deduced which passes through the point of annihilation and is close to where the positron was initially emitted. The most common approach to determine the actual locations, within a few millimetres, is computed tomography. During a \ac{PET} scan, all the counts by a specific detector pair are measured which is proportional to the integrated radioactivity along the line joining these two detectors; commonly refereed to as line integral data. The line integrals at different angles are converted to a 2D image which show the distribution of the molecule to which the radionuclide was attached to\citep{cherry2006pet}.
+\ac{PET}, currently the gold standard, scanners use radionuclides to produce an image of underlying tissue. These radionuclides are bonded to nutrients, e.g. glucose, to create radiotracers. \ac{PET} scanners can, for example, determine the rate of consumption for glucose when the radiolabelled glucose accumulates in tissue \citep{PETscan2003} which can provide information on tumours (whether it is benign or malignant). The radionuclide decays, called beta decay, and releases a positron, also known as an anti-electron. The lifetime of such positron is very short in electron rich tissue. The kinetic energy is quickly lost, typically within 1 to 10mm, and will combine with an electron to form a positronium. The positronium state last approximately $10^-10$ seconds before it annihilates. During this annihilation, two high-energy photons \citep{PETscan1999}, in the gamma-ray region of the electromagnetic spectrum with ten times more energy than X-Rays, are released. These photons travel in opposite directions. Using coincidence detection, the photon's path can be deduced which passes through the point of annihilation and is close to where the positron was initially emitted. The most common approach to determine the actual locations, within a few millimetres, is computed tomography. During a \ac{PET} scan, all the counts by a specific detector pair are measured which is proportional to the integrated radioactivity along the line joining these two detectors; commonly refereed to as line integral data. The line integrals at different angles are converted to a 2D image which show the distribution of the molecule to which the radionuclide was attached to \citep{cherry2006pet}.
 
 \subsection{SPECT}
-The imaging method in a typical \ac{SPECT} scanner are scintillator-based gamma cameras, also known as Anger cameras. Gamma cameras use a scintillator to "transduce" gamma radiation, originating from an injected tracer, to photons. Part of these photons are directed towards a photocathode. If a quantum of light hits the photocathode, which is coated with a photosensitive coating, electrons are emitted due to the photoelectric effect. These electrons travel through a \acp{PMT} and hitting series of dynodes, which in turn trigger secondary emission effectively multiplying the number of electrons travelling through the tube. Electrons hitting the last dynode, which is known as the anode, cause a current pulse which can be detected by measuring equipment. It is proportional to the amount of gamma ray photons entering the scintillator\citep{CZTTech2009}.
+The imaging camera in a typical \ac{SPECT} scanner are scintillator-based gamma cameras, also known as Anger cameras. Gamma cameras use a scintillator to "transduce" gamma radiation, originating from an injected tracer, to photons. Part of these photons are directed towards a photocathode. If a quantum of light hits the photocathode, which has a photosensitive coating, electrons are emitted due to the photoelectric effect. These electrons travel through a \acp{PMT} and hitting a series of dynodes, which in turn trigger secondary emission; effectively multiplying the number of electrons travelling through the tube. Electrons hitting the last dynode, which is known as the anode, cause a current pulse which can be detected by measuring equipment. It is proportional to the amount of gamma ray photons entering the scintillator\citep{CZTTech2009}.
 
 \subsection*{Digital SPECT}
-Developments in imaging systems gave rise to the digital \ac{SPECT} scanner. In contrast to the analogue Anger cameras, the digital \ac{SPECT} scanner utilises a direct conversion semiconductor: \ac{CZT}. \cite{wagenaar2004cdte} used \ac{CZT} to develop pixelated detector units which could then be used for medical imaging. In a recent study, it is shown that a digital \ac{SPECT} scanner, using multiple pixelated \ac{CZT} detectors, showed significant improvements in image sharpness and contrast\citep{goshen2018feasibility}. These detector units do not require any \acp{PMT} and thus allow for a more compact and flexible design \citep{erlandsson2009performance}. The D-SPECT scanner, a digital \ac{SPECT} scanner developed by Spectrum Dynamics\footnote{https://www.spectrum-dynamics.com/}, offers improvements in sensitivity and energy resolution \citep{SpectDynam2018} over Anger camera systems. However, these digital systems are relatively new and require proper validation to convince medical personnel of its value.
+Developments in imaging systems gave rise to the digital \ac{SPECT} scanner. In contrast to the analogue Anger cameras, the digital \ac{SPECT} scanner utilises a direct conversion semiconductor: \ac{CZT}. \cite{wagenaar2004cdte} used \ac{CZT} to develop pixelated detector units which could then be used for medical imaging. In a recent study, it is shown that a digital \ac{SPECT} scanner, using multiple pixelated \ac{CZT} detectors, showed significant improvements in image sharpness and contrast \citep{goshen2018feasibility}. These detector units do not require any \acp{PMT} and thus allow for a more compact and flexible design \citep{erlandsson2009performance}. The D-SPECT scanner, a digital \ac{SPECT} scanner developed by Spectrum Dynamics\footnote{https://www.spectrum-dynamics.com/}, offers improvements in sensitivity and energy resolution \citep{SpectDynam2018} over Anger camera systems. However, these digital systems are relatively new and require proper validation to convince medical personnel of its value.
 
 \subsection{Scanner comparison}
-As is previously mentioned, there are various types of scanners that use different techniques, \ac{CT} \ac{MRI}, or Scintigraphy based (\ac{SPECT}/\ac{PET}) scanners. \cite{pelgrim2016quantitative} compares \ac{MRI} against \ac{CT} and the different theoretical models to acquire absolute perfusion measurements, and also mentioned the current gold standard in quantitative perfusion measurements: \ac{PET}. \ac{PET} scans are generally more expensive \citep{RadioPead2018}, as is shown by \cite{hlatky2014economic} in their two year study. They showed that the costs for patients with suspected \ac{CAD} using \ac{PET} is 22\% higher than \ac{SPECT}, which is more widely used for coronary and myocardial perfusion measurements\citep{rahmim2008pet}. However, with new tracers, specifically the \textsuperscript{18}F-tracer flurpiridaz,  the need for an on-site cyclotron will be eliminated\citep{pelgrim2016quantitative} potentially making \ac{PET} scans more accessible.
+As is previously mentioned, there are various types of scanners that use different techniques, \ac{CT}, \ac{MRI}, or Scintigraphy based (\ac{SPECT}/\ac{PET}) scanners. Each having their own advantages and disadvantages.
+\subsection*{Costs}
+ \cite{pelgrim2016quantitative} compares \ac{MRI} against \ac{CT} and the different theoretical models to acquire absolute perfusion measurements, and also mentioned the current gold standard in quantitative perfusion measurements: \ac{PET}. \ac{PET} scans are generally more expensive \citep{RadioPead2018}, as is shown by \cite{hlatky2014economic} in their two year study. They showed that the costs for patients with suspected \ac{CAD} using \ac{PET} is 22\% higher than \ac{SPECT}, which is more widely used for coronary and myocardial perfusion measurements \citep{rahmim2008pet}. However, with new tracers, specifically the \textsuperscript{18}F-tracer flurpiridaz,  the need for an on-site cyclotron will be eliminated \citep{pelgrim2016quantitative} potentially making \ac{PET} scans more accessible.
 
+\subsection*{Spatial resolution}
 State-of-the-art \ac{MRI} and \ac{CT} scanners offer better spatial and temporal resolution than \ac{PET}/\ac{SPECT} \citep{pelgrim2016quantitative, khalil2011molecular}. \ac{MRI}, in \acl{MPI}, can take three myocardial short-axis slices during 50-60 consecutive heartbeats with a spatial resolution of 1.5 x 1.5 x 10mm\textsuperscript{3}. Whole heart 3D perfusion MRI achieve a spatial resolution of 2.3 x 2.3 x 5mm\textsuperscript{3} due to advanced accelerated imaging sequences. \ac{CT} can achieve an even higher spatial resolution of 0.3 x 0.3 x 5mm\textsuperscript{3}.
 
-\cite{moses2011fundamental} investigated current \ac{PET} scanners and determines, theoretically, that the fundamental  limit for the spatial resolution is 1.83mm for clinical PET cameras. Assuming that zero width detector elements are used. However, zero width detector elements are impractical, so \cite{moses2011fundamental} continues to state that a reasonable compromise would result in clinical PET cameras with a reconstructed spatial resolution of 2.36mm \ac{FWHM}. Typical clinical \ac{PET} scanners have a spatial resolution between 4 and 6mm while a clinical \ac{SPECT} scanner has a spatial resolution between 8 and 12mm. Pre-clinical experiments suggest that  there is still much to be achieved considering \ac{SPECT}\citep{khalil2011molecular}. In these experiments, $\leq$1mm spatial resolution is achieved in \ac{SPECT} scans, while \ac{PET} achieves a spatial resolution between 1 and 2mm mainly due to  non-reducible factors: positron range, distance from positron emission to annihilation, and non-collinear emission of gamma photons after annihilation. The digital \ac{SPECT} scanners showed significant improvements over Anger based \ac{SPECT} in image sharpness and contrast \cite{goshen2018feasibility, gambhir2009novel}.
+\cite{moses2011fundamental} investigated current \ac{PET} scanners and determines, theoretically, that the fundamental  limit for the spatial resolution is 1.83mm for clinical PET cameras. Assuming that zero width detector elements are used. However, zero width detector elements are impractical, so \cite{moses2011fundamental} continues to state that a reasonable compromise would result in clinical PET cameras with a reconstructed spatial resolution of 2.36mm \ac{FWHM}. Typical clinical \ac{PET} scanners have a spatial resolution between 4 and 6mm while a clinical \ac{SPECT} scanner has a spatial resolution between 8 and 12mm. Pre-clinical experiments suggest that  there is still much to be achieved considering \ac{SPECT} \citep{khalil2011molecular}. In these experiments, $\leq$1mm spatial resolution is achieved in \ac{SPECT} scans, while \ac{PET} achieves a spatial resolution between 1 and 2mm mainly due to  non-reducible factors: positron range, distance from positron emission to annihilation, and non-collinear emission of gamma photons after annihilation. The digital \ac{SPECT} scanners showed significant improvements over Anger based \ac{SPECT} in image sharpness and contrast \cite{goshen2018feasibility, gambhir2009novel}. No quantitative results have been given as to the increased performance of these solid-state detector systems.
 
-The increased spatial resolution comes at a price. The temporal resolution for dual-source \ac{CT} scanners is 63ms but in order to achieve whole heart coverage, dynamic shuttling is used which reduces the time between scans to once every 2 - 3 heartbeats. More advanced scanners, with wider detectors, e.g. 256- and 320-slice \ac{CT}, have lower temporal resolution (135ms) but image the whole heart without shuttling. Temporal resolution of \ac{MRI} is typically in the order of 1 second. In spite of the increased spatial resolution, the advanced accelerated imaging sequence has a reduced temporal resolution making it unfit for quantitative estimation of myocardial blood flow\citep{pelgrim2016quantitative}.
+\subsection*{Temporal resolution}
+The increased spatial resolution, of \ac{CT}, comes at a price. The temporal resolution for dual-source \ac{CT} scanners is 63ms but in order to achieve whole heart coverage, dynamic shuttling is used which reduces the time between scans to once every 2 - 3 heartbeats. More advanced scanners, with wider detectors, e.g. 256- and 320-slice \ac{CT}, have lower temporal resolution (135ms) but image the whole heart without shuttling. Temporal resolution of \ac{MRI} is typically in the order of 1 second. In spite of the increased spatial resolution, the advanced accelerated imaging sequence has a reduced temporal resolution making it unfit for quantitative estimation of myocardial blood flow\citep{pelgrim2016quantitative}.
 
-A big limitation of \ac{CT}, is the patient's exposure to ionising radiation. Every image that is taken, introduces additional radiation to the patient which could pose serious health risks. \ac{MRI} does not rely on ionising radiation and therefore does not have this limitation.
+\subsection*{Radiation}
+A big limitation of \ac{CT}, is the patient's exposure to ionising radiation. Every image that is taken, introduces additional radiation to the patient which could pose serious health risks. Both \ac{SPECT} and \ac{PET} rely on radioactive tracers for imaging purposes. \ac{MRI} does not rely on ionising radiation and therefore does not have this limitation. 
 
-\cite{khalil2011molecular} state that the soft tissue contrast in \ac{MRI} is better than in \ac{CT}. Additionally, \ac{MRI} achieves better results without a contrast agent while \ac{CT} depends on it.
+\subsection*{Contrast}
+\cite{khalil2011molecular} states that the soft tissue contrast in \ac{MRI} is better than in \ac{CT}. Additionally, \ac{MRI} achieves better results without a contrast agent while \ac{CT} depends on it. \ac{PET} has poor tissue contrast since it can only visualise the radioactive tracer.
