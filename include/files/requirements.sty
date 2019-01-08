@@ -1,0 +1,44 @@
+%% Add the requirement and subrequirement commands, which are referencable requirements.
+%% Based on http://tex.stackexchange.com/questions/6893/list-of-requirements-problem-with-listing-text-of-requirements
+\NeedsTeXFormat{LaTeX2e}[1994/12/01]
+\ProvidesPackage{include/files/requirements}[2013/02/21 v0.1 Requirements package]
+
+\newcounter{requirement}
+\setcounter{requirement}{0}
+\newcounter{subrequirement}[requirement]
+\setcounter{subrequirement}{0}
+\def\p@subrequirement{\therequirement.}
+
+%% Define label for autoref command
+\def\requirementautorefname{Requirement}
+\def\subrequirementautorefname{Requirement}
+
+%% This is a macro that gets called by the .aux file to load in data.
+\gdef\savedreq#1#2{\expandafter\gdef\csname req#1\endcsname{#2}}
+
+%% The actual command
+%% #1 label name
+%% #2 Requirement text
+\def\requirement#1#2{
+%% Increment the requirement counter
+\refstepcounter{requirement}
+\vspace{1ex}
+\par\noindent
+\textbf{Requirement~\arabic{requirement}:}
+\label{#1}
+\textit{#2}
+\par
+}
+
+%% The actual command
+%% #1 label name
+%% #2 Requirement text
+\def\subrequirement#1#2{
+%% Increment the requirement counter
+\refstepcounter{subrequirement}
+\par\noindent
+\textbf{Requirement~\arabic{requirement}.\arabic{subrequirement}:}
+\label{#1}
+\textit{#2}
+\par
+}
