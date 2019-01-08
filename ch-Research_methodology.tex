@@ -17,11 +17,15 @@ Different perfusion phantoms have been developed. Some are specifically designed
 	\caption{V-Model\citep{rook1986controlling} as proposed by \cite{osborne2005clarus}}
 	\label{fig:vmodel}
 \end{figure}
+Can patient treatment reliably depend on the D-SPECT, using dynamic scanning, in myocardial perfusion imaging?
 
-The project is carried out using the V-Model \citep{rook1986controlling,osborne2005clarus} approach, see figure \ref{fig:vmodel}. The research questions are defined based on the project definition phase.
+\subsection{Primary goal}
+The goal of the project is to develop a prototype myocardial perfusion phantom capable of reproducible simulations of typical and cardiac defect situations using clinical software commonly used in myocardial perfusion scans. Most software packages require anatomical landmarks which imposes requirements on the phantom. In addition, the phantom can be used for educational and training purposes to demonstrate the impact of (poorly) chosen variables, e.g. pressure or flow, scanning parameters, cardiac defects, and so forth.
+
+The primary goal is not to validate the D-SPECT, but to design and build a tool for that validation purpose. The project itself is carried out using the V-Model \citep{rook1986controlling,osborne2005clarus} approach, see figure \ref{fig:vmodel}. Sub-research questions are based on this V-Model approach such that each phase has its own goal.
 
 \subsection{Concept of operations}
-Which type (CT, MRI, PET, or SPECT) of scanner should be used for myocardial perfusion imaging based on technology and availability?
+Is the D-SPECT, in comparison with other types of scanners (CT, MRI, PET, or SPECT), for myocardial perfusion imaging accurate and reliable?
 
 What must the myocardial perfusion phantom be able to simulate?
 
@@ -34,10 +38,7 @@ How can the myocardial perfusion phantom meet the clinical requirements and mimi
 \subsection{Implementation and verification}
 Does the prototype myocardial perfusion phantom meet the specified requirements? 
 
-\section{Project goal}
-The goal of the project is to develop a prototype myocardial perfusion phantom capable of reproducible simulations of typical and cardiac defect situations using clinical software commonly used in myocardial perfusion scans. Most software packages require anatomical landmarks which imposes requirements on the phantom. In addition, the phantom can be used for educational and training purposes to demonstrate the impact of (poorly) chosen variables, e.g. pressure or flow, scanning parameters, cardiac defects, and so forth.
-
-\subsection*{Project sub-goal}
+\subsection{Secondary goal}
 During the individual project, a calibration set-up for flow and pressure sensors has been developed. The prototype version showed that flow sensors can be calibrated using the "emptying tank" principle. Pressure sensors have not been implemented in the prototype. Furthermore, the calibration set-up relies too much on human interaction. A sub-goal of the project will be to improve the existing calibration set-up such that flow and pressure sensors can be calibrated which in turn will increase the reliability of the flow set-up.
 
 \section{Stakeholders}
@@ -49,8 +50,8 @@ A distinction is made between direct stakeholders, actively involved in the deve
 	 - C.H. (Kees) Slump, &  - M.J.W. (Marcel) Greuter, & - Patients with suspected \ac{CAD}, \\
 	 - M.E. (Marije) Kamphuis, & - R.H.J.A. (Riemer) Slart, & - Scanner manufacturers,\\
 	 - Clinical Physicists, & - W.L. (Willem) van Meurs. & - Scanner software developers, \\
-	 - Lab technicians, & & - Hospitals. \\
-	 - Nuclear Medicine Physicians, & & \\
+	 - Lab technicians, & & - Hospitals, \\
+	 - Nuclear Medicine Physicians, & & - Physicians.\\
 	 - Cardiologists. & & \\
 \end{tabular}
 
