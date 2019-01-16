@@ -1,4 +1,4 @@
-\chapter{Technical}
+\chapter{Technical system overview}
 
 \section{Function requirements}
 This section specifies the requirements set for the functions mentioned in figure \ref{fig:funcarch}.
@@ -12,14 +12,14 @@ This table specifies the requirements for the generated flow and pressure.
 \begin{tabular}{l|p{120mm}|}
 	\makecell[l]{\textbf{Requirement} \\  \textbf{number}} & \multicolumn{1}{c}{\textbf{Description}}\\
 	\hline
-	TFR-GF0 & A constant flow is to be generated, i.e. non-pulsatile. \\
-	TFR-GF0 & Flow generators need to be interchangeable. \\
-	TFR-GF0 & Minimum achievable upper limit of myocardial perfusion is 300 mL/min/100g. \\
-	TFR-GF0 & Minimum achievable lower limit of myocardial perfusion is 60 ml/min/100g. \\
-	TFR-GF0 & Minimum achievable upper limit of cardiac output is 8 L/min.\\
-	TFR-GF0* & Minimum arterial pressure is 56 mmHg. \\
-	TFR-GF0* & Maximum arterial pressure is  155 mmHg. \\
-	TFR-GF0 & Flow generators are controlled via a flow feedback system. \\
+	TFR-GF01 & A constant flow is to be generated, i.e. non-pulsatile. \\
+	TFR-GF02 & Flow generators need to be interchangeable. \\
+	TFR-GF03 & Minimum achievable upper limit of myocardial perfusion is 300 mL/min/100g. \\
+	TFR-GF04 & Minimum achievable lower limit of myocardial perfusion is 60 ml/min/100g. \\
+	TFR-GF05 & Minimum achievable upper limit of cardiac output is 8 L/min.\\
+	TFR-GF06* & Minimum arterial pressure is 56 mmHg. \\
+	TFR-GF07* & Maximum arterial pressure is  155 mmHg. \\
+	TFR-GF08 & Flow generators are controlled via a flow feedback system. \\
 	\cline{2-2}
 \end{tabular}
 \raggedright
@@ -34,10 +34,10 @@ This table specifies the requirements for the measuring of flow and pressure.
 \begin{tabular}{l|p{120mm}|}
 	\makecell[l]{\textbf{Requirement} \\  \textbf{number}} & \multicolumn{1}{c}{\textbf{Description}}\\
 	\hline
-	TFR-MFP0 & Flow measuring accuracy less than 5\%. \\
-	TFR-MFP0 & Pressure measuring accuracy less than 5\%. \\
-	TFR-MFP0 & Minimum absolute flow resolution of 1 mL/min. \\
-	TFR-MFP0 & Minimum sampling rate of 100Hz. \\
+	TFR-MFP01 & Flow measuring accuracy less than 5\%. \\
+	TFR-MFP02 & Pressure measuring accuracy less than 5\%. \\
+	TFR-MFP03 & Minimum absolute flow resolution of 1 mL/min. \\
+	TFR-MFP04 & Minimum sampling rate of 100Hz. \\
 	\cline{2-2}
 \end{tabular}
 \raggedright
@@ -51,11 +51,11 @@ This table specifies the requirements specific for the phantom that simulates th
 \begin{tabular}{l|p{120mm}|}
 	\makecell[l]{\textbf{Requirement} \\  \textbf{number}} & \multicolumn{1}{c}{\textbf{Description}}\\
 	\hline
-	TFR-SIM0 & An \ac{AIF} must be extractable from either the aorta or the left ventricle chamber.\\
-	TFR-SIM0 & Stenotic arteries are mimicked in a physiological way by physically narrowing (or increasing flow resistance) of certain arteries. \\
-	TFR-SIM0 & Different stenotic severity, should be possible by, for example, variable flow resistors or interchanging components. \\
-	TFR-SIM0 & Multiple chambers, or areas, should be present, such that ischaemic and non-inschaemic tissue can be visualised simultaneously. Typical software divide the heart into 17 chambers.\\
-	TFR-SIM0 & Phantom's compartment model should match the currently practised protocol. Does the tracer diffuse, is it trapped in tissue et cetera. \\
+	TFR-SIM01 & An \ac{AIF} must be extractable from either the aorta or the left ventricle chamber.\\
+	TFR-SIM02 & Stenotic arteries are mimicked in a physiological way by physically narrowing (or increasing flow resistance) of certain arteries. \\
+	TFR-SIM03 & Different stenotic severity, should be possible by, for example, variable flow resistors or interchanging components. \\
+	TFR-SIM04 & Multiple chambers, or areas, should be present, such that ischaemic and non-inschaemic tissue can be visualised simultaneously. Typical software divide the heart into 17 chambers.\\
+	TFR-SIM05 & Phantom's compartment model should match the currently practised protocol. Does the tracer diffuse, is it trapped in tissue et cetera. \\
 	\cline{2-2}
 \end{tabular}
 \raggedright
@@ -70,9 +70,11 @@ This table summarises the requirements on the contrast and contrast injection pr
 \begin{tabular}{l|p{120mm}|}
 	\makecell[l]{\textbf{Requirement} \\ \textbf{number}} & \multicolumn{1}{c}{\textbf{Description}}\\
 	\hline
-	TR-IC0 & A variable amount of contrast can be injected. \\
-	TR-IC0 & Contrast injection is reproducible. \\
-	TR-IC0 & Contrast should match the currently practised protocol.  \\
+	TR-IC01 & Contrast volume is variable. \\
+	TR-IC02 & Contrast injection is reproducible. \\
+	TR-IC03 & Contrast should match the currently practised protocol. \\
+	TR-IC04 & Contrast concentration is variable. \\
+	TR-IC05 & Contrast agent is variable. \\
 	\cline{2-2}
 \end{tabular}
 \end{table}
@@ -80,6 +82,8 @@ This table summarises the requirements on the contrast and contrast injection pr
 \section{Physical requirements}
 \rrot{Determine size of seating of D-SPECT}
 \rrot{Determine weight limit of seating of D-SPECT}
+\rrot{Must it be completely anatomical?}
+\rrot{Adjust requirements if the phantom does not have to be anatomical.}
 Size, weight et cetera.
 \begin{table} [H]
 \caption{Physical requirements}
@@ -88,9 +92,22 @@ This table summarises the physical requirements.
 \begin{tabular}{l|p{120mm}|}
 	\makecell[l]{\textbf{Requirement} \\ \textbf{number}} & \multicolumn{1}{c}{\textbf{Description}}\\
 	\hline
-	TR-PR0 & The phantom, and its set-up, must fit on the D-SPECT's chair. \\ 
+	TR-PR01 & The phantom, and its set-up, must fit on the D-SPECT's chair. \\
+	TR-PR02 & The phantom must be anatomically correct; four heart chambers, myocardium around the chambers, arrow shaped bottom. \\
+	TR-PR03 & The phantom must be placed inside a thorax phantom, QRM TRX-116, with maximum diameter of 100mm. \\
+	TR-PR04 & Total weight, on patient chair, cannot exceed 171kg. \\
+	TR-PR05 & The flow set-up must remain horizontal, to prevent additional flow resistance. \\
+	TR-PR06* & The phantom must match the size of an average human heart, 12x8x6cm [LxWxD] \citep{openstax2013anatomy}. \\
+	TR-PR07 & The phantom must resemble the weight of an average human heart, 250-300g (female) or 300-350g (male) \citep{openstax2013anatomy}. \\
+	TR-PR08+ & The phantom's ventricles must match the volume of average human ventricles, between 40 and 180mL. \\
+	TR-PR09+ & The phantom's atria must match the volume of average human atria, between 80 and 115mL. \\
+	TR-PR10** & The phantom's chambers must match the dimensions of an average human heart, between 60-90x30-50x60-90mm [LxWxD] \\
 	\cline{2-2}
 \end{tabular}
+\raggedright
+\textit{*Length (L): longitudinal axis (apex-basal), width (W): transverse axis (septal - lateral), Depth (D):  transverse axis (anterior-inferior).} \\
+\textit{**Length (L): longitudinal axis (apical-annular), width (W): transverse axis (septal-lateral (LV) or septal-medial (RV)), depth (D): transverse axis (apical-annular)} \\
+\textit{+\cite{chiribiri2013perfusion} uses LA/RA of 105mL and LV/RV of 120mL.}
 \end{table}
 
 \section{Environmental requirements}
@@ -104,11 +121,14 @@ This table summarises the environmental requirements, i.e. the restrictions set 
 \begin{tabular}{l|p{120mm}|}
 	\makecell[l]{\textbf{Requirement} \\ \textbf{number}} & \multicolumn{1}{c}{\textbf{Description}}\\
 	\hline
-	TR-ER0* &  No high-density or "High-Z" material is to be used.\\ 
+	TR-ER01* &  No high-density or "High-Z" material is to be used.\\ 
+	TR-ER02 & The phantom's left and front side must remain free such that the D-SPECT camera image around it. \\ 
+	TR-ER03** & Any part of the flow set-up and/or phantom, that does not fit directly on the patient chair, must remain horizontal with the remaining parts between 63 and 93cm. \\
 	\cline{2-2}
 \end{tabular}
 \raggedright
-\textit{* High-density and "High-Z" material, i.e. material with high atomic number, tend to block gamma radiation emitted by \ac{SPECT} tracers. Examples are Titanium (Ti), Chromium (Cr), Vanadium (V), Iron (Fe), or Lead (Pb); atom number \textgreater 22, Lead is 82.}
+\textit{* High-density and "High-Z" material, i.e. material with high atomic number, tend to block gamma radiation emitted by \ac{SPECT} tracers. Examples are Titanium (Ti), Chromium (Cr), Vanadium (V), Iron (Fe), or Lead (Pb); atom number \textgreater 22, Lead is 82.} \\
+\textit{** The patient chair's seating is adjustable between 63 and 93cm.}
 \end{table}
 
 \section{External interfaces}
@@ -119,9 +139,9 @@ This table summarises the requirements for the external interface.
 \begin{tabular}{l|p{120mm}|}
 	\makecell[l]{\textbf{Requirement} \\ \textbf{number}} & \multicolumn{1}{c}{\textbf{Description}}\\
 	\hline
-	TR-EI0 &  Live plotting, at 10Hz, of system system flow and pressure.\\
-	TR-EI0 & Ability to adjust the output of the flow generators. \\
-	TR-EI0 & Serial communication between control/monitoring systems and external interface.\\
+	TR-EI01 &  Live plotting, at 10Hz, of system system flow and pressure.\\
+	TR-EI02 & Ability to adjust the output of the flow generators. \\
+	TR-EI03 & Serial communication between control/monitoring systems and external interface.\\
 	\cline{2-2}
 \end{tabular}
 \end{table}
@@ -136,8 +156,8 @@ This table summarises the system qualities.
 \begin{tabular}{l|p{120mm}|}
 	\makecell[l]{\textbf{Requirement} \\ \textbf{number}} & \multicolumn{1}{c}{\textbf{Description}}\\
 	\hline
-	TR-SQ0 & The flow set-up must perform an emergency shut down when the arterial pressure exceeds specified threshold. \\ 
-	TR-SQ1 & The flow set-up must perform an emergency shut down when the flow cannot be controlled, i.e. erratic. \\
+	TR-SQ01 & The flow set-up must perform an emergency shut down when the arterial pressure exceeds specified threshold. \\ 
+	TR-SQ2 & The flow set-up must perform an emergency shut down when the flow cannot be controlled, i.e. erratic. \\
 	\cline{2-2}
 \end{tabular}
 \end{table}
@@ -150,11 +170,11 @@ Design constraints that have been imposed and assumptions that have been made by
 \label{tab:constassump}
 This table summarises constraints placed on the design and assumptions made to yield the system requirements.
 \begin{tabular}{l|p{120mm}|}
-	\makecell[l]{\textbf{Requirement} \\ \textbf{number}} & \multicolumn{1}{c}{\textbf{Description}}\\
+	\makecell[l]{\textbf{Reference} \\ \textbf{number}} & \multicolumn{1}{c}{\textbf{Description}}\\
 	\hline
-	TR-CA0 &  Cardiac artefacts, beating of the heart, is initially too complex. The phantom will be static. \\
-	TR-CA0 & Breating artifacts are not simulated in the phantom itself. A breathing thorax phantom can be used if available. \\
-	TR-CA0 & Chest size, the amount of tissue between heart and scanner, is not simulated in the phantom itself. Thorax phantoms with modular rings are available to simulate tissue patients with varying BMIs. \\
+	TR-CA01 &  Cardiac artefacts, beating of the heart, is initially too complex. The phantom will be static. \\
+	TR-CA02 & Breathing artefacts are not simulated in the phantom itself. A breathing thorax phantom can be used if available. \\
+	TR-CA03 & Chest size, the amount of tissue between heart and scanner, is not simulated in the phantom itself. Thorax phantoms with modular rings are available to simulate tissue patients with varying BMIs. \\
 	\cline{2-2}
 \end{tabular}
 \end{table}
