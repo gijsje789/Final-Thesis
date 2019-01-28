@@ -14,17 +14,35 @@ This table specifies the requirements for the generated flow and pressure.
 	\hline
 	TFR-GF01 & A constant flow is to be generated, i.e. non-pulsatile. \\
 	TFR-GF02 & Flow generators need to be interchangeable. \\
-	TFR-GF03 & Minimum achievable upper limit of myocardial perfusion is 300 mL/min/100g. \\
-	TFR-GF04 & Minimum achievable lower limit of myocardial perfusion is 60 ml/min/100g. \\
-	TFR-GF05 & Minimum achievable upper limit of cardiac output is 8 L/min.\\
-	TFR-GF06* & Minimum arterial pressure is 56 mmHg. \\
-	TFR-GF07* & Maximum arterial pressure is  155 mmHg. \\
+	TFR-GF03* & Minimum achievable upper limit of myocardial perfusion is 300 mL/min/100g. \\
+	TFR-GF04* & Minimum achievable lower limit of myocardial perfusion is 60 ml/min/100g. \\
+	TFR-GF05** & Minimum achievable upper limit of cardiac output is 8 L/min.\\
+	TFR-GF06+ & Minimum arterial pressure is 56 mmHg. \\
+	TFR-GF07+ & Maximum arterial pressure is  155 mmHg. \\
 	TFR-GF08 & Flow generators are controlled via a flow feedback system. \\
 	\cline{2-2}
 \end{tabular}
 \raggedright
-\textit{* based on the diastolic and systolic blood pressures.}
+\textit{* combined flow to myocardium, indicated by blue arrows in figure \ref{fig:sim_heart} }\\
+\textit{** flow \textbf{not} entering the myocardium, indicated by red arrow in figure \ref{fig:sim_heart}} \\
+\textit{+ based on the diastolic and systolic blood pressures, measured at dashed line P in figure \ref{fig:sim_heart}} \\
 \end{table}
+
+\begin{figure}
+\centering
+\begin{minipage}{.5\textwidth}
+  \centering
+  \includegraphics[width=0.7\linewidth]{./images/simplified_heart.png}
+  \captionof{figure}{Simplified, schematic overview of the heart.}
+  \label{fig:sim_heart}
+\end{minipage}%
+\begin{minipage}{.5\textwidth}
+  \centering
+  \includegraphics[width=0.95\linewidth]{./images/17_segment.jpg}
+  \captionof{figure}{17-segment heart model}
+  \label{fig:segment_heart}
+\end{minipage}
+\end{figure}
 
 \subsection{Measuring flow and pressure}
 \begin{table} [H]
@@ -55,11 +73,13 @@ This table specifies the requirements specific for the phantom that simulates th
 	TFR-SIM02 & Stenotic arteries are mimicked in a physiological way by physically narrowing (or increasing flow resistance) of certain arteries. \\
 	TFR-SIM03 & Different stenotic severity, should be possible by, for example, variable flow resistors or interchanging components. \\
 	TFR-SIM04 & The phantom must be compatible with D-SPECT protocol. \\
-	\hspace{1.5cm} A) & The three coronary arteries should be present (RCA, LAD, LCx) and connected to a myocardium. \\
-	\hspace{1.5cm} B) & An ROI can be taken in the left ventricle. \\
-	\hspace{1.5cm} C) & An AIF can be taken from the left atrium. \\
-	\hspace{1.5cm} D) & The myocardium has a longitudinal cross-sectional shape of a horseshoe. \\
-	\hspace{1.5cm} E) & The myocardium has a transverse cross-sectional shape of a circle. \\
+	\hspace{1.5cm} A) & Flow to the myocardium is supplied by the RCA, LAD, and LCx. \\
+	\hspace{1.5cm} B) & Flow for each segment is supplied individually by branches of the RCA, LAD, and LCx, see figure \ref{fig:segment_supply}. \\
+	\hspace{1.5cm} C) & Flow from each segment is measured separately such that they can be compared to the 17-segment model. \\
+	\hspace{1.5cm} D) & An ROI can be taken in the left ventricle. \\
+	\hspace{1.5cm} E) & An AIF can be taken from the left atrium. \\
+	\hspace{1.5cm} F) & The left ventricle's myocardium has a Vertical and Horizontal Longitudinal Axial (VLA/HLA) cross-sectional shape of a horseshoe. \\
+	\hspace{1.5cm} G) & The left ventricle's myocardium has a Short Axial (SA) cross-sectional shape of a circle. \\
 	TFR-SIM05* & Phantom's compartment model should match the currently practised protocol.\\
 	\hspace{1.5cm} A) & The contrast agent specified as Technetium (\textsuperscript{99m}Tc) tetrofosmin, see section \ref{sec:inj_contrast}. \\
 	\hspace{1.5cm} B) & The contrast agent is absorbed by the myocardium to approximately 1.2\% of administered activity in 5 minutes. \\
@@ -70,6 +90,11 @@ This table specifies the requirements specific for the phantom that simulates th
 \textit{* \url{https://pubchem.ncbi.nlm.nih.gov/compound/131704316\#section=Absorption-Distribution-and-Excretion}}
 \end{table}
 
+\begin{figure}
+	\includegraphics[width=0.5\linewidth]{./images/17_supply.png}
+	\caption{Schematic representation of the supply to each segment.}
+	\label{fig:segment_supply}
+\end{figure}
 
 \subsection{Inject contrast}
 \label{sec:inj_contrast}

@@ -3,10 +3,11 @@
 \vskip-10pt
 The system requirements specify all the requirements for the myocardial perfusion phantom. These requirements are based on research and interviews with stakeholders.
 
-\vskip50pt
+\vskip10pt
 G.J. (Gijs) de Vries\\
 Enschede, 7\textsuperscript{th} of January 2019
 
+\vskip10pt
 \section*{Version}
 \begin{table} [h]
 \caption{ Version control }
@@ -27,13 +28,20 @@ Enschede, 7\textsuperscript{th} of January 2019
 		 	& \textbullet TR-PR02 A) through E). & \\
 		 	R0.23 & Added following items: & 2019/01/23 \\
 		 	& \textbullet TFR-SIM05 A) through C). & \\
+		 	R0.24 & Modified: & 2019/01/28 \\
+		 	& \textbullet Section \ref{sec:concept_oper}, to correspond to interview at ZGT. & \\
+		 	& Added following items: & \\
+		 	& \textbullet Figure \ref{fig:sim_heart}, \ref{fig:segment_heart}, and \ref{fig:segment_supply} & \\
+		 	& Removed following items: & \\
+		 	& \textbullet FR08 (combined with FR07) & \\
+		 	& Inserted following items: & \\
+		 	& \textbullet TFR-SIM04 B) \& C). Other requirements are shifted down. & \\
 		\hline
 	\end{tabular}
 \end{table}
 
 \section*{Changelog}
-
-\begin{table} [h]
+\begin{table} [H]
 \caption{ Table of changed requirements }
 	\begin{tabular}{|c|p{0.5\linewidth}|p{0.26\linewidth}|}
 		\multicolumn{1}{l}{\textbf{Requirement}} & \multicolumn{1}{c}{\textbf{Old description}} & \multicolumn{1}{l}{\textbf{Change reason}} \\
@@ -44,6 +52,14 @@ Enschede, 7\textsuperscript{th} of January 2019
 		TR-PR10 & The phantom's chambers must match the dimensions of an average human heart, between 60-90x30-50x60-90mm [LxWxD] & Sizes are specified for the ventricles. \\
 		TR-PR02 & The phantom must be anatomically correct; four heart chambers, myocardium around the chambers, arrow shaped bottom. & Rephrased after interview at ZGT. \\
 		TFR-SIM05 & Phantom's compartment model should match the currently practised protocol. Does the tracer diffuse, is it trapped in tissue et cetera. & Rephrased and linked to contrast section. \\
+		FR03 & The high flow should be suitable for an \ac{AIF}, either in a ventricle chamber or an aorta depending on the clinical software.  & The D-SPECT software extracts the AIF in the left atrium.\\
+		FR04 & Cardiac defects should be simulated such that the complex relation between stenotic and non-stenotic arteries is modelled. & Rephrased. \\
+		FR05 & The phantom must be able to visualise both control and stenotic areas, similar to clinical scans. & Rephrased, it should be compatible with the 17 segment model. \\
+		FR06 & The phantom must initially simulate the compartment model typically used in clinical scans, but be flexible enough such that other compartment models are achievable. & Rephrased to be more specific.\\
+		FR07 & The contrast agent should be equivalent to that used in clinical scans. & Rephrased and combined with FR08 to be more global. \\
+		TFR-SIM04 A) & The three coronary arteries should be present (RCA, LAD, LCx) and connected to a myocardium. & Rephrased to make it more clear. \\
+		TFR-SIM04 F) & The myocardium has a longitudinal cross-sectional shape of a horseshoe. & Rephrased to be more specific. \\
+		TFR-SIM04 G) &  The myocardium has a transverse cross-sectional shape of a circle. & Rephrased to be more specific. \\
 		\hline
 	\end{tabular}
 \end{table}
