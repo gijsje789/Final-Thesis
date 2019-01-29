@@ -14,12 +14,13 @@ This table specifies the requirements for the generated flow and pressure.
 	\hline
 	TFR-GF01 & A constant flow is to be generated, i.e. non-pulsatile. \\
 	TFR-GF02 & Flow generators need to be interchangeable. \\
-	TFR-GF03* & Minimum achievable upper limit of myocardial perfusion is 300 mL/min/100g. \\
-	TFR-GF04* & Minimum achievable lower limit of myocardial perfusion is 60 ml/min/100g. \\
+	TFR-GF03* & Minimum achievable upper limit of myocardial perfusion is 300 mL/min/100g. Stress perfusion typicially between 190-300 mL/min/100g. \\
+	TFR-GF04* & Minimum achievable lower limit of myocardial perfusion is 60 mL/min/100g. Rest perfusion is typically between 60-95 mL/min/100g. \\
 	TFR-GF05** & Minimum achievable upper limit of cardiac output is 8 L/min.\\
 	TFR-GF06+ & Minimum arterial pressure is 56 mmHg. \\
 	TFR-GF07+ & Maximum arterial pressure is  155 mmHg. \\
 	TFR-GF08 & Flow generators are controlled via a flow feedback system. \\
+	TFR-GF09 & Mean Arterial Pressure (MAP) \footnotemark is 89mmHg. Typical range is between 70 and 110mmHg.\\
 	\cline{2-2}
 \end{tabular}
 \raggedright
@@ -27,6 +28,8 @@ This table specifies the requirements for the generated flow and pressure.
 \textit{** flow \textbf{not} entering the myocardium, indicated by red arrow in figure \ref{fig:sim_heart}} \\
 \textit{+ based on the diastolic and systolic blood pressures, measured at dashed line P in figure \ref{fig:sim_heart}} \\
 \end{table}
+
+\footnotetext{Calculated as: $MAP \simeq DP + \sfrac{1}{3} (SP-DP)$}
 
 \begin{figure}
 \centering
@@ -76,8 +79,8 @@ This table specifies the requirements specific for the phantom that simulates th
 	\hspace{1.5cm} A) & Flow to the myocardium is supplied by the RCA, LAD, and LCx. \\
 	\hspace{1.5cm} B) & Flow for each segment is supplied individually by branches of the RCA, LAD, and LCx, see figure \ref{fig:segment_supply}. \\
 	\hspace{1.5cm} C) & Flow from each segment is measured separately such that they can be compared to the 17-segment model. \\
-	\hspace{1.5cm} D) & An ROI can be taken in the left ventricle. \\
-	\hspace{1.5cm} E) & An AIF can be taken from the left atrium. \\
+	\hspace{1.5cm} D) & An ROI for the AIF can be taken in the left atrium. Alternatively, the ROI for the AIF can be taken in the left ventricle. \\
+	\hspace{1.5cm} \sout{E)} & \sout{An AIF can be taken from the left atrium.} \\
 	\hspace{1.5cm} F) & The left ventricle's myocardium has a Vertical and Horizontal Longitudinal Axial (VLA/HLA) cross-sectional shape of a horseshoe. \\
 	\hspace{1.5cm} G) & The left ventricle's myocardium has a Short Axial (SA) cross-sectional shape of a circle. \\
 	TFR-SIM05* & Phantom's compartment model should match the currently practised protocol.\\
@@ -121,11 +124,11 @@ This table summarises the requirements on the contrast and contrast injection pr
 \end{table}
 
 \section{Physical requirements}
-\rrot{Determine size of seating of D-SPECT}
-\rrot{Determine weight limit of seating of D-SPECT}
-\rrot{Must it be completely anatomical?}
-\rrot{Adjust requirements if the phantom does not have to be anatomical.}
-Size, weight et cetera.
+\rrow{Determine size of seating of D-SPECT}
+\rrod{Determine weight limit of seating of D-SPECT}
+\rrow{Must it be completely anatomical?}
+\rrow{Adjust requirements if the phantom does not have to be anatomical.}
+The following requirements state the physical aspects of the phantom and of the .
 \begin{table} [H]
 \caption{Physical requirements}
 \label{tab:physrec}
@@ -135,7 +138,7 @@ This table summarises the physical requirements.
 	\hline
 	TR-PR01 & The phantom, and its set-up, must fit on the D-SPECT's chair. \\
 	TR-PR02 & The phantom must be anatomically shaped. \\
-	\hspace{1.5cm} A) & In correspondence with requirements TFR-SIM04 D) and E). \\
+	\hspace{1.5cm} A) & In correspondence with requirements TFR-SIM04 D). \\
 	\hspace{1.5cm} B) & Four chambered phantom that correspond to left/right ventricle and left/right atrium. \\
 	\hspace{1.5cm} C) & Myocardium surrounds heart chambers. \\
 	\hspace{1.5cm} D) & Three coronary arteries, RCA, LAD and LCx, supply the myocardium. \\
@@ -159,7 +162,7 @@ This table summarises the physical requirements.
 
 \section{Environmental requirements}
 \rrot{Determine how much noise output it may have.}
-\rrot{Determine the height of the chair of the D-SPECT}
+\rrod{Determine the height of the chair of the D-SPECT}
 In what environment is the system operating.
 \begin{table} [H]
 \caption{Environmental requirements}

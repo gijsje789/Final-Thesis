@@ -36,15 +36,23 @@ Enschede, 7\textsuperscript{th} of January 2019
 		 	& \textbullet FR08 (combined with FR07) & \\
 		 	& Inserted following items: & \\
 		 	& \textbullet TFR-SIM04 B) \& C). Other requirements are shifted down. & \\
+		 	R0.25 & Modified: & 2019/01/29 \\
+		 	& \textbullet Section \ref{sec:what_perf}, rephrased. & \\
+		 	& Removed following items: & \\
+		 	& \textbullet TFR-SIM04 E), combined with TFR-SIM04 D), AIF initially in left atrium but alternatively in left ventricle. & \\
+		 	& Added following items: & \\
+		 	& \textbullet TFR-GF09 & \\
 		\hline
 	\end{tabular}
 \end{table}
 
+\newpage
+
 \section*{Changelog}
-\begin{table} [H]
-\caption{ Table of changed requirements }
-	\begin{tabular}{|c|p{0.5\linewidth}|p{0.26\linewidth}|}
-		\multicolumn{1}{l}{\textbf{Requirement}} & \multicolumn{1}{c}{\textbf{Old description}} & \multicolumn{1}{l}{\textbf{Change reason}} \\
+%\begin{table} [H]
+%\caption{ Table of changed requirements }
+	\begin{longtable}{|c|p{0.5\linewidth}|p{0.26\linewidth}|}
+		\multicolumn{1}{l}{\textbf{Requirement}} & \multicolumn{1}{c}{\textbf{Old description}} & \multicolumn{1}{l}{\textbf{Change reason}}  \endhead
 		\hline
 		TR-IC01 & A variable amount of contrast can be injected. & Rephrased. \\
 		TFR-SIM01 & An \ac{AIF} must be extractable from either the aorta or the left ventricle chamber. & The AIF, in the D-SPECT software, is taken from the left ventricle. This requirement is moved to TFR-SIM04. \\
@@ -60,6 +68,11 @@ Enschede, 7\textsuperscript{th} of January 2019
 		TFR-SIM04 A) & The three coronary arteries should be present (RCA, LAD, LCx) and connected to a myocardium. & Rephrased to make it more clear. \\
 		TFR-SIM04 F) & The myocardium has a longitudinal cross-sectional shape of a horseshoe. & Rephrased to be more specific. \\
 		TFR-SIM04 G) &  The myocardium has a transverse cross-sectional shape of a circle. & Rephrased to be more specific. \\
+		TFR-SIM04 D) & An ROI can be taken in the left ventricle. & Combined with TFR-SIM04 E), AIF is taken in left atrium. If it has poor results, the AIF's ROI can be moved to the left ventricle. \\
+	TFR-SIM04 E) & An AIF can be taken from the left atrium. & Removed, combined with TFR-SIM04 D).\\
+	TR-PR02 A) & In correspondence with requirements TFR-SIM04 D) and E) & TFR-SIM04 requirements were modified, therefore TR-PR02 is modified in accordance. \\
+	TFR-GF03 & Minimum achievable upper limit of myocardial perfusion is 300 mL/min/100g. & Added more specificity for stress perfusion.  \\
+	TFR-GF04 & Minimum achievable lower limit of myocardial perfusion is 60 mL/min/100g. & Added more specificity for rest perfusion. \\
 		\hline
-	\end{tabular}
-\end{table}
+	\end{longtable}
+%\end{table}
