@@ -5,28 +5,49 @@ This section specifies the requirements set for the functions mentioned in figur
 \subsection{Generate flow}
 In the project plan, a literature overview is given on perfusion phantoms, for a variety of organs, but also on physiological factors: perfusion rates, blood pressures, rates of stenosis et cetera. The TFR-GF requirements are based on the estimates by \cite{uren1994relation}, summarised in appendix \ref{app:physoverview}, \cite{chiribiri2013normal}, \cite{ho2014dynamic}, summarised in appendix \ref{app:physoverview_ho}, and \cite{slart2015pres}.
 
-\begin{table} [H]
-\caption{Function requirements for function: Generate flow}
-\label{tab:funcreq_tec}
-This table specifies the requirements for the generated flow and pressure.
-\begin{tabular}{l|p{120mm}|}
-	\makecell[l]{\textbf{Requirement} \\  \textbf{number}} & \multicolumn{1}{c}{\textbf{Description}}\\
+Decisions and design choices are given in table \ref{tab:genflow_text}, quantitative requirements are given in table \ref{tab:genflow_quan}.
+
+\begin{table}[H]
+\caption{Textual requirements for function: Generate flow}
+\label{tab:genflow_text}
+\begin{tabular}{p{25mm}|p{115mm}|}
+	\textbf{Requirement number} & \multicolumn{1}{c}{\textbf{Description}} \\
 	\hline
-	TFR-GF01 & A constant flow is to be generated, i.e. non-pulsatile. \\
-	TFR-GF02 & Flow generators need to be interchangeable. \\
-	TFR-GF03* & Minimum achievable upper limit of myocardial perfusion is 300 mL/min/100g. Stress perfusion typicially between 190-300 mL/min/100g. \\
-	TFR-GF04* & Minimum achievable lower limit of myocardial perfusion is 60 mL/min/100g. Rest perfusion is typically between 60-95 mL/min/100g. \\
-	TFR-GF05** & Minimum achievable upper limit of cardiac output is 8 L/min.\\
-	TFR-GF06+ & Minimum arterial pressure is 56 mmHg. \\
-	TFR-GF07+ & Maximum arterial pressure is  155 mmHg. \\
-	TFR-GF08 & Flow generators are controlled via a flow feedback system. \\
-	TFR-GF09 & Mean Arterial Pressure (MAP) \footnotemark is 89mmHg. Typical range is between 70 and 110mmHg.\\
+	TFR-GFT01 & A constant flow is to be generated, i.e. non-pulsatile. \\
+	TFR-GFT02 & Flow generators need to be interchangeable. \\
+	TFR-GFT03 & Flow feedback control for flow generators. \\
 	\cline{2-2}
 \end{tabular}
+\end{table}
+
+\textbf{TFR-GFT01} is based on reducing the complexity of the set-up. The ROI based AIF averages the intensity over time, which removes the pulsatile nature. Furthermore, the heart rate cannot be determine in the measurements results. Therefore, pulsatile flow is not a priority.
+\textbf{
+TFR-GFT02} is based on maintaining flexibility such that the most optimal flow generator can be chosen based on the requirements for a specific experiment.
+
+\textbf{TFR-GFT03} is based on ensuring reliability; no validation can be performed when the flow is not controlled.
+
+\begin{table}[H]
+\caption{Quantitative requirements for function: Generate flow}
+\label{tab:genflow_quan}
+\begin{tabular}{p{25mm}|p{65mm}|c|c|p{20mm}|l}
+	\textbf{Requirement number} & \multicolumn{1}{c}{\textbf{Description}} & \multicolumn{1}{c}{ } & \multicolumn{1}{c}{\textbf{Value}} & \multicolumn{1}{c}{\textbf{Unit}} \\
+	\hline
+	TFR-GFQ01*	& Upper limit myocardial perfusion. 		 & = 		& 300 		&  mL/min/100g \\
+	TFR-GFQ02* 	& Lower limit myocardial perfusion. 		 & = 		& 60 		& mL/min/100g \\
+	TFR-GFQ03* 	& Typical perfusion rate during stress. 	 & >..< 	& 190..300 	& mL/min/100g \\
+	TFR-GFQ04*  	& Typical perfusion rate during rest. 		 & >..< 	& 60..95 	& mL/min/100g \\
+	TFR-GFQ05**	& Upper limit cardiac output.				 & =		& 8 		& L/min \\
+	TFR-GFQ06+		& Lower limit arterial pressure.			 & =		& 56		& mmHg \\
+	TFR-GFQ07+		& Upper limit arterial pressure.			 & = 		& 155		& mmHg \\
+	TFR-GFQ08		& Mean Arterial Pressure (MAP)\footnotemark. & = 		& 89		& mmHg \\
+	TFR-GFQ09		& Typical MAP.								 & >..<		& 70..110	& mmHg \\
+	TFR-GFQ10 	& Feedback control accuracy 					 & =		& 5			& \% \\
+	\cline{2-5}
+\end{tabular} \\
 \raggedright
-\textit{* combined flow to myocardium, indicated by blue arrows in figure \ref{fig:sim_heart} }\\
-\textit{** flow \textbf{not} entering the myocardium, indicated by red arrow in figure \ref{fig:sim_heart}} \\
-\textit{+ based on the diastolic and systolic blood pressures, measured at dashed line P in figure \ref{fig:sim_heart}} \\
+\textit{* combined flow to myocardium, indicated by blue arrows in figure \ref{fig:sim_heart}.} \\
+\textit{** flow \textbf{not} entering the myocardium, indicated by red arrow in figure \ref{fig:sim_heart}.} \\
+\textit{+ based on diastolic and systolic blood pressures, respectively. Measured at dashed line P in figure \ref{fig:sim_heart}.}
 \end{table}
 
 \footnotetext{Calculated as: $MAP \simeq DP + \sfrac{1}{3} (SP-DP)$}
@@ -48,21 +69,32 @@ This table specifies the requirements for the generated flow and pressure.
 \end{figure}
 
 \subsection{Measuring flow and pressure}
-\begin{table} [H]
-\caption{Function requirements for function: Measure flow and pressure}
-\label{tab:funcmeas}
-This table specifies the requirements for the measuring of flow and pressure.
-\begin{tabular}{l|p{120mm}|}
-	\makecell[l]{\textbf{Requirement} \\  \textbf{number}} & \multicolumn{1}{c}{\textbf{Description}}\\
+\begin{table}[H]
+\caption{Quantitative requirements for function: Measure flow and pressure}
+\label{tab:measflow_quan}
+\begin{tabular}{p{25mm}|p{65mm}|c|c|p{20mm}|l}
+	\textbf{Requirement number} & \multicolumn{1}{c}{\textbf{Description}} & \multicolumn{1}{c}{ } & \multicolumn{1}{c}{\textbf{Value}} & \multicolumn{1}{c}{\textbf{Unit}} \\
 	\hline
-	TFR-MFP01 & Flow measuring accuracy less than 5\%. \\
-	TFR-MFP02 & Pressure measuring accuracy less than 5\%. \\
-	TFR-MFP03 & Minimum absolute flow resolution of 1 mL/min. \\
-	TFR-MFP04 & Minimum sampling rate of 100Hz. \\
-	\cline{2-2}
-\end{tabular}
+	TFR-MFPQ01	& Flow measuring accuracy. 		 			 & <= 		& 5 		& \% \\
+	TFR-MFPQ02 	& Pressure measuring accuracy.		 		 & <= 		& 5 		& \% \\
+	TFR-MFPQ03 	& Absolute flow resolution.				 	 & >=	 	& 1 		& mL/min \\
+	TFR-MFPQ04  & Sampling rate.					 		 & >= 		& 10 		& Hz \\
+	\cline{2-5}
+\end{tabular} \\
 \raggedright
 \end{table}
+
+\begin{figure}[H]
+	\includegraphics[width=0.5\linewidth]{./images/17_supply.png}
+	\caption{Schematic representation of the supply to each segment (simplified).}
+	\label{fig:segment_supply}
+\end{figure}
+
+\begin{figure}[H]
+	\includegraphics[width=0.5\linewidth]{./images/17_segment_2.jpg}
+	\caption{Schematic representation of the supply to each segment.}
+	\label{fig:segment_supply2}
+\end{figure}
 
 \subsection{Simulate myocardial perfusion}
 \begin{table} [H]
@@ -92,12 +124,6 @@ This table specifies the requirements specific for the phantom that simulates th
 \raggedright
 \textit{* \url{https://pubchem.ncbi.nlm.nih.gov/compound/131704316\#section=Absorption-Distribution-and-Excretion}}
 \end{table}
-
-\begin{figure}
-	\includegraphics[width=0.5\linewidth]{./images/17_supply.png}
-	\caption{Schematic representation of the supply to each segment.}
-	\label{fig:segment_supply}
-\end{figure}
 
 \subsection{Inject contrast}
 \label{sec:inj_contrast}

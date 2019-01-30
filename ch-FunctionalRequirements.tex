@@ -43,11 +43,16 @@ A single flow source is to be used that supplies the RCA, LAD, and LCx. From an 
 Every tracer behaves differently. For D-SPECT, Technetium (\textsuperscript{99m}Tc) Tetrofosmin is used. This tracer is absorbed by the myocardium. The phantom will thus have to mimic this behaviour in the myocardium.
 
 \section{Business model}
-The development of the myocardial perfusion phantom is primarily for the purpose of validating \ac{MPI}. An added benefit is the educational and training purpose. The phantom will distinguish itself from other phantoms due to its more true-to-nature design, ability to physiologically mimic cardiac defects, and the possibility of modelling different compartment models.
+Dynamic scanning yield quantitative results, i.e. absolute perfusion rates, which require proper validation. Phantom studies are, to a high degree, suitable for such purpose. An added benefit of these studies, is that it provides insight into the effect of different parameters on the outcome, which in turn influences patient treatment. These insights can be used for calibration or protocol optimisation, e.g. tracer protocol. Examples would be determining optimal (patient dependable) activity or injection speed.
+
+In short, the phantom can be used for educational and training purposes, as well as for calibration or optimisation. 
+
+The phantom will distinguish itself from other phantoms due to its more true-to-nature design, ability to physiologically mimic cardiac defects, and the possibility of modelling different compartment models.
 
 The primary focus remains on the current application of \ac{MPI} as performed at the ZGT in Hengelo, Overijssel.
 
 \section{Requirements}
+\rrot{Verify the AIF requirements.}
 The functional requirements are summarised in table \ref{tab:funcreq}.
 
 \begin{table}[h]
@@ -60,17 +65,19 @@ This table summarises the functional requirements for the prototype myocardial p
 	FR01 & The phantom must be able to simulate blood flow, either using water of blood-mimicking fluid, at high flow rates (aortic flow). \\ 
 	\rowcolor{Gray}
 	FR02 & The phantom must be able to simulate blood flow, either using water or blood-mimicking fluid, at low flow rates (myocardial flow). \\
-	FR03 & The high flow should be suitable for an \ac{AIF} extracted from the left atrium. \\
+	FR03* & An \ac{AIF} can be extracted from the left atrium, or alternatively from the left ventricle. \\
 	\rowcolor{Gray}
 	FR04 & Cardiac defects must simulate the complex relation between stenotic and non-stenotic arteries. \\
-	FR05 & The phantom must be able to visualise (and measure) the 17-segment cardiac model. \\
+	FR05 & The phantom must be able to visualise (and measure) at least two active segments of the 17-segment ventricle model. \\
 	\rowcolor{Gray}
 	FR06 & The phantom must use a 2-compartment model (simulating contrast uptake in tissue). \\
-	FR07 & The contrast protocol must be equivalent to that used in clinical scans with D-SPECT. \\
+	FR07 & Tracer protocol must be equivalent to that used in clinical scans with D-SPECT. \\
 	\rowcolor{Gray}
 	\sout{FR08} & \sout{Contrast should be mixed equivalently to contrast mixing in patients.} \\
 	\cline{2-2}
 \end{tabular}
+\raggedright
+\textit{* Depending on the flexibility of the clinical software.}
 \end{table}
 
 \section{Business and system use cases}	
@@ -87,6 +94,6 @@ Please note, setting the imaging and contrast parameters are not part of the pha
 A schematic overview of the flow set-up is shown in figure \ref{fig:funcarch}. The set-up consists of a flow generating system, e.g. mechanical pumps or pressure based, to generate the required aortic and myocardial flow, measuring systems, e.g. flow and pressure sensors, and the phantom itself, simulating the heart. The flow is controlled by means of a control system, over which the user has control. The flow parameters, i.e. flow and pressure, are measured by sensors which are monitored by a monitoring system. The monitoring system and control system cooperate such that user parameters are maintained. Figure \ref{fig:funcarch} shows a distinction between high and low flow, which is not a requirement. Low flow can be created by means of pressure difference in high and low flow circuit; increasing pressure in low flow circuit results in less volume passing through.
 \begin{figure}
 	\includegraphics[width=0.75\textwidth]{./images/functional_architecture.png}
-	\caption{Functional architecture for the myocardial perfusion set-up}
+	\caption{Functional architecture for the myocardial perfusion set-up, \textbf{not yet definitive.}}
 	\label{fig:funcarch}
 \end{figure}
