@@ -13,7 +13,7 @@ Decisions and design choices are given in table \ref{tab:genflow_text}, quantita
 \begin{tabular}{p{25mm}|p{115mm}|}
 	\textbf{Requirement number} & \multicolumn{1}{c}{\textbf{Description}} \\
 	\hline
-	TFR-GFT01 & A constant flow is to be generated, i.e. non-pulsatile. \\
+	TFR-GFT01 & A variable, but constant, flow is to be generated, i.e. non-pulsatile. \\
 	TFR-GFT02 & Flow generators need to be interchangeable. \\
 	TFR-GFT03 & Flow feedback control for flow generators. \\
 	\cline{2-2}
@@ -21,8 +21,7 @@ Decisions and design choices are given in table \ref{tab:genflow_text}, quantita
 \end{table}
 
 \textbf{TFR-GFT01} is based on reducing the complexity of the set-up. The ROI based AIF averages the intensity over time, which removes the pulsatile nature. Furthermore, the heart rate cannot be determine in the measurements results. Therefore, pulsatile flow is not a priority.
-\textbf{
-TFR-GFT02} is based on maintaining flexibility such that the most optimal flow generator can be chosen based on the requirements for a specific experiment.
+\textbf{TFR-GFT02} is based on maintaining flexibility such that the most optimal flow generator can be chosen based on the requirements for a specific experiment.
 
 \textbf{TFR-GFT03} is based on ensuring reliability; no validation can be performed when the flow is not controlled.
 
@@ -115,8 +114,9 @@ This table specifies the requirements specific for the phantom that simulates th
 	\hspace{1.5cm} \sout{E)} & \sout{An AIF can be taken from the left atrium.} \\
 	\hspace{1.5cm} F) & The left ventricle's myocardium has a Vertical and Horizontal Longitudinal Axial (VLA/HLA) cross-sectional shape of a horseshoe. \\
 	\hspace{1.5cm} G) & The left ventricle's myocardium has a Short Axial (SA) cross-sectional shape of a circle. \\
+	\hspace{1.5cm} H) & The phantom is oriented such that it mimics a patient in supine position. \\
 	TFR-SIMT05* & Phantom's compartment model should match the currently practised protocol.\\
-	\hspace{1.5cm} A) & The contrast agent specified as Technetium (\textsuperscript{99m}Tc) tetrofosmin, see section \ref{sec:inj_contrast}. \\
+	\hspace{1.5cm} A) & The tracer specified in section \ref{sec:inj_tracer}.\\
 	\hspace{1.5cm} B) & The contrast agent is absorbed by the myocardium to approximately 1.2\% of administered activity in 5 minutes. \\
 	\hspace{1.5cm} C) & Contrast accumulates in skeletal muscles, spleen, liver, and kidneys (potential interference). \\
 	\cline{2-2}
@@ -136,30 +136,32 @@ The injection protocol is not part of the development of the phantom. However, t
 \begin{table}[H]
 \caption{Textual requirements for function: Inject tracer}
 \label{tab:injtrac_text}
-\begin{tabular}{p{25mm}|p{115mm}|}
-	\textbf{Requirement number} & \multicolumn{1}{c}{\textbf{Description}} \\
+\begin{tabular}{l|p{115mm}|}
+	\makecell[l]{\textbf{Requirement} \\  \textbf{number}} & \multicolumn{1}{c}{\textbf{Description}} \\
 	\hline
-	TRF-ICT01 			& Tracer volume is variable. \\
-	TRF-ICT02			& Tracer activity is variable, also see TRF-ICQ03. \\
-	TRF-ICT03			& Tracer agent is variable. \\
-	TRF-ICT04 			& Tracer injection is reproducible.\\
-	TRF-ICT05 			& Tracer protocol should match the currently practised protocol. \\
-	\hspace{1.5cm} A) 	& See TRF-ICQ01. \\
+	TFR-ICT01 			& Tracer volume is variable. \\
+	TFR-ICT02			& Tracer activity is variable, also see TFR-ICQ03. \\
+	TFR-ICT03			& Tracer agent is variable. \\
+	TFR-ICT04 			& Tracer injection is reproducible, also see TFR-ICT05.\\
+	TFR-ICT05 			& Tracer protocol should match the currently practised protocol. \\
+	\hspace{1.5cm} A) 	& See TFR-ICQ01. \\
 	\hspace{1.5cm} B) 	& Tracer is injected, as bolus, via infusion pump. \\
 	\hspace{1.5cm} C) 	& A pre-bolus is to precede the main bolus. \\
 	\cline{2-2}
 \end{tabular}
 \end{table}
 
+\textbf{TFR-ICT01} through \textbf{TFR-ICT03} are defined such that the tracer protocol can be optimised by performing experiments with different volumes, activity, or tracers. However, the first experiments will focus on the currently practised protocol, as is stated in \textbf{TFR-ICT05}. \textbf{TFR-ICT04} is based on the first experiments performed at the ZGT, Hengelo, where it is concluded that manual injection is not reproducible and results in unreliable results. These effect are directly visible in the dynamic scans. Therefore, an infusion pump is to be used.
+
 \begin{table}[H]
 \caption{Quantitative requirements for function: Inject tracer}
 \label{tab:injtrac_quan}
-\begin{tabular}{p{25mm}|p{65mm}ccp{20mm}|}
-	\textbf{Requirement number} & \multicolumn{1}{c}{\textbf{Description}} & \multicolumn{1}{c}{ } & \multicolumn{1}{c}{\textbf{Value}} & \multicolumn{1}{c}{\textbf{Unit}} \\
+\begin{tabular}{l|p{65mm}ccp{20mm}|}
+	\makecell[l]{\textbf{Requirement} \\  \textbf{number}} & \multicolumn{1}{c}{\textbf{Description}} & \multicolumn{1}{c}{ } & \multicolumn{1}{c}{\textbf{Value}} & \multicolumn{1}{c}{\textbf{Unit}} \\
 	\hline
-	TRF-ICQ01 	& Tracer to be used. 			& = 			& \multicolumn{2}{p{35mm}|}{Technetium (\textsuperscript{99m}Tc) Tetrofosmin} \\
-	TRF-ICQ02 	& Pre-bolus activity.			& = 			& 37				& Mega Becquerel \\
-	TRF-ICQ03*	& Typical main bolus activity. 	& > \spacing < 	& 500 \spacing 700 	& Mega Becquerel \\
+	TFR-ICQ01 	& Tracer to be used. 			& = 			& \multicolumn{2}{p{35mm}|}{Technetium (\textsuperscript{99m}Tc) Tetrofosmin} \\
+	TFR-ICQ02 	& Pre-bolus activity.			& = 			& 37				& Mega Becquerel \\
+	TFR-ICQ03*	& Typical main bolus activity. 	& > \spacing < 	& 500 \spacing 700 	& Mega Becquerel \\
 	\cline{2-5}
 \end{tabular} \\
 \raggedright
@@ -176,11 +178,11 @@ The following requirements state the physical aspects of the phantom and of the 
 \begin{table}[H]
 \caption{Physical requirements (textual)}
 \label{tab:physrec_text}
-\begin{tabular}{p{25mm}|p{115mm}|}
-	\textbf{Requirement number} & \multicolumn{1}{c}{\textbf{Description}} \\
+\begin{tabular}{l|p{115mm}|}
+	\makecell[l]{\textbf{Requirement} \\  \textbf{number}} & \multicolumn{1}{c}{\textbf{Description}} \\
 	\hline
-	TR-PRT01 			& The phantom is to be placed inside the QRM TRX-116, see TR-PRQ01. \\
-	TR-PRT02 			& The phantom must fit on the D-SPECT seating in the imaging area. \\
+	TR-PRT01 			& The phantom's left ventricle is to be placed inside the QRM TRX-116, see TR-PRQ01. \\
+	TR-PRT02 			& The phantom's left ventricle must fit in the D-SPECT's imaging area. \\
 	TR-PRT03 			& The phantom must be anatomically shaped. \\
 	\hspace{1.5cm} \sout{A)} 	& \sout{In correspondence with requirements TFR-SIMT04.} \\
 	\hspace{1.5cm} B) 	& Four chambered phantom that correspond to left/right ventricle and left/right atrium. \\
@@ -194,57 +196,47 @@ The following requirements state the physical aspects of the phantom and of the 
 \end{tabular}
 \end{table}
 
+\rrot{Why only left ventricle?}
+\textbf{TR-PRT01} is based on creating realistic simulation of myocardial perfusion, thereby requiring a thorax phantom (with possible extension rings to simulate more hefty patients). The QRM TRX-116 has been successfully used for CT experiments. The 4DM software looks at the left ventricle thereby requiring the left ventricle to be in the phantom and in the imaging area, as stated in \textbf{TR-PRT02}.
+
+\rrot{Must it be anatomically shaped?}
+
+\textbf{TR-PRT04} is based on the choice to prevent unnecessary complexity. Remaining horizontal will negate gravity.
+
+\textbf{TR-PRT05} is based on the attenuation of air, which compromises the TAC determination.
+
 \begin{table}[H]
 \caption{Physical requirements (Quantitative)}
 \label{tab:physrec_quan}
-\begin{tabular}{p{25mm}|p{65mm}ccp{20mm}|}
-	\textbf{Requirement number} & \multicolumn{1}{c}{\textbf{Description}} & \multicolumn{1}{c}{ } & \multicolumn{1}{c}{\textbf{Value}} & \multicolumn{1}{c}{\textbf{Unit}} \\
+\begin{tabular}{l|p{65mm}ccp{20mm}|}
+	\makecell[l]{\textbf{Requirement} \\  \textbf{number}} & \multicolumn{1}{c}{\textbf{Description}} & \multicolumn{1}{c}{ } & \multicolumn{1}{c}{\textbf{Value}} & \multicolumn{1}{c}{\textbf{Unit}} \\
 	\hline	
 	TR-PRQ01 & Short Axial diameter.		 						& < 			& 100 							& Millimetre \\
 	TR-PRQ02 & Weight on patient chair. 							& < 			& 171 							& Kilogram   \\
-	TR-PRQ03 & Phantom's outer dimensions. 							& 				& 								& 			 \\
+	TR-PRQ03+ & Phantom's outer dimensions. 							& 				& 								& 			 \\
 	\hspace{1.5cm} A) & Basal-Apical distance. 						& $\approx$ 	& 120 							& Millimetre \\
 	\hspace{1.5cm} B) & Left-Right Lateral distance.				& $\approx$ 	& 80							& Millimetre \\
 	\hspace{1.5cm} C) & Anterior-Posterior distance. 				& $\approx$ 	& 60							& Millimetre \\
-	TR-PRQ04 & Left ventricle dimensions.							& 				& 								& 			 \\
+	TR-PRQ04++ & Left ventricle dimensions.							& 				& 								& 			 \\
 	\hspace{1.5cm} A)* & Internal Apical-Annular distance.			& > \spacing < 	& \invchar 69.4 \spacing 105.8	& Millimetre \\
 	\hspace{1.5cm} B) & Internal Septal-Lateral distance. 			& > \spacing <	& 38.2 \spacing 55.6			& Millimetre \\
 	\hspace{1.5cm} C) & Internal Anterior-Inferior.					& > \spacing < 	& 46.9 \spacing 68.5 			& Millimetre \\
 	\hspace{1.5cm} D) & Myocardial wall thickness.					& > \spacing < 	& 4.8 \spacing 9.8				& Millimetre \\
-	\hspace{1.5cm} E) & Internal volume.							& > \spacing < 	& \invchar 52.6 \spacing 143.6 	& Millilitre \\
-	TR-PRQ05 & Right ventricle dimensions.							& 				&								&			 \\
+	\hspace{1.5cm} E)= & Internal volume.							& > \spacing < 	& \invchar 47 \spacing 156 	& Millilitre \\
+	TR-PRQ05++ & Right ventricle dimensions.							& 				&								&			 \\
 	\hspace{1.5cm} A) & Internal Apical-Annular distance.			& > \spacing <	& 44.8 \spacing 79.2 			& Millimetre \\
 	\hspace{1.5cm} B) & Internal Septal-Medial	distance.			& > \spacing < 	& 19.2 \spacing 40.0 			& Millimetre \\
 	\hspace{1.5cm} C) & Internal Anterior-Inferior distance.		& > \spacing < 	& 42.2 \spacing 73.6 			& Millimetre \\
 	\hspace{1.5cm} D) & Myocardial wall thickness.					& > \spacing <	& 1.0 \spacing 3.8				& Millimetre \\
-	\hspace{1.5cm} E) & Internal volume. 							& > \spacing <	& \invchar 24.9 \spacing 139.3 	& Millilitre \\
+	\hspace{1.5cm} E)= & Internal volume. 							& > \spacing <	&  \invchar 24.9 \spacing 163.0 & Millilitre \\
+	TR-PRQ06+ 	& Phantom resembles weight of average human heart. & > \spacing < & 250 \spacing 350 & Gram \\
 	\cline{2-5}
 \end{tabular} \\
 \raggedright
-\textit{* Annular $\rightarrow$ Annulus $\rightarrow$ assuming mitral valve level. }
-\end{table}
-
-\begin{table} [H]
-\caption{Physical requirements}
-\label{tab:physrec}
-This table summarises the physical requirements.
-\begin{tabular}{l|p{120mm}|}
-	\makecell[l]{\textbf{Requirement} \\ \textbf{number}} & \multicolumn{1}{c}{\textbf{Description}}\\
-	\hline
-
-	TR-PR03 & The phantom must be placed inside a thorax phantom, QRM TRX-116, with maximum diameter of 100mm. \\
-	TR-PR04 & Total weight, on patient chair, cannot exceed 171kg. \\
-	TR-PR06* & The phantom must match the size of an average human heart, 12x8x6cm [LxWxD] \citep{openstax2013anatomy}. \\
-	TR-PR07 & The phantom must resemble the weight of an average human heart, 250-300g (female) or 300-350g (male) \citep{openstax2013anatomy}. \\
-	TR-PR08+ & The phantom's ventricles must match the volume of average human ventricles, between 40 and 180mL. \\
-	TR-PR09+ & The phantom's atria must match the volume of average human atria, between 80 and 115mL. \\
-	TR-PR10** & The phantom's ventricles must match the dimensions of an average human heart, between 60-90x30-50x60-90mm [LxWxD] \\
-	\cline{2-2}
-\end{tabular}
-\raggedright
-\textit{*Length (L): longitudinal axis (apex-basal), width (W): transverse axis (septal - lateral), Depth (D):  transverse axis (anterior-inferior).} \\
-\textit{**Length (L): longitudinal axis (apical-annular), width (W): transverse axis (septal-lateral (LV) or septal-medial (RV)), depth (D): transverse axis (apical-annular)} \\
-\textit{+\cite{chiribiri2013perfusion} uses LA/RA of 105mL and LV/RV of 120mL.}
+\textit{* Annular $\rightarrow$ Annulus $\rightarrow$ assuming mitral valve level.} \\
+\textit{+ based on \cite{openstax2013anatomy}.} \\
+\textit{++ based on \cite{lin2008cardiac}.} \\
+\textit{= based on \cite{maceira2006normalizedleft} and \cite{maceira2006normalizedright}}
 \end{table}
 
 \section{Environmental requirements}
@@ -252,35 +244,73 @@ This table summarises the physical requirements.
 \rrod{Determine the height of the chair of the D-SPECT}
 In what environment is the system operating.
 \begin{table} [H]
-\caption{Environmental requirements}
-\label{tab:envirreq}
-This table summarises the environmental requirements, i.e. the restrictions set by the environment to the phantom.
+\caption{Environmental requirements (Textual)}
+\label{tab:envirreq_text}
 \begin{tabular}{l|p{120mm}|}
 	\makecell[l]{\textbf{Requirement} \\ \textbf{number}} & \multicolumn{1}{c}{\textbf{Description}}\\
 	\hline
-	TR-ER01* &  No high-density or "High-Z" material is to be used.\\ 
-	TR-ER02 & The phantom's left and front side must remain free such that the D-SPECT camera image around it. \\ 
-	TR-ER03** & Any part of the flow set-up and/or phantom, that does not fit directly on the patient chair, must remain horizontal with the remaining parts between 63 and 93cm. \\
+	TR-ERT01 & No high-density or "High-Z" material is to be used.\\ 
+	TR-ERT02 & The phantom's left and front side must remain free, see figure \ref{fig:spect_surround}. \\ 
+	\sout{TR-ERT03**} & \sout{Any part of the flow set-up and/or phantom, that does not fit directly on the patient chair, must remain horizontal with the remaining parts between 63 and 93cm.} \\
 	\cline{2-2}
 \end{tabular}
 \raggedright
-\textit{* High-density and "High-Z" material, i.e. material with high atomic number, tend to block gamma radiation emitted by \ac{SPECT} tracers. Examples are Titanium (Ti), Chromium (Cr), Vanadium (V), Iron (Fe), or Lead (Pb); atom number \textgreater 22, Lead is 82.} \\
-\textit{** The patient chair's seating is adjustable between 63 and 93cm.}
+
+\end{table}
+
+\begin{figure}
+  \includegraphics[width=0.5\linewidth]{./images/surrounding_spect.jpg}
+  \caption{figure}{Schematic drawing of D-SPECT head\citep{erlandsson2009performance}.}
+  \label{fig:spect_surround}
+\end{figure}
+
+\textbf{TR-ERT01} is based on material properties; "High-Z", or High-Density, material tend to block gamma radiation emitted by \ac{SPECT} tracers. Some examples of High-Z materials are Titanium (Ti), Chromium (Cr), Vanadium (V), Iron (Fe), or Lead (Pb).
+
+\textbf{TR-ERT02} is based on the D-SPECTS design. The curved design allows for better patient comfort and proper imaging, but will require the phantom for being accessible, i.e. not blocked by High-Z materials, from the patient's left and front side.
+
+\begin{table}[H]
+\caption{Environmental requirements (Quantitative)}
+\label{tab:envirreq_quan}
+\begin{tabular}{l|p{65mm}ccp{20mm}|}
+	\makecell[l]{\textbf{Requirement} \\  \textbf{number}} & \multicolumn{1}{c}{\textbf{Description}} & \multicolumn{1}{c}{ } & \multicolumn{1}{c}{\textbf{Value}} & \multicolumn{1}{c}{\textbf{Unit}} \\
+	\hline	
+	TR-ERQ01* &  Electric power. &  &  &  \\
+	\hspace{1.5cm} A) & Supply voltage. 	& = 	& 230 	& Volt \\
+	\hspace{1.5cm} B) & Supply current at TR-ERQ01 A). 	& < < 	& 6		& Ampere \\
+	\hspace{1.5cm} C) & Supply type. 		& = 	& AC 	& - \\
+	\hspace{1.5cm} C2) & Supply frequency	& =		& 50	& Hertz \\
+	\cline{2-5}
+\end{tabular} \\
+\raggedright
+\textit{* electric power connection (wall socket) for all systems, standard Dutch power mains. \textbf{No more than TR-ERQ01 B) can be drawn due to hospital safety measures.}}
 \end{table}
 
 \section{External interfaces}
 \begin{table} [H]
-\caption{External interface requirements}
-\label{tab:exint}
-This table summarises the requirements for the external interface.
+\caption{External interface requirements (textual)}
+\label{tab:extint_text}
 \begin{tabular}{l|p{120mm}|}
 	\makecell[l]{\textbf{Requirement} \\ \textbf{number}} & \multicolumn{1}{c}{\textbf{Description}}\\
 	\hline
-	TR-EI01 &  Live plotting, at 10Hz, of system system flow and pressure.\\
-	TR-EI02 & Ability to adjust the output of the flow generators. \\
-	TR-EI03 & Serial communication between control/monitoring systems and external interface.\\
+	TR-EIT01 & Adjust output of flow generators. \\
+	TR-EIT02 & Serial communication between control/monitoring systems and external interface.\\
 	\cline{2-2}
 \end{tabular}
+\end{table}
+
+\textbf{TR-EIT01} is based on the different experiments that need to be performed at different flow rates to determine the effect on the outcome.
+
+\textbf{TR-EIT02} is based on the current control and monitoring system, which is connected via USB to the external interface running on in MATLAB on a laptop.
+
+\begin{table}[H]
+\caption{External interface requirements (Quantitative)}
+\label{tab:extint_quan}
+\begin{tabular}{l|p{65mm}ccp{20mm}|}
+	\makecell[l]{\textbf{Requirement} \\  \textbf{number}} & \multicolumn{1}{c}{\textbf{Description}} & \multicolumn{1}{c}{ } & \multicolumn{1}{c}{\textbf{Value}} & \multicolumn{1}{c}{\textbf{Unit}} \\
+	\hline	
+	TR-EIQ01 &  Live plotting frequency of system's flow and pressure. & = &  10 & Hertz \\
+	\cline{2-5}
+\end{tabular} \\
 \end{table}
 
 \section{System qualities}
@@ -289,15 +319,19 @@ Define the quality of the system: such as reliability, availability, serviceabil
 \begin{table} [H]
 \caption{System qualities}
 \label{tab:sysqual}
-This table summarises the system qualities.
 \begin{tabular}{l|p{120mm}|}
 	\makecell[l]{\textbf{Requirement} \\ \textbf{number}} & \multicolumn{1}{c}{\textbf{Description}}\\
 	\hline
-	TR-SQ01 & The flow set-up must perform an emergency shut down when the arterial pressure exceeds specified threshold. \\ 
-	TR-SQ2 & The flow set-up must perform an emergency shut down when the flow cannot be controlled, i.e. erratic. \\
+	TR-SQT01 & Emergency shut down of flow set-up when arterial pressure exceeds TFR-GFQ07. \\ 
+	TR-SQT02 & Emergency shut down of flow set-up when flow cannot be controlled, i.e. erratic or absent. \\
+	TR-SQT03 & No reversed flow out of the phantom is allowed. \\
 	\cline{2-2}
 \end{tabular}
 \end{table}
+
+\textbf{TR-SQT01} and \textbf{TR-SQT02} are based on safety and prevention of leakage. Excessive pressure indicates faulty situation which must be resolved before components fail. Erratic, and especially the absence of proper flow, indicates a leakage and must be resolved. Leakage after injecting the tracer must be prevented at all costs.
+
+\textbf{TR-QRT03} is based on optimisation of the experiments. Once the phantom is filled, it must remain filled such that experiments can be performed quickly in succession. 
 
 \section{Constraints and Assumptions}
 Design constraints that have been imposed and assumptions that have been made by the requirements engineering team when gathering and analyzijng the requirements.
@@ -309,9 +343,13 @@ This table summarises constraints placed on the design and assumptions made to y
 \begin{tabular}{l|p{120mm}|}
 	\makecell[l]{\textbf{Reference} \\ \textbf{number}} & \multicolumn{1}{c}{\textbf{Description}}\\
 	\hline
-	TR-CA01 &  Cardiac artefacts, beating of the heart, is initially too complex. The phantom will be static. \\
-	TR-CA02 & Breathing artefacts are not simulated in the phantom itself. A breathing thorax phantom can be used if available. \\
-	TR-CA03 & Chest size, the amount of tissue between heart and scanner, is not simulated in the phantom itself. Thorax phantoms with modular rings are available to simulate tissue patients with varying BMIs. \\
+	TR-CAT01 & Beating artefacts will not be generated. \\
+	TR-CAT02 & Breathing artefacts will not be generated. \\
+	TR-CAT03 & Hefty patients are simulated using extension rings on the thorax phantom.  \\
 	\cline{2-2}
 \end{tabular}
 \end{table}
+
+\textbf{TR-CAT01} and \textbf{TR-CAT02} are set to prevent over-complicating the first myocardial perfusion phantom. Breathing artefacts may be generated by means of a breathing thorax phantom, which is being developed in Munster, Germany. However, it will make the first phantom too complex but can potentially be used for the second iteration.
+
+Extension rings can be used for the static thorax phantom, see TR-PRT01. These extension rings can increase the amount of "tissue" between the heart phantom (placed in the center) and the scanner. This will simulate more hefty patients, as stated by \textbf{TR-CAT03}.
