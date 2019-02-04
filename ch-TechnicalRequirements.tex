@@ -1,5 +1,30 @@
 \chapter{Technical system overview}
+\section{System}
+The following section defines the phantom as described by \cite{van2011modeling}.
+\subsection{Organ}
+The organ to be simulated is the myocardium of the left ventricle, more specifically the blood flow in the myocardium. The left ventricle has a \ac{HLA} and \ac{VLA} cross-sectional shape of a horseshoe and a \ac{SA} cross-sectional shape of a circle, see figure \ref{fig:ventricle_shapes}. Quantitative data on blood flow is available in previous research by \cite{uren1994relation, chiribiri2013normal, ho2014dynamic, slart2015Pres}. Heart size indications are available in previous research by \cite{lin2008cardiac, maceira2006normalizedleft, maceira2006normalizedright}.
 
+\begin{figure}[H]
+	\includegraphics[scale=1]{./images/ventricle_shapes.jpg}
+	\caption{Ventricle shapes in different planes\citep{yoneyama2017validation}}
+	\label{fig:ventricle_shapes}
+\end{figure}
+
+\subsection{Population}
+The heart phantom will be designed for average adults of both genders with ages between 18 and 79. The population consisted of patients with and without \ac{CAD}.
+\subsection{Physiological states}
+The heart will be simulated in both a resting state and in a stress state while the "patient" is in a supine position. The D-SPECT captures intensity images based on gamma rays caused by the radioactive decay of a tracer which is injected intravenously. The D-SPECT does not capture any information other than intensity information from gamma rays. Therefore the composition of the fluid is of less importance; water is most practical.
+\subsection{Pathologies}
+The phantom aims to simulate the perfusion in the myocardium of healthy patients and of patients with \ac{CAD}, more specifically stenosis of the coronary arteries or its subsequent branches. Stenosis in one of the arteries will have an impact on the overall flow behaviour (higher pressure, less overall flow, more flow to non-stenotic arteries) and thus requires the phantom to mimic the same behaviour.
+\subsection{Clinical signs and monitored variables}
+Blood flow is the most important variable to be monitored as these will be compared to the quantitative results produces by the processing software of the D-SPECT's images. Blood pressure must be monitored for indicative purposes. Depending on the phantom's final design, blood pressure can be critical for the simulation of the myocardial perfusion.
+\subsection{Critical incidents}
+No critical incidents will be simulated.
+\subsection{Interventions}
+No interventions will be simulated.
+\subsection{Overall block diagram}
+
+\subsection{Internal structures and functions}
 \section{Function requirements}
 This section specifies the requirements set for the functions mentioned in figure \ref{fig:funcarch}.
 \subsection{Generate flow}
@@ -229,7 +254,12 @@ The following requirements state the physical aspects of the phantom and of the 
 	\hspace{1.5cm} C) & Internal Anterior-Inferior distance.		& > \spacing < 	& 42.2 \spacing 73.6 			& Millimetre \\
 	\hspace{1.5cm} D) & Myocardial wall thickness.					& > \spacing <	& 1.0 \spacing 3.8				& Millimetre \\
 	\hspace{1.5cm} E)= & Internal volume. 							& > \spacing <	&  \invchar 24.9 \spacing 163.0 & Millilitre \\
-	TR-PRQ06+ 	& Phantom resembles weight of average human heart. & > \spacing < & 250 \spacing 350 & Gram \\
+	TR-PRQ06+ 	& Phantom resembles weight of average human heart. 	& > \spacing <	& 250 \spacing 350 				& Gram \\
+	TR-PRQ07	& Flow path height relative to platform (see figure \ref{fig:QRM_thorax} and \ref{fig:QRM_extension}).			& 				&								& \\
+	\hspace{1.5cm} A)	& Without extension rings.					& $\approx$ 	& 120 $\pm$ 10					& Millimetre \\
+	\hspace{1.5cm} B)	& With extension ring M.					& $\approx$ 	& 145 $\pm$ 10					& Millimetre \\
+	\hspace{1.5cm} C) 	& With extension ring L.					& $\approx$		& 170 $\pm$ 10					& Millimetre \\
+	\hspace{1.5cm} D)	& With extension ring XL.					& $\approx$		& 245 $\pm$ 10					& Millimetre \\
 	\cline{2-5}
 \end{tabular} \\
 \raggedright
@@ -239,13 +269,29 @@ The following requirements state the physical aspects of the phantom and of the 
 \textit{= based on \cite{maceira2006normalizedleft} and \cite{maceira2006normalizedright}}
 \end{table}
 
-\section{Environmental requirements}
+\begin{figure}[H]
+\centering
+\begin{minipage}{.5\textwidth}
+  \centering
+  \includegraphics[width=0.95\linewidth]{./images/cardio_2.jpg}
+  \captionof{figure}{QRM thorax phantom.}
+  \label{fig:QRM_thorax}
+\end{minipage}%
+\begin{minipage}{.5\textwidth}
+  \centering
+  \includegraphics[width=0.95\linewidth]{./images/extension_2.jpg}
+  \captionof{figure}{QRM thorax phantom extension rings.}
+  \label{fig:QRM_extension}
+\end{minipage}
+\end{figure}
+
+\section{External requirements}
 \rrot{Determine how much noise output it may have.}
 \rrod{Determine the height of the chair of the D-SPECT}
 In what environment is the system operating.
 \begin{table} [H]
-\caption{Environmental requirements (Textual)}
-\label{tab:envirreq_text}
+\caption{External requirements (Textual)}
+\label{tab:extreq_text}
 \begin{tabular}{l|p{120mm}|}
 	\makecell[l]{\textbf{Requirement} \\ \textbf{number}} & \multicolumn{1}{c}{\textbf{Description}}\\
 	\hline
@@ -258,7 +304,7 @@ In what environment is the system operating.
 
 \end{table}
 
-\begin{figure}
+\begin{figure} [H]
   \includegraphics[width=0.5\linewidth]{./images/surrounding_spect.jpg}
   \caption{figure}{Schematic drawing of D-SPECT head\citep{erlandsson2009performance}.}
   \label{fig:spect_surround}
@@ -269,8 +315,8 @@ In what environment is the system operating.
 \textbf{TR-ERT02} is based on the D-SPECTS design. The curved design allows for better patient comfort and proper imaging, but will require the phantom for being accessible, i.e. not blocked by High-Z materials, from the patient's left and front side.
 
 \begin{table}[H]
-\caption{Environmental requirements (Quantitative)}
-\label{tab:envirreq_quan}
+\caption{External requirements (Quantitative)}
+\label{tab:extreq_quan}
 \begin{tabular}{l|p{65mm}ccp{20mm}|}
 	\makecell[l]{\textbf{Requirement} \\  \textbf{number}} & \multicolumn{1}{c}{\textbf{Description}} & \multicolumn{1}{c}{ } & \multicolumn{1}{c}{\textbf{Value}} & \multicolumn{1}{c}{\textbf{Unit}} \\
 	\hline	
