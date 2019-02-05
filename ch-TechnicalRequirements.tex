@@ -23,12 +23,20 @@ No critical incidents will be simulated.
 \subsection{Interventions}
 No interventions will be simulated.
 \subsection{Overall block diagram}
+Figure \ref{fig:overall_block} shows an overview of all systems, how they are separated, and their interrelations. A distinction is made between four key elements; the flow set-up, the phantom, the imaging system, and external systems. The generation of an artificial heartbeat and the injection of the tracer are carried out externally and do not require development. Additionally, the imaging system (D-SPECT) with analysis software (4DM) do not require development since it concerns off-the-shelf hard-/software. The flow set-up and the phantom do require development. 
 
-\subsection{Internal structures and functions}
+The flow is generated for different physiological states for high and low flows, i.e. for stress and rest. A closed-loop circuit monitors and controls the flow for optimal accuracy. The tracer is injected and flows to the phantom where the myocardial perfusion is mimicked. The contaminated water flows out of the phantom such that it can de disposed. Optionally, if the tracer can be filtered from the contaminated water, a closed, recirculating system can be fabricated; greatly reducing water waste. The tracer undergoes radioactive decay that results in the emission of gamma rays, which are picked up by the D-SPECT's detectors. The resulting intensity images can be reconstructed to form cross-sectional images which in turn are used to quantify the blood flow.
+
+\begin{figure}[H]
+	\includegraphics[width=\linewidth]{./images/technical_blockdiagram.png}
+	\caption{Overall block diagram}
+	\label{fig:overall_block}
+\end{figure}
+
 \section{Function requirements}
 This section specifies the requirements set for the functions mentioned in figure \ref{fig:funcarch}.
 \subsection{Generate flow}
-In the project plan, a literature overview is given on perfusion phantoms, for a variety of organs, but also on physiological factors: perfusion rates, blood pressures, rates of stenosis et cetera. The TFR-GF requirements are based on the estimates by \cite{uren1994relation}, summarised in appendix \ref{app:physoverview}, \cite{chiribiri2013normal}, \cite{ho2014dynamic}, summarised in appendix \ref{app:physoverview_ho}, and \cite{slart2015pres}.
+In the project plan, a literature overview is given on perfusion phantoms, for a variety of organs, but also on physiological factors: perfusion rates, blood pressures, rates of stenosis et cetera. The TFR-GF requirements are based on the estimates by \cite{uren1994relation}, summarised in appendix \ref{app:physoverview}, \cite{chiribiri2013normal}, \cite{ho2014dynamic}, summarised in appendix \ref{app:physoverview_ho}, and \cite{slart2015Pres}.
 
 Decisions and design choices are given in table \ref{tab:genflow_text}, quantitative requirements are given in table \ref{tab:genflow_quan}.
 
@@ -93,6 +101,7 @@ Decisions and design choices are given in table \ref{tab:genflow_text}, quantita
 \end{figure}
 
 \subsection{Measuring flow and pressure}
+This section focusses on the requirements for the measuring of the system variables; flow and pressure.
 \begin{table}[H]
 \caption{Quantitative requirements for function: Measure flow and pressure}
 \label{tab:measflow_quan}
@@ -121,10 +130,10 @@ Decisions and design choices are given in table \ref{tab:genflow_text}, quantita
 \end{figure}
 
 \subsection{Simulate myocardial perfusion}
+This section specifies the requirements specified for the simulation of the myocardium.
 \begin{table} [H]
 \caption{Function requirements for function: Simulate myocardial perfusion}
 \label{tab:funcsim}
-This table specifies the requirements specific for the phantom that simulates the myocardial perfusion.
 \begin{tabular}{l|p{120mm}|}
 	\makecell[l]{\textbf{Requirement} \\  \textbf{number}} & \multicolumn{1}{c}{\textbf{Description}}\\
 	\hline
@@ -152,11 +161,11 @@ This table specifies the requirements specific for the phantom that simulates th
 
 \textbf{TFR-SIMT02} is based on the assumption that the relation between arteries, especially when some are narrowed, is too complex to be modelled independently. Simply reducing the overall flow in the myocardium will not capture that relation. Each segment of the left ventricle is supplied by a different branch of the three coronary arteries. One narrowed branch will have an impact on \textit{all} other branches, which leads to \textbf{TFR-SIMT03}. The severity of the stenosis will impact the other branches differently.
 
-\textbf{TFR-SIMT03} is based on the goal of the project; to validate the D-SPECT. As mentioned in section \ref{sec:concept_oper}, the relatively less expensive, less invasive (patient friendliness and dose reduction), faster and more accurate system makes it suitable for myocardial perfusion imaging. However, the quantitative nature of the dynamic scanning protocol requires validation since it has not yet been done. Furthermore, the learning, educational, and training purposes of the phantom study is desired by researchers, manufacturers, and medical personnel. This is somewhat extended by \textbf{TFR-SIMT05}. Protocols already exist within clinics and is therefore the best starting point for research and phantom development.
+\textbf{TFR-SIMT04} is based on the goal of the project; to validate the D-SPECT. As mentioned in section \ref{sec:concept_oper}, the relatively less expensive, less invasive (patient friendliness and dose reduction), faster and more accurate system makes it suitable for myocardial perfusion imaging. However, the quantitative nature of the dynamic scanning protocol requires validation since it has not been carried out. Furthermore, the learning, educational, and training purposes of the phantom study is desired by researchers, manufacturers, and medical personnel. This is somewhat extended by \textbf{TFR-SIMT05}. Protocols already exist within clinics and is therefore the best starting point for research and phantom development.
 
 \subsection{Inject tracer}
 \label{sec:inj_tracer}
-The injection protocol is not part of the development of the phantom. However, there are certain requirements to be monitored:
+The injection of tracer into the flow set-up, is carried out by an external infusion pump. 
 
 \begin{table}[H]
 \caption{Textual requirements for function: Inject tracer}
@@ -170,7 +179,7 @@ The injection protocol is not part of the development of the phantom. However, t
 	TFR-ICT04 			& Tracer injection is reproducible, also see TFR-ICT05.\\
 	TFR-ICT05 			& Tracer protocol should match the currently practised protocol. \\
 	\hspace{1.5cm} A) 	& See TFR-ICQ01. \\
-	\hspace{1.5cm} B) 	& Tracer is injected, as bolus, via infusion pump. \\
+	\hspace{1.5cm} \sout{B)} 	& \sout{Tracer is injected, as bolus, via infusion pump.} \\
 	\hspace{1.5cm} C) 	& A pre-bolus is to precede the main bolus. \\
 	\cline{2-2}
 \end{tabular}
@@ -184,21 +193,25 @@ The injection protocol is not part of the development of the phantom. However, t
 \begin{tabular}{l|p{65mm}ccp{20mm}|}
 	\makecell[l]{\textbf{Requirement} \\  \textbf{number}} & \multicolumn{1}{c}{\textbf{Description}} & \multicolumn{1}{c}{ } & \multicolumn{1}{c}{\textbf{Value}} & \multicolumn{1}{c}{\textbf{Unit}} \\
 	\hline
-	TFR-ICQ01 	& Tracer to be used. 			& = 			& \multicolumn{2}{p{35mm}|}{Technetium (\textsuperscript{99m}Tc) Tetrofosmin} \\
-	TFR-ICQ02 	& Pre-bolus activity.			& = 			& 37				& Mega Becquerel \\
-	TFR-ICQ03*	& Typical main bolus activity. 	& > \spacing < 	& 500 \spacing 700 	& Mega Becquerel \\
+	TFR-ICQ01 	& Tracer to be used. 					& = 			& \multicolumn{2}{p{35mm}|}{Technetium (\textsuperscript{99m}Tc) Tetrofosmin} \\
+	TFR-ICQ02 	& Pre-bolus activity.					& = 			& 37				& Mega Becquerel \\
+	TFR-ICQ03*	& Typical main bolus activity.		 	& > \spacing < 	& 500 \spacing 700 	& Mega Becquerel \\
+	TFR-ICQ04+	& Typical main bolus volume. 			& > \spacing <	& 1 \spacing 2 		& Millilitre \\
+	TFR-ICQ05+	& Typical main bolus injection speed.	& > \spacing < 	& 1 \spacing 2		& Millilitre per second \\
+	TFR-ICQ06+	& Saline flush after tracer injection.	& =				& 30				& Millilitre \\
 	\cline{2-5}
 \end{tabular} \\
 \raggedright
-\textit{* hefty patient tend to get higher activity injected, i.e. 700 MBq.}
+\textit{* hefty patient tend to get higher activity injected, i.e. 700 MBq.} \\
+\textit{+ based on D-SPECT manufacturer's specification and current clinical protocol.}
 \end{table}
 
 \section{Physical requirements}
 \rrow{Determine size of seating of D-SPECT}
 \rrod{Determine weight limit of seating of D-SPECT}
-\rrot{Must it be completely anatomical?}
+\rrot{Must it be completely anatomical? Discuss with Kees}
 \rrot{Adjust requirements if the phantom does not have to be anatomical.}
-The following requirements state the physical aspects of the phantom and of the .
+This sections specifies the requirements on the physical aspects of the phantom and flow set-up, a.o. sizes, dimensions.
 
 \begin{table}[H]
 \caption{Physical requirements (textual)}
@@ -288,7 +301,7 @@ The following requirements state the physical aspects of the phantom and of the 
 \section{External requirements}
 \rrot{Determine how much noise output it may have.}
 \rrod{Determine the height of the chair of the D-SPECT}
-In what environment is the system operating.
+This section specifies the requirements that result from external influences.
 \begin{table} [H]
 \caption{External requirements (Textual)}
 \label{tab:extreq_text}
@@ -332,6 +345,7 @@ In what environment is the system operating.
 \end{table}
 
 \section{External interfaces}
+This section specifies the requirements for the external interface, between user and set-up.
 \begin{table} [H]
 \caption{External interface requirements (textual)}
 \label{tab:extint_text}
@@ -361,7 +375,7 @@ In what environment is the system operating.
 
 \section{System qualities}
 \rrot{Specify pressure threshold.}
-Define the quality of the system: such as reliability, availability, serviceability, security, scalability, maintainability.
+This section specifies additional requirements that define the system's quality.
 \begin{table} [H]
 \caption{System qualities}
 \label{tab:sysqual}
@@ -380,12 +394,11 @@ Define the quality of the system: such as reliability, availability, serviceabil
 \textbf{TR-QRT03} is based on optimisation of the experiments. Once the phantom is filled, it must remain filled such that experiments can be performed quickly in succession. 
 
 \section{Constraints and Assumptions}
-Design constraints that have been imposed and assumptions that have been made by the requirements engineering team when gathering and analyzijng the requirements.
+This section specifies the design constrains that have been imposed and the assumptions that have been made.
 
 \begin{table}[H]
 \caption{}
 \label{tab:constassump}
-This table summarises constraints placed on the design and assumptions made to yield the system requirements.
 \begin{tabular}{l|p{120mm}|}
 	\makecell[l]{\textbf{Reference} \\ \textbf{number}} & \multicolumn{1}{c}{\textbf{Description}}\\
 	\hline
@@ -396,6 +409,6 @@ This table summarises constraints placed on the design and assumptions made to y
 \end{tabular}
 \end{table}
 
-\textbf{TR-CAT01} and \textbf{TR-CAT02} are set to prevent over-complicating the first myocardial perfusion phantom. Breathing artefacts may be generated by means of a breathing thorax phantom, which is being developed in Munster, Germany. However, it will make the first phantom too complex but can potentially be used for the second iteration.
+\textbf{TR-CAT01} and \textbf{TR-CAT02} are set to prevent over-complicating the first myocardial perfusion phantom. Breathing artefacts may be generated by means of a breathing thorax phantom, which is being developed in Münster, Germany. However, it will make the first phantom too complex. There is potential for the breathing phantom in the second iteration.
 
 Extension rings can be used for the static thorax phantom, see TR-PRT01. These extension rings can increase the amount of "tissue" between the heart phantom (placed in the center) and the scanner. This will simulate more hefty patients, as stated by \textbf{TR-CAT03}.
