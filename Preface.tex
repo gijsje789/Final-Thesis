@@ -9,6 +9,7 @@ Enschede, 7\textsuperscript{th} of January 2019
 
 \vskip10pt
 \section*{Version}
+\footnotesize{
 \begin{longtable}{|c|p{0.64\linewidth}|l|}
 		\multicolumn{1}{l}{\textbf{Requirement}} & \multicolumn{1}{c}{\textbf{Old description}} & \multicolumn{1}{c}{\textbf{Date}} \endhead
 		\hline
@@ -63,16 +64,30 @@ Enschede, 7\textsuperscript{th} of January 2019
 		 	& \hspace{0.5cm} \textbullet TFR-ICT05 B), tracer injection parameters are now specified in TFR-ICQ04, TFR-ICQ05, and TFR-ICQ06. &\\
 		 	& Added following items: & \\
 		 	& \hspace{0.5cm} \textbullet TFR-ICQ04, TFR-ICQ05, TFR-ICQ06. & \\
+		 	R1.0 & Implemented feedback from progress meeting of February 5. & 2019/02/06 \\
+		 	& Added following items: & \\
+		 	& \hspace{0.5cm} \textbullet TR-QRT04 & \\
+		 	& Modified following items: & \\
+		 	& \hspace{0.5cm} \textbullet Section \ref{sec:what_perf}, tracer uptake is not a necessity due to the relatively small amount of uptake. & \\
+		 	& \hspace{0.5cm} \textbullet Section \ref{sec:bus_model}, no planned profit will be made from the phantom, it is for research purposes of a PhD thesis. & \\
+		 	& \hspace{0.5cm} \textbullet Figure \ref{fig:funcarch}, schematic now shows that a defect situation should also be simulated. & \\
+		 	& \hspace{0.5cm} \textbullet Figure \ref{fig:segment_heart}, \ref{fig:segment_supply}, \ref{fig:segment_supply2}, \ref{fig:QRM_thorax}, \ref{fig:QRM_extension}, added references. & \\
+		 	& Removed following items: & \\
+		 	& \hspace{0.5cm} \textbullet FR06, 2-compartment model is a design choice since only a small amount of tracer is absorbed by the myocardium. & \\
+		 	& \hspace{0.5cm} \textbullet TR-PRT03, having a four chambered heart is a design choice, not a requirement. According to Kees, it is best to keep it simple, especially in the beginning. & \\
+		 	& Moved following items: & \\
+		 	& TFR-SIMT04 F) and G) to TR-PRT03 G) and H) respectively, requirements describe physical attributes. & \\
 		\hline
 \end{longtable}
+}
 
-\newpage
 
 \section*{Changelog}
 %\begin{table} [H]
 %\caption{ Table of changed requirements }
+\footnotesize{
 	\begin{longtable}{|c|p{0.5\linewidth}|p{0.26\linewidth}|}
-		\multicolumn{1}{l}{\textbf{Requirement}} & \multicolumn{1}{c}{\textbf{Old description}} & \multicolumn{1}{l}{\textbf{Change reason}}  \endhead
+		\multicolumn{1}{l}{\textbf{Requirement}} & \multicolumn{1}{c}{\textbf{Old description}} & \multicolumn{1}{c}{\textbf{Change reason}}  \endhead
 		\hline
 		TR-IC01 & A variable amount of contrast can be injected. & Rephrased. \\
 		TFR-SIM01 & An \ac{AIF} must be extractable from either the aorta or the left ventricle chamber. & The AIF, in the D-SPECT software, is taken from the left ventricle. This requirement is moved to TFR-SIM04. \\
@@ -101,6 +116,11 @@ Enschede, 7\textsuperscript{th} of January 2019
 	TR-PRT01 & The phantom is to be placed inside the QRM TRX-116, see TR-PRQ01. & The phantom's left ventricle is to be placed inside the thorax phantom as opposed to the entire phantom.\\
 	TR-PRT02 & The phantom must fit on the D-SPECT seating in the imaging area. & The left ventricle must be in the imaging area as opposed to the entire phantom.\\
 	TFR-GFT01 & A constant flow is to be generated, i.e. non-pulsatile. & Flow must be constant and variable.\\
+	TR-PRT04 			& The flow set-up is to remain horizontal (preventing additional flow resistance). \\
+	TR-PRT05 			& The phantom cannot contain air bubbles. & The phantom must be easily cleared of air bubbles. \\
 		\hline
 	\end{longtable}
 %\end{table}
+}
+
+\normalsize

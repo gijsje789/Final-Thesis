@@ -1,6 +1,6 @@
 \chapter{Technical system overview}
 \section{System}
-The following section defines the phantom as described by \cite{van2011modeling}.
+The following section describes the phantom following \cite{van2011modeling}'s methodology.
 \subsection{Organ}
 The organ to be simulated is the myocardium of the left ventricle, more specifically the blood flow in the myocardium. The left ventricle has a \ac{HLA} and \ac{VLA} cross-sectional shape of a horseshoe and a \ac{SA} cross-sectional shape of a circle, see figure \ref{fig:ventricle_shapes}. Quantitative data on blood flow is available in previous research by \cite{uren1994relation, chiribiri2013normal, ho2014dynamic, slart2015Pres}. Heart size indications are available in previous research by \cite{lin2008cardiac, maceira2006normalizedleft, maceira2006normalizedright}.
 
@@ -95,7 +95,7 @@ Decisions and design choices are given in table \ref{tab:genflow_text}, quantita
 \begin{minipage}{.5\textwidth}
   \centering
   \includegraphics[width=0.95\linewidth]{./images/17_segment.jpg}
-  \captionof{figure}{17-segment heart model}
+  \captionof{figure}{17-segment heart model (\citep{muralidhar2013practice} based on \citep{american2002standardized}}
   \label{fig:segment_heart}
 \end{minipage}
 \end{figure}
@@ -119,13 +119,13 @@ This section focusses on the requirements for the measuring of the system variab
 
 \begin{figure}[H]
 	\includegraphics[width=0.5\linewidth]{./images/17_supply.png}
-	\caption{Schematic representation of the supply to each segment (simplified).}
+	\caption{Schematic representation of the supply to each segment (simplified)\citep{es2009simple}.}
 	\label{fig:segment_supply}
 \end{figure}
 
 \begin{figure}[H]
 	\includegraphics[width=0.5\linewidth]{./images/17_segment_2.jpg}
-	\caption{Schematic representation of the supply to each segment.}
+	\caption{Schematic representation of the supply to each segment\citep{american2002standardized}.}
 	\label{fig:segment_supply2}
 \end{figure}
 
@@ -146,8 +146,8 @@ This section specifies the requirements specified for the simulation of the myoc
 	\hspace{1.5cm} C) & Flow from each segment is measured separately such that they can be compared to the 17-segment model. \\
 	\hspace{1.5cm} D) & An ROI for the AIF can be taken in the left atrium. Alternatively, the ROI for the AIF can be taken in the left ventricle. \\
 	\hspace{1.5cm} \sout{E)} & \sout{An AIF can be taken from the left atrium.} \\
-	\hspace{1.5cm} F) & The left ventricle's myocardium has a Vertical and Horizontal Longitudinal Axial (VLA/HLA) cross-sectional shape of a horseshoe. \\
-	\hspace{1.5cm} G) & The left ventricle's myocardium has a Short Axial (SA) cross-sectional shape of a circle. \\
+	\hspace{1.5cm} \sout{F)} & \sout{The left ventricle's myocardium has a Vertical and Horizontal Longitudinal Axial (VLA/HLA) cross-sectional shape of a horseshoe.} \\
+	\hspace{1.5cm} \sout{G)} & \sout{The left ventricle's myocardium has a Short Axial (SA) cross-sectional shape of a circle.} \\
 	\hspace{1.5cm} H) & The phantom is oriented such that it mimics a patient in supine position. \\
 	TFR-SIMT05* & Phantom's compartment model should match the currently practised protocol.\\
 	\hspace{1.5cm} A) & The tracer specified in section \ref{sec:inj_tracer}.\\
@@ -207,10 +207,11 @@ The injection of tracer into the flow set-up, is carried out by an external infu
 \end{table}
 
 \section{Physical requirements}
+\label{sec:phys_req}
 \rrow{Determine size of seating of D-SPECT}
 \rrod{Determine weight limit of seating of D-SPECT}
-\rrot{Must it be completely anatomical? Discuss with Kees}
-\rrot{Adjust requirements if the phantom does not have to be anatomical.}
+\rrod{Must it be completely anatomical? Discuss with Kees}
+\rrow{Adjust requirements if the phantom does not have to be anatomical. Kees does not feel that it is necessary to have four chambers. However, the myocardial shape is still debateable.}
 This sections specifies the requirements on the physical aspects of the phantom and flow set-up, a.o. sizes, dimensions.
 
 \begin{table}[H]
@@ -223,25 +224,28 @@ This sections specifies the requirements on the physical aspects of the phantom 
 	TR-PRT02 			& The phantom's left ventricle must fit in the D-SPECT's imaging area. \\
 	TR-PRT03 			& The phantom must be anatomically shaped. \\
 	\hspace{1.5cm} \sout{A)} 	& \sout{In correspondence with requirements TFR-SIMT04.} \\
-	\hspace{1.5cm} B) 	& Four chambered phantom that correspond to left/right ventricle and left/right atrium. \\
+	\hspace{1.5cm} \sout{B)} 	& \sout{Four chambered phantom that correspond to left/right ventricle and left/right atrium.} \\
 	\hspace{1.5cm} C) 	& Segmented myocardium surrounds heart chambers. \\
 	\hspace{1.5cm}\sout{D)}	& \sout{Three coronary arteries, RCA, LAD and LCx, supply the myocardium.} \\
 	\hspace{1.5cm} E) 	& The coronary arteries run outside of the myocardium. \\
 	\hspace{1.5cm} F) 	& The coronary veins run outside of the myocardium. \\
+	\hspace{1.5cm} G) 	& The left ventricle's myocardium has a Vertical and Horizontal Longitudinal Axial (VLA/HLA) cross-sectional shape of a horseshoe. \\
+	\hspace{1.5cm} H) 	& The left ventricle's myocardium has a Short Axial (SA) cross-sectional shape of a circle. \\
 	TR-PRT04 			& The flow set-up is to remain horizontal (preventing additional flow resistance). \\
-	TR-PRT05 			& The phantom cannot contain air bubbles. \\
+	TR-PRT05 			& The phantom must be easily be cleared of air bubbles. \\
 	\cline{2-2}
 \end{tabular}
 \end{table}
 
-\rrot{Why only left ventricle?}
 \textbf{TR-PRT01} is based on creating realistic simulation of myocardial perfusion, thereby requiring a thorax phantom (with possible extension rings to simulate more hefty patients). The QRM TRX-116 has been successfully used for CT experiments. The 4DM software looks at the left ventricle thereby requiring the left ventricle to be in the phantom and in the imaging area, as stated in \textbf{TR-PRT02}.
 
-\rrot{Must it be anatomically shaped?}
+\rrod{Must it be anatomically shaped?}
+\rrow{Verify shape of ventricle at webinar}
+\textbf{TR-PRT03} is based on the requirements by the 4DM software. It does not require a four chambered heart and as such is no longer a requirement. However, the software must recognise the ventricle and thus imposes physical requirements on the left ventricle of the phantom.
 
 \textbf{TR-PRT04} is based on the choice to prevent unnecessary complexity. Remaining horizontal will negate gravity.
 
-\textbf{TR-PRT05} is based on the attenuation of air, which compromises the TAC determination.
+\textbf{TR-PRT05} is based on the attenuation of air, which compromises the TAC determination. The phantom should be easily cleared of air bubbles.
 
 \begin{table}[H]
 \caption{Physical requirements (Quantitative)}
@@ -287,13 +291,13 @@ This sections specifies the requirements on the physical aspects of the phantom 
 \begin{minipage}{.5\textwidth}
   \centering
   \includegraphics[width=0.95\linewidth]{./images/cardio_2.jpg}
-  \captionof{figure}{QRM thorax phantom.}
+  \captionof{figure}{QRM thorax phantom \citep{QRMthorax}.}
   \label{fig:QRM_thorax}
 \end{minipage}%
 \begin{minipage}{.5\textwidth}
   \centering
   \includegraphics[width=0.95\linewidth]{./images/extension_2.jpg}
-  \captionof{figure}{QRM thorax phantom extension rings.}
+  \captionof{figure}{QRM thorax phantom extension rings\citep{QRMextension}.}
   \label{fig:QRM_extension}
 \end{minipage}
 \end{figure}
@@ -374,7 +378,7 @@ This section specifies the requirements for the external interface, between user
 \end{table}
 
 \section{System qualities}
-\rrot{Specify pressure threshold.}
+\rrot{Specify pressure threshold. Currently, no emergency shutdown is implemented.}
 This section specifies additional requirements that define the system's quality.
 \begin{table} [H]
 \caption{System qualities}
@@ -385,6 +389,7 @@ This section specifies additional requirements that define the system's quality.
 	TR-SQT01 & Emergency shut down of flow set-up when arterial pressure exceeds TFR-GFQ07. \\ 
 	TR-SQT02 & Emergency shut down of flow set-up when flow cannot be controlled, i.e. erratic or absent. \\
 	TR-SQT03 & No reversed flow out of the phantom is allowed. \\
+	TR-SQT04 & Any leaks that may occur are trapped in a collection tray. \\
 	\cline{2-2}
 \end{tabular}
 \end{table}
@@ -392,6 +397,9 @@ This section specifies additional requirements that define the system's quality.
 \textbf{TR-SQT01} and \textbf{TR-SQT02} are based on safety and prevention of leakage. Excessive pressure indicates faulty situation which must be resolved before components fail. Erratic, and especially the absence of proper flow, indicates a leakage and must be resolved. Leakage after injecting the tracer must be prevented at all costs.
 
 \textbf{TR-QRT03} is based on optimisation of the experiments. Once the phantom is filled, it must remain filled such that experiments can be performed quickly in succession. 
+
+\textbf{TR-QRT04} is safety based requirement. Leaks must be prevented by using decent materials and connections. However, it is possible that an unexpected leak occurs, for example due to dried out seal. Therefore, if fluid leaks from the flow set-up, a collection tray should collect the fluid to prevent contamination of the working environment.
+
 
 \section{Constraints and Assumptions}
 This section specifies the design constrains that have been imposed and the assumptions that have been made.
