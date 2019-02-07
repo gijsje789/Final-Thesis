@@ -42,6 +42,7 @@ signals:
 
 private slots:
     void radiobuttonToggled(bool flow_checked);
+    void enableCheckboxStateChanged(int state);
 
 public slots:
 };

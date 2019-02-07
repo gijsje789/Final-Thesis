@@ -45,6 +45,7 @@ AnalogueSensorMenu::AnalogueSensorMenu(QWidget *parent) : QWidget(parent)
     this->setLayout(gridLayout);
 
     connect(flow_radioButton, SIGNAL(toggled(bool)), this, SLOT(radiobuttonToggled(bool)));
+    connect(enable_checkBox, SIGNAL(stateChanged(int)), this, SLOT(enableCheckboxStateChanged(int)));
 }
 
 QGridLayout* AnalogueSensorMenu::getMainLayout()
@@ -54,5 +55,10 @@ QGridLayout* AnalogueSensorMenu::getMainLayout()
 
 void AnalogueSensorMenu::radiobuttonToggled(bool flow_checked)
 {
-    qDebug() << "radiobutton toggled." << flow_checked;
+    qDebug() << "radiobutton toggled." << this << flow_checked;
+}
+
+void AnalogueSensorMenu::enableCheckboxStateChanged(int state)
+{
+    qDebug() << "Checkbox state change." << state;
 }
