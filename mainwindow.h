@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QTabWidget>
 #include "analoguesensormenu.h"
 
 
@@ -15,7 +16,8 @@ public:
 
 private:
     QWidget *centralWidget = new QWidget;
-    QWidget *an1_widget = new QWidget(centralWidget);
+    QTabWidget *anSensors_tabWidget = new QTabWidget(centralWidget);
+    QWidget *an1_widget = new QWidget;
     AnalogueSensorMenu *an1_menu = new AnalogueSensorMenu(an1_widget);
 };
 
