@@ -15,6 +15,8 @@ AnalogueSensorMenu::AnalogueSensorMenu(QWidget *parent) : QWidget(parent)
     // Create the exclusive radio buttons.
     flow_radioButton->setText("Flow");
     pres_radioButton->setText("Pressure");
+    flow_radioButton->setCheckable(true);
+    pres_radioButton->setCheckable(true);
     flow_radioButton->setChecked(true);
 
     // Create the enabled checkbox.
@@ -41,9 +43,16 @@ AnalogueSensorMenu::AnalogueSensorMenu(QWidget *parent) : QWidget(parent)
 
     // Set the layout of the widget to the gridlayout.
     this->setLayout(gridLayout);
+
+    connect(flow_radioButton, SIGNAL(toggled(bool)), this, SLOT(radiobuttonToggled(bool)));
 }
 
 QGridLayout* AnalogueSensorMenu::getMainLayout()
 {
     return gridLayout;
+}
+
+void AnalogueSensorMenu::radiobuttonToggled(bool flow_checked)
+{
+    qDebug() << "radiobutton toggled." << flow_checked;
 }

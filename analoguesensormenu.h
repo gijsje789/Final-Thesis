@@ -13,6 +13,8 @@
 
 #include <QDoubleValidator>
 
+#include <QDebug>
+
 class AnalogueSensorMenu : public QWidget
 {
     Q_OBJECT
@@ -37,6 +39,9 @@ private:
     // Enabled checkbox.
     QCheckBox *enable_checkBox = new QCheckBox;
 signals:
+
+private slots:
+    void radiobuttonToggled(bool flow_checked);
 
 public slots:
 };
