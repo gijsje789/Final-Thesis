@@ -20,20 +20,21 @@ public:
     explicit AnalogueSensorMenu(QWidget *parent = nullptr);
     QGridLayout* getMainLayout();
 private:
+    // Layouts that are used.
     QGridLayout *gridLayout = new QGridLayout;
     QVBoxLayout *radio_vBox = new QVBoxLayout;
-
+    // A fields.
     QLabel *a_label = new QLabel;
     QLineEdit *a_val_lineEdit = new QLineEdit;
     QComboBox *a_unit_comboBox = new QComboBox;
-
+    // B fields.
     QLabel *b_label = new QLabel;
     QLineEdit *b_val_lineEdit = new QLineEdit;
     QComboBox *b_unit_comboBox = new QComboBox;
-
+    // Radio buttons.
     QRadioButton *flow_radioButton = new QRadioButton;
     QRadioButton *pres_radioButton = new QRadioButton;
-
+    // Enabled checkbox.
     QCheckBox *enable_checkBox = new QCheckBox;
 signals:
 
