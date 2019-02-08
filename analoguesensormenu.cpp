@@ -7,6 +7,8 @@ AnalogueSensorMenu::AnalogueSensorMenu(QWidget *parent) : QWidget(parent)
     a_val_lineEdit->setValidator(new QDoubleValidator());
     a_val_lineEdit->setText("0");
     fillFlowComboBox();
+    //fillPresComboBox();
+    fillBComboBox();
 
     // Create fillable b part.
     b_label->setText("b");
@@ -70,15 +72,29 @@ void AnalogueSensorMenu::fillFlowComboBox()
         a_unit_comboBox->removeItem(a_unit_comboBox->count());
     }
 
+    for(const QString &item : a_flowItems) {
+        a_unit_comboBox->addItem(item);
+    }
+}
+
+void AnalogueSensorMenu::fillPresComboBox()
+{
+    while(a_unit_comboBox->count() > 0) {
+        a_unit_comboBox->removeItem(a_unit_comboBox->count());
+    }
+
+    for(const QString &item : a_presItems) {
+        a_unit_comboBox->addItem(item);
+    }
+}
+
+void AnalogueSensorMenu::fillBComboBox()
+{
     while(b_unit_comboBox->count() > 0) {
         b_unit_comboBox->removeItem(b_unit_comboBox->count());
     }
 
-    for(const QString &item : a_flowItems) {
-        a_unit_comboBox->addItem(item);
-    }
-
-    for(const QString &item : b_flowItems) {
+    for(const QString &item : b_Items) {
         b_unit_comboBox->addItem(item);
     }
 }

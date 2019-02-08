@@ -43,8 +43,13 @@ private:
     const QString a_flowItems[8] = {"V/L/min", "V/L/s", "V/mL/min",
                                   "V/mL/s", "mV/L/min", "mV/L/s",
                                   "mV/mL/min", "mV/mL/s"};
-    const QString b_flowItems[2] = {"V", "mV"};
+    const QString b_Items[2] = {"V", "mV"};
+    const QString a_presItems[8] = {"V/psi", "mV/psi", "V/bar",
+                                    "V/mbar", "mV/bar", "mV/mbar",
+                                    "V/mmHg", "mV/mmHg"};
     void fillFlowComboBox();
+    void fillPresComboBox();
+    void fillBComboBox();
 signals:
 
 private slots:
