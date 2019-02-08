@@ -14,6 +14,7 @@
 #include <QDoubleValidator>
 
 #include <QDebug>
+#include <QString>
 
 class AnalogueSensorMenu : public QWidget
 {
@@ -38,6 +39,11 @@ private:
     QRadioButton *pres_radioButton = new QRadioButton;
     // Enabled checkbox.
     QCheckBox *enable_checkBox = new QCheckBox;
+
+    const QString flowItems[8] = {"V/L/min", "V/L/s", "V/mL/min",
+                                  "V/mL/s", "mV/L/min", "mV/L/s",
+                                  "mV/mL/min", "mV/mL/s"};
+    void fillFlowComboBox();
 signals:
 
 private slots:

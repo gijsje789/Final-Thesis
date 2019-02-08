@@ -6,6 +6,7 @@ AnalogueSensorMenu::AnalogueSensorMenu(QWidget *parent) : QWidget(parent)
     a_label->setText("a");
     a_val_lineEdit->setValidator(new QDoubleValidator());
     a_val_lineEdit->setText("0");
+    fillFlowComboBox();
 
     // Create fillable b part.
     b_label->setText("b");
@@ -61,4 +62,15 @@ void AnalogueSensorMenu::radiobuttonToggled(bool flow_checked)
 void AnalogueSensorMenu::enableCheckboxStateChanged(int state)
 {
     qDebug() << "Checkbox state change." << state;
+}
+
+void AnalogueSensorMenu::fillFlowComboBox()
+{
+    while(a_unit_comboBox->count() > 0) {
+        a_unit_comboBox->removeItem(a_unit_comboBox->count());
+    }
+
+    for(const QString &item : flowItems) {
+        a_unit_comboBox->addItem(item);
+    }
 }
