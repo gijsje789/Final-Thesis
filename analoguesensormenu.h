@@ -40,9 +40,10 @@ private:
     // Enabled checkbox.
     QCheckBox *enable_checkBox = new QCheckBox;
 
-    const QString flowItems[8] = {"V/L/min", "V/L/s", "V/mL/min",
+    const QString a_flowItems[8] = {"V/L/min", "V/L/s", "V/mL/min",
                                   "V/mL/s", "mV/L/min", "mV/L/s",
                                   "mV/mL/min", "mV/mL/s"};
+    const QString b_flowItems[2] = {"V", "mV"};
     void fillFlowComboBox();
 signals:
 

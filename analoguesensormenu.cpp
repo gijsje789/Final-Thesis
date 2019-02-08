@@ -70,7 +70,15 @@ void AnalogueSensorMenu::fillFlowComboBox()
         a_unit_comboBox->removeItem(a_unit_comboBox->count());
     }
 
-    for(const QString &item : flowItems) {
+    while(b_unit_comboBox->count() > 0) {
+        b_unit_comboBox->removeItem(b_unit_comboBox->count());
+    }
+
+    for(const QString &item : a_flowItems) {
         a_unit_comboBox->addItem(item);
+    }
+
+    for(const QString &item : b_flowItems) {
+        b_unit_comboBox->addItem(item);
     }
 }
