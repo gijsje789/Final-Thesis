@@ -1,34 +1,34 @@
 \chapter{Functional system overview}
-This chapter goes into detail on the functional aspects of the myocardial perfusion phantom.
+This chapter gives a system overview on a functional level by describing the drivers, the approach of the project, the business model, high-level requirements, and the business and system use cases.
 \section{Drivers}
 \label{sec:drivers}
-Many factors influence the outcome of \ac{MPI}. Some of these factors are:
+Some parameters that influence the outcome of \ac{MPI}, are:
 
 \begin{tabular}{llll}
  	\multicolumn{1}{c}{\textbf{Tracer}} & \multicolumn{1}{c}{\textbf{Patient}} & \multicolumn{1}{c}{\textbf{Technology}} & \multicolumn{1}{c}{\textbf{Software}} \\
-		- Concentration, & - Breathing artefacts, & - Modality, & - Package, \\
+		- Activity, & - Breathing artefacts, & - Modality, & - Package, \\
 		- Volume, & - Cardiac motion, &  - Spatial resolution, & - Mathematical model, \\
 		- Molecule size, & - BMI. & - Temporal resolution. & - Filters,\\
 		- Injection speed.  & & & \makecell[l]{- \acs{ROI}.}\\
 \end{tabular}
 
-The strength of a phantom is that small modifications, for example, in contrast concentration or volume, or the mathematical model,  can be directly mapped to the outcome. It provides insight into dependent and independent factors in perfusion imaging.
+The strength of a phantom is its reproducibility. Varying specific parameters provides insight into dependent and independent factor and its effect on the outcome.
 
-Current phantoms either require modifications to software packages or do not model defects in a physiological way. Defects are typically modelled by reducing the flow through the myocardium by reducing the pump rate, effectively ignoring the complex relation between stenotic and non-stenotic arteries. Therefore, a myocardial perfusion phantom is needed that is compatible with clinical software and is able to mimic cardiac defects in a physiological way. This will increase the similarity with patient studies resulting in more reliable validation.
+Current phantoms either require modifications to clinical software packages or do not model defects in a physiological way, typically by reducing the flow through the myocardium by reducing the pump rate. This effectively ignores the complex relation between stenotic and non-stenotic arteries. Therefore, a myocardial perfusion phantom is needed that is compatible with clinical software and is able to mimic cardiac defects in a physiological way. This will increase the similarity with patient studies resulting in more reliable validation.
 
-In addition to being a tool for validation of scanners and/or software packages, the phantom can be used for educational and training purposes to demonstrate the impact of hard- and software variables (sampling rate, \acf{ROI}, mathematical model), patient variables (BMI, blood flow and -pressure), tracer variables (concentration, type, injection speed), and many more.
+In addition to validation of scanners and/or software packages, the phantom can be used for education and training, to demonstrate the impact of the different parameters, but also for optimisation, of protocol and/or work flow. 
 
 \section{Approach}
-The V-Model defines the project's development cycle. 
+The project development cycle is defined by the V-Model. The project plan defined several research questions, in which this section answers the research questions for the first two phases: the "concept of operations" phase and "requirements and architecture" phase.
 
 \subsection{Concept of operations}
 \label{sec:concept_oper}
 \subsection*{Is the D-SPECT's dynamic scanning, in comparison with other modalities (CT, MRI, PET, or SPECT), suitable for quantitative myocardial perfusion imaging?}
-Quantitative flow measurements is made possible due to dynamic scanning. Dynamic scanning is not a newly emerged technique, it has been used with \ac{CT} in past research. Due to the solid-state detectors (Cadmium-Zinc Telluride), dynamic scanning is made possible for \ac{SPECT}. The D-SPECT is relatively new in the Netherlands. However, it has been employed in Japan, Canada, France, and Great-Britain. The D-SPECT is a highly specialised cardiac system. Due to the relatively small patient population, clinics often choose more all-purpose systems. The D-SPECT is very patient friendly due to its design in contrast to alternatives, e.g. GE uses a gantry design.
+Quantitative flow measurements is made possible as a result of dynamic scanning.The technique is not new, \ac{CT} utilises it in past research. The solid-state detectors (Cadmium-Zinc Telluride) made dynamic scanning possible for \ac{SPECT}. The D-SPECT is a highly specialised cardiac system and is relatively new in the Netherlands. It has been employed in Japan, Canada, France, and Great-Britain. The relatively small patient population, in the Netherlands, forces clinics to choose less specialised systems in order to prevent excessive costs. However, despite its specialisation, the D-SPECT offers a very patient friendly experience due to its open design. Competitors, for example GE, use a gantry design which encloses the patient and can result in anxiety and stress.
 
-\ac{CT} is a well established modality with the highest spatial resolution. However, its largest drawback is that the radiation dose is directly proportional to the number of images, therefore increasing the likelihood of complication due to radiation exposure. \ac{MRI} does not rely an ionising radiation, but its lower temporal resolution makes it less suitable for dynamic imaging. \ac{SPECT} and \ac{PET} use radioactive tracers to image blood flow, thus exposing the patient to some degree of radiation. However, it is not directly proportional to the amount of images taken and is therefore less dangerous than \ac{CT}.
+\ac{CT} is a well established modality with the highest spatial resolution. However, its largest drawback is the direct, proportional, relation between radiation dose and the number of images taken, thereby increasing the likelihood of radiation based complication. \ac{MRI} does not rely on ionising radiation, but its lower temporal resolution makes it less suitable for dynamic imaging. It does offer the best tissue discrimination. \ac{SPECT} and \ac{PET} both use radioactive tracers to image blood flow, thus exposing the patient to some degree of radiation. However, it is not directly proportional to the number of images taken. D-SPECT offers significant dose reduction, due to more sensitive detectors, which reduces the strain and risk for patients.
 
-In addition, traditional \ac{SPECT} is, on average, 22\% less expensive than the current gold standard, \ac{PET}. D-SPECT is supposed to be even less expensive and faster. Furthermore, significant dose reduction, due to more sensitive solid-state detectors, reduces the strain and risk for patients. In addition, these solid-state detectors improve the image resolution. 
+In addition, traditional \ac{SPECT} is, on average, 22\% less expensive than the current gold standard, \ac{PET} in cardiac imaging. D-SPECT is supposed to be even less expensive and faster with better image resolution. 
 
 In summary, although the D-SPECT is relatively new in the Netherlands, it is more widely employed in Japan, Canada, France, and Great-Britain. The highly cardiac specialised system, its patient friendly design, the ability to scan faster and more accurate at significant dose reductions, make the D-SPECT suitable for quantitative myocardial perfusion imaging. 
 
@@ -36,7 +36,7 @@ In summary, although the D-SPECT is relatively new in the Netherlands, it is mor
 \label{sec:what_perf}
 The phantom must be compatible with clinical practice, i.e. use clinical protocols and hard-/software. Patients are scanned in a D-SPECT scanner while lying down, face up (supine). The scans are evaluated using 4DM software. 
 
-The phantom must be suitable for an ROI in the left atrium for \ac{AIF} extraction. However, in case of poor results, the ROI can be reshaped and moved to the left ventricle. The software determines the perfusion in 17 areas of the left ventricle's myocardium, at a basal, mid and apical level, and at the apex. These segments are supplied via branches of the three coronary arteries, i.e. the RCA, LAD, and LCx. 4DM calculates individual flow rates for each segment. Therefore, the phantom should contain 17 segments where each segment is either static or with variable flow that can be measured. 
+The phantom must be suitable for an \ac{AIF} ROI in the left atrium. Alternatively, in case of poor results, the ROI can be reshaped and placed in the left ventricle. The software determines the perfusion in 17 areas of the left ventricle's myocardium, at a basal, mid and apical level, and at the apex. These segments are supplied via branches of the three coronary arteries, i.e. the RCA, LAD, and LCx. 4DM calculates individual flow rates for each segment. Therefore, the phantom should contain 17 segments where each segment is either static or with variable flow that can be measured. 
 
 A single flow source is to be used that supplies the RCA, LAD, and LCx. From an anatomical viewpoint, the coronary arteries are supplied from the aorta. The phantom could mimic this anatomical structure, which is impractical. Instead, it is possible to supply the coronary arteries from a dedicated flow source significantly decreasing the total volume of liquid being displaced. Care must be taken such that the ratio of contrast remains equivalent. Since the entire myocardium is supplied by three coronary arteries, stenosis in one of the arteries, or its branches, results in different flow behaviour which cannot be mimicked by reducing the overall flow to the myocardium alone.
 
@@ -44,9 +44,9 @@ Every tracer behaves differently. For D-SPECT, Technetium (\textsuperscript{99m}
 
 \section{Business model}
 \label{sec:bus_model}
-Dynamic scanning yield quantitative results, i.e. absolute perfusion rates, which require proper validation. Phantom studies are, to a high degree, suitable for such purpose. An added benefit of these studies, is that it provides insight into the effect of different parameters on the outcome, which in turn influences patient treatment. These insights can be used for calibration or protocol optimisation, e.g. tracer protocol. Examples would be determining optimal (patient dependable) activity or injection speed.
+Dynamic scanning yield quantitative results, i.e. absolute perfusion rates, which require proper validation. Phantom studies are, to a high degree, suitable for such purpose. An added benefit of these studies, is that it provides insight into the effect of different parameters on the outcome, which in turn impacts patient treatment. These insights can be used for calibration or optimisation, e.g. tracer protocol or work flow. Some examples would be determining optimal (patient dependable) activity or injection speed, or placement of the placement of peripherals.
 
-In short, the phantom can be used for educational and training purposes, as well as for calibration or optimisation. 
+In short, the phantom can be used for validation, education, training, calibration or optimisation. 
 
 The phantom will distinguish itself from other phantoms due to its more true-to-nature design, ability to physiologically mimic cardiac defects, and the possibility of modelling different compartment models.
 
@@ -56,18 +56,17 @@ Please note, the phantom is developed during a master thesis to support the rese
 
 \section{Requirements}
 \rrod{Verify the AIF requirements.}
-The functional requirements are summarised in table \ref{tab:funcreq}.
+This section defines the functional requirements. These are high-level requirements and are shown in table \ref{tab:funcreq}.
 
 \begin{table}[h]
 \caption{Functional requirements}
 \label{tab:funcreq}
-This table summarises the functional requirements for the prototype myocardial perfusion phantom.
 \begin{tabular}{l|p{120mm}|}
 	\makecell[l]{Requirement \\ number} & \multicolumn{1}{c}{Description}\\
 	\hline
-	FR01 & The phantom must be able to simulate blood flow, either using water of blood-mimicking fluid, at high flow rates (aortic flow). \\ 
+	FR01 & The phantom must be able to simulate blood flow at high flow rates (aortic flow). \\ 
 	\rowcolor{Gray}
-	FR02 & The phantom must be able to simulate blood flow, either using water or blood-mimicking fluid, at low flow rates (myocardial flow). \\
+	FR02 & The phantom must be able to simulate blood flow at low flow rates (myocardial flow). \\
 	FR03* & An \ac{AIF} can be extracted from the left atrium, or alternatively from the left ventricle. \\
 	\rowcolor{Gray}
 	FR04 & Cardiac defects must simulate the complex relation between stenotic and non-stenotic arteries. \\
