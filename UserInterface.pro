@@ -27,11 +27,13 @@ CONFIG += c++11
 SOURCES += \
         main.cpp \
         mainwindow.cpp \
-    analoguesensormenu.cpp
+    analoguesensormenu.cpp \
+    digitalsensormenu.cpp
 
 HEADERS += \
         mainwindow.h \
-    analoguesensormenu.h
+    analoguesensormenu.h \
+    digitalsensormenu.h
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
