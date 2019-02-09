@@ -1,3 +1,7 @@
+// mainwindow.h - Header file for the main window of the app.
+// Date: 2019-02-07
+// Created by: Gijs de Vries
+
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 

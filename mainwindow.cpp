@@ -1,3 +1,7 @@
+// mainwindow.cpp - Implementation file for the main window of the app.
+// Date: 2019-02-07
+// Created by: Gijs de Vries
+
 #include "mainwindow.h"
 
 MainWindow::MainWindow(QWidget *parent)
@@ -8,9 +12,6 @@ MainWindow::MainWindow(QWidget *parent)
 
     // Set a central widget in order to manipulate layouts.
     this->setCentralWidget(centralWidget);
-
-    // Create widget for analogue sensor 1.
-    //an1_widget->setLayout(an1_menu->getMainLayout());
 
     // Create tab widget and populate with analogue sensors.
     anSensors_tabWidget->setGeometry(10, 10, 984/3, 150);
