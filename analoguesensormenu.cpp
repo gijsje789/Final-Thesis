@@ -1,3 +1,10 @@
+// analoguesensormenu.cpp - Implementation file for the AnalogueSensorMenu class.
+// This class handles the appearance and functionality of the
+// analogue sensor menus. The user can enter the sensors analogue
+// characteristics.
+// Date: 2019-02-07
+// Created by: Gijs de Vries
+
 #include "analoguesensormenu.h"
 
 AnalogueSensorMenu::AnalogueSensorMenu(QWidget *parent) : QWidget(parent)
@@ -6,10 +13,13 @@ AnalogueSensorMenu::AnalogueSensorMenu(QWidget *parent) : QWidget(parent)
     createAndFillLayouts();
 
     connect(flow_radioButton, SIGNAL(toggled(bool)), this, SLOT(radiobuttonToggled(bool)));
-    connect(enable_checkBox, SIGNAL(stateChanged(int)), this, SLOT(enableCheckboxStateChanged(int)));
+    connect(enable_checkBox, SIGNAL(toggled(bool)), this, SLOT(enableCheckboxToggled(bool)));
 }
 
 // #################### Public functions ####################
+// getMainLayout() returns the pointer such that an external widget
+// can be filled with the buttons and fields needed to set the
+// sensor.
 QGridLayout* AnalogueSensorMenu::getMainLayout()
 {
     return gridLayout;
@@ -63,6 +73,9 @@ void AnalogueSensorMenu::createAndFillLayouts()
     gridLayout->addLayout(radio_vBox, 3, 1, 2, 3);
     gridLayout->addWidget(enable_checkBox, 3, 4, 2, 2);
 
+    // Disable the widgets.
+    disableFields();
+
     // Set the layout of the widget to the gridlayout.
     this->setLayout(gridLayout);
 }
@@ -97,6 +110,41 @@ void AnalogueSensorMenu::fillBComboBox()
         b_unit_comboBox->addItem(item);
     }
 }
+
+void AnalogueSensorMenu::disableFields()
+{
+    // Disable a_fields
+    a_label->setEnabled(false);
+    a_val_lineEdit->setEnabled(false);
+    a_unit_comboBox->setEnabled(false);
+
+    // Disable b_fields
+    b_label->setEnabled(false);
+    b_val_lineEdit->setEnabled(false);
+    b_unit_comboBox->setEnabled(false);
+
+    // Disable radio buttons
+    flow_radioButton->setEnabled(false);
+    pres_radioButton->setEnabled(false);
+}
+
+void AnalogueSensorMenu::enableFields()
+{
+    // Enable a_fields
+    a_label->setEnabled(true);
+    a_val_lineEdit->setEnabled(true);
+    a_unit_comboBox->setEnabled(true);
+
+    // Enable b_fields
+    b_label->setEnabled(true);
+    b_val_lineEdit->setEnabled(true);
+    b_unit_comboBox->setEnabled(true);
+
+    // Enable radio buttons
+    flow_radioButton->setEnabled(true);
+    pres_radioButton->setEnabled(true);
+}
+
 // #################### Signals ####################
 // #################### Private slots ####################
 void AnalogueSensorMenu::radiobuttonToggled(bool flow_checked)
@@ -107,9 +155,12 @@ void AnalogueSensorMenu::radiobuttonToggled(bool flow_checked)
         fillPresComboBox();
 }
 
-void AnalogueSensorMenu::enableCheckboxStateChanged(int state)
+void AnalogueSensorMenu::enableCheckboxToggled(bool state)
 {
-    qDebug() << "Checkbox state change." << state;
+    if (state)
+        enableFields();
+    else
+        disableFields();
 }
 
 // #################### Public slots ####################

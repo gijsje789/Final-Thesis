@@ -1,3 +1,10 @@
+// analoguesensormenu.h - Header file for the AnalogueSensorMenu class.
+// This class handles the appearance and functionality of the
+// analogue sensor menus. The user can enter the sensors analogue
+// characteristics.
+// Date: 2019-02-07
+// Created by: Gijs de Vries
+
 #ifndef ANALOGUESENSORMENU_H
 #define ANALOGUESENSORMENU_H
 
@@ -52,11 +59,13 @@ private:
     void fillFlowComboBox();
     void fillPresComboBox();
     void fillBComboBox();
+    void disableFields();
+    void enableFields();
 signals:
 
 private slots:
     void radiobuttonToggled(bool flow_checked);
-    void enableCheckboxStateChanged(int state);
+    void enableCheckboxToggled(bool state);
 
 public slots:
 };
