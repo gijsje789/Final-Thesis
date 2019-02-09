@@ -28,12 +28,14 @@ SOURCES += \
         main.cpp \
         mainwindow.cpp \
     analoguesensormenu.cpp \
-    digitalsensormenu.cpp
+    digitalsensormenu.cpp \
+    pumpmenu.cpp
 
 HEADERS += \
         mainwindow.h \
     analoguesensormenu.h \
-    digitalsensormenu.h
+    digitalsensormenu.h \
+    pumpmenu.h
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
