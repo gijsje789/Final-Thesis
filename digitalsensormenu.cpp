@@ -53,14 +53,14 @@ void DigitalSensorMenu::createAndFillLayout()
     radio_vBox->addWidget(pres_radioButotn);
 
     // Add the input fields to the main gridlayout.
-    gridLayout->addWidget(input_label, 1, 1);
-    gridLayout->addWidget(input_lineEdit, 1, 2, 1, 2);
-    gridLayout->addWidget(input_comboBox, 1, 4, 1, 2);
-
+    gridLayout->addWidget(input_label, 0, 0);
+    gridLayout->addWidget(input_lineEdit, 0, 1, 1, 2);
+    gridLayout->addWidget(input_comboBox, 0, 3, 1, 2);
+    // Add a spacer to ensure empty row.
+    gridLayout->addItem(empty_row, 1, 0, 1, 5);
     // Add the radio buttons layout and the checkbox to the main layout.
-    gridLayout->addLayout(radio_vBox, 3, 1, 2, 3);
-    gridLayout->addWidget(enable_checkBox, 3, 4, 2, 2);
-
+    gridLayout->addLayout(radio_vBox, 2, 0, 2, 3);
+    gridLayout->addWidget(enable_checkBox, 2, 3, 2, 2);
     // Disable the widgets.
     disableFields();
 
@@ -129,3 +129,5 @@ void DigitalSensorMenu::enableCheckboxToggled(bool state)
     else
         disableFields();
 }
+
+// #################### Public slots ####################

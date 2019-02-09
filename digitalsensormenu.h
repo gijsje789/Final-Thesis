@@ -14,6 +14,7 @@
 #include <QComboBox>
 #include <QRadioButton>
 #include <QCheckBox>
+#include <QSpacerItem>
 
 #include <QGridLayout>
 #include <QVBoxLayout>
@@ -42,6 +43,9 @@ private:
     QRadioButton *pres_radioButotn = new QRadioButton;
     // Enable checkbox
     QCheckBox *enable_checkBox = new QCheckBox;
+    // Spacer item to insert an empty row.
+    //QLineEdit * empty_row = new QLineEdit;
+    QSpacerItem *empty_row = new QSpacerItem(10, 31);
 
     const QString flowItems[4] = {"P/L/min", "P/L/s",
                                   "P/mL/min", "P/mL/s"};
