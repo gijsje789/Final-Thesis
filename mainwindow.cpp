@@ -20,6 +20,13 @@ MainWindow::MainWindow(QWidget *parent)
     anSensors_tabWidget->addTab(an3_widget, "AN3");
     anSensors_tabWidget->addTab(an4_widget, "AN4");
     anSensors_tabWidget->addTab(an5_widget, "AN5");
+
+    dSensors_tabWidget->setGeometry(348, 10, 984/3, 150);
+    dSensors_tabWidget->addTab(d1_widget, "D1");
+    dSensors_tabWidget->addTab(d2_widget, "D2");
+    dSensors_tabWidget->addTab(d3_widget, "D3");
+    dSensors_tabWidget->addTab(d4_widget, "D4");
+    dSensors_tabWidget->addTab(d5_widget, "D5");
 }
 
 MainWindow::~MainWindow()
