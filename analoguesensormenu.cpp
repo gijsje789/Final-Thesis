@@ -58,7 +58,10 @@ QGridLayout* AnalogueSensorMenu::getMainLayout()
 
 void AnalogueSensorMenu::radiobuttonToggled(bool flow_checked)
 {
-    qDebug() << "radiobutton toggled." << this << flow_checked;
+    if (flow_checked)
+        fillFlowComboBox();
+    else
+        fillPresComboBox();
 }
 
 void AnalogueSensorMenu::enableCheckboxStateChanged(int state)
@@ -68,9 +71,8 @@ void AnalogueSensorMenu::enableCheckboxStateChanged(int state)
 
 void AnalogueSensorMenu::fillFlowComboBox()
 {
-    while(a_unit_comboBox->count() > 0) {
-        a_unit_comboBox->removeItem(a_unit_comboBox->count());
-    }
+    if(a_unit_comboBox->count() > 0)
+        a_unit_comboBox->clear();
 
     for(const QString &item : a_flowItems) {
         a_unit_comboBox->addItem(item);
@@ -79,9 +81,8 @@ void AnalogueSensorMenu::fillFlowComboBox()
 
 void AnalogueSensorMenu::fillPresComboBox()
 {
-    while(a_unit_comboBox->count() > 0) {
-        a_unit_comboBox->removeItem(a_unit_comboBox->count());
-    }
+    if(a_unit_comboBox->count() > 0)
+        a_unit_comboBox->clear();
 
     for(const QString &item : a_presItems) {
         a_unit_comboBox->addItem(item);
