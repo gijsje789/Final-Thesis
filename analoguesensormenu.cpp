@@ -50,7 +50,7 @@ void AnalogueSensorMenu::createGuiItems()
 
     // Create the enabled checkbox.
     enable_checkBox->setText("Enable");
-    enable_checkBox->setTristate(false);
+    enable_checkBox->setChecked(false);
 }
 
 void AnalogueSensorMenu::createAndFillLayouts()
