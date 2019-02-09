@@ -29,7 +29,7 @@ QGridLayout* AnalogueSensorMenu::getMainLayout()
 void AnalogueSensorMenu::createGuiItems()
 {
     // Create fillable a part.
-    a_label->setText("a");
+    a_label->setText("a:");
     a_val_lineEdit->setValidator(new QDoubleValidator());
     a_val_lineEdit->setText("0");
     fillFlowComboBox();
@@ -37,7 +37,7 @@ void AnalogueSensorMenu::createGuiItems()
     fillBComboBox();
 
     // Create fillable b part.
-    b_label->setText("b");
+    b_label->setText("b:");
     b_val_lineEdit->setValidator(new QDoubleValidator());
     b_val_lineEdit->setText("0");
 
