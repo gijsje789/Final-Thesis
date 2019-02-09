@@ -2,6 +2,22 @@
 
 AnalogueSensorMenu::AnalogueSensorMenu(QWidget *parent) : QWidget(parent)
 {
+    createGuiItems();
+    createAndFillLayouts();
+
+    connect(flow_radioButton, SIGNAL(toggled(bool)), this, SLOT(radiobuttonToggled(bool)));
+    connect(enable_checkBox, SIGNAL(stateChanged(int)), this, SLOT(enableCheckboxStateChanged(int)));
+}
+
+// #################### Public functions ####################
+QGridLayout* AnalogueSensorMenu::getMainLayout()
+{
+    return gridLayout;
+}
+
+// #################### Private functions ####################
+void AnalogueSensorMenu::createGuiItems()
+{
     // Create fillable a part.
     a_label->setText("a");
     a_val_lineEdit->setValidator(new QDoubleValidator());
@@ -25,7 +41,10 @@ AnalogueSensorMenu::AnalogueSensorMenu(QWidget *parent) : QWidget(parent)
     // Create the enabled checkbox.
     enable_checkBox->setText("Enable");
     enable_checkBox->setTristate(false);
+}
 
+void AnalogueSensorMenu::createAndFillLayouts()
+{
     // Add the radio buttons to their own layout.
     radio_vBox->addWidget(flow_radioButton);
     radio_vBox->addWidget(pres_radioButton);
@@ -46,27 +65,6 @@ AnalogueSensorMenu::AnalogueSensorMenu(QWidget *parent) : QWidget(parent)
 
     // Set the layout of the widget to the gridlayout.
     this->setLayout(gridLayout);
-
-    connect(flow_radioButton, SIGNAL(toggled(bool)), this, SLOT(radiobuttonToggled(bool)));
-    connect(enable_checkBox, SIGNAL(stateChanged(int)), this, SLOT(enableCheckboxStateChanged(int)));
-}
-
-QGridLayout* AnalogueSensorMenu::getMainLayout()
-{
-    return gridLayout;
-}
-
-void AnalogueSensorMenu::radiobuttonToggled(bool flow_checked)
-{
-    if (flow_checked)
-        fillFlowComboBox();
-    else
-        fillPresComboBox();
-}
-
-void AnalogueSensorMenu::enableCheckboxStateChanged(int state)
-{
-    qDebug() << "Checkbox state change." << state;
 }
 
 void AnalogueSensorMenu::fillFlowComboBox()
@@ -99,3 +97,19 @@ void AnalogueSensorMenu::fillBComboBox()
         b_unit_comboBox->addItem(item);
     }
 }
+// #################### Signals ####################
+// #################### Private slots ####################
+void AnalogueSensorMenu::radiobuttonToggled(bool flow_checked)
+{
+    if (flow_checked)
+        fillFlowComboBox();
+    else
+        fillPresComboBox();
+}
+
+void AnalogueSensorMenu::enableCheckboxStateChanged(int state)
+{
+    qDebug() << "Checkbox state change." << state;
+}
+
+// #################### Public slots ####################

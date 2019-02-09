@@ -47,6 +47,8 @@ private:
     const QString a_presItems[8] = {"V/psi", "mV/psi", "V/bar",
                                     "V/mbar", "mV/bar", "mV/mbar",
                                     "V/mmHg", "mV/mmHg"};
+    void createGuiItems();
+    void createAndFillLayouts();
     void fillFlowComboBox();
     void fillPresComboBox();
     void fillBComboBox();
