@@ -60,18 +60,18 @@ void AnalogueSensorMenu::createAndFillLayouts()
     radio_vBox->addWidget(pres_radioButton);
 
     // Add the a fields to the main gridlayout.
-    gridLayout->addWidget(a_label, 1, 1);
-    gridLayout->addWidget(a_val_lineEdit, 1, 2, 1, 2);
-    gridLayout->addWidget(a_unit_comboBox, 1, 4, 1, 2);
+    gridLayout->addWidget(a_label, 0, 0);
+    gridLayout->addWidget(a_val_lineEdit, 0, 1, 1, 2);
+    gridLayout->addWidget(a_unit_comboBox, 0, 3, 1, 2);
 
     // Add the b fields to the main gridlayout.
-    gridLayout->addWidget(b_label, 2, 1);
-    gridLayout->addWidget(b_val_lineEdit, 2, 2, 1, 2);
-    gridLayout->addWidget(b_unit_comboBox, 2, 4, 1, 2);
+    gridLayout->addWidget(b_label, 1, 0);
+    gridLayout->addWidget(b_val_lineEdit, 1, 1, 1, 2);
+    gridLayout->addWidget(b_unit_comboBox, 1, 3, 1, 2);
 
     // Add the radio buttons layout and the checkbox to the main gridlayout.
-    gridLayout->addLayout(radio_vBox, 3, 1, 2, 3);
-    gridLayout->addWidget(enable_checkBox, 3, 4, 2, 2);
+    gridLayout->addLayout(radio_vBox, 2, 0, 2, 3);
+    gridLayout->addWidget(enable_checkBox, 2, 3, 2, 2);
 
     // Disable the widgets.
     disableFields();
