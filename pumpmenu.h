@@ -1,3 +1,10 @@
+// pumpmenu.h - Header file for the PumpMeny class.
+// This class handles the appearance and functionality of the
+// pump menus. The user can enter the flow rate and feedback
+// sensor.
+// Date: 2019-02-09
+// Created by: Gijs de Vries
+
 #ifndef PUMPMENU_H
 #define PUMPMENU_H
 
