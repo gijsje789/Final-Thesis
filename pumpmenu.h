@@ -45,7 +45,7 @@ private:
     QPushButton *update_pushButton = new QPushButton;
     QCheckBox *enable_checkBox = new QCheckBox;
 
-    QSpacerItem *empty_row = new QSpacerItem(10, 11);
+    QSpacerItem *empty_row = new QSpacerItem(10, 11, QSizePolicy::Fixed);
 
     void createGuiItems();
     void createAndFillLayouts();

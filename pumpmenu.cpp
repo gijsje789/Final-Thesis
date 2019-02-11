@@ -55,7 +55,7 @@ void PumpMenu::createAndFillLayouts()
     gridLayout->addWidget(feedback_label, 1, 0, 1, 3);
     gridLayout->addWidget(feedback_comboBox, 1, 2, 1, 1);
 
-    //gridLayout->addItem(empty_row, 2, 0, 1, 5);
+    gridLayout->addItem(empty_row, 2, 0, 1, 5);
 
     // Add the push button to gridlayout.
     gridLayout->addWidget(update_pushButton, 3, 0, 1, 3);
