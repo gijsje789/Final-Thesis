@@ -10,6 +10,7 @@
 #define WIDGET_SPACE 10
 
 #include <QMainWindow>
+#include <QObject>
 #include <QTabWidget>
 #include "analoguesensormenu.h"
 #include "digitalsensormenu.h"
@@ -57,11 +58,11 @@ private:
     AnalogueSensorMenu *an4_menu = new AnalogueSensorMenu(an4_widget);
     AnalogueSensorMenu *an5_menu = new AnalogueSensorMenu(an5_widget);
 
-    DigitalSensorMenu *d1_menu = new DigitalSensorMenu(d1_widget);
-    DigitalSensorMenu *d2_menu = new DigitalSensorMenu(d2_widget);
-    DigitalSensorMenu *d3_menu = new DigitalSensorMenu(d3_widget);
-    DigitalSensorMenu *d4_menu = new DigitalSensorMenu(d4_widget);
-    DigitalSensorMenu *d5_menu = new DigitalSensorMenu(d5_widget);
+    DigitalSensorMenu *d1_menu = new DigitalSensorMenu("D1", d1_widget);
+    DigitalSensorMenu *d2_menu = new DigitalSensorMenu("D2", d2_widget);
+    DigitalSensorMenu *d3_menu = new DigitalSensorMenu("D3", d3_widget);
+    DigitalSensorMenu *d4_menu = new DigitalSensorMenu("D4", d4_widget);
+    DigitalSensorMenu *d5_menu = new DigitalSensorMenu("D5", d5_widget);
 
     PumpMenu *p1_menu = new PumpMenu(p1_widget);
     PumpMenu *p2_menu = new PumpMenu(p2_widget);

@@ -7,7 +7,8 @@
 
 #include "digitalsensormenu.h"
 
-DigitalSensorMenu::DigitalSensorMenu(QWidget *parent) : QWidget(parent)
+DigitalSensorMenu::DigitalSensorMenu(QString sensorNr, QWidget *parent)
+    : QWidget(parent), sensorName(sensorNr)
 {
     createGuiItems();
     createAndFillLayout();
@@ -116,8 +117,10 @@ void DigitalSensorMenu::enableFields()
 // #################### Private slots ####################
 void DigitalSensorMenu::radiobuttonToggled(bool flow_checked)
 {
-    if (flow_checked)
+    if (flow_checked) {
         fillFlowComboBox();
+        emit flowSensorCreated(sensorName);
+    }
     else
         fillPresComboBox();
 }

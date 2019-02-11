@@ -112,9 +112,9 @@ void PumpMenu::enableCheckboxToggled(bool state)
     qDebug() << feedback_label->width() << feedback_comboBox->width();
 }
 // #################### Public slots ####################
-void PumpMenu::addSensorToComboBox()
+void PumpMenu::addSensorToComboBox(QString sensor)
 {
-
+    feedback_comboBox->addItem(sensor);
 }
 
 void PumpMenu::removeSensorFromComboBox()

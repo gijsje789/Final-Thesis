@@ -55,7 +55,7 @@ signals:
 private slots:
     void enableCheckboxToggled(bool state);
 public slots:
-    void addSensorToComboBox();
+    void addSensorToComboBox(QString sensor);
     void removeSensorFromComboBox();
 };
 

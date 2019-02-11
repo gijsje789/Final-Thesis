@@ -33,6 +33,8 @@ MainWindow::MainWindow(QWidget *parent)
     pump_tabWidget->addTab(p2_widget, "P2");
     pump_tabWidget->addTab(p3_widget, "P3");
     pump_tabWidget->addTab(p4_widget, "P4");
+
+    connect(d1_menu, SIGNAL(flowSensorCreated(QString)), p1_menu, SLOT(addSensorToComboBox(QString)));
 }
 
 MainWindow::~MainWindow()
