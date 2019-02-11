@@ -8,6 +8,7 @@
 #define WINDOW_W 1024
 #define WINDOW_H 768
 #define WIDGET_SPACE 10
+#define SMENU_H 150
 
 #include <QMainWindow>
 #include <QObject>
@@ -15,6 +16,7 @@
 #include "analoguesensormenu.h"
 #include "digitalsensormenu.h"
 #include "pumpmenu.h"
+#include "comport.h"
 
 
 class MainWindow : public QMainWindow
@@ -33,7 +35,10 @@ private:
     QTabWidget *dSensors_tabWidget = new QTabWidget(centralWidget);
     QTabWidget *pump_tabWidget = new QTabWidget(centralWidget);
 
-    // Create the widgets that populate the tab widget.
+    QWidget *comport_widget = new QWidget(centralWidget);
+    ComPort *comport_menu = new ComPort(comport_widget);
+
+    // Create the widgets that populate the tab widgets.
     QWidget *an1_widget = new QWidget;
     QWidget *an2_widget = new QWidget;
     QWidget *an3_widget = new QWidget;

@@ -14,25 +14,27 @@ MainWindow::MainWindow(QWidget *parent)
     this->setCentralWidget(centralWidget);
 
     // Create tab widget and populate with analogue sensors.
-    anSensors_tabWidget->setGeometry(WIDGET_SPACE, WIDGET_SPACE, (WINDOW_W-4*WIDGET_SPACE)/3, 150);
+    anSensors_tabWidget->setGeometry(WIDGET_SPACE, WIDGET_SPACE, (WINDOW_W-4*WIDGET_SPACE)/3, SMENU_H);
     anSensors_tabWidget->addTab(an1_widget, "AN1");
     anSensors_tabWidget->addTab(an2_widget, "AN2");
     anSensors_tabWidget->addTab(an3_widget, "AN3");
     anSensors_tabWidget->addTab(an4_widget, "AN4");
     anSensors_tabWidget->addTab(an5_widget, "AN5");
 
-    dSensors_tabWidget->setGeometry(2*WIDGET_SPACE + ((WINDOW_W-4*WIDGET_SPACE)/3), WIDGET_SPACE, (WINDOW_W-4*WIDGET_SPACE)/3, 150);
+    dSensors_tabWidget->setGeometry(2*WIDGET_SPACE + ((WINDOW_W-4*WIDGET_SPACE)/3), WIDGET_SPACE, (WINDOW_W-4*WIDGET_SPACE)/3, SMENU_H);
     dSensors_tabWidget->addTab(d1_widget, "D1");
     dSensors_tabWidget->addTab(d2_widget, "D2");
     dSensors_tabWidget->addTab(d3_widget, "D3");
     dSensors_tabWidget->addTab(d4_widget, "D4");
     dSensors_tabWidget->addTab(d5_widget, "D5");
 
-    pump_tabWidget->setGeometry(3*WIDGET_SPACE + 2*((WINDOW_W-4*WIDGET_SPACE)/3), WIDGET_SPACE, (WINDOW_W-4*WIDGET_SPACE)/3, 150);
+    pump_tabWidget->setGeometry(3*WIDGET_SPACE + 2*((WINDOW_W-4*WIDGET_SPACE)/3), WIDGET_SPACE, (WINDOW_W-4*WIDGET_SPACE)/3, SMENU_H);
     pump_tabWidget->addTab(p1_widget, "P1");
     pump_tabWidget->addTab(p2_widget, "P2");
     pump_tabWidget->addTab(p3_widget, "P3");
     pump_tabWidget->addTab(p4_widget, "P4");
+
+    comport_widget->setGeometry(WIDGET_SPACE, 2*WIDGET_SPACE+SMENU_H, (WINDOW_W-4*WIDGET_SPACE)/3, SMENU_H);
 
     connectWidgets();
 }
