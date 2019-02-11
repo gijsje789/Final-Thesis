@@ -121,8 +121,10 @@ void DigitalSensorMenu::radiobuttonToggled(bool flow_checked)
         fillFlowComboBox();
         emit flowSensorCreated(sensorName);
     }
-    else
+    else {
         fillPresComboBox();
+        emit flowSensorDeleted(sensorName);
+    }
 }
 
 void DigitalSensorMenu::enableCheckboxToggled(bool state)

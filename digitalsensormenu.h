@@ -64,6 +64,7 @@ signals:
     // Signal to emit that is emited to the outside world when
     // the sensor (if enabled) is set to "flow".
     void flowSensorCreated(QString sensor);
+    void flowSensorDeleted(QString sensor);
 
 private slots:
     void radiobuttonToggled(bool flow_checked);

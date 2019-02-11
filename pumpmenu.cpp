@@ -108,8 +108,6 @@ void PumpMenu::enableCheckboxToggled(bool state)
         enableFields();
     else
         disableFields();
-    qDebug() << pumpRate_label->width() << pumpRate_lineEdit->width() << pumpRate_unit_label->width() << gridLayout->horizontalSpacing();
-    qDebug() << feedback_label->width() << feedback_comboBox->width();
 }
 // #################### Public slots ####################
 void PumpMenu::addSensorToComboBox(QString sensor)
@@ -117,7 +115,10 @@ void PumpMenu::addSensorToComboBox(QString sensor)
     feedback_comboBox->addItem(sensor);
 }
 
-void PumpMenu::removeSensorFromComboBox()
+void PumpMenu::removeSensorFromComboBox(QString sensor)
 {
+    int index_to_remove = feedback_comboBox->findText(sensor);
 
+    if (index_to_remove != -1)
+        feedback_comboBox->removeItem(index_to_remove);
 }

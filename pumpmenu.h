@@ -56,7 +56,7 @@ private slots:
     void enableCheckboxToggled(bool state);
 public slots:
     void addSensorToComboBox(QString sensor);
-    void removeSensorFromComboBox();
+    void removeSensorFromComboBox(QString sensor);
 };
 
 #endif // PUMPMENU_H
