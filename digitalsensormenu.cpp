@@ -129,10 +129,18 @@ void DigitalSensorMenu::radiobuttonToggled(bool flow_checked)
 
 void DigitalSensorMenu::enableCheckboxToggled(bool state)
 {
-    if (state)
+    if (state) {
         enableFields();
-    else
+        if (flow_radioButton->isChecked())
+                    emit flowSensorCreated(sensorName);
+        else
+                    emit flowSensorDeleted(sensorName);
+    }
+    else {
         disableFields();
+        if (flow_radioButton->isChecked())
+                    emit flowSensorDeleted(sensorName);
+    }
 }
 
 // #################### Public slots ####################

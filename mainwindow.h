@@ -68,6 +68,8 @@ private:
     PumpMenu *p2_menu = new PumpMenu(p2_widget);
     PumpMenu *p3_menu = new PumpMenu(p3_widget);
     PumpMenu *p4_menu = new PumpMenu(p4_widget);
+
+    void connectWidgets();
 };
 
 #endif // MAINWINDOW_H

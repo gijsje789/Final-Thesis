@@ -34,11 +34,23 @@ MainWindow::MainWindow(QWidget *parent)
     pump_tabWidget->addTab(p3_widget, "P3");
     pump_tabWidget->addTab(p4_widget, "P4");
 
-    connect(d1_menu, SIGNAL(flowSensorCreated(QString)), p1_menu, SLOT(addSensorToComboBox(QString)));
-    connect(d1_menu, SIGNAL(flowSensorDeleted(QString)), p1_menu, SLOT(removeSensorFromComboBox(QString)));
+    connectWidgets();
 }
 
 MainWindow::~MainWindow()
 {
 
+}
+
+void MainWindow::connectWidgets()
+{
+    DigitalSensorMenu *dMenu[5] = {d1_menu, d2_menu, d3_menu, d4_menu, d5_menu};
+    PumpMenu *pMenu[4] = {p1_menu, p2_menu, p3_menu, p4_menu};
+    // Connect digital sensors to pumps.
+    for (DigitalSensorMenu *menu : dMenu) {
+        for (PumpMenu *pump : pMenu) {
+            connect(menu, SIGNAL(flowSensorCreated(QString)), pump, SLOT(addSensorToComboBox(QString)));
+            connect(menu, SIGNAL(flowSensorDeleted(QString)), pump, SLOT(removeSensorFromComboBox(QString)));
+        }
+    }
 }
