@@ -64,6 +64,9 @@ signals:
     // Signal to emit that is emited to the outside world when
     // the sensor (if enabled) is set to "flow".
     void flowSensorCreated(QString sensor);
+
+    // Signal to emit that is emited to the outside world when
+    // the flow sensor is disabled or set to "Pressure".
     void flowSensorDeleted(QString sensor);
 
 private slots:

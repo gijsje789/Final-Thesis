@@ -132,14 +132,14 @@ void DigitalSensorMenu::enableCheckboxToggled(bool state)
     if (state) {
         enableFields();
         if (flow_radioButton->isChecked())
-                    emit flowSensorCreated(sensorName);
+            emit flowSensorCreated(sensorName);
         else
-                    emit flowSensorDeleted(sensorName);
+            emit flowSensorDeleted(sensorName);
     }
     else {
         disableFields();
         if (flow_radioButton->isChecked())
-                    emit flowSensorDeleted(sensorName);
+            emit flowSensorDeleted(sensorName);
     }
 }
 

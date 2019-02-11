@@ -27,9 +27,11 @@ class AnalogueSensorMenu : public QWidget
 {
     Q_OBJECT
 public:
-    explicit AnalogueSensorMenu(QWidget *parent = nullptr);
+    explicit AnalogueSensorMenu(QString sensorNr, QWidget *parent = nullptr);
     QGridLayout* getMainLayout();
 private:
+    // Analogue sensor name.
+    QString sensorName;
     // Layouts that are used.
     QGridLayout *gridLayout = new QGridLayout;
     QVBoxLayout *radio_vBox = new QVBoxLayout;
@@ -62,6 +64,13 @@ private:
     void disableFields();
     void enableFields();
 signals:
+    // Signal to emit that is emited to the outside world when
+    // the sensor (if enabled) is set to "flow".
+    void flowSensorCreated(QString sensor);
+
+    // Signal to emit that is emited to the outside world when
+    // the flow sensor is disabled or set to "Pressure".
+    void flowSensorDeleted(QString sensor);
 
 private slots:
     void radiobuttonToggled(bool flow_checked);

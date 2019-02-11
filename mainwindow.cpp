@@ -45,9 +45,17 @@ MainWindow::~MainWindow()
 void MainWindow::connectWidgets()
 {
     DigitalSensorMenu *dMenu[5] = {d1_menu, d2_menu, d3_menu, d4_menu, d5_menu};
+    AnalogueSensorMenu *aMenu[5] = {an1_menu, an2_menu, an3_menu, an4_menu, an5_menu};
     PumpMenu *pMenu[4] = {p1_menu, p2_menu, p3_menu, p4_menu};
     // Connect digital sensors to pumps.
     for (DigitalSensorMenu *menu : dMenu) {
+        for (PumpMenu *pump : pMenu) {
+            connect(menu, SIGNAL(flowSensorCreated(QString)), pump, SLOT(addSensorToComboBox(QString)));
+            connect(menu, SIGNAL(flowSensorDeleted(QString)), pump, SLOT(removeSensorFromComboBox(QString)));
+        }
+    }
+
+    for (AnalogueSensorMenu *menu : aMenu) {
         for (PumpMenu *pump : pMenu) {
             connect(menu, SIGNAL(flowSensorCreated(QString)), pump, SLOT(addSensorToComboBox(QString)));
             connect(menu, SIGNAL(flowSensorDeleted(QString)), pump, SLOT(removeSensorFromComboBox(QString)));

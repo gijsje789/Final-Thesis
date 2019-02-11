@@ -7,7 +7,8 @@
 
 #include "analoguesensormenu.h"
 
-AnalogueSensorMenu::AnalogueSensorMenu(QWidget *parent) : QWidget(parent)
+AnalogueSensorMenu::AnalogueSensorMenu(QString sensorNr, QWidget *parent)
+    : QWidget(parent), sensorName(sensorNr)
 {
     createGuiItems();
     createAndFillLayouts();
@@ -149,18 +150,30 @@ void AnalogueSensorMenu::enableFields()
 // #################### Private slots ####################
 void AnalogueSensorMenu::radiobuttonToggled(bool flow_checked)
 {
-    if (flow_checked)
+    if (flow_checked) {
         fillFlowComboBox();
-    else
+        emit flowSensorCreated(sensorName);
+    }
+    else {
         fillPresComboBox();
+        emit flowSensorDeleted(sensorName);
+    }
 }
 
 void AnalogueSensorMenu::enableCheckboxToggled(bool state)
 {
-    if (state)
+    if (state) {
         enableFields();
-    else
+        if (flow_radioButton->isChecked())
+            emit flowSensorCreated(sensorName);
+        else
+            emit flowSensorDeleted(sensorName);
+    }
+    else {
         disableFields();
+        if (flow_radioButton->isChecked())
+            emit flowSensorDeleted(sensorName);
+    }
 }
 
 // #################### Public slots ####################

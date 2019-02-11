@@ -52,11 +52,11 @@ private:
     QWidget *p4_widget = new QWidget;
 
     // Create the sensor menus.
-    AnalogueSensorMenu *an1_menu = new AnalogueSensorMenu(an1_widget);
-    AnalogueSensorMenu *an2_menu = new AnalogueSensorMenu(an2_widget);
-    AnalogueSensorMenu *an3_menu = new AnalogueSensorMenu(an3_widget);
-    AnalogueSensorMenu *an4_menu = new AnalogueSensorMenu(an4_widget);
-    AnalogueSensorMenu *an5_menu = new AnalogueSensorMenu(an5_widget);
+    AnalogueSensorMenu *an1_menu = new AnalogueSensorMenu("AN1", an1_widget);
+    AnalogueSensorMenu *an2_menu = new AnalogueSensorMenu("AN2", an2_widget);
+    AnalogueSensorMenu *an3_menu = new AnalogueSensorMenu("AN3", an3_widget);
+    AnalogueSensorMenu *an4_menu = new AnalogueSensorMenu("AN4", an4_widget);
+    AnalogueSensorMenu *an5_menu = new AnalogueSensorMenu("AN5", an5_widget);
 
     DigitalSensorMenu *d1_menu = new DigitalSensorMenu("D1", d1_widget);
     DigitalSensorMenu *d2_menu = new DigitalSensorMenu("D2", d2_widget);
