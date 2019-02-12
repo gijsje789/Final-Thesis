@@ -19,6 +19,9 @@
 #include <QLabel>
 #include <QComboBox>
 
+#include <QtSerialPort/QSerialPortInfo>
+#include <QList>
+
 class ComPort : public QWidget
 {
     Q_OBJECT
@@ -56,9 +59,13 @@ private:
     QLabel *portName_label = new QLabel;
     QLabel *manuName_label = new QLabel;
     QLabel *descript_label = new QLabel;
+    // List containing all devices.
+    QList<QSerialPortInfo> serial_list;
 
     void createGuiItems();
     void createAndFillLayouts();
+private slots:
+    void updatePortInformation(int index);
 };
 
 #endif // COMPORT_H

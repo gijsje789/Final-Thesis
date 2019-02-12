@@ -8,8 +8,6 @@
 #include "comport.h"
 
 #include <QDebug>
-#include <QtSerialPort/QSerialPortInfo>
-#include <QList>
 
 ComPort::ComPort(QWidget *parent) : QWidget(parent)
 {
@@ -65,19 +63,23 @@ ComPortSelectWindow::ComPortSelectWindow(QWidget *parent)
     createGuiItems();
     createAndFillLayouts();
 
+    connect(selected_port_comboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(updatePortInformation(int)));
+
     QSerialPortInfo *info = new QSerialPortInfo;
-    QList<QSerialPortInfo> list = info->availablePorts();
-    qDebug() << "List" << list.length();
-    for(int i = 0; i < list.length(); i++){
-        selected_port_comboBox->addItem(list[i].portName());
+    serial_list = info->availablePorts();
+    qDebug() << "List" << serial_list.length();
+    for(int i = 0; i < serial_list.length(); i++){
+        selected_port_comboBox->addItem(serial_list[i].portName());
     }
-    if (list.length()>0) {
-        portName_label->setText("Port: " + list[0].portName());
-        manuName_label->setText("Manufacturer: " + list[0].manufacturer());
-        descript_label->setText("Description: " + list[0].description());
+
+    if (serial_list.length()>0) {
+        portName_label->setText("Port: " + serial_list[0].portName());
+        manuName_label->setText("Manufacturer: " + serial_list[0].manufacturer());
+        descript_label->setText("Description: " + serial_list[0].description());
     }
 }
 
+// #################### Private functions ####################
 void ComPortSelectWindow::createGuiItems()
 {
     // Create the push button.
@@ -102,4 +104,15 @@ void ComPortSelectWindow::createAndFillLayouts()
     vbox_main->addWidget(descript_label);
 
     this->setLayout(vbox_main);
+}
+// #################### Signals ####################
+// #################### Private slots ####################
+void ComPortSelectWindow::updatePortInformation(int index)
+{
+    qDebug() << "Updating information";
+    if (index < serial_list.length() && index >= 0) {
+        portName_label->setText("Port: " + serial_list[index].portName());
+        manuName_label->setText("Manufacturer: " + serial_list[index].manufacturer());
+        descript_label->setText("Description: " + serial_list[index].description());
+    }
 }
