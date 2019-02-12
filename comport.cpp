@@ -34,8 +34,8 @@ void ComPort::createGuiItems()
 void ComPort::createAndFillLayouts()
 {
     // Fill the horizontal layout.
-    hboxLayout->addWidget(selectPort_pushButton);
     hboxLayout->addWidget(selectedPort_label);
+    hboxLayout->addWidget(selectPort_pushButton);
 
     // Set the horizontal layout as the main layout.
     this->setLayout(hboxLayout);

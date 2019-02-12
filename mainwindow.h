@@ -9,6 +9,7 @@
 #define WINDOW_H 768
 #define WIDGET_SPACE 10
 #define SMENU_H 150
+#define COM_H 40
 
 #include <QMainWindow>
 #include <QObject>
@@ -17,6 +18,7 @@
 #include "digitalsensormenu.h"
 #include "pumpmenu.h"
 #include "comport.h"
+#include "fileoperation.h"
 
 
 class MainWindow : public QMainWindow
@@ -37,6 +39,9 @@ private:
 
     QWidget *comport_widget = new QWidget(centralWidget);
     ComPort *comport_menu = new ComPort(comport_widget);
+
+    QWidget *file_widget = new QWidget(centralWidget);
+    FileOperation *file_menu = new FileOperation(file_widget);
 
     // Create the widgets that populate the tab widgets.
     QWidget *an1_widget = new QWidget;

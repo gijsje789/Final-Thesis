@@ -34,8 +34,9 @@ MainWindow::MainWindow(QWidget *parent)
     pump_tabWidget->addTab(p3_widget, "P3");
     pump_tabWidget->addTab(p4_widget, "P4");
 
-    comport_widget->setGeometry(WIDGET_SPACE, 2*WIDGET_SPACE+SMENU_H, (WINDOW_W-4*WIDGET_SPACE)/3, SMENU_H);
+    comport_widget->setGeometry(WIDGET_SPACE, 2*WIDGET_SPACE+SMENU_H, (WINDOW_W-4*WIDGET_SPACE)/3, COM_H);
 
+    file_widget->setGeometry(WIDGET_SPACE, 3*WIDGET_SPACE+SMENU_H+COM_H, (WINDOW_W-4*WIDGET_SPACE)/3, COM_H);
     connectWidgets();
 }
 
