@@ -7,6 +7,8 @@
 
 #include "comport.h"
 
+#include <QDebug>
+
 ComPort::ComPort(QWidget *parent) : QWidget(parent)
 {
     createGuiItems();
@@ -43,6 +45,25 @@ void ComPort::createAndFillLayouts()
 // #################### Private slots ####################
 void ComPort::selectComPort()
 {
-
+    QWidget *SelectWindow = new QWidget;
+    SelectWindow->setFixedSize(500, 500);
+    ComPortSelectWindow *select = new ComPortSelectWindow(SelectWindow);
+    SelectWindow->show();
 }
 // #################### Public slots ####################
+
+// #########################################################
+// #########################################################
+// #################### ComPortSelectWindow ################
+// #########################################################
+// #########################################################
+ComPortSelectWindow::ComPortSelectWindow(QWidget *parent)
+    : QWidget(parent)
+{
+    select_port_pushButton->setText("Select port");
+
+    hbox_layout->addWidget(selected_port_comboBox);
+    hbox_layout->addWidget(select_port_pushButton);
+
+    this->setLayout(hbox_layout);
+}

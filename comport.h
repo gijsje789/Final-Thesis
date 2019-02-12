@@ -11,9 +11,13 @@
 #include <QSizePolicy>
 
 #include <QWidget>
+#include <QWindow>
+
 #include <QHBoxLayout>
+#include <QVBoxLayout>
 #include <QPushButton>
 #include <QLabel>
+#include <QComboBox>
 
 class ComPort : public QWidget
 {
@@ -35,6 +39,23 @@ signals:
 private slots:
     void selectComPort();
 public slots:
+};
+
+class ComPortSelectWindow : public QWidget{
+    Q_OBJECT
+public:
+    explicit ComPortSelectWindow(QWidget *parent = nullptr);
+private:
+    // Layouts to be used.
+    QHBoxLayout *hbox_layout = new QHBoxLayout;
+    QVBoxLayout *vbox_layout = new QVBoxLayout;
+    // User widgets
+    QComboBox *selected_port_comboBox = new QComboBox;
+    QPushButton *select_port_pushButton = new QPushButton;
+    // Information widgets.
+    //QLabel *portName_label = new QLabel;
+    //QLabel *manuName_label = new QLabel;
+    //QLabel
 };
 
 #endif // COMPORT_H
