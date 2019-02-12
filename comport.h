@@ -47,15 +47,18 @@ public:
     explicit ComPortSelectWindow(QWidget *parent = nullptr);
 private:
     // Layouts to be used.
-    QHBoxLayout *hbox_layout = new QHBoxLayout;
-    QVBoxLayout *vbox_layout = new QVBoxLayout;
+    QHBoxLayout *hbox_pushCombo = new QHBoxLayout;
+    QVBoxLayout *vbox_main = new QVBoxLayout;
     // User widgets
     QComboBox *selected_port_comboBox = new QComboBox;
     QPushButton *select_port_pushButton = new QPushButton;
     // Information widgets.
-    //QLabel *portName_label = new QLabel;
-    //QLabel *manuName_label = new QLabel;
-    //QLabel
+    QLabel *portName_label = new QLabel;
+    QLabel *manuName_label = new QLabel;
+    QLabel *descript_label = new QLabel;
+
+    void createGuiItems();
+    void createAndFillLayouts();
 };
 
 #endif // COMPORT_H

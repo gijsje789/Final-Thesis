@@ -8,6 +8,8 @@
 #include "comport.h"
 
 #include <QDebug>
+#include <QtSerialPort/QSerialPortInfo>
+#include <QList>
 
 ComPort::ComPort(QWidget *parent) : QWidget(parent)
 {
@@ -60,10 +62,44 @@ void ComPort::selectComPort()
 ComPortSelectWindow::ComPortSelectWindow(QWidget *parent)
     : QWidget(parent)
 {
+    createGuiItems();
+    createAndFillLayouts();
+
+    QSerialPortInfo *info = new QSerialPortInfo;
+    QList<QSerialPortInfo> list = info->availablePorts();
+    qDebug() << "List" << list.length();
+    for(int i = 0; i < list.length(); i++){
+        selected_port_comboBox->addItem(list[i].portName());
+    }
+    if (list.length()>0) {
+        portName_label->setText("Port: " + list[0].portName());
+        manuName_label->setText("Manufacturer: " + list[0].manufacturer());
+        descript_label->setText("Description: " + list[0].description());
+    }
+}
+
+void ComPortSelectWindow::createGuiItems()
+{
+    // Create the push button.
     select_port_pushButton->setText("Select port");
 
-    hbox_layout->addWidget(selected_port_comboBox);
-    hbox_layout->addWidget(select_port_pushButton);
+    // Create the labels.
+    portName_label->setText("Port: ");
+    manuName_label->setText("Manufacturer: ");
+    descript_label->setText("Description: ");
+}
 
-    this->setLayout(hbox_layout);
+void ComPortSelectWindow::createAndFillLayouts()
+{
+    // Fill the horizontal layout
+    hbox_pushCombo->addWidget(selected_port_comboBox);
+    hbox_pushCombo->addWidget(select_port_pushButton);
+
+    // Fill the vertical layout
+    vbox_main->addLayout(hbox_pushCombo);
+    vbox_main->addWidget(portName_label);
+    vbox_main->addWidget(manuName_label);
+    vbox_main->addWidget(descript_label);
+
+    this->setLayout(vbox_main);
 }
