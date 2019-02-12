@@ -21,6 +21,7 @@
 
 #include <QtSerialPort/QSerialPortInfo>
 #include <QList>
+#include <QTimer>
 
 class ComPort : public QWidget
 {
@@ -61,11 +62,15 @@ private:
     QLabel *descript_label = new QLabel;
     // List containing all devices.
     QList<QSerialPortInfo> serial_list;
+    // Timer to refresh serial list.
+    QTimer *timer = new QTimer(this);
 
     void createGuiItems();
     void createAndFillLayouts();
+    void getAvailablePorts();
 private slots:
     void updatePortInformation(int index);
+    void refreshComPortList();
 };
 
 #endif // COMPORT_H

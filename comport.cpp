@@ -46,7 +46,7 @@ void ComPort::createAndFillLayouts()
 void ComPort::selectComPort()
 {
     QWidget *SelectWindow = new QWidget;
-    SelectWindow->setFixedSize(500, 500);
+    SelectWindow->setFixedSize(500, 250);
     ComPortSelectWindow *select = new ComPortSelectWindow(SelectWindow);
     SelectWindow->show();
 }
@@ -64,19 +64,10 @@ ComPortSelectWindow::ComPortSelectWindow(QWidget *parent)
     createAndFillLayouts();
 
     connect(selected_port_comboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(updatePortInformation(int)));
+    connect(timer, SIGNAL(timeout()), this, SLOT(refreshComPortList()));
+    timer->start(500);
 
-    QSerialPortInfo *info = new QSerialPortInfo;
-    serial_list = info->availablePorts();
-    qDebug() << "List" << serial_list.length();
-    for(int i = 0; i < serial_list.length(); i++){
-        selected_port_comboBox->addItem(serial_list[i].portName());
-    }
-
-    if (serial_list.length()>0) {
-        portName_label->setText("Port: " + serial_list[0].portName());
-        manuName_label->setText("Manufacturer: " + serial_list[0].manufacturer());
-        descript_label->setText("Description: " + serial_list[0].description());
-    }
+    getAvailablePorts();
 }
 
 // #################### Private functions ####################
@@ -87,8 +78,11 @@ void ComPortSelectWindow::createGuiItems()
 
     // Create the labels.
     portName_label->setText("Port: ");
+    portName_label->setFixedSize(400, 40);
     manuName_label->setText("Manufacturer: ");
+    manuName_label->setFixedSize(400, 40);
     descript_label->setText("Description: ");
+    descript_label->setFixedSize(400, 40);
 }
 
 void ComPortSelectWindow::createAndFillLayouts()
@@ -105,14 +99,48 @@ void ComPortSelectWindow::createAndFillLayouts()
 
     this->setLayout(vbox_main);
 }
+
+void ComPortSelectWindow::getAvailablePorts()
+{
+    QSerialPortInfo *info = new QSerialPortInfo;
+    serial_list = info->availablePorts();
+
+    selected_port_comboBox->clear();
+    for(int i = 0; i < serial_list.length(); i++){
+        selected_port_comboBox->addItem(serial_list[i].portName());
+    }
+
+    if (serial_list.length()>0) {
+        portName_label->setText("Port: " + serial_list[0].portName());
+        manuName_label->setText("Manufacturer: " + serial_list[0].manufacturer());
+        descript_label->setText("Description: " + serial_list[0].description());
+    }
+}
 // #################### Signals ####################
 // #################### Private slots ####################
 void ComPortSelectWindow::updatePortInformation(int index)
 {
-    qDebug() << "Updating information";
+    qDebug() << "Updating information" << index;
     if (index < serial_list.length() && index >= 0) {
         portName_label->setText("Port: " + serial_list[index].portName());
         manuName_label->setText("Manufacturer: " + serial_list[index].manufacturer());
         descript_label->setText("Description: " + serial_list[index].description());
+    }
+    else {
+        portName_label->setText("Port: ");
+        manuName_label->setText("Manufacturer: ");
+        descript_label->setText("Description: ");
+    }
+}
+
+void ComPortSelectWindow::refreshComPortList()
+{
+    qDebug() << "Refreshing comports";
+    QSerialPortInfo *info = new QSerialPortInfo;
+    QList<QSerialPortInfo> temp = info->availablePorts();
+
+    if (temp.length() != serial_list.length()) {
+        qDebug() << "Serial list changed. Need update.";
+        getAvailablePorts();
     }
 }
