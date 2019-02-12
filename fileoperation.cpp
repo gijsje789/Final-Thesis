@@ -15,12 +15,7 @@ FileOperation::FileOperation(QWidget *parent) : QWidget(parent)
 
 FileOperation::~FileOperation()
 {
-    if (outputFile != nullptr) {
-        if (outputFile->isOpen()) {
-            qDebug() << "Closing file.";
-            outputFile->close();
-        }
-    }
+    closeOutputFile();
 }
 
 // #################### Private functions ####################
@@ -48,17 +43,40 @@ void FileOperation::createNewOutputFile()
     // Create new file in an output folder which is one level up.
     QDateTime *datetime = new QDateTime;
     QString tempString = FILE_LOC
-            + datetime->currentDateTime().toString("yyyyMMdd_hhmmss")
+            + datetime->currentDateTime().toString("yyyyMMdd_hhmmss_")
             + fileName_lineEdit->text() + ".csv";
     outputFile = new QFile(tempString);
-    outputFile->open(QIODevice::WriteOnly);
+    if(outputFile->open(QIODevice::WriteOnly)) {
+        qDebug() << "File successfully opened.";
+        lastFile = outputFile->fileName();
+    }
 }
 
 // #################### Signals ####################
 // #################### Private slots ####################
 void FileOperation::renameLastFile()
 {
-    qDebug() << "Im pressed";
-    createNewOutputFile();
+    if (temp) {
+        closeOutputFile();
+        temp = false;
+    }
+    else {
+        createNewOutputFile();
+        temp = true;
+    }
+}
+
+void FileOperation::closeOutputFile()
+{
+    if (outputFile != nullptr) {
+        if (outputFile->isOpen()) {
+            qDebug() << "Closing file.";
+            outputFile->close();
+            outputFile = nullptr;
+        }
+        else {
+            outputFile = nullptr;
+        }
+    }
 }
 // #################### Public slots ####################

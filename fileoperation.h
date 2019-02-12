@@ -36,15 +36,20 @@ private:
     QPushButton *renameLast_pushButton = new QPushButton;
 
     QFile *outputFile = nullptr;
+    QString lastFile = "";
+
+    bool temp = false;
 
     void createGuiItems();
     void createAndFillLayouts();
-    void createNewOutputFile();
 
 signals:
 
 private slots:
+    void createNewOutputFile();
     void renameLastFile();
+    void closeOutputFile();
+
 };
 
 #endif // FILEOPERATION_H
