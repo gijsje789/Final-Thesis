@@ -19,7 +19,8 @@
 #include <QLabel>
 #include <QComboBox>
 
-#include <QtSerialPort/QSerialPortInfo>
+#include <QSerialPortInfo>
+#include <QSerialPort>
 #include <QList>
 #include <QTimer>
 
@@ -35,6 +36,8 @@ private:
     // Input fields.
     QPushButton *selectPort_pushButton = new QPushButton;
     QLabel *selectedPort_label = new QLabel;
+    // Have a variable for the serial port.
+    QSerialPort *serial_port;
 
     void createGuiItems();
     void createAndFillLayouts();
@@ -42,8 +45,12 @@ signals:
 
 private slots:
     void selectComPort();
+    void setComPort(QSerialPortInfo comport);
 public slots:
 };
+
+// #############################################################
+// #############################################################
 
 class ComPortSelectWindow : public QWidget{
     Q_OBJECT
@@ -68,9 +75,12 @@ private:
     void createGuiItems();
     void createAndFillLayouts();
     void getAvailablePorts();
+signals:
+    void ComPortSelected(QSerialPortInfo comport);
 private slots:
     void updatePortInformation(int index);
     void refreshComPortList();
+    void selectPortButtonPressed();
 };
 
 #endif // COMPORT_H

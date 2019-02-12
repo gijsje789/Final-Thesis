@@ -47,8 +47,14 @@ void ComPort::selectComPort()
 {
     QWidget *SelectWindow = new QWidget;
     SelectWindow->setFixedSize(500, 250);
-    ComPortSelectWindow *select = new ComPortSelectWindow(SelectWindow);
+    ComPortSelectWindow *window = new ComPortSelectWindow(SelectWindow);
+    connect(window, SIGNAL(ComPortSelected(QSerialPortInfo)), this, SLOT(setComPort(QSerialPortInfo)));
     SelectWindow->show();
+}
+
+void ComPort::setComPort(QSerialPortInfo comport)
+{
+    serial_port = new QSerialPort(comport, this);
 }
 // #################### Public slots ####################
 
@@ -110,17 +116,12 @@ void ComPortSelectWindow::getAvailablePorts()
         selected_port_comboBox->addItem(serial_list[i].portName());
     }
 
-    if (serial_list.length()>0) {
-        portName_label->setText("Port: " + serial_list[0].portName());
-        manuName_label->setText("Manufacturer: " + serial_list[0].manufacturer());
-        descript_label->setText("Description: " + serial_list[0].description());
-    }
+    emit updatePortInformation(selected_port_comboBox->currentIndex());
 }
 // #################### Signals ####################
 // #################### Private slots ####################
 void ComPortSelectWindow::updatePortInformation(int index)
 {
-    qDebug() << "Updating information" << index;
     if (index < serial_list.length() && index >= 0) {
         portName_label->setText("Port: " + serial_list[index].portName());
         manuName_label->setText("Manufacturer: " + serial_list[index].manufacturer());
@@ -135,12 +136,16 @@ void ComPortSelectWindow::updatePortInformation(int index)
 
 void ComPortSelectWindow::refreshComPortList()
 {
-    qDebug() << "Refreshing comports";
     QSerialPortInfo *info = new QSerialPortInfo;
     QList<QSerialPortInfo> temp = info->availablePorts();
 
     if (temp.length() != serial_list.length()) {
-        qDebug() << "Serial list changed. Need update.";
         getAvailablePorts();
     }
+}
+
+void ComPortSelectWindow::selectPortButtonPressed()
+{
+    if (serial_list.length()>0)
+        emit ComPortSelected(serial_list[selected_port_comboBox->currentIndex()]);
 }
