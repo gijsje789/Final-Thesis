@@ -39,6 +39,9 @@ private:
     // Have a variable for the serial port.
     QSerialPort *serial_port;
 
+    // Window for the selection of the comport.
+    QWidget *SelectWindow = new QWidget;
+
     void createGuiItems();
     void createAndFillLayouts();
 signals:

@@ -26,7 +26,7 @@ void ComPort::createGuiItems()
 
     // Create the label.
     selectedPort_label->setText("Selected port: ");
-    selectedPort_label->setFixedWidth(100);
+    selectedPort_label->setFixedWidth(150);
 
     createAndFillLayouts();
 }
@@ -45,7 +45,6 @@ void ComPort::createAndFillLayouts()
 // #################### Private slots ####################
 void ComPort::selectComPort()
 {
-    QWidget *SelectWindow = new QWidget;
     SelectWindow->setFixedSize(500, 250);
     ComPortSelectWindow *window = new ComPortSelectWindow(SelectWindow);
     connect(window, SIGNAL(ComPortSelected(QSerialPortInfo)), this, SLOT(setComPort(QSerialPortInfo)));
@@ -55,6 +54,12 @@ void ComPort::selectComPort()
 void ComPort::setComPort(QSerialPortInfo comport)
 {
     serial_port = new QSerialPort(comport, this);
+    selectedPort_label->setText("Selected port: " + serial_port->portName());
+
+    qDebug() << "Comport set: " << serial_port->portName();
+
+    // Delete the dialog window.
+    delete SelectWindow;
 }
 // #################### Public slots ####################
 
@@ -71,6 +76,7 @@ ComPortSelectWindow::ComPortSelectWindow(QWidget *parent)
 
     connect(selected_port_comboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(updatePortInformation(int)));
     connect(timer, SIGNAL(timeout()), this, SLOT(refreshComPortList()));
+    connect(select_port_pushButton, SIGNAL(clicked()), this, SLOT(selectPortButtonPressed()));
     timer->start(500);
 
     getAvailablePorts();
@@ -148,4 +154,6 @@ void ComPortSelectWindow::selectPortButtonPressed()
 {
     if (serial_list.length()>0)
         emit ComPortSelected(serial_list[selected_port_comboBox->currentIndex()]);
+    else
+        portName_label->setText("Port: ERROR NO PORT SELECTED!");
 }
