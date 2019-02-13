@@ -1,7 +1,3 @@
-// mainwindow.cpp - Implementation file for the main window of the app.
-// Date: 2019-02-07
-// Created by: Gijs de Vries
-
 #include "mainwindow.h"
 
 MainWindow::MainWindow(QWidget *parent)
