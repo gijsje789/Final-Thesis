@@ -1,0 +1,69 @@
+%% Use this line for the final version of your report
+%\documentclass[final,UKenglish]{include/RaM/RaM-MScReport}
+
+%% Use this line for the draft versions of your report, it enables rro/notes/line numbers/date in footer
+\documentclass[lineno,UKenglish]{include/RaM/RaM-MScReport}
+
+\settitle{Development of a myocardial perfusion phantom}
+\setauthor{G.J. de Vries, s1854526}
+\input{include/settings}
+
+
+\begin{document}
+% Numbered roman style
+
+\makerro				% Build RichReportOutline.rro file
+
+\frontmatter
+
+\includepdf{./frontpage/frontpage_r0d100.pdf}
+
+% Use \maketitle or the available PDF when it is released (for student reports)
+\maketitle
+
+% Enter the name of the official RaM title page PDF between the brackets
+% ! This method disables the option of using EPS files in your report.
+% ! If EPS images are required, use LaTeX source instead of the PDF file
+% \includepdf{./frontpage/frontpage_r0d1.pdf}
+\cleardoublepage
+
+% \include{Summary}
+% Dutch summary is not obligatory
+%\include{Samenvatting}
+
+\include{Preface}
+%In a two-sided printing style, it makes the next page a right-hand
+% (odd-numbered) page, producing a blank page if necessary.
+\cleardoublepage
+
+% Add the table of contents pages (TOC)
+\tableofcontents
+
+% The report starts here
+\mainmatter
+
+% this contains a showcase of LaTeX
+\include{ch-Introduction}
+
+% add another chapter
+% change file name for better descriptive names, but start with ch-
+\include{ch-ConceptDesign}
+\include{ch-DetailedDesign}
+
+% Appendix starts here
+% change file name for better descriptive names, but start with apx-
+\appendix
+\include{apx-Appendix1}
+
+% Bibliography starts here
+\backmatter
+
+% Generate bibliography
+\fancyhead[LO]{Bibliography}
+\bibliographystyle{apalike}
+%\bibliographystyle{include/files/RaM-bibtex}
+\label{ch:bib} %label to refer to
+\bibliography{bibliography} 
+
+\end{document}
+
