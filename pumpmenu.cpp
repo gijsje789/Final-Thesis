@@ -116,7 +116,11 @@ void PumpMenu::comboBoxSelectionChanged(QString sensor)
 {
     if (prev_item != NO_CHOICE) {
         // The previous item was a sensor, thus now it is deselected it must be re-entered in other menus.
-        emit comboBoxSensorReset(prev_item);
+        qDebug() << "selection" << ignoreSensorReset;
+        if (ignoreSensorReset)
+            ignoreSensorReset = false;
+        else
+            emit comboBoxSensorReset(prev_item);
     }
     if (sensor != NO_CHOICE) {
         emit comboBoxSensorSelected(sensor);
@@ -133,7 +137,14 @@ void PumpMenu::removeSensorFromComboBox(QString sensor)
 {
     int index_to_remove = feedback_comboBox->findText(sensor);
 
+    qDebug() << "remove" << feedback_comboBox->currentText() << sensor;
+    if (feedback_comboBox->currentText() == sensor) {
+        ignoreSensorReset = true;
+        qDebug() << "remove" << ignoreSensorReset;
+    }
+
     if (index_to_remove != -1)
         feedback_comboBox->removeItem(index_to_remove);
+
 }
 

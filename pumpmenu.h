@@ -59,6 +59,8 @@ private:
 
     QString prev_item = NO_CHOICE; /**< The previous selected item by the feedback_comboBox. */
 
+    bool ignoreSensorReset = false;
+
     /**
      * @brief createGuiItems Creates all the widgets for the pump menu.
      */
