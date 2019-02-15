@@ -45,6 +45,7 @@ void ComPort::createAndFillLayouts()
 // #################### Private slots ####################
 void ComPort::selectComPort()
 {
+    SelectWindow = SelectWindow == nullptr ? new QWidget : SelectWindow;
     SelectWindow->setFixedSize(500, 250);
     ComPortSelectWindow *window = new ComPortSelectWindow(SelectWindow);
     connect(window, SIGNAL(ComPortSelected(QSerialPortInfo)), this, SLOT(setComPort(QSerialPortInfo)));
@@ -60,6 +61,7 @@ void ComPort::setComPort(QSerialPortInfo comport)
 
     // Delete the dialog window.
     delete SelectWindow;
+    SelectWindow = nullptr;
 }
 // #################### Public slots ####################
 
