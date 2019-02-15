@@ -36,6 +36,7 @@ public:
      * @param parent The parent of the sensor menu.
      */
     explicit AnalogueSensorMenu(QString sensorNr, QWidget *parent = nullptr);
+   
     /**
      * @brief getMainLayout returns the main layout of the menu. May be obsolete.
      * @return the main layout.

@@ -104,9 +104,6 @@ signals:
      */
     void flowSensorCreated(QString sensor);
 
-    // Signal to emit that is emited to the outside world when
-    // the flow sensor is disabled or set to "Pressure".
-
     /**
      * @brief flowSensorDeleted The signal that is emitted when the digital sensor is specified as being a "Pressure" sensor or when disabled.
      * @param sensor The self-identifier QString sensorName.
