@@ -45,6 +45,8 @@ private:
     // Window for the selection of the comport.
     QWidget *SelectWindow = new QWidget; /**< The widget, used as a window, in which the selection widgets are placed. */
 
+    QTimer *timer = new QTimer(this); /**< A QTimer to call the checkComPortStatus() such that a disconnect of the selected device is detected. */
+
     /**
      * @brief createGuiItems Creates the widgets for the COM-port menu.
      */
@@ -54,6 +56,7 @@ private:
      * @brief createAndFillLayouts
      */
     void createAndFillLayouts();
+
 signals:
 
 private slots:
@@ -67,6 +70,12 @@ private slots:
      * @param comport The QSerialPortInfo of the port selected by the user.
      */
     void setComPort(QSerialPortInfo comport);
+
+    /**
+     * @brief checkComPortStatus The callback function, based on the timeout() of timer, that checks if the COM-port, that is selected by the user, is still an available port.
+     * Only makes sense when the port is not yet opened, QSerialPort emits an error signal if one occurs when port is opened.
+     */
+    void checkComPortStatus();
 public slots:
 };
 

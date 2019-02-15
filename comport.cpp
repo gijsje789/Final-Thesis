@@ -45,7 +45,6 @@ void ComPort::createAndFillLayouts()
 // #################### Private slots ####################
 void ComPort::selectComPort()
 {
-    SelectWindow = SelectWindow == nullptr ? new QWidget : SelectWindow;
     SelectWindow->setFixedSize(500, 250);
     ComPortSelectWindow *window = new ComPortSelectWindow(SelectWindow);
     connect(window, SIGNAL(ComPortSelected(QSerialPortInfo)), this, SLOT(setComPort(QSerialPortInfo)));
@@ -57,11 +56,41 @@ void ComPort::setComPort(QSerialPortInfo comport)
     serial_port = new QSerialPort(comport, this);
     selectedPort_label->setText("Selected port: " + serial_port->portName());
 
-    qDebug() << "Comport set: " << serial_port->portName();
+    qDebug() << "COM-port set: " << serial_port->portName();
+
+    connect(timer, SIGNAL(timeout()), this, SLOT(checkComPortStatus()));
+    timer->start(1000);
+    qDebug() << "COM-port will be periodically checked.";
 
     // Delete the dialog window.
     delete SelectWindow;
-    SelectWindow = nullptr;
+    SelectWindow = new QWidget;
+}
+
+void ComPort::checkComPortStatus()
+{
+    QSerialPortInfo *info = new QSerialPortInfo;
+    QList<QSerialPortInfo> list = info->availablePorts();
+    bool port_still_available = false;
+
+    for (QSerialPortInfo &port : list) {
+        if (port.portName() == serial_port->portName())
+            port_still_available = true;
+    }
+
+    if (!port_still_available) {
+        qDebug() << "Selected COM-port," << serial_port->portName() << ", no longer available!";
+
+        delete serial_port;
+        serial_port = nullptr;
+        qDebug() << "COM-port is deleted.";
+
+        delete timer;
+        timer = new QTimer(this);
+        qDebug() << "COM-port timer is deleted.";
+
+        selectedPort_label->setText("Error: disconnected");
+    }
 }
 // #################### Public slots ####################
 
@@ -120,8 +149,8 @@ void ComPortSelectWindow::getAvailablePorts()
     serial_list = info->availablePorts();
 
     selected_port_comboBox->clear();
-    for(int i = 0; i < serial_list.length(); i++){
-        selected_port_comboBox->addItem(serial_list[i].portName());
+    for(QSerialPortInfo &item :  serial_list){
+        selected_port_comboBox->addItem(item.portName());
     }
 
     emit updatePortInformation(selected_port_comboBox->currentIndex());
