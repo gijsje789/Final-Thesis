@@ -40,7 +40,7 @@ private:
     QPushButton *selectPort_pushButton = new QPushButton; /**< The QPushButton that the user can press to activate the selection window. */
     QLabel *selectedPort_label = new QLabel; /**< The label showing the actual COM-port that is selected. */
     // Have a variable for the serial port.
-    QSerialPort *serial_port; /**< The actual QSerialPort of the COM-port the user has selected. */
+    QSerialPort *serial_port = nullptr; /**< The actual QSerialPort of the COM-port the user has selected. */
 
     // Window for the selection of the comport.
     QWidget *SelectWindow = new QWidget; /**< The widget, used as a window, in which the selection widgets are placed. */
