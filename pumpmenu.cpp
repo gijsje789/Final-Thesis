@@ -13,6 +13,7 @@ PumpMenu::PumpMenu(QWidget *parent) : QWidget(parent)
     createAndFillLayouts();
 
     connect(enable_checkBox, SIGNAL(toggled(bool)), this, SLOT(enableCheckboxToggled(bool)));
+    connect(feedback_comboBox, SIGNAL(currentIndexChanged(QString)), this, SLOT(comboBoxSelectionChanged(QString)));
 }
 
 // #################### Public functions ####################
@@ -35,7 +36,7 @@ void PumpMenu::createGuiItems()
 
     // Create feedback fields.
     feedback_label->setText("Feedback sensor:");
-    feedback_comboBox->addItem("Pick");
+    feedback_comboBox->addItem(NO_CHOICE);
 
     // Create push button.
     update_pushButton->setText("Update pump rate");
@@ -110,6 +111,18 @@ void PumpMenu::enableCheckboxToggled(bool state)
     else
         disableFields();
 }
+
+void PumpMenu::comboBoxSelectionChanged(QString sensor)
+{
+    if (prev_item != NO_CHOICE) {
+        // The previous item was a sensor, thus now it is deselected it must be re-entered in other menus.
+        // emit signal to add to other boxes.
+    }
+    if (sensor != NO_CHOICE) {
+        emit comboBoxSensorSelected(sensor);
+    }
+    prev_item = sensor;
+}
 // #################### Public slots ####################
 void PumpMenu::addSensorToComboBox(QString sensor)
 {
@@ -123,3 +136,4 @@ void PumpMenu::removeSensorFromComboBox(QString sensor)
     if (index_to_remove != -1)
         feedback_comboBox->removeItem(index_to_remove);
 }
+

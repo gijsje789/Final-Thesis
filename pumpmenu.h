@@ -18,6 +18,8 @@
 #include <QDebug>
 #include <QString>
 
+#define NO_CHOICE "Pick"
+
 /**
  * @brief The PumpMenu class handles the appearance and functionality of the pump menus.
  * The user can enter the flow rate and the feedback sensor.
@@ -55,6 +57,8 @@ private:
 
     QSpacerItem *empty_row = new QSpacerItem(10, 11, QSizePolicy::Fixed); /**< Empty item to organise the entire menu. */
 
+    QString prev_item = NO_CHOICE; /**< The previous selected item by the feedback_comboBox. */
+
     /**
      * @brief createGuiItems Creates all the widgets for the pump menu.
      */
@@ -75,12 +79,23 @@ private:
      */
     void enableFields();
 signals:
+    /**
+     * @brief comboBoxCurrentIndexChanged When the feedback_comboBox changes sensor, this signal is emitted to the outside world.
+     * @param sensor
+     */
+    void comboBoxSensorSelected(QString sensor);
 private slots:
     /**
      * @brief enableCheckboxToggled The callback function when the enable_checkBox is toggled.
      * @param state
      */
     void enableCheckboxToggled(bool state);
+
+    /**
+     * @brief comboBoxSelectionChanged The callback function when the feedback_comboBox changes selection.
+     * @param sensor The newly selected sensor.
+     */
+    void comboBoxSelectionChanged(QString sensor);
 public slots:
     /**
      * @brief addSensorToComboBox The callback function when a flow sensor is defined and it must be added to the feedback_comboBox.

@@ -60,4 +60,12 @@ void MainWindow::connectWidgets()
             connect(menu, SIGNAL(flowSensorDeleted(QString)), pump, SLOT(removeSensorFromComboBox(QString)));
         }
     }
+
+    for (PumpMenu *send : pMenu) {
+        for (PumpMenu *rec : pMenu) {
+            if (send != rec) {
+                connect(send, SIGNAL(comboBoxSensorSelected(QString)), rec, SLOT(removeSensorFromComboBox(QString)));
+            }
+        }
+    }
 }
