@@ -35,6 +35,7 @@ void PumpMenu::createGuiItems()
 
     // Create feedback fields.
     feedback_label->setText("Feedback sensor:");
+    feedback_comboBox->addItem("Pick");
 
     // Create push button.
     update_pushButton->setText("Update pump rate");
