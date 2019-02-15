@@ -1,6 +1,45 @@
 \chapter{Concept design}
-The concept designs are based on the mind map, shown in appendix \ref{app:mind_map}.
+This chapter defines the global restraints on the concepts and presents an overview of the different concepts.
 
+\section{Global restraints}
+This section describes the global restraints on the concepts, as stated in the system requirements. 
+\subsection{Myocardium}
+\label{sec:myocardium}
+To ensure compatibility to the clinical software, \textit{4DM}, the myocardium's cross-sectional shapes must be physiological; i.e. the \ac{HLA} and \ac{VLA} have the shape of a horseshoe and the \ac{SA} has the shape of a circle. 4DM requires these shapes to determine the contours and consequently determine the myocardial flow.
+\subsection{Modality}
+\label{sec:modality}
+The main research question is based around the, relatively new in the Netherlands, D-SPECT's dynamic scanning. Therefore, the modality is bounded to the D-SPECT. As mentioned in section \ref{sec:concept_oper}, the D-SPECT is a suitable choice for myocardial perfusion imaging but still requires validation, which is the goal of the PhD research of which this project is part of.
+\subsection{Flow Type}
+Based on background information on the 4DM software, a decision has been made to use a non-pulsatile flow. The D-SPECT uses gated measurements such that images are extracted at the same point in time of the cardiac cycle. Furthermore, initial experiments with the D-SPECT, with non-pulsatile flow, have been performed on February 5, 2019. The prototype set-up from the individual project, with a dialysis tube, was placed in the D-SPECT and the TAC was extracted. This curve showed proper similarity to TACs extracted from patients.
+\section{Concept overview}
+Each concept is based on the mind map shown in appendix \ref{app:mind_map}. The following sections describe each aspect of the five main categories, respectively:
+\begin{itemize}[noitemsep]
+	\item Myocardium,
+	\item Modality,
+	\item Design,
+	\item Tracer, and
+	\item Flow.
+\end{itemize}
+\subsection{Myocardium}
+The myocardium has two subcategories, the shape and the model. As described in section 
+\subsection*{Shape}
+As described in section \ref{sec:myocardium}, the shape of the myocardium is especially important for the 4DM software since it looks for the contours of the left ventricle's walls. Therefore, the shape of the myocardium is fixed (as per system requirements):
+\begin{itemize}[noitemsep]
+	\item \ac{VLA}: Horseshoe.
+	\item \ac{HLA}: Horseshoe.
+	\item \ac{SA}: circle.
+\end{itemize}
+\subsection*{Model}
+\rrot{this section, depending on 4dm}.
+\subsection{Modality}
+As described in section \ref{sec:modality}, the modality is fixed (as per system requirements) to the D-SPECT's dynamic scanning.
+\subsection{Design}
+
+
+\section{Concepts}
+\subsection{Concept 1}
+\subsection{Concept 2}
+\subsection{Summary}
 \begin{table}[H]
 \caption{Concept overview}
 \begin{tabular}{l|llll}
@@ -18,10 +57,3 @@ The concept designs are based on the mind map, shown in appendix \ref{app:mind_m
 \multirow{-6}{*}{\textbf{Flow}}                            & Perfusate                     &                               &                          & \multicolumn{1}{l|}{}                         \\ \cline{2-5} 
 \end{tabular}
 \end{table}
-
-\section{Global restraints}
-This section describes the global restraints on the concepts, as stated in the system requirements.
-\subsection{Myocardium}
-To ensure compatibility to the clinical software, 4DM, the myocardium's cross-sectional shapes must be physiological; i.e. the 
-\subsection{Modality}
-\subsection{Disposal}
