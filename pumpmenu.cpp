@@ -116,7 +116,7 @@ void PumpMenu::comboBoxSelectionChanged(QString sensor)
 {
     if (prev_item != NO_CHOICE) {
         // The previous item was a sensor, thus now it is deselected it must be re-entered in other menus.
-        // emit signal to add to other boxes.
+        emit comboBoxSensorReset(prev_item);
     }
     if (sensor != NO_CHOICE) {
         emit comboBoxSensorSelected(sensor);

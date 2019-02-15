@@ -65,6 +65,7 @@ void MainWindow::connectWidgets()
         for (PumpMenu *rec : pMenu) {
             if (send != rec) {
                 connect(send, SIGNAL(comboBoxSensorSelected(QString)), rec, SLOT(removeSensorFromComboBox(QString)));
+                connect(send, SIGNAL(comboBoxSensorReset(QString)), rec, SLOT(addSensorToComboBox(QString)));
             }
         }
     }

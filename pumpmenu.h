@@ -81,9 +81,15 @@ private:
 signals:
     /**
      * @brief comboBoxCurrentIndexChanged When the feedback_comboBox changes sensor, this signal is emitted to the outside world.
-     * @param sensor
+     * @param sensor The currently selected sensor.
      */
     void comboBoxSensorSelected(QString sensor);
+
+    /**
+     * @brief comboBoxSensorReset When the feedback_comboBox changes sensor, this signal is emitted when the previous selection is a valid sensor.
+     * @param sensor The previously selected sensor.
+     */
+    void comboBoxSensorReset(QString sensor);
 private slots:
     /**
      * @brief enableCheckboxToggled The callback function when the enable_checkBox is toggled.
