@@ -49,6 +49,12 @@ signals:
      * @brief startRecording This signal is emitted when the user preses the record_pushButton.
      */
     void startRecording();
+
+    /**
+     * @brief recordData This signal is emitted when the class wants to record a message.
+     * @param data The data that needs to be written to the outputFile.
+     */
+    void recordData(QString data);
 public slots:
     /**
      * @brief recordingReady The callback function to be called when the FileOperations class successfully readied the output file.
@@ -65,6 +71,11 @@ private slots:
      * @brief recordButtonPressed The callback function when the record_pushButton is pressed.
      */
     void recordButtonPressed();
+
+    /**
+     * @brief initButtonPressed The callback function when the init_pushButton is pressed.
+     */
+    void initButtonPressed();
 };
 
 #endif // MAINCONTROLS_H

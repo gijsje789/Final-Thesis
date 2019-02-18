@@ -76,4 +76,5 @@ void MainWindow::connectWidgets()
     connect(mainControl_menu, SIGNAL(startRecording()), file_menu, SLOT(startRecording()));
     connect(file_menu, SIGNAL(readyToRecord()), mainControl_menu, SLOT(recordingReady()));
     connect(file_menu, SIGNAL(fileFailure(QString)), mainControl_menu, SLOT(recordingFail(QString)));
+    connect(mainControl_menu, SIGNAL(recordData(QString)), file_menu, SLOT(writeToOutputFile(QString)));
 }

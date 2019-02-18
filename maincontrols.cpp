@@ -6,6 +6,7 @@ MainControls::MainControls(QWidget *parent) : QWidget(parent)
     createAndFillLayouts();
 
     connect(record_pushButton, SIGNAL(pressed()), this, SLOT(recordButtonPressed()));
+    connect(init_pushButton, SIGNAL(pressed()), this, SLOT(initButtonPressed()));
 }
 
 // ################### Private methods ######################
@@ -17,6 +18,7 @@ void MainControls::createGuiItems()
 
     record_pushButton->setText("Record experiment");
     record_label->setText("Not recording");
+    record_label->setFixedWidth(100);
 }
 
 void MainControls::createAndFillLayouts()
@@ -51,4 +53,9 @@ void MainControls::recordingFail(QString message)
 void MainControls::recordButtonPressed()
 {
     emit startRecording();
+}
+
+void MainControls::initButtonPressed()
+{
+    emit recordData("This is a test message");
 }

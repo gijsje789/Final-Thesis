@@ -70,13 +70,31 @@ void FileOperation::startRecording()
     if (outputFile->isWritable() && outputFile->isOpen())
         emit readyToRecord();
     else if (outputFile == nullptr)
-        emit fileFailure("No file.");
+        emit fileFailure("FERR-004");
     else if (!outputFile->isOpen())
-        emit fileFailure("File not open.");
+        emit fileFailure("FERR-005");
     else if (!outputFile->isWritable())
-        emit fileFailure("File not writeable.");
+        emit fileFailure("FERR-006");
     else
-        emit fileFailure("Unknown error.");
+        emit fileFailure("FERR-999");
+}
+
+void FileOperation::writeToOutputFile(QString data)
+{
+    QByteArray byteArray = data.toLocal8Bit();
+    if (outputFile != nullptr) {
+        if (outputFile->isOpen()) {
+            if (outputFile->isWritable()) {
+                outputFile->write(byteArray);
+            } else {
+                emit fileFailure("FERR-003");
+            }
+        } else {
+            emit fileFailure("FERR-002");
+        }
+    } else {
+        emit fileFailure("FERR-001");
+    }
 }
 // #################### Private slots ####################
 void FileOperation::renameLastFile()
@@ -104,4 +122,3 @@ void FileOperation::closeOutputFile()
         }
     }
 }
-// #################### Public slots ####################

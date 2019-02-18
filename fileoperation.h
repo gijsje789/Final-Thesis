@@ -13,6 +13,7 @@
 
 #include <QFile>
 #include <QString>
+#include <QByteArray>
 
 #include <QtDebug>
 
@@ -82,6 +83,12 @@ public slots:
      * @brief startRecording The callback function that checks the starting conditions and initialises recording.
      */
     void startRecording();
+
+    /**
+     * @brief writeToOutputFile The callback function that writes data to the output file.
+     * @param data The data that must be written to the outputFile.
+     */
+    void writeToOutputFile(QString data);
 private slots:
     /**
      * @brief renameLastFile The callback function to rename the last file.
