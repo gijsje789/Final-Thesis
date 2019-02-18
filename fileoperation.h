@@ -56,14 +56,33 @@ private:
      */
     void createAndFillLayouts();
 
-signals:
-
-private slots:
     /**
-     * @brief createNewOutputFile The callback function to create a new output file.
+     * @brief createNewOutputFile The function to create a new output file.
      */
     void createNewOutputFile();
 
+    /**
+     * @brief openOutputFile The function to open the output file. This function also emits the signal readyToRecord().
+     */
+    void openOutputFile();
+
+signals:
+    /**
+     * @brief readyToRecord The emition of this signal indicates that the output file has been made and it can receive data.
+     */
+    void readyToRecord();
+
+    /**
+     * @brief fileFailure The emition of this signal indicates that an error occured while trying to perform file operations.
+     * @param message The failure message.
+     */
+    void fileFailure(QString message);
+public slots:
+    /**
+     * @brief startRecording The callback function that checks the starting conditions and initialises recording.
+     */
+    void startRecording();
+private slots:
     /**
      * @brief renameLastFile The callback function to rename the last file.
      */

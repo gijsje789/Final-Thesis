@@ -32,7 +32,8 @@ SOURCES += \
     digitalsensormenu.cpp \
     pumpmenu.cpp \
     comport.cpp \
-    fileoperation.cpp
+    fileoperation.cpp \
+    maincontrols.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -40,7 +41,8 @@ HEADERS += \
     digitalsensormenu.h \
     pumpmenu.h \
     comport.h \
-    fileoperation.h
+    fileoperation.h \
+    maincontrols.h
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

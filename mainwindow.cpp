@@ -33,6 +33,9 @@ MainWindow::MainWindow(QWidget *parent)
     comport_widget->setGeometry(WIDGET_SPACE, 2*WIDGET_SPACE+SMENU_H, (WINDOW_W-4*WIDGET_SPACE)/3, COM_H);
 
     file_widget->setGeometry(WIDGET_SPACE, 3*WIDGET_SPACE+SMENU_H+COM_H, (WINDOW_W-4*WIDGET_SPACE)/3, COM_H);
+
+    mainControl_widget->setGeometry(WIDGET_SPACE, 4*WIDGET_SPACE+SMENU_H+2*COM_H, (WINDOW_W-4*WIDGET_SPACE)/3, 2*COM_H);
+
     connectWidgets();
 }
 
@@ -69,4 +72,8 @@ void MainWindow::connectWidgets()
             }
         }
     }
+
+    connect(mainControl_menu, SIGNAL(startRecording()), file_menu, SLOT(startRecording()));
+    connect(file_menu, SIGNAL(readyToRecord()), mainControl_menu, SLOT(recordingReady()));
+    connect(file_menu, SIGNAL(fileFailure(QString)), mainControl_menu, SLOT(recordingFail(QString)));
 }

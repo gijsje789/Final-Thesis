@@ -16,6 +16,7 @@
 #include "pumpmenu.h"
 #include "comport.h"
 #include "fileoperation.h"
+#include "maincontrols.h"
 
 /**
  * @brief The MainWindow class
@@ -51,6 +52,9 @@ private:
 
     QWidget *file_widget = new QWidget(centralWidget); /**< The file widget where the fields necessary to define the output file are placed. */
     FileOperation *file_menu = new FileOperation(file_widget); /**< The actual class object that creates the fields and handles all the functionality necessary to select and use the output file. */
+
+    QWidget *mainControl_widget = new QWidget(centralWidget);
+    MainControls *mainControl_menu = new MainControls(mainControl_widget);
 
     // Create the widgets that populate the tab widgets.
     QWidget *an1_widget = new QWidget; /**< The widget that will parent the analogue sensor 1 menu. */

@@ -46,13 +46,38 @@ void FileOperation::createNewOutputFile()
             + datetime->currentDateTime().toString("yyyyMMdd_hhmmss_")
             + fileName_lineEdit->text() + ".csv";
     outputFile = new QFile(tempString);
-    if(outputFile->open(QIODevice::WriteOnly)) {
-        qDebug() << "File successfully opened.";
-        lastFile = outputFile->fileName();
-    }
 }
 
-// #################### Signals ####################
+void FileOperation::openOutputFile()
+{
+    if (outputFile != nullptr) {
+        if(outputFile->open(QIODevice::WriteOnly)) {
+            qDebug() << outputFile->fileName() << "successfully opened.";
+            lastFile = outputFile->fileName();
+        }
+    }
+}
+// #################### Signals ##########################
+// #################### Public slots #####################
+void FileOperation::startRecording()
+{
+    if (outputFile == nullptr)
+        createNewOutputFile();
+
+    if (!outputFile->isOpen())
+        openOutputFile();
+
+    if (outputFile->isWritable() && outputFile->isOpen())
+        emit readyToRecord();
+    else if (outputFile == nullptr)
+        emit fileFailure("No file.");
+    else if (!outputFile->isOpen())
+        emit fileFailure("File not open.");
+    else if (!outputFile->isWritable())
+        emit fileFailure("File not writeable.");
+    else
+        emit fileFailure("Unknown error.");
+}
 // #################### Private slots ####################
 void FileOperation::renameLastFile()
 {
