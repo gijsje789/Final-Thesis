@@ -41,6 +41,20 @@ void ComPort::createAndFillLayouts()
     this->setLayout(hboxLayout);
 }
 
+void ComPort::deleteComPort()
+{
+    delete serial_port;
+    serial_port = nullptr;
+    qDebug() << "COM-port is deleted.";
+}
+
+void ComPort::deleteTimer()
+{
+    delete timer;
+    timer = new QTimer(this);
+    qDebug() << "COM-port timer is deleted.";
+}
+
 // #################### Signals ####################
 // #################### Public slots ###############
 void ComPort::initialiseComPort()
@@ -81,7 +95,7 @@ void ComPort::setComPort(QSerialPortInfo comport)
     qDebug() << "COM-port set: " << serial_port->portName();
 
     connect(timer, SIGNAL(timeout()), this, SLOT(checkComPortStatus()));
-    timer->start(1000);
+    timer->start(500);
     qDebug() << "COM-port will be periodically checked.";
 
     // Delete the dialog window.
@@ -103,13 +117,8 @@ void ComPort::checkComPortStatus()
     if (!port_still_available) {
         qDebug() << "Selected COM-port," << serial_port->portName() << ", no longer available!";
 
-        delete serial_port;
-        serial_port = nullptr;
-        qDebug() << "COM-port is deleted.";
-
-        delete timer;
-        timer = new QTimer(this);
-        qDebug() << "COM-port timer is deleted.";
+        deleteComPort();
+        deleteTimer();
 
         selectedPort_label->setText("Error: disconnected");
     }
@@ -123,6 +132,12 @@ void ComPort::checkInputBuffer()
 void ComPort::serialErrorOccurred(QSerialPort::SerialPortError error)
 {
     qDebug() << "Error occured in COM-port: " << error;
+    emit comPortFailure("CPERR-004");
+
+    deleteComPort();
+    deleteTimer();
+
+    selectedPort_label->setText("Error: disconnected");
 }
 // #################### Public slots ####################
 

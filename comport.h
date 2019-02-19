@@ -60,6 +60,16 @@ private:
      */
     void createAndFillLayouts();
 
+    /**
+     * @brief deleteComPort Deletes the COM-port.
+     */
+    void deleteComPort();
+
+    /**
+     * @brief deleteTimer Deletes the timer that periodically checks the COM-port.
+     */
+    void deleteTimer();
+
 signals:
     /**
      * @brief comPortFailure This signal is emitted when a problem occured concerning the COM-port.
