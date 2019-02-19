@@ -127,7 +127,13 @@ void ComPort::checkComPortStatus()
 
 void ComPort::checkInputBuffer()
 {
-    qDebug() << "Checking input buffer: " << serial_port->bytesAvailable();
+    if (serial_port->bytesAvailable() > 0) {
+        qDebug() << serial_port->bytesAvailable();
+        QString *data = new QString(serial_port->readAll());
+        qDebug() << serial_port->bytesAvailable();
+        emit recordData(*data);
+    }
+    //qDebug() << "Checking input buffer: " << serial_port->bytesAvailable();
 }
 
 void ComPort::serialErrorOccurred(QSerialPort::SerialPortError error)

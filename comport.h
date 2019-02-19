@@ -81,6 +81,8 @@ signals:
      * @brief comPortSuccessfulOpen This signal is emitted when the COM-port is successfully opened.
      */
     void comPortSuccess(QString message);
+
+    void recordData(QString data);
 public slots:
     /**
      * @brief initialiseComPort The callback function that initialises the ComPort.

@@ -81,4 +81,5 @@ void MainWindow::connectWidgets()
     connect(mainControl_menu, SIGNAL(initSetup()), comport_menu, SLOT(initialiseComPort()));
     connect(comport_menu, SIGNAL(comPortFailure(QString)), mainControl_menu, SLOT(comPortFail(QString)));
     connect(comport_menu, SIGNAL(comPortSuccess(QString)), mainControl_menu, SLOT(comPortSuccess(QString)));
+    connect(comport_menu, SIGNAL(recordData(QString)), file_menu, SLOT(writeToOutputFile(QString)));
 }
