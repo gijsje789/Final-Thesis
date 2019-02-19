@@ -1,6 +1,9 @@
 #ifndef COMPORT_H
 #define COMPORT_H
 
+#define BAUDRATE 9600 // bits per second
+#define POLL_INPUT_TIME 100 // msec
+
 #include <QSizePolicy>
 
 #include <QWidget>
@@ -45,7 +48,7 @@ private:
     // Window for the selection of the comport.
     QWidget *SelectWindow = new QWidget; /**< The widget, used as a window, in which the selection widgets are placed. */
 
-    QTimer *timer = new QTimer(this); /**< A QTimer to call the checkComPortStatus() such that a disconnect of the selected device is detected. */
+    QTimer *timer = new QTimer(this); /**< A QTimer to call the checkComPortStatus() such that a disconnect of the selected device is detected. When ComPort is opened, the ... is called to periodically check the input buffer.*/
 
     /**
      * @brief createGuiItems Creates the widgets for the COM-port menu.
@@ -58,6 +61,16 @@ private:
     void createAndFillLayouts();
 
 signals:
+    /**
+     * @brief comPortFailure This signal is emitted when a problem occured concerning the COM-port.
+     * @param message The error message.
+     */
+    void comPortFailure(QString message);
+public slots:
+    /**
+     * @brief initialiseComPort The callback function that initialises the ComPort.
+     */
+    void initialiseComPort();
 
 private slots:
     /**
@@ -72,11 +85,21 @@ private slots:
     void setComPort(QSerialPortInfo comport);
 
     /**
-     * @brief checkComPortStatus The callback function, based on the timeout() of timer, that checks if the COM-port, that is selected by the user, is still an available port.
+     * @brief checkComPortStatus The callback function, based on the timeout() of timer (when COM-port is closed), that checks if the COM-port, that is selected by the user, is still an available port.
      * Only makes sense when the port is not yet opened, QSerialPort emits an error signal if one occurs when port is opened.
      */
     void checkComPortStatus();
-public slots:
+
+    /**
+     * @brief checkInputBuffer The callback function, based on the timeout() of timer (when COM-port is opened), that checks if the input buffer is sufficiently filled such that data can be read.
+     */
+    void checkInputBuffer();
+
+    /**
+     * @brief serialErrorOccured When the COM-port is opened, QSerialPort emits a signal that can be used to stop the port.
+     * @param error The error that has occured.
+     */
+    void serialErrorOccurred(QSerialPort::SerialPortError error);
 };
 
 // #############################################################
@@ -129,6 +152,9 @@ signals:
      * @param comport The QSerialPortInfo object of the COM-port the user has selected.
      */
     void ComPortSelected(QSerialPortInfo comport);
+
+public slots:
+
 private slots:
     /**
      * @brief updatePortInformation The callback function to update the portName_label, manuName_label, and descript_label.

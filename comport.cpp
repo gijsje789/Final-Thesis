@@ -42,6 +42,28 @@ void ComPort::createAndFillLayouts()
 }
 
 // #################### Signals ####################
+// #################### Public slots ###############
+void ComPort::initialiseComPort()
+{
+    if (serial_port != nullptr) {
+        if (serial_port->open(QIODevice::ReadWrite)) {
+            if (serial_port->setBaudRate(BAUDRATE)) {
+                timer->stop();
+                delete timer;
+                timer = new QTimer(this);
+                timer->start(POLL_INPUT_TIME);
+                connect(timer, SIGNAL(timeout()), this, SLOT(checkInputBuffer()));
+                connect(serial_port, SIGNAL(errorOccurred(QSerialPort::SerialPortError)), this, SLOT(serialErrorOccurred(QSerialPort::SerialPortError)));
+            } else {
+                emit comPortFailure("CPERR-003");
+            }
+        } else {
+            emit comPortFailure("CPERR-002");
+        }
+    } else {
+        emit comPortFailure("CPERR-001");
+    }
+}
 // #################### Private slots ####################
 void ComPort::selectComPort()
 {
@@ -91,6 +113,16 @@ void ComPort::checkComPortStatus()
 
         selectedPort_label->setText("Error: disconnected");
     }
+}
+
+void ComPort::checkInputBuffer()
+{
+    qDebug() << "Checking input buffer: " << serial_port->bytesAvailable();
+}
+
+void ComPort::serialErrorOccurred(QSerialPort::SerialPortError error)
+{
+    qDebug() << "Error occured in COM-port: " << error;
 }
 // #################### Public slots ####################
 
@@ -155,7 +187,8 @@ void ComPortSelectWindow::getAvailablePorts()
 
     emit updatePortInformation(selected_port_comboBox->currentIndex());
 }
-// #################### Signals ####################
+// #################### Signals ##########################
+// #################### Public slots #####################
 // #################### Private slots ####################
 void ComPortSelectWindow::updatePortInformation(int index)
 {

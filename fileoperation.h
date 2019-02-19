@@ -72,6 +72,11 @@ private:
      * @param newDateTime When set to false, the function is forced to use the dateTime from lastFile. When ommited or set to true, complete new file name is created.
      */
     QString createFileName(bool newDateTime = true);
+
+    /**
+     * @brief closeOutputFile The callback function to close the output file.
+     */
+    void closeOutputFile();
 signals:
     /**
      * @brief readyToRecord The emition of this signal indicates that the output file has been made and it can receive data.
@@ -99,11 +104,6 @@ private slots:
      * @brief renameLastFile The callback function to rename the last file.
      */
     void renameLastFile();
-
-    /**
-     * @brief closeOutputFile The callback function to close the output file.
-     */
-    void closeOutputFile();
 
 };
 

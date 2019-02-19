@@ -5,8 +5,8 @@ MainControls::MainControls(QWidget *parent) : QWidget(parent)
     createGuiItems();
     createAndFillLayouts();
 
-    connect(record_pushButton, SIGNAL(pressed()), this, SLOT(recordButtonPressed()));
-    connect(init_pushButton, SIGNAL(pressed()), this, SLOT(initButtonPressed()));
+    connect(record_pushButton, SIGNAL(clicked()), this, SLOT(recordButtonPressed()));
+    connect(init_pushButton, SIGNAL(clicked()), this, SLOT(initButtonPressed()));
 }
 
 // ################### Private methods ######################
@@ -49,6 +49,11 @@ void MainControls::recordingFail(QString message)
 {
     record_label->setText("Error: " + message);
 }
+
+void MainControls::comPortFail(QString message)
+{
+    init_label->setText("Error: " + message);
+}
 // #################### Private slots ###################
 void MainControls::recordButtonPressed()
 {
@@ -57,5 +62,5 @@ void MainControls::recordButtonPressed()
 
 void MainControls::initButtonPressed()
 {
-    emit recordData("This is a test message");
+    emit initSetup();
 }

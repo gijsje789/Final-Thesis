@@ -68,6 +68,17 @@ QString FileOperation::createFileName(bool newDateTime)
                 + fileName_lineEdit->text() + ".csv";
     }
 }
+
+void FileOperation::closeOutputFile()
+{
+    if (outputFile != nullptr) {
+        if (outputFile->isOpen()) {
+            qDebug() << "Closing file.";
+            outputFile->close();
+        }
+        outputFile = nullptr;
+    }
+}
 // #################### Signals ##########################
 // #################### Public slots #####################
 void FileOperation::startRecording()
@@ -128,16 +139,5 @@ void FileOperation::renameLastFile()
         }
     } else {
         emit fileFailure("FERR-007");
-    }
-}
-
-void FileOperation::closeOutputFile()
-{
-    if (outputFile != nullptr) {
-        if (outputFile->isOpen()) {
-            qDebug() << "Closing file.";
-            outputFile->close();
-        }
-        outputFile = nullptr;
     }
 }

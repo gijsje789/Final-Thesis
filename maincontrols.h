@@ -51,10 +51,15 @@ signals:
     void startRecording();
 
     /**
-     * @brief recordData This signal is emitted when the class wants to record a message.
+     * @brief recordData This signal is emitted when the user wants to record a message.
      * @param data The data that needs to be written to the outputFile.
      */
     void recordData(QString data);
+
+    /**
+     * @brief initSetup This signal is emitted when the user wants the initialise the set-up.
+     */
+    void initSetup();
 public slots:
     /**
      * @brief recordingReady The callback function to be called when the FileOperations class successfully readied the output file.
@@ -62,10 +67,16 @@ public slots:
     void recordingReady();
 
     /**
-     * @brief recordingFail The callback function to be called when the FileOperations class could not ready the output file.
-     * @param message
+     * @brief recordingFail The callback function to be called when the FileOperations class emits an error signal.
+     * @param message The error message.
      */
     void recordingFail(QString message);
+
+    /**
+     * @brief comPortFail The callback function to be called when the ComPort class emits an error signal.
+     * @param message The error message.
+     */
+    void comPortFail(QString message);
 private slots:
     /**
      * @brief recordButtonPressed The callback function when the record_pushButton is pressed.
