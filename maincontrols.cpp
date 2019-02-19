@@ -54,6 +54,11 @@ void MainControls::comPortFail(QString message)
 {
     init_label->setText("Error: " + message);
 }
+
+void MainControls::comPortSuccess(QString message)
+{
+    init_label->setText("Status: " + message);
+}
 // #################### Private slots ###################
 void MainControls::recordButtonPressed()
 {

@@ -76,6 +76,11 @@ signals:
      * @param message The error message.
      */
     void comPortFailure(QString message);
+
+    /**
+     * @brief comPortSuccessfulOpen This signal is emitted when the COM-port is successfully opened.
+     */
+    void comPortSuccess(QString message);
 public slots:
     /**
      * @brief initialiseComPort The callback function that initialises the ComPort.

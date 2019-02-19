@@ -77,6 +77,11 @@ public slots:
      * @param message The error message.
      */
     void comPortFail(QString message);
+
+    /**
+     * @brief comPortSucessfulOpen The callback function to be called when the COM-port is successfully opened.
+     */
+    void comPortSuccess(QString message);
 private slots:
     /**
      * @brief recordButtonPressed The callback function when the record_pushButton is pressed.

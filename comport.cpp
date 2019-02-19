@@ -68,6 +68,7 @@ void ComPort::initialiseComPort()
                 timer->start(POLL_INPUT_TIME);
                 connect(timer, SIGNAL(timeout()), this, SLOT(checkInputBuffer()));
                 connect(serial_port, SIGNAL(errorOccurred(QSerialPort::SerialPortError)), this, SLOT(serialErrorOccurred(QSerialPort::SerialPortError)));
+                comPortSuccess("Connected");
             } else {
                 emit comPortFailure("CPERR-003");
             }
