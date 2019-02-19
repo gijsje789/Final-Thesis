@@ -9,6 +9,8 @@
 #include <QHBoxLayout>
 #include <QVBoxLayout>
 
+#include <QSizePolicy>
+
 /**
  * @brief The MainControls class is responsible for the appearance and functionality of the main controls.
  * The main controls are the buttons to initialise the system and to begin the recording of the variables.

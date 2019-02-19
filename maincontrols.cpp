@@ -12,6 +12,7 @@ MainControls::MainControls(QWidget *parent) : QWidget(parent)
 // ################### Private methods ######################
 void MainControls::createGuiItems()
 {
+
     // Create the widgets.
     init_pushButton->setText("Initialise set-up");
     init_label->setText("Status: idle");
@@ -19,6 +20,12 @@ void MainControls::createGuiItems()
     record_pushButton->setText("Record experiment");
     record_label->setText("Not recording");
     record_label->setFixedWidth(100);
+
+    record_pushButton->setEnabled(false);
+    QSizePolicy sp_retain = record_label->sizePolicy();
+    sp_retain.setRetainSizeWhenHidden(true);
+    record_label->setSizePolicy(sp_retain);
+    record_label->setVisible(false);
 }
 
 void MainControls::createAndFillLayouts()
@@ -63,9 +70,11 @@ void MainControls::comPortSuccess(QString message)
 void MainControls::recordButtonPressed()
 {
     emit startRecording();
+    record_label->setVisible(true);
 }
 
 void MainControls::initButtonPressed()
 {
     emit initSetup();
+    record_pushButton->setEnabled(true);
 }

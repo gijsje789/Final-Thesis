@@ -35,7 +35,6 @@ MainWindow::MainWindow(QWidget *parent)
     file_widget->setGeometry(WIDGET_SPACE, 3*WIDGET_SPACE+SMENU_H+COM_H, (WINDOW_W-4*WIDGET_SPACE)/3, COM_H);
 
     mainControl_widget->setGeometry(WIDGET_SPACE, 4*WIDGET_SPACE+SMENU_H+2*COM_H, (WINDOW_W-4*WIDGET_SPACE)/3, 2*COM_H);
-
     connectWidgets();
 }
 
