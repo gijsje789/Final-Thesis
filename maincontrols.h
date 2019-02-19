@@ -30,13 +30,14 @@ private:
     // Create the layouts.
     QHBoxLayout *init_hbox = new QHBoxLayout; /**< The QHBoxLayout to hold the initialise set-up QPushButton and QLabel. */
     QHBoxLayout *record_hbox = new QHBoxLayout; /**< The QHBoxLayout to hold the recording QPushButton and QLabel. */
-    QVBoxLayout *main_vbox = new QVBoxLayout; /**< The main QVBoxLayout to hold the other layouts. */
+    QVBoxLayout *layout_vbox = new QVBoxLayout; /**< The QVBoxLayout to hold init_hbox and record_hbox. */
+    QHBoxLayout *main_hbox = new QHBoxLayout; /**< The main QHBoxLayout to hold all the widgets. */
     // Create the widgets.
     QPushButton *init_pushButton = new QPushButton; /**< The QPushButton to initialise the set-up. */
     QLabel *init_label = new QLabel; /**< The QLabel to hold the status of the setup. */
     QPushButton *record_pushButton = new QPushButton; /**< The QPushButton to start recording incoming values. */
     QLabel *record_label = new QLabel; /**< The QLabel to hold the status of the recording. */
-
+    QPushButton *stop_button = new QPushButton;
     /**
      * @brief createGuiItems creates the widgets that are used for the main controls of the GUI.
      */

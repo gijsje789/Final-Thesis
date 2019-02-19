@@ -26,6 +26,9 @@ void MainControls::createGuiItems()
     sp_retain.setRetainSizeWhenHidden(true);
     record_label->setSizePolicy(sp_retain);
     record_label->setVisible(false);
+
+    stop_button->setText("STOP");
+    stop_button->setFixedSize(70, 70);
 }
 
 void MainControls::createAndFillLayouts()
@@ -37,12 +40,16 @@ void MainControls::createAndFillLayouts()
     record_hbox->addWidget(record_pushButton);
     record_hbox->addWidget(record_label);
 
+    // Fill the vertical layout.
+    layout_vbox->addLayout(init_hbox);
+    layout_vbox->addLayout(record_hbox);
+
     // Fill the main layout.
-    main_vbox->addLayout(init_hbox);
-    main_vbox->addLayout(record_hbox);
+    main_hbox->addLayout(layout_vbox);
+    main_hbox->addWidget(stop_button);
 
     // Set the main layout.
-    this->setLayout(main_vbox);
+    this->setLayout(main_hbox);
 }
 
 // #################### Signals #########################
