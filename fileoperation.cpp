@@ -41,11 +41,7 @@ void FileOperation::createAndFillLayouts()
 void FileOperation::createNewOutputFile()
 {
     // Create new file in an output folder which is one level up.
-    QDateTime *datetime = new QDateTime;
-    QString tempString = FILE_LOC
-            + datetime->currentDateTime().toString("yyyyMMdd_hhmmss_")
-            + fileName_lineEdit->text() + ".csv";
-    outputFile = new QFile(tempString);
+    outputFile = new QFile(createFileName());
 }
 
 void FileOperation::openOutputFile()
@@ -55,6 +51,21 @@ void FileOperation::openOutputFile()
             qDebug() << outputFile->fileName() << "successfully opened.";
             lastFile = outputFile->fileName();
         }
+    }
+}
+
+QString FileOperation::createFileName(bool newDateTime)
+{
+    QString dateTimeFormat = "yyyyMMdd_hhmmss_";
+    if (newDateTime) {
+        QDateTime *datetime = new QDateTime;
+        return FILE_LOC + datetime->currentDateTime().toString(dateTimeFormat)
+                + fileName_lineEdit->text() + ".csv";
+    } else {
+        int fileLoc_length = strlen(FILE_LOC);
+        int dateTime_length = dateTimeFormat.length();
+        return lastFile.left(fileLoc_length + dateTime_length)
+                + fileName_lineEdit->text() + ".csv";
     }
 }
 // #################### Signals ##########################
@@ -99,13 +110,24 @@ void FileOperation::writeToOutputFile(QString data)
 // #################### Private slots ####################
 void FileOperation::renameLastFile()
 {
-    if (temp) {
-        closeOutputFile();
-        temp = false;
-    }
-    else {
-        createNewOutputFile();
-        temp = true;
+    if (!lastFile.isEmpty()) {
+        if (outputFile != nullptr && lastFile == outputFile->fileName()) {
+            emit fileFailure("FERR-010");
+        } else {
+            QFile *renameFile = new QFile(lastFile);
+            QString newFileName = createFileName(false);
+            if (renameFile->exists()) {
+                if (renameFile->rename(newFileName)) {
+                    lastFile = newFileName;
+                } else {
+                    emit fileFailure("FERR-008");
+                }
+            } else {
+                emit fileFailure("FERR-009");
+            }
+        }
+    } else {
+        emit fileFailure("FERR-007");
     }
 }
 
@@ -115,10 +137,7 @@ void FileOperation::closeOutputFile()
         if (outputFile->isOpen()) {
             qDebug() << "Closing file.";
             outputFile->close();
-            outputFile = nullptr;
         }
-        else {
-            outputFile = nullptr;
-        }
+        outputFile = nullptr;
     }
 }

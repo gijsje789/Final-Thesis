@@ -67,6 +67,11 @@ private:
      */
     void openOutputFile();
 
+    /**
+     * @brief createFileName The function that creates a custom string for the file based on the input lineedit.
+     * @param newDateTime When set to false, the function is forced to use the dateTime from lastFile. When ommited or set to true, complete new file name is created.
+     */
+    QString createFileName(bool newDateTime = true);
 signals:
     /**
      * @brief readyToRecord The emition of this signal indicates that the output file has been made and it can receive data.
