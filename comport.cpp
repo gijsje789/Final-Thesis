@@ -45,6 +45,7 @@ void ComPort::deleteComPort()
 {
     delete serial_port;
     serial_port = nullptr;
+    selectedPort_label->setText("Selected port: ");
     qDebug() << "COM-port is deleted.";
 }
 
@@ -78,6 +79,15 @@ void ComPort::initialiseComPort()
     } else {
         emit comPortFailure("CPERR-001");
     }
+}
+
+void ComPort::disconnect()
+{
+    deleteTimer();
+    if (serial_port != nullptr && serial_port->isOpen())
+        serial_port->close();
+    deleteComPort();
+    comPortSuccess("disconnected");
 }
 // #################### Private slots ####################
 void ComPort::selectComPort()
@@ -128,12 +138,9 @@ void ComPort::checkComPortStatus()
 void ComPort::checkInputBuffer()
 {
     if (serial_port->bytesAvailable() > 0) {
-        qDebug() << serial_port->bytesAvailable();
         QString *data = new QString(serial_port->readAll());
-        qDebug() << serial_port->bytesAvailable();
         emit recordData(*data);
     }
-    //qDebug() << "Checking input buffer: " << serial_port->bytesAvailable();
 }
 
 void ComPort::serialErrorOccurred(QSerialPort::SerialPortError error)

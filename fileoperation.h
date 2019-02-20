@@ -45,8 +45,6 @@ private:
     QFile *outputFile = nullptr; /**< The pointer to the output file. */
     QString lastFile = ""; /**< The last file created by the GUI. */
 
-    bool temp = false; /**< Temporary boolean, will be removed. */
-
     /**
      * @brief createGuiItems Creates the widgets for the FileOperation menu.
      */
@@ -88,6 +86,11 @@ signals:
      * @param message The failure message.
      */
     void fileFailure(QString message);
+
+    /**
+     * @brief recordingStopped This signal is emitted when the recording of the file has been successfully stopped.
+     */
+    void recordingStopped();
 public slots:
     /**
      * @brief startRecording The callback function that checks the starting conditions and initialises recording.
@@ -99,6 +102,11 @@ public slots:
      * @param data The data that must be written to the outputFile.
      */
     void writeToOutputFile(QString data);
+
+    /**
+     * @brief disconnect The callback function to disconnect from the file.
+     */
+    void disconnect();
 private slots:
     /**
      * @brief renameLastFile The callback function to rename the last file.

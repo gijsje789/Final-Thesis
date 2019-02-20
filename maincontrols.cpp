@@ -7,6 +7,7 @@ MainControls::MainControls(QWidget *parent) : QWidget(parent)
 
     connect(record_pushButton, SIGNAL(clicked()), this, SLOT(recordButtonPressed()));
     connect(init_pushButton, SIGNAL(clicked()), this, SLOT(initButtonPressed()));
+    connect(stop_pushButton, SIGNAL(clicked()), this, SLOT(stopButtonPressed()));
 }
 
 // ################### Private methods ######################
@@ -27,8 +28,8 @@ void MainControls::createGuiItems()
     record_label->setSizePolicy(sp_retain);
     record_label->setVisible(false);
 
-    stop_button->setText("STOP");
-    stop_button->setFixedSize(70, 70);
+    stop_pushButton->setText("STOP");
+    stop_pushButton->setFixedSize(70, 70);
 }
 
 void MainControls::createAndFillLayouts()
@@ -46,7 +47,7 @@ void MainControls::createAndFillLayouts()
 
     // Fill the main layout.
     main_hbox->addLayout(layout_vbox);
-    main_hbox->addWidget(stop_button);
+    main_hbox->addWidget(stop_pushButton);
 
     // Set the main layout.
     this->setLayout(main_hbox);
@@ -72,6 +73,12 @@ void MainControls::comPortFail(QString message)
 void MainControls::comPortSuccess(QString message)
 {
     init_label->setText("Status: " + message);
+    record_pushButton->setEnabled(true);
+}
+
+void MainControls::recordingStopped()
+{
+    record_label->setText("Stopped");
 }
 // #################### Private slots ###################
 void MainControls::recordButtonPressed()
@@ -83,5 +90,11 @@ void MainControls::recordButtonPressed()
 void MainControls::initButtonPressed()
 {
     emit initSetup();
-    record_pushButton->setEnabled(true);
+}
+
+void MainControls::stopButtonPressed()
+{
+    qDebug() <<  "Stop is pressed.";
+    record_label->setVisible(false);
+    emit disconnect();
 }

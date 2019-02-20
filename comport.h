@@ -82,12 +82,21 @@ signals:
      */
     void comPortSuccess(QString message);
 
+    /**
+     * @brief recordData This signal is emited when the COM-port received data and must be recorded.
+     * @param data The data to be recorded.
+     */
     void recordData(QString data);
 public slots:
     /**
      * @brief initialiseComPort The callback function that initialises the ComPort.
      */
     void initialiseComPort();
+
+    /**
+     * @brief disconnect The callback function when the COM-port must be disconnected.
+     */
+    void disconnect();
 
 private slots:
     /**

@@ -118,6 +118,12 @@ void FileOperation::writeToOutputFile(QString data)
         emit fileFailure("FERR-001");
     }
 }
+
+void FileOperation::disconnect()
+{
+    closeOutputFile();
+    emit recordingStopped();
+}
 // #################### Private slots ####################
 void FileOperation::renameLastFile()
 {
@@ -129,6 +135,7 @@ void FileOperation::renameLastFile()
             QString newFileName = createFileName(false);
             if (renameFile->exists()) {
                 if (renameFile->rename(newFileName)) {
+                    qDebug() << "File" << lastFile << "renamed to" << newFileName;
                     lastFile = newFileName;
                 } else {
                     emit fileFailure("FERR-008");

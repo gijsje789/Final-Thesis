@@ -11,6 +11,7 @@
 
 #include <QSizePolicy>
 
+#include <QDebug>
 /**
  * @brief The MainControls class is responsible for the appearance and functionality of the main controls.
  * The main controls are the buttons to initialise the system and to begin the recording of the variables.
@@ -37,7 +38,7 @@ private:
     QLabel *init_label = new QLabel; /**< The QLabel to hold the status of the setup. */
     QPushButton *record_pushButton = new QPushButton; /**< The QPushButton to start recording incoming values. */
     QLabel *record_label = new QLabel; /**< The QLabel to hold the status of the recording. */
-    QPushButton *stop_button = new QPushButton;
+    QPushButton *stop_pushButton = new QPushButton; /**< The QPushButton to stop recording and to close active communications. */
     /**
      * @brief createGuiItems creates the widgets that are used for the main controls of the GUI.
      */
@@ -63,6 +64,11 @@ signals:
      * @brief initSetup This signal is emitted when the user wants the initialise the set-up.
      */
     void initSetup();
+
+    /**
+     * @brief disconnect This signal is emitted when the user want to stop.
+     */
+    void disconnect();
 public slots:
     /**
      * @brief recordingReady The callback function to be called when the FileOperations class successfully readied the output file.
@@ -85,6 +91,11 @@ public slots:
      * @brief comPortSucessfulOpen The callback function to be called when the COM-port is successfully opened.
      */
     void comPortSuccess(QString message);
+
+    /**
+     * @brief recordingStoped The callback function to be called when the recording is successfully stopped.
+     */
+    void recordingStopped();
 private slots:
     /**
      * @brief recordButtonPressed The callback function when the record_pushButton is pressed.
@@ -95,6 +106,11 @@ private slots:
      * @brief initButtonPressed The callback function when the init_pushButton is pressed.
      */
     void initButtonPressed();
+
+    /**
+     * @brief stopButtonPressed The callback function when the stop_pushButton is pressed.
+     */
+    void stopButtonPressed();
 };
 
 #endif // MAINCONTROLS_H
