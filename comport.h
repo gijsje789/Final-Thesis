@@ -15,6 +15,9 @@
 #include <QLabel>
 #include <QComboBox>
 
+#include <QString>
+#include <QChar>
+
 #include <QSerialPortInfo>
 #include <QSerialPort>
 #include <QList>
@@ -50,6 +53,8 @@ private:
 
     QTimer *timer = new QTimer(this); /**< A QTimer to call the checkComPortStatus() such that a disconnect of the selected device is detected. When ComPort is opened, the ... is called to periodically check the input buffer.*/
 
+    QStringList excessData; /**< A QStringList that contains the excess sensor values. The input buffer is synchronously read, meaning that it does not necessarily have all the sensor values. By storing excess information in this variable, the next cycle can combine the excess information from previous cycle with the current. */
+
     /**
      * @brief createGuiItems Creates the widgets for the COM-port menu.
      */
@@ -69,6 +74,12 @@ private:
      * @brief deleteTimer Deletes the timer that periodically checks the COM-port.
      */
     void deleteTimer();
+
+    /**
+     * @brief extractSensorValues Extracts the sensor values from the input data.
+     * @param data The data string. Needs 10 decimal values.
+     */
+    void extractSensorValues(QString data);
 
 signals:
     /**

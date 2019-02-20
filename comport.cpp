@@ -56,6 +56,50 @@ void ComPort::deleteTimer()
     qDebug() << "COM-port timer is deleted.";
 }
 
+void ComPort::extractSensorValues(QString data)
+{
+    // Split the string into all its values.
+    // data contains more than just 10 sensor values.
+    QStringList list = data.split('\n');
+
+    for (int i = 0; i<list.length(); i++) {
+        if (!list[i].isEmpty()) {
+            QString temp = list[i];
+            QStringList splitted = list[i].split(' ');
+            // It can occur the first and/or last are empty.
+            // This causes issues. This code removes them.
+            if (splitted[0].isEmpty())
+                splitted.removeFirst();
+            if (splitted[splitted.length()-1].isEmpty())
+                splitted.removeLast();
+
+            if (splitted.length() < 10 && i == 0) {
+                // If the first string is too short.
+                // It must be combined with the previous too short string.
+                excessData.append(splitted);
+                splitted = excessData;
+                excessData.clear();
+            } else if (splitted.length()<10){
+                // If the string is too short but not the first
+                // It must be saved such that it can be combined with
+                // the next string.
+                excessData = splitted;
+            } else if (splitted.length()==10){
+                QString combinedSensorValues = "";
+                for (QString &character : splitted) {
+                    combinedSensorValues.append(character);
+                    combinedSensorValues.append(" ");
+                }
+                qDebug() << combinedSensorValues;
+            } else {
+                qDebug() << "STring not OK";
+            }
+        } else {
+            list.removeAt(i);
+        }
+    }
+}
+
 // #################### Signals ####################
 // #################### Public slots ###############
 void ComPort::initialiseComPort()
@@ -140,6 +184,7 @@ void ComPort::checkInputBuffer()
     if (serial_port->bytesAvailable() > 0) {
         QString *data = new QString(serial_port->readAll());
         emit recordData(*data);
+        extractSensorValues(*data);
     }
 }
 
