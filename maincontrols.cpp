@@ -73,7 +73,6 @@ void MainControls::comPortFail(QString message)
 void MainControls::comPortSuccess(QString message)
 {
     init_label->setText("Status: " + message);
-    record_pushButton->setEnabled(true);
 }
 
 void MainControls::recordingStopped()
@@ -84,12 +83,14 @@ void MainControls::recordingStopped()
 void MainControls::recordButtonPressed()
 {
     emit startRecording();
+    record_pushButton->setEnabled(false);
     record_label->setVisible(true);
 }
 
 void MainControls::initButtonPressed()
 {
     emit initSetup();
+    record_pushButton->setEnabled(true);
 }
 
 void MainControls::stopButtonPressed()

@@ -26,6 +26,14 @@ QGridLayout* AnalogueSensorMenu::getMainLayout()
     return gridLayout;
 }
 
+aParams AnalogueSensorMenu::getParams()
+{
+    aType type = flow_radioButton->isChecked() ? aFlow : aPressure;
+    aParams params = {
+        enable_checkBox->isChecked(), type, a_val_lineEdit->text().toDouble(), b_val_lineEdit->text().toDouble()
+    };
+    return params;
+}
 // #################### Private functions ####################
 void AnalogueSensorMenu::createGuiItems()
 {

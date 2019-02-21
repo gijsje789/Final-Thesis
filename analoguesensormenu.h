@@ -16,6 +16,13 @@
 #include <QDebug>
 #include <QString>
 
+enum aType {aFlow, aPressure};
+struct aParams {
+    bool enabled;
+    aType type;
+    double aVal;
+    double bVal;
+};
 /**
  * @brief The analogue sensor menu class
  *
@@ -42,6 +49,12 @@ public:
      * @return the main layout.
      */
     QGridLayout* getMainLayout();
+
+    /**
+     * @brief getParams Getter to get the parameters of the analogue sensor menu.
+     * @return A aParams struct containing the sensor's parameters.
+     */
+    aParams getParams();
 private:
     // Analogue sensor name.
     QString sensorName; /**< The self-identifier of which sensor it is; e.g. digital sensor 3. */

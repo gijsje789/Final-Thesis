@@ -25,6 +25,13 @@ QGridLayout* PumpMenu::getMainLayout()
     return gridLayout;
 }
 
+pParams PumpMenu::getParams()
+{
+    pParams params = {
+        enable_checkBox->isChecked(), pumpRate_lineEdit->text().toDouble(), feedback_comboBox->currentText()
+    };
+    return params;
+}
 // #################### Private functions ####################
 void PumpMenu::createGuiItems()
 {
@@ -116,7 +123,6 @@ void PumpMenu::comboBoxSelectionChanged(QString sensor)
 {
     if (prev_item != NO_CHOICE) {
         // The previous item was a sensor, thus now it is deselected it must be re-entered in other menus.
-        qDebug() << "selection" << ignoreSensorReset;
         if (ignoreSensorReset)
             ignoreSensorReset = false;
         else
@@ -137,10 +143,8 @@ void PumpMenu::removeSensorFromComboBox(QString sensor)
 {
     int index_to_remove = feedback_comboBox->findText(sensor);
 
-    qDebug() << "remove" << feedback_comboBox->currentText() << sensor;
     if (feedback_comboBox->currentText() == sensor) {
         ignoreSensorReset = true;
-        qDebug() << "remove" << ignoreSensorReset;
     }
 
     if (index_to_remove != -1)

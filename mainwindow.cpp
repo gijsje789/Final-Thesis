@@ -35,7 +35,11 @@ MainWindow::MainWindow(QWidget *parent)
     file_widget->setGeometry(WIDGET_SPACE, 3*WIDGET_SPACE+SMENU_H+COM_H, (WINDOW_W-4*WIDGET_SPACE)/3, COM_H);
 
     mainControl_widget->setGeometry(WIDGET_SPACE, 4*WIDGET_SPACE+SMENU_H+2*COM_H, (WINDOW_W-4*WIDGET_SPACE)/3, 2*COM_H);
+
     connectWidgets();
+
+    initialiseParamInterface();
+    comport_menu->setParameterInterface(param_interface);
 }
 
 MainWindow::~MainWindow()
@@ -86,4 +90,23 @@ void MainWindow::connectWidgets()
     connect(mainControl_menu, SIGNAL(disconnect()), comport_menu, SLOT(disconnect()));
 
     connect(file_menu, SIGNAL(recordingStopped()), mainControl_menu, SLOT(recordingStopped()));
+}
+
+void MainWindow::initialiseParamInterface()
+{
+    DigitalSensorMenu *dMenu[5] = {d1_menu, d2_menu, d3_menu, d4_menu, d5_menu};
+    AnalogueSensorMenu *aMenu[5] = {an1_menu, an2_menu, an3_menu, an4_menu, an5_menu};
+    PumpMenu *pMenu[4] = {p1_menu, p2_menu, p3_menu, p4_menu};
+
+    for (AnalogueSensorMenu *menu : aMenu) {
+        param_interface->addAnalogueSensor(menu);
+    }
+
+    for (DigitalSensorMenu *menu : dMenu) {
+        param_interface->addDigitalSensor(menu);
+    }
+
+    for (PumpMenu *menu : pMenu) {
+        param_interface->addPump(menu);
+    }
 }

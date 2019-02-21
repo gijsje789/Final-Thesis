@@ -17,6 +17,7 @@
 #include "comport.h"
 #include "fileoperation.h"
 #include "maincontrols.h"
+#include "parameterinterface.h"
 
 /**
  * @brief The MainWindow class
@@ -92,10 +93,17 @@ private:
     PumpMenu *p3_menu = new PumpMenu(p3_widget); /**< The actual class objects that creates the fields and handles all the functionality to define pump 3. */
     PumpMenu *p4_menu = new PumpMenu(p4_widget); /**< The actual class objects that creates the fields and handles all the functionality to define pump 4. */
 
+    ParameterInterface *param_interface = new ParameterInterface;
+
     /**
      * @brief connectWidgets Connects the signals from its children widgets to each other.
      */
     void connectWidgets();
+
+    /**
+     * @brief initialiseParamInterface Initialises the ParameterInterface object.
+     */
+    void initialiseParamInterface();
 };
 
 #endif // MAINWINDOW_H

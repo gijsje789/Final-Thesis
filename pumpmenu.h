@@ -20,6 +20,12 @@
 
 #define NO_CHOICE "Pick"
 
+struct pParams {
+    bool enabled;
+    double rate;
+    QString feedback;
+};
+
 /**
  * @brief The PumpMenu class handles the appearance and functionality of the pump menus.
  * The user can enter the flow rate and the feedback sensor.
@@ -41,6 +47,12 @@ public:
      * @return the main layout.
      */
     QGridLayout* getMainLayout();
+
+    /**
+     * @brief getParams Getter to get the parameters of the pump menu.
+     * @return A pParams struct containing the sensor's parameters.
+     */
+    pParams getParams();
 private:
     // Layouts that are used.
     QGridLayout *gridLayout = new QGridLayout; /**< The grid layout used to organise the input fields. */

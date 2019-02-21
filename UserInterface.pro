@@ -33,7 +33,8 @@ SOURCES += \
     pumpmenu.cpp \
     comport.cpp \
     fileoperation.cpp \
-    maincontrols.cpp
+    maincontrols.cpp \
+    parameterinterface.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -42,7 +43,8 @@ HEADERS += \
     pumpmenu.h \
     comport.h \
     fileoperation.h \
-    maincontrols.h
+    maincontrols.h \
+    parameterinterface.h
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

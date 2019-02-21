@@ -17,6 +17,12 @@
 #include <QDebug>
 #include <QString>
 
+enum dType {dFlow, dPressure};
+struct dParams {
+    bool enabled;
+    dType type;
+    double output;
+};
 /**
  * @brief The digital sensor menu class
  *
@@ -43,6 +49,12 @@ public:
      * @return the main layout.
      */
     QGridLayout* getMainLayout();
+
+    /**
+     * @brief getParams Getter to return the sensor parameters.
+     * @return a dParams struct containing the sensor's parameters.
+     */
+    dParams getParams();
 private:
     // Identifier for the sensor.
     QString sensorName = ""; /**< The self-identifier of which sensor it is; e.g. digital sensor 3. */

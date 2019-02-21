@@ -16,6 +16,11 @@ ComPort::ComPort(QWidget *parent) : QWidget(parent)
     connect(selectPort_pushButton, SIGNAL(clicked()), this, SLOT(selectComPort()));
 }
 
+void ComPort::setParameterInterface(ParameterInterface *interface)
+{
+    param_interface = interface;
+}
+
 // #################### Private functions ####################
 void ComPort::createGuiItems()
 {
@@ -100,10 +105,38 @@ void ComPort::extractSensorValues(QString data)
     }
 }
 
+void ComPort::getAnalogueSensorParams()
+{
+    QList<aParams> a_sensor_vals = param_interface->getAnalogueSensorParams();
+    for (aParams &item : a_sensor_vals) {
+        //qDebug() << item.enabled << item.type << item.aVal << item.bVal;
+    }
+}
+
+void ComPort::getDigitalSensorParams()
+{
+    QList<dParams> d_sensor_vals = param_interface->getDigitalSensorParams();
+    for (dParams &item : d_sensor_vals) {
+        //qDebug() << item.enabled << item.type << item.aVal << item.bVal;
+    }
+}
+
+void ComPort::getPumpParams()
+{
+    QList<pParams> p_pump_vals = param_interface->getPumpParams();
+    for (pParams &item : p_pump_vals) {
+        //qDebug() << item.enabled << item.type << item.aVal << item.bVal;
+    }
+}
+
 // #################### Signals ####################
 // #################### Public slots ###############
 void ComPort::initialiseComPort()
 {
+    getAnalogueSensorParams();
+    getDigitalSensorParams();
+    getPumpParams();
+
     if (serial_port != nullptr) {
         if (serial_port->open(QIODevice::ReadWrite)) {
             if (serial_port->setBaudRate(BAUDRATE)) {

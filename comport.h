@@ -23,6 +23,11 @@
 #include <QList>
 #include <QTimer>
 
+#include "digitalsensormenu.h"
+#include "analoguesensormenu.h"
+#include "pumpmenu.h"
+#include "parameterinterface.h"
+
 /**
  * @brief The ComPort class provides the widgets and the functionality to select a COM-port.
  * The window that is used to select from the active COM-ports is a seperate class, ComPortSelectWindow.
@@ -39,6 +44,12 @@ public:
      */
     explicit ComPort(QWidget *parent = nullptr);
 
+    /**
+     * @brief setParameterInterface Set the pointer to the ParameterInterface object in memory.
+     * @param interface The pointer to the ParameterInterface object.
+     */
+    void setParameterInterface(ParameterInterface *interface);
+
 private:
     // Layouts that are used.
     QHBoxLayout *hboxLayout = new QHBoxLayout; /**< The main layout used to organise the input fields. */
@@ -54,6 +65,8 @@ private:
     QTimer *timer = new QTimer(this); /**< A QTimer to call the checkComPortStatus() such that a disconnect of the selected device is detected. When ComPort is opened, the ... is called to periodically check the input buffer.*/
 
     QStringList excessData; /**< A QStringList that contains the excess sensor values. The input buffer is synchronously read, meaning that it does not necessarily have all the sensor values. By storing excess information in this variable, the next cycle can combine the excess information from previous cycle with the current. */
+
+    ParameterInterface *param_interface = nullptr; /**< The pointer to the parameter interface to retrieve the sensor parameters. */
 
     /**
      * @brief createGuiItems Creates the widgets for the COM-port menu.
@@ -80,7 +93,6 @@ private:
      * @param data The data string. Needs 10 decimal values.
      */
     void extractSensorValues(QString data);
-
 signals:
     /**
      * @brief comPortFailure This signal is emitted when a problem occured concerning the COM-port.
@@ -137,6 +149,21 @@ private slots:
      * @param error The error that has occured.
      */
     void serialErrorOccurred(QSerialPort::SerialPortError error);
+
+    /**
+     * @brief getAnalogueSensorParams Gets the analogue sensor params.
+     */
+    void getAnalogueSensorParams();
+
+    /**
+     * @brief getDigitalSensorParams Gets the digital sensor params.
+     */
+    void getDigitalSensorParams();
+
+    /**
+     * @brief getPumpParams Gets the pump params.
+     */
+    void getPumpParams();
 };
 
 // #############################################################
