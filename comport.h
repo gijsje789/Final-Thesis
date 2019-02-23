@@ -93,6 +93,33 @@ private:
      * @param data The data string. Needs 10 decimal values.
      */
     void extractSensorValues(QString data);
+
+    /**
+     * @brief getAnalogueSensorParams Gets the analogue sensor params.
+     * @param params The pointer to where the parameters must be stored.
+     * @return Returns true if successful, otherwise false.
+     */
+    bool getAnalogueSensorParams(QList<aParams> *params);
+
+    /**
+     * @brief getAnalogueSensorParams Gets the digital sensor params.
+     * @param params The pointer to where the parameters must be stored.
+     * @return Returns true if successful, otherwise false.
+     */
+    bool getDigitalSensorParams(QList<dParams> *params);
+
+    /**
+     * @brief getAnalogueSensorParams Gets the pump params.
+     * @param params The pointer to where the parameters must be stored.
+     * @return Returns true if successful, otherwise false.
+     */
+    bool getPumpParams(QList<pParams> *params);
+
+    /**
+     * @brief sendParametersToDevice Sends the sensor and pump parameters to the device using serial_port.
+     * @return Returns true if all is successfull, otherwise false.
+     */
+    bool sendParametersToDevice();
 signals:
     /**
      * @brief comPortFailure This signal is emitted when a problem occured concerning the COM-port.
@@ -119,7 +146,7 @@ public slots:
     /**
      * @brief disconnect The callback function when the COM-port must be disconnected.
      */
-    void disconnect();
+    void disconnect(bool failure = false);
 
 private slots:
     /**
@@ -149,21 +176,6 @@ private slots:
      * @param error The error that has occured.
      */
     void serialErrorOccurred(QSerialPort::SerialPortError error);
-
-    /**
-     * @brief getAnalogueSensorParams Gets the analogue sensor params.
-     */
-    void getAnalogueSensorParams();
-
-    /**
-     * @brief getDigitalSensorParams Gets the digital sensor params.
-     */
-    void getDigitalSensorParams();
-
-    /**
-     * @brief getPumpParams Gets the pump params.
-     */
-    void getPumpParams();
 };
 
 // #############################################################

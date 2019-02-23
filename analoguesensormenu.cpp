@@ -30,7 +30,7 @@ aParams AnalogueSensorMenu::getParams()
 {
     aType type = flow_radioButton->isChecked() ? aFlow : aPressure;
     aParams params = {
-        enable_checkBox->isChecked(), type, a_val_lineEdit->text().toDouble(), b_val_lineEdit->text().toDouble()
+        sensorName, enable_checkBox->isChecked(), type, a_val_lineEdit->text().toDouble(), b_val_lineEdit->text().toDouble()
     };
     return params;
 }

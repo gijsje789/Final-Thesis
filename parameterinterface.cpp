@@ -48,7 +48,12 @@ QList<pParams> ParameterInterface::getPumpParams()
 {
     QList<pParams> params;
     for (PumpMenu *menu : pumps) {
-        params.append(menu->getParams());
+        pParams temp = menu->getParams();
+        if (temp.enabled && temp.feedback == "Pick") {
+            // Do not append, the fault will be picked up by ComPort.
+        } else {
+            params.append(temp);
+        }
     }
     return params;
 }

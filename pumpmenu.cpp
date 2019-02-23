@@ -7,7 +7,8 @@
 
 #include "pumpmenu.h"
 
-PumpMenu::PumpMenu(QWidget *parent) : QWidget(parent)
+PumpMenu::PumpMenu(QString name, QWidget *parent)
+    :  QWidget(parent), pumpName(name)
 {
     createGuiItems();
     createAndFillLayouts();
@@ -28,7 +29,7 @@ QGridLayout* PumpMenu::getMainLayout()
 pParams PumpMenu::getParams()
 {
     pParams params = {
-        enable_checkBox->isChecked(), pumpRate_lineEdit->text().toDouble(), feedback_comboBox->currentText()
+        pumpName, enable_checkBox->isChecked(), pumpRate_lineEdit->text().toDouble(), feedback_comboBox->currentText()
     };
     return params;
 }

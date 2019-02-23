@@ -21,6 +21,7 @@
 #define NO_CHOICE "Pick"
 
 struct pParams {
+    QString name;
     bool enabled;
     double rate;
     QString feedback;
@@ -38,9 +39,10 @@ class PumpMenu : public QWidget
 public:
     /**
      * @brief PumpMenu The constructor for the Pump Menu.
+     * @param name The name of the sensor.
      * @param parent The parent of the widget.
      */
-    explicit PumpMenu(QWidget *parent = nullptr);
+    explicit PumpMenu(QString name, QWidget *parent = nullptr);
 
     /**
      * @brief getMainLayout returns the main layout of the menu. May be obsolete.
@@ -54,6 +56,7 @@ public:
      */
     pParams getParams();
 private:
+    QString pumpName = "";
     // Layouts that are used.
     QGridLayout *gridLayout = new QGridLayout; /**< The grid layout used to organise the input fields. */
     // Pump rate fields.
@@ -92,6 +95,11 @@ private:
      * @brief enableFields Enables all the input fields of the pump menu.
      */
     void enableFields();
+
+    /**
+     * @brief checkInputParameters Check if the entered parameters are valid, more specifically, if the feedback is set.
+     */
+    void checkInputParameters();
 signals:
     /**
      * @brief comboBoxCurrentIndexChanged When the feedback_comboBox changes sensor, this signal is emitted to the outside world.

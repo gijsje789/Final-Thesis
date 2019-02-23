@@ -56,6 +56,8 @@ void ComPort::deleteComPort()
 
 void ComPort::deleteTimer()
 {
+    if (timer->isActive())
+        timer->stop();
     delete timer;
     timer = new QTimer(this);
     qDebug() << "COM-port timer is deleted.";
@@ -105,48 +107,111 @@ void ComPort::extractSensorValues(QString data)
     }
 }
 
-void ComPort::getAnalogueSensorParams()
+bool ComPort::getAnalogueSensorParams(QList<aParams> *params)
 {
-    QList<aParams> a_sensor_vals = param_interface->getAnalogueSensorParams();
-    for (aParams &item : a_sensor_vals) {
-        //qDebug() << item.enabled << item.type << item.aVal << item.bVal;
+    QList<aParams> temp = param_interface->getAnalogueSensorParams();
+    if (temp.length() != 5)
+        return false;
+    else {
+        *params = temp;
+        return true;
     }
 }
 
-void ComPort::getDigitalSensorParams()
+bool ComPort::getDigitalSensorParams(QList<dParams> *params)
 {
-    QList<dParams> d_sensor_vals = param_interface->getDigitalSensorParams();
-    for (dParams &item : d_sensor_vals) {
-        //qDebug() << item.enabled << item.type << item.aVal << item.bVal;
+    QList<dParams> temp = param_interface->getDigitalSensorParams();
+    if (temp.length() != 5)
+        return false;
+    else {
+        *params = temp;
+        return true;
     }
 }
 
-void ComPort::getPumpParams()
+bool ComPort::getPumpParams(QList<pParams> *params)
 {
-    QList<pParams> p_pump_vals = param_interface->getPumpParams();
-    for (pParams &item : p_pump_vals) {
-        //qDebug() << item.enabled << item.type << item.aVal << item.bVal;
+    QList<pParams> temp = param_interface->getPumpParams();
+    if (temp.length() != 4)
+        return false;
+    else {
+        *params = temp;
+        return true;
     }
 }
 
+bool ComPort::sendParametersToDevice()
+{
+    QList<aParams> *a_params = new QList<aParams>;
+    QList<dParams> *d_params = new QList<dParams>;
+    QList<pParams> *p_params = new QList<pParams>;
+
+    // Retrieve all the parameters
+    if (!getAnalogueSensorParams(a_params)) {
+        emit comPortFailure("CPERR-005");
+        return false;
+    }
+    if (!getDigitalSensorParams(d_params)) {
+        emit comPortFailure("CPERR-006");
+        return false;
+    }
+    if (!getPumpParams(p_params)) {
+        emit comPortFailure("CPERR-007");
+        return false;
+    }
+
+    QString message = "";
+    for (aParams &sensor : *a_params) {
+        if (sensor.enabled)
+            message = QString("%1 %2 %3 %4\n").
+                    arg(sensor.name, QString::number(sensor.enabled),
+                        QString::number(sensor.aVal, 'f', 10),
+                        QString::number(sensor.bVal, 'f', 10));
+        else
+            message = QString("%1 0\n").arg(sensor.name);
+
+        qDebug() << message;
+    }
+
+    for (dParams &sensor : *d_params) {
+        if (sensor.enabled)
+            message = QString("%1 %2 %3 %4\n").
+                    arg(sensor.name, QString::number(sensor.enabled),
+                        QString::number(sensor.output, 'f', 10));
+        else
+            message = QString("%1 0\n").arg(sensor.name);
+
+        qDebug() << message;
+    }
+
+    for (pParams &pump : *p_params) {
+        if (pump.enabled)
+            message = QString("%1 %2 %3 %4\n").
+                    arg(pump.name, QString::number(pump.enabled),
+                        QString::number(pump.rate, 'f', 10),
+                        pump.feedback);
+        else
+            message = QString("%1 0\n").arg(pump.name);
+
+        qDebug() << message;
+    }
+    return true;
+}
 // #################### Signals ####################
 // #################### Public slots ###############
 void ComPort::initialiseComPort()
 {
-    getAnalogueSensorParams();
-    getDigitalSensorParams();
-    getPumpParams();
-
     if (serial_port != nullptr) {
         if (serial_port->open(QIODevice::ReadWrite)) {
             if (serial_port->setBaudRate(BAUDRATE)) {
-                timer->stop();
-                delete timer;
-                timer = new QTimer(this);
+                deleteTimer(); // Restart the timer.
                 timer->start(POLL_INPUT_TIME);
                 connect(timer, SIGNAL(timeout()), this, SLOT(checkInputBuffer()));
                 connect(serial_port, SIGNAL(errorOccurred(QSerialPort::SerialPortError)), this, SLOT(serialErrorOccurred(QSerialPort::SerialPortError)));
                 comPortSuccess("Connected");
+                if (!sendParametersToDevice()) {
+                    disconnect(true);
+                }
             } else {
                 emit comPortFailure("CPERR-003");
             }
@@ -158,13 +223,16 @@ void ComPort::initialiseComPort()
     }
 }
 
-void ComPort::disconnect()
+void ComPort::disconnect(bool failure)
 {
     deleteTimer();
     if (serial_port != nullptr && serial_port->isOpen())
         serial_port->close();
-    deleteComPort();
-    comPortSuccess("disconnected");
+
+    if (!failure) {
+        deleteComPort();
+        comPortSuccess("disconnected");
+    }
 }
 // #################### Private slots ####################
 void ComPort::selectComPort()

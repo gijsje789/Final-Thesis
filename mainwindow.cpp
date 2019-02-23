@@ -11,11 +11,11 @@ MainWindow::MainWindow(QWidget *parent)
 
     // Create tab widget and populate with analogue sensors.
     anSensors_tabWidget->setGeometry(WIDGET_SPACE, WIDGET_SPACE, (WINDOW_W-4*WIDGET_SPACE)/3, SMENU_H);
-    anSensors_tabWidget->addTab(an1_widget, "AN1");
-    anSensors_tabWidget->addTab(an2_widget, "AN2");
-    anSensors_tabWidget->addTab(an3_widget, "AN3");
-    anSensors_tabWidget->addTab(an4_widget, "AN4");
-    anSensors_tabWidget->addTab(an5_widget, "AN5");
+    anSensors_tabWidget->addTab(an1_widget, "A1");
+    anSensors_tabWidget->addTab(an2_widget, "A2");
+    anSensors_tabWidget->addTab(an3_widget, "A3");
+    anSensors_tabWidget->addTab(an4_widget, "A4");
+    anSensors_tabWidget->addTab(an5_widget, "A5");
 
     dSensors_tabWidget->setGeometry(2*WIDGET_SPACE + ((WINDOW_W-4*WIDGET_SPACE)/3), WIDGET_SPACE, (WINDOW_W-4*WIDGET_SPACE)/3, SMENU_H);
     dSensors_tabWidget->addTab(d1_widget, "D1");

@@ -76,11 +76,11 @@ private:
     QWidget *p4_widget = new QWidget; /**< The widget that will parent the pump 4 menu. */
 
     // Create the sensor menus.
-    AnalogueSensorMenu *an1_menu = new AnalogueSensorMenu("AN1", an1_widget); /**< The actual class objects that creates the fields and handles all the functionality to define analogue sensor 1. */
-    AnalogueSensorMenu *an2_menu = new AnalogueSensorMenu("AN2", an2_widget); /**< The actual class objects that creates the fields and handles all the functionality to define analogue sensor 2. */
-    AnalogueSensorMenu *an3_menu = new AnalogueSensorMenu("AN3", an3_widget); /**< The actual class objects that creates the fields and handles all the functionality to define analogue sensor 3. */
-    AnalogueSensorMenu *an4_menu = new AnalogueSensorMenu("AN4", an4_widget); /**< The actual class objects that creates the fields and handles all the functionality to define analogue sensor 4. */
-    AnalogueSensorMenu *an5_menu = new AnalogueSensorMenu("AN5", an5_widget); /**< The actual class objects that creates the fields and handles all the functionality to define analogue sensor 5. */
+    AnalogueSensorMenu *an1_menu = new AnalogueSensorMenu("A1", an1_widget); /**< The actual class objects that creates the fields and handles all the functionality to define analogue sensor 1. */
+    AnalogueSensorMenu *an2_menu = new AnalogueSensorMenu("A2", an2_widget); /**< The actual class objects that creates the fields and handles all the functionality to define analogue sensor 2. */
+    AnalogueSensorMenu *an3_menu = new AnalogueSensorMenu("A3", an3_widget); /**< The actual class objects that creates the fields and handles all the functionality to define analogue sensor 3. */
+    AnalogueSensorMenu *an4_menu = new AnalogueSensorMenu("A4", an4_widget); /**< The actual class objects that creates the fields and handles all the functionality to define analogue sensor 4. */
+    AnalogueSensorMenu *an5_menu = new AnalogueSensorMenu("A5", an5_widget); /**< The actual class objects that creates the fields and handles all the functionality to define analogue sensor 5. */
 
     DigitalSensorMenu *d1_menu = new DigitalSensorMenu("D1", d1_widget); /**< The actual class objects that creates the fields and handles all the functionality to define digital sensor 1. */
     DigitalSensorMenu *d2_menu = new DigitalSensorMenu("D2", d2_widget); /**< The actual class objects that creates the fields and handles all the functionality to define digital sensor 2. */
@@ -88,10 +88,10 @@ private:
     DigitalSensorMenu *d4_menu = new DigitalSensorMenu("D4", d4_widget); /**< The actual class objects that creates the fields and handles all the functionality to define digital sensor 4. */
     DigitalSensorMenu *d5_menu = new DigitalSensorMenu("D5", d5_widget); /**< The actual class objects that creates the fields and handles all the functionality to define digital sensor 5. */
 
-    PumpMenu *p1_menu = new PumpMenu(p1_widget); /**< The actual class objects that creates the fields and handles all the functionality to define pump 1. */
-    PumpMenu *p2_menu = new PumpMenu(p2_widget); /**< The actual class objects that creates the fields and handles all the functionality to define pump 2. */
-    PumpMenu *p3_menu = new PumpMenu(p3_widget); /**< The actual class objects that creates the fields and handles all the functionality to define pump 3. */
-    PumpMenu *p4_menu = new PumpMenu(p4_widget); /**< The actual class objects that creates the fields and handles all the functionality to define pump 4. */
+    PumpMenu *p1_menu = new PumpMenu("P1", p1_widget); /**< The actual class objects that creates the fields and handles all the functionality to define pump 1. */
+    PumpMenu *p2_menu = new PumpMenu("P2", p2_widget); /**< The actual class objects that creates the fields and handles all the functionality to define pump 2. */
+    PumpMenu *p3_menu = new PumpMenu("P3", p3_widget); /**< The actual class objects that creates the fields and handles all the functionality to define pump 3. */
+    PumpMenu *p4_menu = new PumpMenu("P4", p4_widget); /**< The actual class objects that creates the fields and handles all the functionality to define pump 4. */
 
     ParameterInterface *param_interface = new ParameterInterface;
 

@@ -30,7 +30,7 @@ dParams DigitalSensorMenu::getParams()
 {
     dType type = flow_radioButton->isChecked() ? dFlow : dPressure;
     dParams params = {
-        enable_checkBox->isChecked(), type, input_lineEdit->text().toDouble()
+        sensorName, enable_checkBox->isChecked(), type, input_lineEdit->text().toDouble()
     };
     return params;
 }

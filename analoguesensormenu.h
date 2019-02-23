@@ -18,6 +18,7 @@
 
 enum aType {aFlow, aPressure};
 struct aParams {
+    QString name;
     bool enabled;
     aType type;
     double aVal;

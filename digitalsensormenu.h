@@ -19,6 +19,7 @@
 
 enum dType {dFlow, dPressure};
 struct dParams {
+    QString name;
     bool enabled;
     dType type;
     double output;
