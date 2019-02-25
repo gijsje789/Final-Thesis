@@ -31,6 +31,9 @@
 #include <thread>
 #include <chrono>
 
+#include <QProgressDialog>
+#include <QApplication>
+
 /**
  * @brief The ComPort class provides the widgets and the functionality to select a COM-port.
  * The window that is used to select from the active COM-ports is a seperate class, ComPortSelectWindow.
@@ -179,8 +182,6 @@ private slots:
      * @param error The error that has occured.
      */
     void serialErrorOccurred(QSerialPort::SerialPortError error);
-
-    void checkWriteBuffer(qint64 byteswriten);
 };
 
 // #############################################################
