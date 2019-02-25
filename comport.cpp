@@ -170,7 +170,9 @@ bool ComPort::sendParametersToDevice()
         else
             message = QString("%1 0\n").arg(sensor.name);
 
-        qDebug() << message;
+        qDebug() << "writing: " << message;
+        serial_port->write(message.toUtf8());
+        //std::this_thread::sleep_for(std::chrono::milliseconds(100));
     }
 
     for (dParams &sensor : *d_params) {
@@ -181,7 +183,9 @@ bool ComPort::sendParametersToDevice()
         else
             message = QString("%1 0\n").arg(sensor.name);
 
-        qDebug() << message;
+        qDebug() << "writing: " << message;
+        serial_port->write(message.toUtf8());
+        //std::this_thread::sleep_for(std::chrono::milliseconds(100));
     }
 
     for (pParams &pump : *p_params) {
@@ -193,8 +197,11 @@ bool ComPort::sendParametersToDevice()
         else
             message = QString("%1 0\n").arg(pump.name);
 
-        qDebug() << message;
+        qDebug() << "writing: " << message;
+        serial_port->write(message.toUtf8());
+        //std::this_thread::sleep_for(std::chrono::milliseconds(100));
     }
+
     return true;
 }
 // #################### Signals ####################
@@ -208,6 +215,7 @@ void ComPort::initialiseComPort()
                 timer->start(POLL_INPUT_TIME);
                 connect(timer, SIGNAL(timeout()), this, SLOT(checkInputBuffer()));
                 connect(serial_port, SIGNAL(errorOccurred(QSerialPort::SerialPortError)), this, SLOT(serialErrorOccurred(QSerialPort::SerialPortError)));
+                connect(serial_port, SIGNAL(bytesWritten(qint64)), this, SLOT(checkWriteBuffer(qint64)));
                 comPortSuccess("Connected");
                 if (!sendParametersToDevice()) {
                     disconnect(true);
@@ -298,6 +306,11 @@ void ComPort::serialErrorOccurred(QSerialPort::SerialPortError error)
     deleteTimer();
 
     selectedPort_label->setText("Error: disconnected");
+}
+
+void ComPort::checkWriteBuffer(qint64 byteswritten)
+{
+    qDebug() << byteswritten;
 }
 // #################### Public slots ####################
 
