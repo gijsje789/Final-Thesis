@@ -12,6 +12,7 @@
 ComPort::ComPort(QWidget *parent) : QWidget(parent)
 {
     createGuiItems();
+    createAndFillLayouts();
 
     connect(selectPort_pushButton, SIGNAL(clicked()), this, SLOT(selectComPort()));
 }
@@ -32,8 +33,6 @@ void ComPort::createGuiItems()
     // Create the label.
     selectedPort_label->setText("Selected port: ");
     selectedPort_label->setFixedWidth(150);
-
-    createAndFillLayouts();
 }
 
 void ComPort::createAndFillLayouts()
