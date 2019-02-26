@@ -207,6 +207,15 @@ bool ComPort::sendParametersToDevice()
 
     return true;
 }
+
+void ComPort::sendStartSignalToDevice()
+{
+    QString message = "Q\n";
+    qDebug() << "writing:" << message;
+    serial_port->write(message.toUtf8());
+    while(serial_port->waitForBytesWritten(-1)){}
+    std::this_thread::sleep_for(std::chrono::milliseconds(100));
+}
 // #################### Signals ####################
 // #################### Public slots ###############
 void ComPort::initialiseComPort()
@@ -218,8 +227,10 @@ void ComPort::initialiseComPort()
                 timer->start(POLL_INPUT_TIME);
                 connect(timer, SIGNAL(timeout()), this, SLOT(checkInputBuffer()));
                 connect(serial_port, SIGNAL(errorOccurred(QSerialPort::SerialPortError)), this, SLOT(serialErrorOccurred(QSerialPort::SerialPortError)));
-                comPortSuccess("Connected");
-                if (!sendParametersToDevice()) {
+                if (sendParametersToDevice()) {
+                    sendStartSignalToDevice();
+                    comPortSuccess("Connected");
+                } else {
                     disconnect(true);
                 }
             } else {
@@ -286,7 +297,7 @@ void ComPort::checkComPortStatus()
         deleteComPort();
         deleteTimer();
 
-        selectedPort_label->setText("Error: disconnected");
+        selectedPort_label->setText("Error, disconnected");
     }
 }
 
@@ -307,7 +318,7 @@ void ComPort::serialErrorOccurred(QSerialPort::SerialPortError error)
     deleteComPort();
     deleteTimer();
 
-    selectedPort_label->setText("Error: disconnected");
+    selectedPort_label->setText("Error, disconnected");
 }
 // #################### Public slots ####################
 

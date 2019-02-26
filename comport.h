@@ -126,6 +126,11 @@ private:
      * @return Returns true if all is successfull, otherwise false.
      */
     bool sendParametersToDevice();
+
+    /**
+     * @brief sendStartSignalToDevice Sends the start signal to the device using serial_port.
+     */
+    void sendStartSignalToDevice();
 signals:
     /**
      * @brief comPortFailure This signal is emitted when a problem occured concerning the COM-port.
