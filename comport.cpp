@@ -79,18 +79,41 @@ void ComPort::extractSensorValues(QString data)
             if (splitted[splitted.length()-1].isEmpty())
                 splitted.removeLast();
 
-            if (splitted.length() < DATA_INPUT_LENGTH && i == 0) {
-                // If the first string is too short.
-                // It must be combined with the previous too short string.
+            bool dataGood = false;
+
+            if (excessData.isEmpty()) {
+                if (splitted.length() == DATA_INPUT_LENGTH) {
+                    // all good.
+                    dataGood = true;
+                } else if (splitted.length() < DATA_INPUT_LENGTH) {
+                    // No excess data from previous string,
+                    // Current string is too short,
+                    // store data in excessData
+                    excessData = splitted;
+                } else if (splitted.length() > DATA_INPUT_LENGTH) {
+                    // Shouldn't happen?
+                    // Just ignore this string.
+                }
+            } else if (excessData.length() + splitted.length() == DATA_INPUT_LENGTH) {
+                // Combine and all good.
                 excessData.append(splitted);
                 splitted = excessData;
                 excessData.clear();
-            } else if (splitted.length()<DATA_INPUT_LENGTH){
-                // If the string is too short but not the first
-                // It must be saved such that it can be combined with
-                // the next string.
-                excessData = splitted;
-            } else if (splitted.length()==DATA_INPUT_LENGTH){
+                dataGood = true;
+            } else if (excessData.length() + splitted.length() < DATA_INPUT_LENGTH) {
+                // Combine and store back into excessData.
+                excessData.append(splitted);
+            } else if (excessData.length() + splitted.length() > DATA_INPUT_LENGTH) {
+                // Combine but merge the last entry of excessData with the first of splitted.
+                excessData[excessData.length()-1] = excessData[excessData.length()-1] + splitted[0];
+                splitted.removeFirst();
+                excessData.append(splitted);
+                splitted = excessData;
+                excessData.clear();
+                dataGood = true;
+            }
+
+            if (dataGood) {
                 emit dataReadyForPlot(splitted);
                 // qDebug() output for visual verification.
                 QString combinedSensorValues = "";
@@ -99,11 +122,7 @@ void ComPort::extractSensorValues(QString data)
                     combinedSensorValues.append(" ");
                 }
                 qDebug() << combinedSensorValues;
-            } else {
-                qDebug() << "STring not OK";
             }
-        } else {
-            list.removeAt(i);
         }
     }
 }
