@@ -4,6 +4,8 @@
 #define BAUDRATE 9600 // bits per second
 #define POLL_INPUT_TIME 100 // msec
 
+#define DATA_INPUT_LENGTH 11 // items (time stamp, 5 analogue sensor, 5 digital sensor).
+
 #include <QSizePolicy>
 
 #include <QWidget>
@@ -148,6 +150,12 @@ signals:
      * @param data The data to be recorded.
      */
     void recordData(QString data);
+
+    /**
+     * @brief plotReadyData This signal is emitted when the COM-port has extracted the data and verified its content.
+     * @param data The data that is ready to be plotted.
+     */
+    void dataReadyForPlot(QStringList data);
 public slots:
     /**
      * @brief initialiseComPort The callback function that initialises the ComPort.

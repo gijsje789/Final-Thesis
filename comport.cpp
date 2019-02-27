@@ -70,7 +70,6 @@ void ComPort::extractSensorValues(QString data)
 
     for (int i = 0; i<list.length(); i++) {
         if (!list[i].isEmpty()) {
-            QString temp = list[i];
             QStringList splitted = list[i].split(' ');
             // It can occur the first and/or last are empty.
             // This causes issues. This code removes them.
@@ -79,18 +78,20 @@ void ComPort::extractSensorValues(QString data)
             if (splitted[splitted.length()-1].isEmpty())
                 splitted.removeLast();
 
-            if (splitted.length() < 10 && i == 0) {
+            if (splitted.length() < DATA_INPUT_LENGTH && i == 0) {
                 // If the first string is too short.
                 // It must be combined with the previous too short string.
                 excessData.append(splitted);
                 splitted = excessData;
                 excessData.clear();
-            } else if (splitted.length()<10){
+            } else if (splitted.length()<DATA_INPUT_LENGTH){
                 // If the string is too short but not the first
                 // It must be saved such that it can be combined with
                 // the next string.
                 excessData = splitted;
-            } else if (splitted.length()==10){
+            } else if (splitted.length()==DATA_INPUT_LENGTH){
+                emit dataReadyForPlot(splitted);
+                // qDebug() output for visual verification.
                 QString combinedSensorValues = "";
                 for (QString &character : splitted) {
                     combinedSensorValues.append(character);

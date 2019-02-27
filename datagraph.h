@@ -11,6 +11,9 @@
 
 #include <QHBoxLayout>
 
+#include <QStringList>
+#include <QString>
+
 /**
  * @brief The DataGraph class handles all the visual aspects
  * as well as the functionality to plot received data.
@@ -53,6 +56,11 @@ private:
 signals:
 
 public slots:
+    /**
+     * @brief dataReadyForPlot The callback function that receives the data from the ComPort class.
+     * @param data The verified data that needs to be plotted.
+     */
+    void dataReadyForPlot(QStringList data);
 };
 
 #endif // DATAGRAPH_H

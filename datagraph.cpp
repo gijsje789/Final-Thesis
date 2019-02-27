@@ -35,18 +35,6 @@ DataGraph::DataGraph(QWidget *parent) : QWidget(parent)
 
     flowChart->setAnimationOptions(QChart::AllAnimations);
 
-    // Chang ethe x axis categories
-    QCategoryAxis *axisX = new QCategoryAxis();
-    axisX->append("1996", 0);
-    axisX->append("1997", 1);
-    axisX->append("1998", 2);
-    axisX->append("1999", 3);
-    axisX->append("2000", 4);
-    axisX->append("2001", 5);
-    axisX->append("2002", 6);
-    axisX->append("2003", 7);
-    flowChart->setAxisX(axisX, lineSeries);
-
     // Used to display the chart.
     flow_chartView->setRenderHint(QPainter::Antialiasing);
 }
@@ -67,4 +55,10 @@ void DataGraph::createAndFillLayouts()
 }
 // #################### Signals ###################
 // #################### Public slots ###############
+void DataGraph::dataReadyForPlot(QStringList data)
+{
+    for (QString &string : data) {
+        qDebug() << string;
+    }
+}
 // #################### Private slots ##############
