@@ -5,7 +5,8 @@
 #-------------------------------------------------
 
 QT       += core gui \
-            serialport
+            serialport \
+            charts
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -34,7 +35,8 @@ SOURCES += \
     comport.cpp \
     fileoperation.cpp \
     maincontrols.cpp \
-    parameterinterface.cpp
+    parameterinterface.cpp \
+    datagraph.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -44,7 +46,8 @@ HEADERS += \
     comport.h \
     fileoperation.h \
     maincontrols.h \
-    parameterinterface.h
+    parameterinterface.h \
+    datagraph.h
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

@@ -7,6 +7,7 @@
 #define WIDGET_SPACE 10
 #define SMENU_H 150
 #define COM_H 40
+#define PLOT_H 398
 
 #include <QMainWindow>
 #include <QObject>
@@ -18,6 +19,7 @@
 #include "fileoperation.h"
 #include "maincontrols.h"
 #include "parameterinterface.h"
+#include "datagraph.h"
 
 /**
  * @brief The MainWindow class
@@ -56,6 +58,9 @@ private:
 
     QWidget *mainControl_widget = new QWidget(centralWidget);
     MainControls *mainControl_menu = new MainControls(mainControl_widget);
+
+    QWidget *plot_widget = new QWidget(centralWidget);
+    DataGraph *graphs = new DataGraph(plot_widget);
 
     // Create the widgets that populate the tab widgets.
     QWidget *an1_widget = new QWidget; /**< The widget that will parent the analogue sensor 1 menu. */
