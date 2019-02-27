@@ -45,7 +45,7 @@ private:
 
     QLineSeries *lineSeries = new QLineSeries(); /**< A QLineSeries that contains the data of a line. */
 
-    QList<QPoint> AN1_data; /**< The QPoints containing the data that needs to be plotted. */
+    QList<QPointF> AN1_data; /**< The QPoints containing the data that needs to be plotted. */
 
     QTimer *plotTimer = new QTimer;
     /**

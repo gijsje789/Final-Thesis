@@ -49,8 +49,10 @@ void DataGraph::createAndFillLayouts()
 // #################### Public slots ###############
 void DataGraph::dataReadyForPlot(QStringList data)
 {
-    AN1_data.append(QPoint(data[0].toInt(), data[1].toInt()));
-
+    qDebug() << data[0] << data[1];
+    AN1_data.append(QPointF(static_cast<double>(data[0].toInt())/1000.0,
+                            static_cast<double>(data[1].toInt())));
+    // qDebug() << AN1_data[AN1_data.length()-1];
     // Only have to check one pointer's length.
     if(AN1_data.length()>100) {
        AN1_data.removeFirst();
@@ -60,24 +62,24 @@ void DataGraph::dataReadyForPlot(QStringList data)
 void DataGraph::startPlotting()
 {
     plotTimer->start(100);
+    lineSeries->clear();
 }
 
 void DataGraph::stopPlotting()
 {
     plotTimer->stop();
-    lineSeries->clear();
 }
 // #################### Private slots ##############
 void DataGraph::plotData()
 {
     if (AN1_data.length()>0) {
-        QPoint dataPoint = AN1_data[AN1_data.length()-1];
+        QPointF dataPoint = AN1_data[AN1_data.length()-1];
 
         lineSeries->append(dataPoint);
         if (lineSeries->count()>500) {
             lineSeries->remove(0);
         }
-        flowChart->axisX()->setRange(dataPoint.x()-500, dataPoint.x()+100);
-        flowChart->axisY()->setRange(dataPoint.y()-500, dataPoint.y()+500);
+        flowChart->axisX()->setRange(dataPoint.x()-10, dataPoint.x()+10);
+        flowChart->axisY()->setRange(dataPoint.y()-250, dataPoint.y()+250);
     }
 }
