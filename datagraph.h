@@ -13,6 +13,7 @@
 
 #include <QStringList>
 #include <QString>
+#include <Qtimer>
 
 /**
  * @brief The DataGraph class handles all the visual aspects
@@ -44,6 +45,9 @@ private:
 
     QLineSeries *lineSeries = new QLineSeries(); /**< A QLineSeries that contains the data of a line. */
 
+    QList<QPoint> AN1_data;
+
+    QTimer *plotTimer = new QTimer;
     /**
      * @brief createGuiItems Creates the GUI items that populate the MainWindow.
      */
@@ -61,6 +65,11 @@ public slots:
      * @param data The verified data that needs to be plotted.
      */
     void dataReadyForPlot(QStringList data);
+private slots:
+    /**
+     * @brief plotData The callback function to periodically call to plot the data that is received.
+     */
+    void plotData();
 };
 
 #endif // DATAGRAPH_H

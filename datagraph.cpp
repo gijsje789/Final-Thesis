@@ -7,15 +7,6 @@ DataGraph::DataGraph(QWidget *parent) : QWidget(parent)
     createGuiItems();
     createAndFillLayouts();
 
-    lineSeries->append(0, 1);
-    lineSeries->append(1, 2);
-    lineSeries->append(2, 4);
-    lineSeries->append(3, 8);
-    lineSeries->append(4, 16);
-    lineSeries->append(5, 32);
-    lineSeries->append(6, 64);
-    lineSeries->append(7, 128);
-
     // Create chart and add data
     flowChart->legend()->hide();
     flowChart->addSeries(lineSeries);
@@ -33,10 +24,13 @@ DataGraph::DataGraph(QWidget *parent) : QWidget(parent)
     pen.setWidth(5);
     lineSeries->setPen(pen);
 
-    flowChart->setAnimationOptions(QChart::AllAnimations);
+    flowChart->setAnimationOptions(QChart::NoAnimation);
 
     // Used to display the chart.
     flow_chartView->setRenderHint(QPainter::Antialiasing);
+
+    plotTimer->start(100);
+    connect(plotTimer, SIGNAL(timeout()), this, SLOT(plotData()));
 }
 
 // #################### Private ###################
@@ -57,8 +51,25 @@ void DataGraph::createAndFillLayouts()
 // #################### Public slots ###############
 void DataGraph::dataReadyForPlot(QStringList data)
 {
-    for (QString &string : data) {
-        qDebug() << string;
+    AN1_data.append(QPoint(data[0].toInt(), data[1].toInt()));
+
+    // Only have to check one pointer's length.
+    if(AN1_data.length()>100) {
+       AN1_data.removeFirst();
     }
 }
 // #################### Private slots ##############
+void DataGraph::plotData()
+{
+    if (AN1_data.length()>0) {
+        QPoint dataPoint = AN1_data[AN1_data.length()-1];
+
+        qDebug() << dataPoint;
+        lineSeries->append(dataPoint);
+        if (lineSeries->count()>500) {
+            lineSeries->remove(0);
+        }
+        flowChart->axisX()->setRange(dataPoint.x()-500, dataPoint.x()+100);
+        flowChart->axisY()->setRange(dataPoint.y()-500, dataPoint.y()+500);
+    }
+}

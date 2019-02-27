@@ -97,7 +97,7 @@ void ComPort::extractSensorValues(QString data)
                     combinedSensorValues.append(character);
                     combinedSensorValues.append(" ");
                 }
-                qDebug() << combinedSensorValues;
+                //qDebug() << combinedSensorValues;
             } else {
                 qDebug() << "STring not OK";
             }
@@ -306,6 +306,7 @@ void ComPort::checkInputBuffer()
     if (serial_port->bytesAvailable() > 0) {
         QString *data = new QString(serial_port->readAll());
         emit recordData(*data);
+        //qDebug() << *data;
         extractSensorValues(*data);
     }
 }
