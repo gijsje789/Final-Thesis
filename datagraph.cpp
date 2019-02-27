@@ -29,7 +29,6 @@ DataGraph::DataGraph(QWidget *parent) : QWidget(parent)
     // Used to display the chart.
     flow_chartView->setRenderHint(QPainter::Antialiasing);
 
-    plotTimer->start(100);
     connect(plotTimer, SIGNAL(timeout()), this, SLOT(plotData()));
 }
 
@@ -58,13 +57,22 @@ void DataGraph::dataReadyForPlot(QStringList data)
        AN1_data.removeFirst();
     }
 }
+
+void DataGraph::startPlotting()
+{
+    plotTimer->start(100);
+}
+
+void DataGraph::stopPlotting()
+{
+    plotTimer->stop();
+}
 // #################### Private slots ##############
 void DataGraph::plotData()
 {
     if (AN1_data.length()>0) {
         QPoint dataPoint = AN1_data[AN1_data.length()-1];
 
-        qDebug() << dataPoint;
         lineSeries->append(dataPoint);
         if (lineSeries->count()>500) {
             lineSeries->remove(0);

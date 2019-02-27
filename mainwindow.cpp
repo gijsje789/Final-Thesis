@@ -94,6 +94,8 @@ void MainWindow::connectWidgets()
     connect(file_menu, SIGNAL(recordingStopped()), mainControl_menu, SLOT(recordingStopped()));
 
     connect(comport_menu, SIGNAL(dataReadyForPlot(QStringList)), graphs, SLOT(dataReadyForPlot(QStringList)));
+    connect(mainControl_menu, SIGNAL(initSetup()), graphs, SLOT(startPlotting()));
+    connect(mainControl_menu, SIGNAL(disconnect()), graphs, SLOT(stopPlotting()));
 }
 
 void MainWindow::initialiseParamInterface()

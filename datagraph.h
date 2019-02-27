@@ -45,7 +45,7 @@ private:
 
     QLineSeries *lineSeries = new QLineSeries(); /**< A QLineSeries that contains the data of a line. */
 
-    QList<QPoint> AN1_data;
+    QList<QPoint> AN1_data; /**< The QPoints containing the data that needs to be plotted. */
 
     QTimer *plotTimer = new QTimer;
     /**
@@ -65,6 +65,16 @@ public slots:
      * @param data The verified data that needs to be plotted.
      */
     void dataReadyForPlot(QStringList data);
+
+    /**
+     * @brief startPlotting The callback function that signals the set-up is ready and plotting needs to start.
+     */
+    void startPlotting();
+
+    /**
+     * @brief stopPlotting The callback function that signals that plotting must stop.
+     */
+    void stopPlotting();
 private slots:
     /**
      * @brief plotData The callback function to periodically call to plot the data that is received.
