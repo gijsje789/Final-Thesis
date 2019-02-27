@@ -69,6 +69,7 @@ signals:
      * @brief disconnect This signal is emitted when the user want to stop.
      */
     void disconnect();
+
 public slots:
     /**
      * @brief recordingReady The callback function to be called when the FileOperations class successfully readied the output file.

@@ -6,6 +6,14 @@ DataGraph::DataGraph(QWidget *parent) : QWidget(parent)
 {
     createGuiItems();
     createAndFillLayouts();
+    connect(plotTimer, SIGNAL(timeout()), this, SLOT(plotData()));
+}
+
+// #################### Private ###################
+void DataGraph::createGuiItems()
+{
+    flow_chartView->setFixedSize(490, 398);
+    press_chartView->setFixedSize(490, 398);
 
     // Create chart and add data
     flowChart->legend()->hide();
@@ -28,15 +36,6 @@ DataGraph::DataGraph(QWidget *parent) : QWidget(parent)
 
     // Used to display the chart.
     flow_chartView->setRenderHint(QPainter::Antialiasing);
-
-    connect(plotTimer, SIGNAL(timeout()), this, SLOT(plotData()));
-}
-
-// #################### Private ###################
-void DataGraph::createGuiItems()
-{
-    flow_chartView->setFixedSize(490, 398);
-    press_chartView->setFixedSize(490, 398);
 }
 
 void DataGraph::createAndFillLayouts()
@@ -66,6 +65,7 @@ void DataGraph::startPlotting()
 void DataGraph::stopPlotting()
 {
     plotTimer->stop();
+    lineSeries->clear();
 }
 // #################### Private slots ##############
 void DataGraph::plotData()

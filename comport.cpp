@@ -213,6 +213,7 @@ void ComPort::sendStartSignalToDevice()
     QString message = "Q\n";
     qDebug() << "writing:" << message;
     serial_port->write(message.toUtf8());
+    emit startPlotting();
     while(serial_port->waitForBytesWritten(-1)){}
     std::this_thread::sleep_for(std::chrono::milliseconds(100));
 }

@@ -156,6 +156,11 @@ signals:
      * @param data The data that is ready to be plotted.
      */
     void dataReadyForPlot(QStringList data);
+
+    /**
+     * @brief startPlotting This signal is emtited after sending the start signal is send to the arduino.
+     */
+    void startPlotting();
 public slots:
     /**
      * @brief initialiseComPort The callback function that initialises the ComPort.
