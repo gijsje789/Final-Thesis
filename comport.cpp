@@ -64,7 +64,7 @@ void ComPort::deleteTimer()
 
 void ComPort::extractSensorValues(QString data)
 {
-    qDebug() << data;
+    //qDebug() << data;
     // Split the string into all its values.
     // data contains more than just 10 sensor values.
     QStringList list = data.split('\n');
@@ -121,7 +121,7 @@ void ComPort::extractSensorValues(QString data)
                     combinedSensorValues.append(character);
                     combinedSensorValues.append(" ");
                 }
-                qDebug() << combinedSensorValues;
+                //qDebug() << combinedSensorValues;
             }
         }
     }

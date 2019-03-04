@@ -10,6 +10,7 @@
 #include <QtCharts/QCategoryAxis>
 
 #include <QHBoxLayout>
+#include <QVBoxLayout>
 
 #include <QStringList>
 #include <QString>
@@ -33,7 +34,9 @@ public:
 
 private:
     // The layouts that are used.
-    QHBoxLayout *hbox = new QHBoxLayout(); /**< The main QHBoxLayout. */
+    QHBoxLayout *graph_hbox = new QHBoxLayout(); /**< The main QHBoxLayout. */
+    QHBoxLayout *checkBox_hbox = new QHBoxLayout();
+    QVBoxLayout *vbox = new QVBoxLayout();
 
     // The charts to plot in.
     QChart *flowChart = new QChart(); /**< The QChart used to visualise the flow parameters. */
@@ -43,11 +46,15 @@ private:
     QChartView *flow_chartView = new QChartView(flowChart); /**< The QChartView that contains the flow QChart. */
     QChartView *press_chartView = new QChartView(pressureChart); /**< The QChartView that contains the pressure QChart. */
 
+    QList<QCheckBox*> sensor_enableCheckboxes; /**< The QCheckBox pointers to enable plotting of datapoints. */
+
     QLineSeries *lineSeries = new QLineSeries(); /**< A QLineSeries that contains the data of a line. */
 
     QList<QPointF> AN1_data; /**< The QPoints containing the data that needs to be plotted. */
 
-    QTimer *plotTimer = new QTimer;
+    QTimer *plotTimer = new QTimer; /**< The QTimer that triggers a plot at 10Hz. */
+
+    bool enabled_sensors[10] = {true};
     /**
      * @brief createGuiItems Creates the GUI items that populate the MainWindow.
      */
@@ -80,6 +87,8 @@ private slots:
      * @brief plotData The callback function to periodically call to plot the data that is received.
      */
     void plotData();
+
+    void plotMembersChanged(bool state);
 };
 
 #endif // DATAGRAPH_H

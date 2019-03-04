@@ -7,13 +7,43 @@ DataGraph::DataGraph(QWidget *parent) : QWidget(parent)
     createGuiItems();
     createAndFillLayouts();
     connect(plotTimer, SIGNAL(timeout()), this, SLOT(plotData()));
+    for(QCheckBox *item : sensor_enableCheckboxes) {
+        connect(item, SIGNAL(toggled(bool)), this, SLOT(plotMembersChanged(bool)));
+    }
 }
 
 // #################### Private ###################
 void DataGraph::createGuiItems()
 {
-    flow_chartView->setFixedSize(490, 398);
-    press_chartView->setFixedSize(490, 398);
+    QPixmap pixmap = QPixmap(100,100);
+    QList<QColor> colours = {
+        QColor(255, 0, 0),
+        QColor(255, 0, 255),
+        QColor(255, 255, 0),
+        QColor(0, 255, 0),
+        QColor(0, 255, 255),
+        QColor(0, 0, 255),
+        QColor(0, 0, 0),
+        QColor(48, 46, 142),
+        QColor(237, 175, 33),
+        QColor(165, 165, 165),
+    };
+    for (int i = 0; i < 10; i++) {
+        sensor_enableCheckboxes.append(new QCheckBox);
+        sensor_enableCheckboxes[i]->setChecked(true);
+
+        pixmap.fill(colours[i]);
+        QIcon temp2 = QIcon(pixmap);
+        sensor_enableCheckboxes[i]->setIcon(temp2);
+
+        if(i <= 4)
+            sensor_enableCheckboxes[i]->setText(QString("A%1").arg(i+1));
+        else
+            sensor_enableCheckboxes[i]->setText(QString("D%1").arg(i-4));
+    }
+
+    flow_chartView->setFixedSize(490, 350);
+    press_chartView->setFixedSize(490, 350);
 
     // Create chart and add data
     flowChart->legend()->hide();
@@ -40,10 +70,16 @@ void DataGraph::createGuiItems()
 
 void DataGraph::createAndFillLayouts()
 {
-    hbox->addWidget(flow_chartView);
-    hbox->addWidget(press_chartView);
+    for(QCheckBox *item : sensor_enableCheckboxes) {
+        checkBox_hbox->addWidget(item);
+    }
+    graph_hbox->addWidget(flow_chartView);
+    graph_hbox->addWidget(press_chartView);
 
-    this->setLayout(hbox);
+    vbox->addLayout(checkBox_hbox);
+    vbox->addLayout(graph_hbox);
+
+    this->setLayout(vbox);
 }
 // #################### Signals ###################
 // #################### Public slots ###############
@@ -81,5 +117,18 @@ void DataGraph::plotData()
         }
         flowChart->axisX()->setRange(dataPoint.x()-10, dataPoint.x()+10);
         flowChart->axisY()->setRange(dataPoint.y()-250, dataPoint.y()+250);
+    }
+}
+
+void DataGraph::plotMembersChanged(bool state)
+{
+    int i = 0;
+    for(QCheckBox *item : sensor_enableCheckboxes) {
+        enabled_sensors[i] = item->isChecked();
+        i++;
+    }
+
+    for(int i = 0; i< 10; i++) {
+        qDebug() << enabled_sensors[i];
     }
 }
