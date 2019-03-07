@@ -97,5 +97,6 @@ void MainControls::stopButtonPressed()
 {
     qDebug() <<  "Stop is pressed.";
     record_label->setVisible(false);
+    record_pushButton->setEnabled(false);
     emit disconnect();
 }

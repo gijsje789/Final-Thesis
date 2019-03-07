@@ -14,7 +14,9 @@
 
 #include <QStringList>
 #include <QString>
-#include <Qtimer>
+#include <QTimer>
+
+#include "parameterinterface.h"
 
 /**
  * @brief The DataGraph class handles all the visual aspects
@@ -32,6 +34,11 @@ public:
      */
     explicit DataGraph(QWidget *parent = nullptr);
 
+    /**
+     * @brief setParameterInterface Set the pointer to the ParameterInterface object in memory.
+     * @param interface The pointer to the ParameterInterface object.
+     */
+    void setParameterInterface(ParameterInterface *pInterface);
 private:
     // The layouts that are used.
     QHBoxLayout *graph_hbox = new QHBoxLayout(); /**< The main QHBoxLayout. */
@@ -48,13 +55,30 @@ private:
 
     QList<QCheckBox*> sensor_enableCheckboxes; /**< The QCheckBox pointers to enable plotting of datapoints. */
 
-    QLineSeries *lineSeries = new QLineSeries(); /**< A QLineSeries that contains the data of a line. */
+    QList<QLineSeries*> lineSeries; /**< A QLineSeries that contains the data of a line. */
 
-    QList<QPointF> AN1_data; /**< The QPoints containing the data that needs to be plotted. */
+    QList<QPointF> recentData; /**< The QPoints containing the data that needs to be plotted. */
 
     QTimer *plotTimer = new QTimer; /**< The QTimer that triggers a plot at 10Hz. */
 
-    bool enabled_sensors[10] = {true};
+    bool plotSensors[10] = {false}; /**< A boolean array that contains true if the sensor is to be plotted.*/
+    bool enabledSensors[10] = {false};
+    bool isFlowSensor[10] = {false};
+
+    ParameterInterface *mInterface = nullptr;
+
+    QList<QColor> plotColours = {
+        QColor(255, 0, 0),
+        QColor(255, 0, 255),
+        QColor(255, 255, 0),
+        QColor(0, 255, 0),
+        QColor(0, 255, 255),
+        QColor(0, 0, 255),
+        QColor(0, 0, 0),
+        QColor(48, 46, 142),
+        QColor(237, 175, 33),
+        QColor(165, 165, 165),
+    };
     /**
      * @brief createGuiItems Creates the GUI items that populate the MainWindow.
      */
@@ -64,6 +88,12 @@ private:
      * @brief createAndFillLayouts Creates and fills the layouts with the widgets created in createGuiItems().
      */
     void createAndFillLayouts();
+
+    void createFlowGraph();
+
+    void createPressureGraph();
+
+    void initialiseLineSeries();
 signals:
 
 public slots:
