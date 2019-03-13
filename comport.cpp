@@ -73,7 +73,7 @@ void ComPort::extractSensorValues(QString data)
     else
         allData = oldData + data;
 
-    qDebug() << allData;
+    //qDebug() << allData;
     oldData.clear();
     QString message = "";
     QStringList splitted;

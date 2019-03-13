@@ -117,12 +117,12 @@ void DataGraph::setParameterInterface(ParameterInterface *pInterface)
 // #################### Public slots ###############
 void DataGraph::dataReadyForPlot(QStringList data)
 {
-    //qDebug() << data[0] << data[1] << data[2] << data[3] << data[4] << data[5];
+    // qDebug() << data[0] << data[1] << data[2] << data[3] << data[4] << data[5];
     for(int i = 0; i < recentData.size(); i++) {
         recentData[i] = (QPointF(static_cast<double>(data[0].toInt())/1000.0,
                          static_cast<double>(data[i+1].toInt())));
     }
-    // qDebug() << AN1_data[AN1_data.length()-1];
+    // qDebug() << recentData[0] << recentData[1] << recentData[2] << recentData[3];
 }
 
 void DataGraph::startPlotting()
@@ -130,31 +130,36 @@ void DataGraph::startPlotting()
     QList<aParams> a_sensor_params = mInterface->getAnalogueSensorParams();
     QList<dParams> d_sensor_params = mInterface->getDigitalSensorParams();
 
+    //flowChart->removeAllSeries();
+    //pressureChart->removeAllSeries();
+
     for(int i = 0; i < a_sensor_params.size(); i++) {
-        enabledSensors[i] = a_sensor_params[i].enabled;
         if(a_sensor_params[i].enabled && a_sensor_params[i].type == aFlow) {
-            isFlowSensor[i] = true;
             plotSensors[i] = true;
             sensor_enableCheckboxes[i]->setChecked(true);
+            flowChart->addSeries(lineSeries[i]);
         } else {
-            isFlowSensor[i] = false;
             plotSensors[i] = false;
             sensor_enableCheckboxes[i]->setChecked(false);
-        }
-    }
-    for(int i = 0; i < d_sensor_params.size(); i++) {
-        enabledSensors[i+5] = d_sensor_params[i].enabled;
-        if(d_sensor_params[i].enabled && d_sensor_params[i].type == dFlow) {
-            isFlowSensor[i+5] = true;
-            plotSensors[i+5] = true;
-            sensor_enableCheckboxes[i+5]->setChecked(true);
-        } else {
-            isFlowSensor[i+5] = false;
-            plotSensors[i+5] = false;
-            sensor_enableCheckboxes[i+5]->setChecked(false);
+            pressureChart->addSeries(lineSeries[i]);
         }
     }
 
+    for(int i = 0; i < d_sensor_params.size(); i++) {
+        if(d_sensor_params[i].enabled && d_sensor_params[i].type == dFlow) {
+            plotSensors[i+5] = true;
+            sensor_enableCheckboxes[i+5]->setChecked(true);
+            flowChart->addSeries(lineSeries[i+5]);
+        } else {
+            plotSensors[i+5] = false;
+            sensor_enableCheckboxes[i+5]->setChecked(false);
+            pressureChart->addSeries(lineSeries[i+5]);
+        }
+    }
+    flowChart->createDefaultAxes();
+    pressureChart->createDefaultAxes();
+
+    qDebug() << flowChart->series().size();
     plotTimer->start(100);
     for(QLineSeries* series : lineSeries) {
         series->clear();
@@ -175,15 +180,16 @@ void DataGraph::plotData()
         else lineSeries[i]->hide();
 
         if (!recentData[i].isNull()) {
+            // qDebug() << "plotting: " << i << recentData[i];
             lineSeries[i]->append(recentData[i]);
+            //qDebug() << lineSeries[i]->count() << i;
             if (lineSeries[i]->count()>500) {
                 lineSeries[i]->remove(0);
             }
         }
     }
-    flowChart->axisX()->setRange(recentData[0].x()-10, recentData[0].x()+10);
-    flowChart->axisY()->setRange(recentData[0].y()-250, recentData[0].y()+250);
-
+    flowChart->axisX()->setRange(recentData[0].x()-100, recentData[0].x());
+    flowChart->axisY()->setRange(0, 1024);
 }
 
 void DataGraph::plotMembersChanged(bool state)

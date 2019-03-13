@@ -62,8 +62,6 @@ private:
     QTimer *plotTimer = new QTimer; /**< The QTimer that triggers a plot at 10Hz. */
 
     bool plotSensors[10] = {false}; /**< A boolean array that contains true if the sensor is to be plotted.*/
-    bool enabledSensors[10] = {false};
-    bool isFlowSensor[10] = {false};
 
     ParameterInterface *mInterface = nullptr;
 
