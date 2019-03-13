@@ -76,6 +76,8 @@ private:
 
     ParameterInterface *param_interface = nullptr; /**< The pointer to the parameter interface to retrieve the sensor parameters. */
 
+    QString oldData = "";
+
     /**
      * @brief createGuiItems Creates the widgets for the COM-port menu.
      */

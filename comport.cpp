@@ -64,65 +64,52 @@ void ComPort::deleteTimer()
 
 void ComPort::extractSensorValues(QString data)
 {
-    //qDebug() << data;
+    // qDebug() << data;
     // Split the string into all its values.
     // data contains more than just 10 sensor values.
-    QStringList list = data.split('\n');
+    QString allData = "";
+    if(oldData.isEmpty())
+        allData = data;
+    else
+        allData = oldData + data;
 
-    for (int i = 0; i<list.length(); i++) {
-        if (!list[i].isEmpty()) {
-            QStringList splitted = list[i].split(' ');
-            // It can occur the first and/or last are empty.
-            // This causes issues. This code removes them.
-            if (splitted[0].isEmpty())
-                splitted.removeFirst();
-            if (splitted[splitted.length()-1].isEmpty())
-                splitted.removeLast();
+    qDebug() << allData;
+    oldData.clear();
+    QString message = "";
+    QStringList splitted;
+    for(int i = 0; i < allData.size(); i++){
+        bool dataGood = false;
 
-            bool dataGood = false;
-
-            if (excessData.isEmpty()) {
-                if (splitted.length() == DATA_INPUT_LENGTH) {
-                    // all good.
-                    dataGood = true;
-                } else if (splitted.length() < DATA_INPUT_LENGTH) {
-                    // No excess data from previous string,
-                    // Current string is too short,
-                    // store data in excessData
-                    excessData = splitted;
-                } else if (splitted.length() > DATA_INPUT_LENGTH) {
-                    // Shouldn't happen?
-                    // Just ignore this string.
-                }
-            } else if (excessData.length() + splitted.length() == DATA_INPUT_LENGTH) {
-                // Combine and all good.
-                excessData.append(splitted);
-                splitted = excessData;
-                excessData.clear();
+        if(allData[i] == '\n') {
+            splitted = message.split(' ');
+            if(splitted.size() == DATA_INPUT_LENGTH) {
                 dataGood = true;
-            } else if (excessData.length() + splitted.length() < DATA_INPUT_LENGTH) {
-                // Combine and store back into excessData.
-                excessData.append(splitted);
-            } else if (excessData.length() + splitted.length() > DATA_INPUT_LENGTH) {
-                // Combine but merge the last entry of excessData with the first of splitted.
-                excessData[excessData.length()-1] = excessData[excessData.length()-1] + splitted[0];
-                splitted.removeFirst();
-                excessData.append(splitted);
-                splitted = excessData;
-                excessData.clear();
-                dataGood = true;
+            } else {
+                // Just ignore data that is incorrect.
+               // qDebug() << "Data no good." << i << message;
             }
+            message.clear();
+        } else {
+            message.append(allData[i]);
+        }
 
-            if (dataGood) {
-                emit dataReadyForPlot(splitted);
-                // qDebug() output for visual verification.
-                QString combinedSensorValues = "";
-                for (QString &character : splitted) {
-                    combinedSensorValues.append(character);
-                    combinedSensorValues.append(" ");
-                }
-                //qDebug() << combinedSensorValues;
+        if(i == allData.size() -1) {
+            // Save the remaining data for the next iteration.
+            //qDebug() << "data too short" << message;
+            oldData = message;
+            message.clear();
+        }
+
+        if (dataGood) {
+            // qDebug() << splitted;
+            emit dataReadyForPlot(splitted);
+            // qDebug() output for visual verification.
+            QString combinedSensorValues = "";
+            for (QString &character : splitted) {
+                combinedSensorValues.append(character);
+                combinedSensorValues.append(" ");
             }
+            //qDebug() << combinedSensorValues;
         }
     }
 }

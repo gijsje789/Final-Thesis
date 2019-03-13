@@ -117,7 +117,7 @@ void DataGraph::setParameterInterface(ParameterInterface *pInterface)
 // #################### Public slots ###############
 void DataGraph::dataReadyForPlot(QStringList data)
 {
-    qDebug() << data[0] << data[1];
+    //qDebug() << data[0] << data[1] << data[2] << data[3] << data[4] << data[5];
     for(int i = 0; i < recentData.size(); i++) {
         recentData[i] = (QPointF(static_cast<double>(data[0].toInt())/1000.0,
                          static_cast<double>(data[i+1].toInt())));
@@ -176,7 +176,6 @@ void DataGraph::plotData()
 
         if (!recentData[i].isNull()) {
             lineSeries[i]->append(recentData[i]);
-            qDebug() << lineSeries[i]->color();
             if (lineSeries[i]->count()>500) {
                 lineSeries[i]->remove(0);
             }
