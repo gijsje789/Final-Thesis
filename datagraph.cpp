@@ -1,20 +1,55 @@
 #include "datagraph.h"
 
-
+//TODO: presure graphing
+// TODO: limits based on slider
 // #################### Public ####################
 DataGraph::DataGraph(QWidget *parent) : QWidget(parent)
 {
     createGuiItems();
     createAndFillLayouts();
+
     connect(plotTimer, SIGNAL(timeout()), this, SLOT(plotData()));
     for(QCheckBox *item : sensor_enableCheckboxes) {
         connect(item, SIGNAL(toggled(bool)), this, SLOT(plotMembersChanged(bool)));
     }
+    connect(flow_y_auto, SIGNAL(toggled(bool)), this, SLOT(flowAutoAdjustY(bool)));
+    connect(pres_y_auto, SIGNAL(toggled(bool)), this, SLOT(presAutoAdjustY(bool)));
+    connect(flow_y_upper, SIGNAL(editingFinished()), this, SLOT(adjustFlowYUpper()));
+    connect(flow_y_lower, SIGNAL(editingFinished()), this, SLOT(adjustFlowYLower()));
+    connect(pres_y_upper, SIGNAL(editingFinished()), this, SLOT(adjustPresYUpper()));
+    connect(pres_y_lower, SIGNAL(editingFinished()), this, SLOT(adjustPresYLower()));
+    connect(flow_x_slider, SIGNAL(valueChanged(int)), this, SLOT(adjustFlowXAxis(int)));
+    connect(pres_x_slider, SIGNAL(valueChanged(int)), this, SLOT(adjustPresXAxis(int)));
 }
 
 // #################### Private ###################
 void DataGraph::createGuiItems()
 {
+    flow_x_slider->setOrientation(Qt::Horizontal);
+    flow_x_slider->setRange(-100, -1);
+    flow_x_slider->setValue(50);
+    flow_y_auto->setChecked(true);
+
+    flow_y_upper->setValidator(new QDoubleValidator());
+    flow_y_lower->setValidator(new QDoubleValidator());
+    flow_y_label_u->setText("Upper lim");
+    flow_y_label_l->setText("Lower lim");
+    flow_y_upper->hide();
+    flow_y_lower->hide();
+
+    pres_x_slider->setOrientation(Qt::Horizontal);
+    pres_x_slider->setRange(-100, -1);
+    pres_x_slider->setValue(50);
+    pres_y_auto->setChecked(true);
+
+    pres_y_upper->setValidator(new QDoubleValidator());
+    pres_y_lower->setValidator(new QDoubleValidator());
+    pres_y_label_u->setText("Upper lim");
+    pres_y_label_l->setText("Lower lim");
+    pres_y_upper->hide();
+    pres_y_lower->hide();
+
+
     QPixmap pixmap = QPixmap(100,100);
 
     for (int i = 0; i < 10; i++) {
@@ -41,11 +76,32 @@ void DataGraph::createGuiItems()
 
 void DataGraph::createAndFillLayouts()
 {
+    flow_y_widgets->addWidget(flow_y_lower);
+    flow_y_widgets->addWidget(flow_y_label_l);
+    flow_y_widgets->addWidget(flow_y_auto);
+    flow_y_widgets->addWidget(flow_y_label_u);
+    flow_y_widgets->addWidget(flow_y_upper);
+
+    pres_y_widgets->addWidget(pres_y_lower);
+    pres_y_widgets->addWidget(pres_y_label_l);
+    pres_y_widgets->addWidget(pres_y_auto);
+    pres_y_widgets->addWidget(pres_y_label_u);
+    pres_y_widgets->addWidget(pres_y_upper);
+
+    flow_vbox->addWidget(flow_x_slider);
+    flow_vbox->addLayout(flow_y_widgets);
+    flow_vbox->addWidget(flow_chartView);
+
+    pres_vbox->addWidget(pres_x_slider);
+    pres_vbox->addLayout(pres_y_widgets);
+    pres_vbox->addWidget(press_chartView);
+
+    graph_hbox->addLayout(flow_vbox);
+    graph_hbox->addLayout(pres_vbox);
+
     for(QCheckBox *item : sensor_enableCheckboxes) {
         checkBox_hbox->addWidget(item);
     }
-    graph_hbox->addWidget(flow_chartView);
-    graph_hbox->addWidget(press_chartView);
 
     vbox->addLayout(checkBox_hbox);
     vbox->addLayout(graph_hbox);
@@ -55,7 +111,7 @@ void DataGraph::createAndFillLayouts()
 
 void DataGraph::createFlowGraph()
 {
-    flow_chartView->setFixedSize(490, 350);
+    flow_chartView->setFixedSize(490, 310);
 
     // Create chart and add data
     flowChart->legend()->hide();
@@ -78,7 +134,7 @@ void DataGraph::createFlowGraph()
 
 void DataGraph::createPressureGraph()
 {
-    press_chartView->setFixedSize(490, 350);
+    press_chartView->setFixedSize(490, 310);
 
     // Create chart and add data
     pressureChart->legend()->hide();
@@ -107,6 +163,66 @@ void DataGraph::initialiseLineSeries()
         lineSeries[i]->setPen(pen);
         lineSeries[i]->setColor(plotColours[i]);
     }
+}
+
+qreal DataGraph::getMaxFlowYRange()
+{
+    qreal maxVal = 0;
+    for(int i = 0; i < 10; i++) {
+        if(isLineSeriesFlow[i] && lineSeries[i]->isVisible()) {
+            for(QPointF &val : lineSeries[i]->points()) {
+                if (val.y() > maxVal) {
+                    maxVal = val.y();
+                }
+            }
+        }
+    }
+    return maxVal;
+}
+
+qreal DataGraph::getMinFlowYRange()
+{
+    qreal minVal = 1.7e300;
+    for(int i = 0; i < 10; i++) {
+        if(isLineSeriesFlow[i] && lineSeries[i]->isVisible()) {
+            for(QPointF &val : lineSeries[i]->points()) {
+                if (val.y() < minVal) {
+                    minVal = val.y();
+                }
+            }
+        }
+    }
+    return minVal;
+}
+
+qreal DataGraph::getMaxPresYRange()
+{
+    qreal maxVal = 0;
+    for(int i = 0; i < 10; i++) {
+        if(!isLineSeriesFlow[i] && lineSeries[i]->isVisible()) {
+            for(QPointF &val : lineSeries[i]->points()) {
+                if (val.y() > maxVal) {
+                    maxVal = val.y();
+                }
+            }
+        }
+    }
+    return maxVal;
+}
+
+qreal DataGraph::getMinPresYRange()
+{
+    qreal minVal = 1.7e300;
+    for(int i = 0; i < 10; i++) {
+        if(!isLineSeriesFlow[i] && lineSeries[i]->isVisible()) {
+            for(QPointF &val : lineSeries[i]->points()) {
+                if (val.y() < minVal) {
+                    minVal = val.y();
+                }
+            }
+        }
+    }
+    return minVal;
 }
 
 void DataGraph::setParameterInterface(ParameterInterface *pInterface)
@@ -138,6 +254,7 @@ void DataGraph::startPlotting()
             plotSensors[i] = true;
             sensor_enableCheckboxes[i]->setChecked(true);
             flowChart->addSeries(lineSeries[i]);
+            isLineSeriesFlow[i] = true;
         } else {
             plotSensors[i] = false;
             sensor_enableCheckboxes[i]->setChecked(false);
@@ -150,6 +267,7 @@ void DataGraph::startPlotting()
             plotSensors[i+5] = true;
             sensor_enableCheckboxes[i+5]->setChecked(true);
             flowChart->addSeries(lineSeries[i+5]);
+            isLineSeriesFlow[i+5] = true;
         } else {
             plotSensors[i+5] = false;
             sensor_enableCheckboxes[i+5]->setChecked(false);
@@ -159,7 +277,6 @@ void DataGraph::startPlotting()
     flowChart->createDefaultAxes();
     pressureChart->createDefaultAxes();
 
-    qDebug() << flowChart->series().size();
     plotTimer->start(100);
     for(QLineSeries* series : lineSeries) {
         series->clear();
@@ -180,16 +297,20 @@ void DataGraph::plotData()
         else lineSeries[i]->hide();
 
         if (!recentData[i].isNull()) {
-            // qDebug() << "plotting: " << i << recentData[i];
             lineSeries[i]->append(recentData[i]);
-            //qDebug() << lineSeries[i]->count() << i;
             if (lineSeries[i]->count()>500) {
                 lineSeries[i]->remove(0);
             }
         }
     }
-    flowChart->axisX()->setRange(recentData[0].x()-100, recentData[0].x());
-    flowChart->axisY()->setRange(0, 1024);
+    flowChart->axisX()->setRange(recentData[0].x()+flow_x_slider->value(),
+            recentData[0].x()+2);
+
+    if(flow_y_auto->isChecked())
+        flowAutoAdjustY(true);
+
+    if(pres_y_auto->isChecked())
+        presAutoAdjustY(true);
 }
 
 void DataGraph::plotMembersChanged(bool state)
@@ -199,4 +320,83 @@ void DataGraph::plotMembersChanged(bool state)
         plotSensors[i] = item->isChecked();
         i++;
     }
+}
+
+void DataGraph::flowAutoAdjustY(bool state)
+{
+    qreal max = getMaxFlowYRange();
+    qreal min = getMinFlowYRange();
+
+    if(max - min < MIN_FLOW_RES) {
+        qreal avg = ((min + max) / 2.0);
+        min = avg - 0.5 * static_cast<qreal>(MIN_FLOW_RES);
+        max = avg + 0.5 * static_cast<qreal>(MIN_FLOW_RES);
+    }
+
+    if(state) {
+        flow_y_upper->hide();
+        flow_y_lower->hide();
+    } else {
+        flow_y_upper->show();
+        flow_y_lower->show();
+    }
+    flow_y_upper->setText(QString::number(max));
+    flow_y_lower->setText(QString::number(min));
+    flowChart->axisY()->setRange(min, max);
+}
+
+void DataGraph::presAutoAdjustY(bool state)
+{
+    qreal max = getMaxPresYRange();
+    qreal min = getMinPresYRange();
+
+    if(max - min < MIN_PRES_RES) {
+        qreal avg = ((min + max) / 2.0);
+        min = avg - 0.5 * MIN_PRES_RES;
+        max = avg + 0.5 * MIN_PRES_RES;
+    }
+
+    if(state) {
+        pres_y_upper->hide();
+        pres_y_lower->hide();
+    } else {
+        pres_y_upper->show();
+        pres_y_lower->show();
+    }
+
+    pres_y_upper->setText(QString::number(max));
+    pres_y_lower->setText(QString::number(min));
+    pressureChart->axisY()->setRange(pres_y_lower->text().toDouble(), pres_y_upper->text().toDouble());
+}
+
+void DataGraph::adjustFlowYUpper()
+{
+    if(flow_y_upper->text().toDouble() < flow_y_lower->text().toDouble()) {
+        flow_y_lower->setText(QString::number(flow_y_upper->text().toDouble() - 10));
+    }
+    flowChart->axisY()->setRange(flow_y_lower->text().toDouble(), flow_y_upper->text().toDouble());
+}
+
+void DataGraph::adjustFlowYLower()
+{
+    if(flow_y_lower->text().toDouble() > flow_y_upper->text().toDouble()) {
+        flow_y_upper->setText(QString::number(flow_y_lower->text().toDouble() + 10));
+    }
+    flowChart->axisY()->setRange(flow_y_lower->text().toDouble(), flow_y_upper->text().toDouble());
+}
+
+void DataGraph::adjustPresYUpper()
+{
+    if(pres_y_upper->text().toDouble() < pres_y_lower->text().toDouble()) {
+        pres_y_lower->setText(QString::number(pres_y_upper->text().toDouble() - 10));
+    }
+    pressureChart->axisY()->setRange(pres_y_lower->text().toDouble(), pres_y_upper->text().toDouble());
+}
+
+void DataGraph::adjustPresYLower()
+{
+    if(pres_y_lower->text().toDouble() > pres_y_upper->text().toDouble()) {
+        pres_y_upper->setText(QString::number(pres_y_lower->text().toDouble() + 10));
+    }
+    pressureChart->axisY()->setRange(pres_y_lower->text().toDouble(), pres_y_upper->text().toDouble());
 }

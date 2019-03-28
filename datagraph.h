@@ -1,6 +1,9 @@
 #ifndef DATAGRAPH_H
 #define DATAGRAPH_H
 
+#define MIN_FLOW_RES 100 //L/min //TODO: this
+#define MIN_PRES_RES 25 //mmHg // TODO: this
+
 #include <QWidget>
 
 #include <QtCharts>
@@ -15,6 +18,10 @@
 #include <QStringList>
 #include <QString>
 #include <QTimer>
+#include <QSlider>
+#include <QLineEdit>
+#include <QDoubleValidator>
+#include <QLabel>
 
 #include "parameterinterface.h"
 
@@ -41,8 +48,6 @@ public:
     void setParameterInterface(ParameterInterface *pInterface);
 private:
     // The layouts that are used.
-    QHBoxLayout *graph_hbox = new QHBoxLayout(); /**< The main QHBoxLayout. */
-    QHBoxLayout *checkBox_hbox = new QHBoxLayout();
     QVBoxLayout *vbox = new QVBoxLayout();
 
     // The charts to plot in.
@@ -56,6 +61,7 @@ private:
     QList<QCheckBox*> sensor_enableCheckboxes; /**< The QCheckBox pointers to enable plotting of datapoints. */
 
     QList<QLineSeries*> lineSeries; /**< A QLineSeries that contains the data of a line. */
+    bool isLineSeriesFlow[10] = {false};
 
     QList<QPointF> recentData; /**< The QPoints containing the data that needs to be plotted. */
 
@@ -64,6 +70,31 @@ private:
     bool plotSensors[10] = {false}; /**< A boolean array that contains true if the sensor is to be plotted.*/
 
     ParameterInterface *mInterface = nullptr;
+
+    QSlider *flow_x_slider = new QSlider();
+    QCheckBox *flow_y_auto = new QCheckBox();
+
+    QLineEdit *flow_y_upper = new QLineEdit();
+    QLineEdit *flow_y_lower = new QLineEdit();
+    QLabel *flow_y_label_u = new QLabel();
+    QLabel *flow_y_label_l = new QLabel();
+
+    QSlider *pres_x_slider = new QSlider();
+    QCheckBox *pres_y_auto = new QCheckBox();
+
+    QHBoxLayout *flow_y_widgets = new QHBoxLayout();
+    QHBoxLayout *pres_y_widgets = new QHBoxLayout();
+
+    QLineEdit *pres_y_lower = new QLineEdit();
+    QLineEdit *pres_y_upper = new QLineEdit();
+    QLabel *pres_y_label_u = new QLabel();
+    QLabel *pres_y_label_l = new QLabel();
+
+    QVBoxLayout *flow_vbox = new QVBoxLayout();
+    QVBoxLayout *pres_vbox = new QVBoxLayout();
+
+    QHBoxLayout *graph_hbox = new QHBoxLayout(); /**< The main QHBoxLayout. */
+    QHBoxLayout *checkBox_hbox = new QHBoxLayout();
 
     QList<QColor> plotColours = {
         QColor(255, 0, 0),
@@ -92,6 +123,14 @@ private:
     void createPressureGraph();
 
     void initialiseLineSeries();
+
+    qreal getMaxFlowYRange();
+
+    qreal getMinFlowYRange();
+
+    qreal getMaxPresYRange();
+
+    qreal getMinPresYRange();
 signals:
 
 public slots:
@@ -117,6 +156,18 @@ private slots:
     void plotData();
 
     void plotMembersChanged(bool state);
+
+    void flowAutoAdjustY(bool state);
+
+    void presAutoAdjustY(bool state);
+
+    void adjustFlowYUpper();
+
+    void adjustFlowYLower();
+
+    void adjustPresYUpper();
+
+    void adjustPresYLower();
 };
 
 #endif // DATAGRAPH_H
