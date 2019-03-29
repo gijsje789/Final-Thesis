@@ -18,6 +18,11 @@ FileOperation::~FileOperation()
     closeOutputFile();
 }
 
+void FileOperation::setParameterInterface(ParameterInterface *pInterface)
+{
+    mInterface = pInterface;
+}
+
 // #################### Private functions ####################
 void FileOperation::createGuiItems()
 {
@@ -89,8 +94,38 @@ void FileOperation::startRecording()
     if (!outputFile->isOpen())
         openOutputFile();
 
-    if (outputFile->isWritable() && outputFile->isOpen())
+    if (outputFile->isWritable() && outputFile->isOpen()) {
+        QList<aParams> a_sensor_params = mInterface->getAnalogueSensorParams();
+        QList<dParams> d_sensor_params = mInterface->getDigitalSensorParams();
+        QList<pParams> p_params = mInterface->getPumpParams();
+
+        QString message = "";
+
+        for(aParams &param : a_sensor_params) {
+            message = QString("%1 %2 %3 %4 %5,").
+                    arg(param.name, QString::number(param.type), QString::number(param.enabled),
+                        QString::number(param.aVal),
+                        QString::number(param.bVal));
+            outputFile->write(message.toUtf8());
+        }
+        for(dParams &param : d_sensor_params) {
+            message = QString("%1 %2 %3 %4,").
+                    arg(param.name, QString::number(param.type),
+                        QString::number(param.enabled),
+                        QString::number(param.output));
+            outputFile->write(message.toUtf8());
+        }
+
+        for(pParams &param : p_params) {
+            message = QString("%1 %2 %3 %4,").
+                    arg(param.name, QString::number(param.enabled),
+                        QString::number(param.rate), param.feedback);
+            outputFile->write(message.toUtf8());
+        }
+        outputFile->write("\n");
+
         emit readyToRecord();
+    }
     else if (outputFile == nullptr)
         emit fileFailure("FERR-004");
     else if (!outputFile->isOpen())

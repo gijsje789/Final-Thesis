@@ -43,6 +43,7 @@ MainWindow::MainWindow(QWidget *parent)
     initialiseParamInterface();
     comport_menu->setParameterInterface(param_interface);
     graphs->setParameterInterface(param_interface);
+    file_menu->setParameterInterface(param_interface);
 }
 
 MainWindow::~MainWindow()

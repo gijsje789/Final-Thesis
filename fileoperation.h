@@ -16,6 +16,7 @@
 #include <QByteArray>
 
 #include <QtDebug>
+#include "parameterinterface.h"
 
 /**
  * @brief The FileOperation class handles the appearance and functionality of the file menu.
@@ -33,6 +34,8 @@ public:
      */
     explicit FileOperation(QWidget *parent = nullptr);
 
+    void setParameterInterface(ParameterInterface *pInterface);
+
     ~FileOperation();
 private:
     // Layouts that are used.
@@ -44,6 +47,8 @@ private:
 
     QFile *outputFile = nullptr; /**< The pointer to the output file. */
     QString lastFile = ""; /**< The last file created by the GUI. */
+
+    ParameterInterface *mInterface = nullptr;
 
     /**
      * @brief createGuiItems Creates the widgets for the FileOperation menu.
