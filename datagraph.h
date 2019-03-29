@@ -2,7 +2,7 @@
 #define DATAGRAPH_H
 
 #define MIN_FLOW_RES 100 //L/min //TODO: this
-#define MIN_PRES_RES 25 //mmHg // TODO: this
+#define MIN_PRES_RES 100 //mmHg // TODO: this
 #define MAX_PAST_S 60 // sec
 #define MAX_PAST_VAL 600 // datapoints at 10Hz
 
