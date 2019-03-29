@@ -21,6 +21,11 @@ DataGraph::DataGraph(QWidget *parent) : QWidget(parent)
     //connect(pres_x_slider, SIGNAL(valueChanged(int)), this, SLOT(adjustPresXAxis(int)));
 }
 
+
+void DataGraph::setParameterInterface(ParameterInterface *pInterface)
+{
+    mInterface = pInterface;
+}
 // #################### Private ###################
 void DataGraph::createGuiItems()
 {
@@ -66,7 +71,7 @@ void DataGraph::createGuiItems()
     }
 
     // Create a line series for each sensor.
-    for(int i = 0; i < 10; i++) lineSeries.append(new QLineSeries());
+    removeAndCreateLineSeries();
     for(int i = 0; i < 10; i++) recentData.append(QPointF(0,0));
 
     createFlowGraph();
@@ -170,7 +175,6 @@ qreal DataGraph::getMaxFlowYRange()
     for(int i = 0; i < 10; i++) {
         if(isLineSeriesFlow[i] && lineSeries[i]->isVisible()) {
             for(QPointF &val : lineSeries[i]->points()) {
-                //qDebug() << val.x() << recentData[i].x() << static_cast<qreal>(flow_x_slider->value()) << recentData[i].x() - static_cast<qreal>(flow_x_slider->value());
                 if (val.x() > recentData[i].x() + static_cast<qreal>(flow_x_slider->value()) && val.y() > maxVal) {
                     maxVal = val.y();
                 }
@@ -225,9 +229,13 @@ qreal DataGraph::getMinPresYRange()
     return minVal;
 }
 
-void DataGraph::setParameterInterface(ParameterInterface *pInterface)
+void DataGraph::removeAndCreateLineSeries()
 {
-    mInterface = pInterface;
+    lineSeries.clear();
+
+    for(int i = 0; i < 10; i++) {
+        lineSeries.append(new QLineSeries());
+    }
 }
 // #################### Signals ###################
 // #################### Public slots ###############
@@ -246,8 +254,9 @@ void DataGraph::startPlotting()
     QList<aParams> a_sensor_params = mInterface->getAnalogueSensorParams();
     QList<dParams> d_sensor_params = mInterface->getDigitalSensorParams();
 
-    //flowChart->removeAllSeries();
-    //pressureChart->removeAllSeries();
+    flowChart->removeAllSeries();
+    pressureChart->removeAllSeries();
+    removeAndCreateLineSeries();
 
     for(int i = 0; i < a_sensor_params.size(); i++) {
         if(a_sensor_params[i].enabled && a_sensor_params[i].type == aFlow) {
@@ -324,14 +333,8 @@ void DataGraph::plotMembersChanged()
 
 void DataGraph::flowAutoAdjustY(bool state)
 {
-    qreal max = getMaxFlowYRange();
-    qreal min = getMinFlowYRange();
-
-    if(max - min < MIN_FLOW_RES) {
-        qreal avg = ((min + max) / 2.0);
-        min = avg - 0.5 * static_cast<qreal>(MIN_FLOW_RES);
-        max = avg + 0.5 * static_cast<qreal>(MIN_FLOW_RES);
-    }
+    qreal max = getMaxFlowYRange()+ 0.5 * static_cast<qreal>(MIN_FLOW_RES);
+    qreal min = getMinFlowYRange() - 0.5 * static_cast<qreal>(MIN_FLOW_RES);
 
     if(state) {
         flow_y_upper->hide();
@@ -347,14 +350,8 @@ void DataGraph::flowAutoAdjustY(bool state)
 
 void DataGraph::presAutoAdjustY(bool state)
 {
-    qreal max = getMaxPresYRange();
-    qreal min = getMinPresYRange();
-
-    if(max - min < MIN_PRES_RES) {
-        qreal avg = ((min + max) / 2.0);
-        min = avg - 0.5 * MIN_PRES_RES;
-        max = avg + 0.5 * MIN_PRES_RES;
-    }
+    qreal max = getMaxFlowYRange()+ 0.5 * static_cast<qreal>(MIN_PRES_RES);
+    qreal min = getMinFlowYRange() - 0.5 * static_cast<qreal>(MIN_PRES_RES);
 
     if(state) {
         pres_y_upper->hide();

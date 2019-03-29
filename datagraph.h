@@ -133,6 +133,8 @@ private:
     qreal getMaxPresYRange();
 
     qreal getMinPresYRange();
+
+    void removeAndCreateLineSeries();
 signals:
 
 public slots:
