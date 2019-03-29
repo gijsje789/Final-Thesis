@@ -1,7 +1,7 @@
 #include "datagraph.h"
 
 //TODO: presure graphing
-// TODO: limits based on slider
+// TODO: limits based on slider!!!!
 // #################### Public ####################
 DataGraph::DataGraph(QWidget *parent) : QWidget(parent)
 {
@@ -18,16 +18,16 @@ DataGraph::DataGraph(QWidget *parent) : QWidget(parent)
     connect(flow_y_lower, SIGNAL(editingFinished()), this, SLOT(adjustFlowYLower()));
     connect(pres_y_upper, SIGNAL(editingFinished()), this, SLOT(adjustPresYUpper()));
     connect(pres_y_lower, SIGNAL(editingFinished()), this, SLOT(adjustPresYLower()));
-    connect(flow_x_slider, SIGNAL(valueChanged(int)), this, SLOT(adjustFlowXAxis(int)));
-    connect(pres_x_slider, SIGNAL(valueChanged(int)), this, SLOT(adjustPresXAxis(int)));
+    //connect(flow_x_slider, SIGNAL(valueChanged(int)), this, SLOT(adjustFlowXAxis(int)));
+    //connect(pres_x_slider, SIGNAL(valueChanged(int)), this, SLOT(adjustPresXAxis(int)));
 }
 
 // #################### Private ###################
 void DataGraph::createGuiItems()
 {
     flow_x_slider->setOrientation(Qt::Horizontal);
-    flow_x_slider->setRange(-100, -1);
-    flow_x_slider->setValue(50);
+    flow_x_slider->setRange(-MAX_PAST_S, -1);
+    flow_x_slider->setValue(-1);
     flow_y_auto->setChecked(true);
 
     flow_y_upper->setValidator(new QDoubleValidator());
@@ -38,8 +38,8 @@ void DataGraph::createGuiItems()
     flow_y_lower->hide();
 
     pres_x_slider->setOrientation(Qt::Horizontal);
-    pres_x_slider->setRange(-100, -1);
-    pres_x_slider->setValue(50);
+    pres_x_slider->setRange(-MAX_PAST_S, -1);
+    pres_x_slider->setValue(-1);
     pres_y_auto->setChecked(true);
 
     pres_y_upper->setValidator(new QDoubleValidator());
@@ -171,7 +171,8 @@ qreal DataGraph::getMaxFlowYRange()
     for(int i = 0; i < 10; i++) {
         if(isLineSeriesFlow[i] && lineSeries[i]->isVisible()) {
             for(QPointF &val : lineSeries[i]->points()) {
-                if (val.y() > maxVal) {
+                //qDebug() << val.x() << recentData[i].x() << static_cast<qreal>(flow_x_slider->value()) << recentData[i].x() - static_cast<qreal>(flow_x_slider->value());
+                if (val.x() > recentData[i].x() + static_cast<qreal>(flow_x_slider->value()) && val.y() > maxVal) {
                     maxVal = val.y();
                 }
             }
@@ -186,7 +187,7 @@ qreal DataGraph::getMinFlowYRange()
     for(int i = 0; i < 10; i++) {
         if(isLineSeriesFlow[i] && lineSeries[i]->isVisible()) {
             for(QPointF &val : lineSeries[i]->points()) {
-                if (val.y() < minVal) {
+                if (val.x() > recentData[0].x() + static_cast<qreal>(flow_x_slider->value()) && val.y() < minVal) {
                     minVal = val.y();
                 }
             }
@@ -298,7 +299,7 @@ void DataGraph::plotData()
 
         if (!recentData[i].isNull()) {
             lineSeries[i]->append(recentData[i]);
-            if (lineSeries[i]->count()>500) {
+            if (lineSeries[i]->count()>MAX_PAST_VAL) {
                 lineSeries[i]->remove(0);
             }
         }
