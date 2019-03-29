@@ -157,7 +157,7 @@ private slots:
      */
     void plotData();
 
-    void plotMembersChanged(bool state);
+    void plotMembersChanged();
 
     void flowAutoAdjustY(bool state);
 
