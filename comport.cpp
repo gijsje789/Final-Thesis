@@ -224,6 +224,17 @@ void ComPort::sendStartSignalToDevice()
     while(serial_port->waitForBytesWritten(-1)){}
     std::this_thread::sleep_for(std::chrono::milliseconds(100));
 }
+
+void ComPort::sendStopSignalToDevice()
+{
+    QString message = "R\n";
+    if(serial_port != nullptr && serial_port->isOpen()) {
+        qDebug() << "Writing:" << message;
+        serial_port->write(message.toUtf8());
+        while(serial_port->waitForBytesWritten(-1)){}
+        std::this_thread::sleep_for(std::chrono::milliseconds(100));
+    }
+}
 // #################### Signals ####################
 // #################### Public slots ###############
 void ComPort::initialiseComPort()
@@ -254,6 +265,8 @@ void ComPort::initialiseComPort()
 
 void ComPort::disconnect(bool failure)
 {
+    sendStopSignalToDevice();
+
     deleteTimer();
     if (serial_port != nullptr && serial_port->isOpen())
         serial_port->close();

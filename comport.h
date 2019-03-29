@@ -135,6 +135,8 @@ private:
      * @brief sendStartSignalToDevice Sends the start signal to the device using serial_port.
      */
     void sendStartSignalToDevice();
+
+    void sendStopSignalToDevice();
 signals:
     /**
      * @brief comPortFailure This signal is emitted when a problem occured concerning the COM-port.
