@@ -231,7 +231,14 @@ qreal DataGraph::getMinPresYRange()
 
 void DataGraph::removeAndCreateLineSeries()
 {
+    for(QLineSeries *line : lineSeries) {
+        line->clear();
+    }
+
     lineSeries.clear();
+
+    recentData.clear();
+    for(int i = 0; i < 10; i++) recentData.append(QPointF(0,0));
 
     for(int i = 0; i < 10; i++) {
         lineSeries.append(new QLineSeries());
