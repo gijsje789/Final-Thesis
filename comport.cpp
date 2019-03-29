@@ -185,7 +185,7 @@ bool ComPort::sendParametersToDevice()
 
     for (dParams &sensor : *d_params) {
         if (sensor.enabled)
-            message = QString("%1 %2 %3 %4\n").
+            message = QString("%1 %2 %3\n").
                     arg(sensor.name, QString::number(sensor.enabled),
                         QString::number(sensor.output, 'f', 10));
         else
@@ -257,9 +257,8 @@ void ComPort::disconnect(bool failure)
     deleteTimer();
     if (serial_port != nullptr && serial_port->isOpen())
         serial_port->close();
-
+    deleteComPort();
     if (!failure) {
-        deleteComPort();
         comPortSuccess("disconnected");
     }
 }
