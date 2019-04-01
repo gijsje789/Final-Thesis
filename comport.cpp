@@ -212,6 +212,18 @@ bool ComPort::sendParametersToDevice()
         std::this_thread::sleep_for(std::chrono::milliseconds(100));
     }
 
+    for(int i = 1; i < 5; i++) {
+        message = QString("C%1 %2 %3 %4").
+                arg(QString::number(i),
+                    QString::number(0.01),
+                    QString::number(0.0025),
+                    QString::number(1));
+        qDebug() << "writing: " << message;
+        serial_port->write(message.toUtf8());
+        while(serial_port->waitForBytesWritten(-1)) {}
+        std::this_thread::sleep_for(std::chrono::milliseconds(100));
+    }
+
     return true;
 }
 
