@@ -29,8 +29,47 @@ QGridLayout* DigitalSensorMenu::getMainLayout()
 dParams DigitalSensorMenu::getParams()
 {
     dType type = flow_radioButton->isChecked() ? dFlow : dPressure;
+
+   /* const QString flowItems[4] = {"P/L/min", "P/L/s",
+                                  "P/mL/min", "P/mL/s"};
+    const QString presItems[4] = {"P/psi", "P/bar",
+                                  "P/mbar", "P/mmHg"}; */
+    double input_val = 0;
+    QString input_unit = input_comboBox->currentText();
+
+    if(type == dFlow) {
+        if(input_unit == "P/L/min") {
+            // No conversion needed.
+            input_val = input_lineEdit->text().toDouble();
+        } else if(input_unit == "P/L/s") {
+            input_val = input_lineEdit->text().toDouble() * (1.0 / 60.0);
+        } else if(input_unit == "P/mL/min") {
+            input_val = input_lineEdit->text().toDouble() * (1000.0);
+        } else if(input_unit == "P/mL/s") {
+            input_val = input_lineEdit->text().toDouble() * (1000.0 / 60.0);
+        } else {
+            qDebug() << sensorName << "Unknown input unit";
+        }
+    } else if(type == dPressure) {
+        if(input_unit == "P/psi") {
+            input_val = input_lineEdit->text().toDouble() * (1.0 / 51.7149326);
+        } else if(input_unit == "P/bar") {
+            input_val = input_lineEdit->text().toDouble() * (1.0 / 750.061683);
+        } else if(input_unit == "P/mbar") {
+            input_val = input_lineEdit->text().toDouble() * (1000.0 / 750.061683);
+        } else if(input_unit == "P/mmHg") {
+            // No conversion needed.
+            input_val = input_lineEdit->text().toDouble();
+        } else {
+            qDebug() << sensorName << "Unknown input unit";
+        }
+    } else {
+        qDebug() << sensorName << "Unknown sensor type.";
+    }
+
+
     dParams params = {
-        sensorName, enable_checkBox->isChecked(), type, input_lineEdit->text().toDouble()
+        sensorName, enable_checkBox->isChecked(), type, input_val
     };
     return params;
 }

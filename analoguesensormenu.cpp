@@ -29,8 +29,61 @@ QGridLayout* AnalogueSensorMenu::getMainLayout()
 aParams AnalogueSensorMenu::getParams()
 {
     aType type = flow_radioButton->isChecked() ? aFlow : aPressure;
+    double a_val = 0;
+    double b_val = 0;
+
+    QString a_unit = a_unit_comboBox->currentText();
+    QString b_unit = b_unit_comboBox->currentText();
+
+    if(type == aFlow) {
+        if(a_unit == "V/L/min" || a_unit == "mV/mL/min") {
+            // No conversion needed.
+            a_val = a_val_lineEdit->text().toDouble();
+        } else if(a_unit == "V/L/s" || a_unit == "mV/mL/s") {
+            a_val = a_val_lineEdit->text().toDouble() * (1.0 / 60.0);
+        } else if(a_unit == "V/mL/min") {
+            a_val = a_val_lineEdit->text().toDouble() * (1000.0);
+        } else if(a_unit == "V/mL/s") {
+            a_val = a_val_lineEdit->text().toDouble() * (1000.0 / 60.0);
+        } else if(a_unit == "mV/L/min") {
+            a_val = a_val_lineEdit->text().toDouble() * (1.0 / 1000.0);
+        } else if(a_unit == "mV/L/s") {
+            a_val = a_val_lineEdit->text().toDouble() * (1.0 / 60000.0);
+        } else {
+            qDebug() << sensorName << "Unknown a unit";
+        }
+    } else if(type == aPressure) {
+        if(a_unit == "V/psi") {
+            a_val = a_val_lineEdit->text().toDouble() * (1.0 / 51.7149326);
+        } else if(a_unit == "mV/psi"){
+            a_val = a_val_lineEdit->text().toDouble() * (1.0 / 51714.9326);
+        } else if(a_unit == "V/bar" || a_unit == "mV/mbar") {
+            a_val = a_val_lineEdit->text().toDouble() * (1.0 / 750.061683);
+        } else if(a_unit == "V/mbar") {
+            a_val = a_val_lineEdit->text().toDouble() * (1000.0 / 750.061683);
+        } else if(a_unit == "mV/bar") {
+            a_val = a_val_lineEdit->text().toDouble() * (1.0 / 750061.683);
+        } else if(a_unit == "V/mmHg") {
+            // No conversion needed.
+            a_val = a_val_lineEdit->text().toDouble();
+        } else if(a_unit == "mV/mmHg") {
+            a_val = a_val_lineEdit->text().toDouble() * (1.0 / 1000.0);
+        } else {
+            qDebug() << sensorName << "Unknown b unit";
+        }
+    } else {
+        qDebug() << sensorName << "Unknown sensor type.";
+    }
+
+    if(b_unit == "V") {
+        // No conversion needed.
+        b_val = b_val_lineEdit->text().toDouble();
+    } else if(b_unit == "mV"){
+        b_val = b_val_lineEdit->text().toDouble() * (1.0 / 1000.0);
+    }
+
     aParams params = {
-        sensorName, enable_checkBox->isChecked(), type, a_val_lineEdit->text().toDouble(), b_val_lineEdit->text().toDouble()
+        sensorName, enable_checkBox->isChecked(), type, a_val, b_val
     };
     return params;
 }

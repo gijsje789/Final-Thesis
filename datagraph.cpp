@@ -1,6 +1,5 @@
 #include "datagraph.h"
 
-//TODO: presure graphing
 // #################### Public ####################
 DataGraph::DataGraph(QWidget *parent) : QWidget(parent)
 {
