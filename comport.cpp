@@ -213,7 +213,7 @@ bool ComPort::sendParametersToDevice()
     }
 
     for(int i = 1; i < 5; i++) {
-        message = QString("C%1 %2 %3 %4").
+        message = QString("C%1 1 %2 %3 %4\n").
                 arg(QString::number(i),
                     QString::number(0.01),
                     QString::number(0.0025),

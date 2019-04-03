@@ -68,6 +68,7 @@ void MainControls::recordingFail(QString message)
 void MainControls::comPortFail(QString message)
 {
     init_label->setText("Error: " + message);
+    init_pushButton->setEnabled(true);
 }
 
 void MainControls::comPortSuccess(QString message)
@@ -89,8 +90,9 @@ void MainControls::recordButtonPressed()
 
 void MainControls::initButtonPressed()
 {
+    init_pushButton->setEnabled(false);
     emit initSetup();
-    record_pushButton->setEnabled(true);
+    record_pushButton->setEnabled(true);   
 }
 
 void MainControls::stopButtonPressed()
@@ -98,5 +100,6 @@ void MainControls::stopButtonPressed()
     qDebug() <<  "Stop is pressed.";
     record_label->setVisible(false);
     record_pushButton->setEnabled(false);
+    init_pushButton->setEnabled(true);
     emit disconnect();
 }

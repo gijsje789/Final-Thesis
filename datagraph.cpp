@@ -250,6 +250,7 @@ void DataGraph::dataReadyForPlot(QStringList data)
     for(int i = 0; i < recentData.size(); i++) {
         recentData[i] = (QPointF(static_cast<double>(data[0].toInt())/1000.0,
                          static_cast<double>(data[i+1].toInt())));
+        //qDebug() << data[0].toInt() << data[i+1].toInt();
     }
 }
 
