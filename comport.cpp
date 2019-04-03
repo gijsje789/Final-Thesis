@@ -287,6 +287,26 @@ void ComPort::disconnect(bool failure)
         comPortSuccess("disconnected");
     }
 }
+
+void ComPort::updatePumpParameter(QString pumpName, bool enabled, double flowrate, QString feedback)
+{
+    if(serial_port != nullptr && serial_port->isOpen()) {
+        if(feedback != "Pick") {
+            QString message;
+            if(enabled) {
+             message = QString("%1 1 %2 %3\n").arg(pumpName,
+                                                      QString::number(flowrate),
+                                                      feedback);
+            } else {
+              message = QString("%1 0\n").arg(pumpName);
+            }
+            qDebug() << "Writing: " << message;
+            serial_port->write(message.toUtf8());
+            while(serial_port->waitForBytesWritten(-1)){}
+            //std::this_thread::sleep_for(std::chrono::milliseconds(100));
+        }
+    }
+}
 // #################### Private slots ####################
 void ComPort::selectComPort()
 {

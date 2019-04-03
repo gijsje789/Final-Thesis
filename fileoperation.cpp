@@ -102,14 +102,14 @@ void FileOperation::startRecording()
         QString message = "";
 
         for(aParams &param : a_sensor_params) {
-            message = QString("%1 %2 %3 %4 %5,").
+            message = QString("%1 %2 %3 %4 %5").
                     arg(param.name, QString::number(param.type), QString::number(param.enabled),
                         QString::number(param.aVal),
                         QString::number(param.bVal));
             outputFile->write(message.toUtf8());
         }
         for(dParams &param : d_sensor_params) {
-            message = QString("%1 %2 %3 %4,").
+            message = QString("%1 %2 %3 %4").
                     arg(param.name, QString::number(param.type),
                         QString::number(param.enabled),
                         QString::number(param.output));
@@ -117,7 +117,7 @@ void FileOperation::startRecording()
         }
 
         for(pParams &param : p_params) {
-            message = QString("%1 %2 %3 %4,").
+            message = QString("%1 %2 %3 %4").
                     arg(param.name, QString::number(param.enabled),
                         QString::number(param.rate), param.feedback);
             outputFile->write(message.toUtf8());

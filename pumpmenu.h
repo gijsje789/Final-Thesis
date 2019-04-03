@@ -112,6 +112,8 @@ signals:
      * @param sensor The previously selected sensor.
      */
     void comboBoxSensorReset(QString sensor);
+
+    void updatePumpParameter(QString name, bool enabled, double rate, QString feedback);
 private slots:
     /**
      * @brief enableCheckboxToggled The callback function when the enable_checkBox is toggled.
@@ -124,6 +126,8 @@ private slots:
      * @param sensor The newly selected sensor.
      */
     void comboBoxSelectionChanged(QString sensor);
+
+    void updatePushButtonPressed();
 public slots:
     /**
      * @brief addSensorToComboBox The callback function when a flow sensor is defined and it must be added to the feedback_comboBox.

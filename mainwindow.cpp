@@ -78,6 +78,8 @@ void MainWindow::connectWidgets()
                 connect(send, SIGNAL(comboBoxSensorReset(QString)), rec, SLOT(addSensorToComboBox(QString)));
             }
         }
+        connect(send, SIGNAL(updatePumpParameter(QString, bool, double, QString)),
+                comport_menu, SLOT(updatePumpParameter(QString, bool, double, QString)));
     }
 
     connect(mainControl_menu, SIGNAL(startRecording()), file_menu, SLOT(startRecording()));

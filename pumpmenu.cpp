@@ -15,6 +15,7 @@ PumpMenu::PumpMenu(QString name, QWidget *parent)
 
     connect(enable_checkBox, SIGNAL(toggled(bool)), this, SLOT(enableCheckboxToggled(bool)));
     connect(feedback_comboBox, SIGNAL(currentIndexChanged(QString)), this, SLOT(comboBoxSelectionChanged(QString)));
+    connect(update_pushButton, SIGNAL(pressed()), this, SLOT(updatePushButtonPressed()));
 }
 
 // #################### Public functions ####################
@@ -153,3 +154,10 @@ void PumpMenu::removeSensorFromComboBox(QString sensor)
 
 }
 
+void PumpMenu::updatePushButtonPressed()
+{
+    emit updatePumpParameter(pumpName,
+                             enable_checkBox->isChecked(),
+                             pumpRate_lineEdit->text().toDouble(),
+                             feedback_comboBox->currentText());
+}

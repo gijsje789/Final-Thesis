@@ -176,6 +176,8 @@ public slots:
      */
     void disconnect(bool failure = false);
 
+    void updatePumpParameter(QString pumpName, bool enabled, double flowrate, QString feedback);
+
 private slots:
     /**
      * @brief selectComPort The slot that is creates the ComPortSelectWindow.
