@@ -68,7 +68,6 @@ void MainControls::recordingFail(QString message)
 void MainControls::comPortFail(QString message)
 {
     init_label->setText("Error: " + message);
-    init_pushButton->setEnabled(true);
 }
 
 void MainControls::comPortSuccess(QString message)
