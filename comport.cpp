@@ -73,7 +73,7 @@ void ComPort::extractSensorValues(QString data)
     else
         allData = oldData + data;
 
-    //qDebug() << allData;
+    qDebug() << allData << endl;
     oldData.clear();
     QString message = "";
     QStringList splitted;
@@ -86,7 +86,7 @@ void ComPort::extractSensorValues(QString data)
                 dataGood = true;
             } else {
                 // Just ignore data that is incorrect.
-               // qDebug() << "Data no good." << i << message;
+               //qDebug() << "Data no good." << i << message;
             }
             message.clear();
         } else {
@@ -101,7 +101,7 @@ void ComPort::extractSensorValues(QString data)
         }
 
         if (dataGood) {
-            // qDebug() << splitted;
+            //qDebug() << splitted;
             emit dataReadyForPlot(splitted);
             // qDebug() output for visual verification.
             QString combinedSensorValues = "";
@@ -167,53 +167,62 @@ bool ComPort::sendParametersToDevice()
         return false;
     }
 
+    //serial_port->clear(QSerialPort::AllDirections);
+    // Somehow, the first 3 messages do not arrive, are corrupted, or something.
+    // bug fix is by sending 3 garbage messages. The fist analogue sensor is then normally received.
     QString message = "";
-    for (aParams &sensor : *a_params) {
-        if (sensor.enabled)
-            message = QString("%1 %2 %3 %4\n").
-                    arg(sensor.name, QString::number(sensor.enabled),
-                        QString::number(sensor.aVal, 'f', 10),
-                        QString::number(sensor.bVal, 'f', 10));
-        else
-            message = QString("%1 0\n").arg(sensor.name);
-
+    for(int i = 1; i < 4; i++) {
+        message = QString("%1 Garbage\n").arg(QString::number(i));
         qDebug() << "writing: " << message;
         serial_port->write(message.toUtf8());
         while(serial_port->waitForBytesWritten(-1)) {}
-        std::this_thread::sleep_for(std::chrono::milliseconds(100));
+
+        std::this_thread::sleep_for(std::chrono::milliseconds(200));
+    }
+
+   for (aParams &sensor : *a_params) {
+        if (sensor.enabled) {
+            message = QString("%1 %2 %3\n").
+                    arg(sensor.name,
+                        QString::number(sensor.aVal, 'f', 10),
+                        QString::number(sensor.bVal, 'f', 10));
+
+            qDebug() << "writing: " << message;
+            serial_port->write(message.toUtf8());
+            while(serial_port->waitForBytesWritten(-1)) {}
+            std::this_thread::sleep_for(std::chrono::milliseconds(200));
+        }
     }
 
     for (dParams &sensor : *d_params) {
-        if (sensor.enabled)
-            message = QString("%1 %2 %3\n").
-                    arg(sensor.name, QString::number(sensor.enabled),
+        if (sensor.enabled) {
+            message = QString("%1 %2\n").
+                    arg(sensor.name,
                         QString::number(sensor.output, 'f', 10));
-        else
-            message = QString("%1 0\n").arg(sensor.name);
 
-        qDebug() << "writing: " << message;
-        serial_port->write(message.toUtf8());
-        while(serial_port->waitForBytesWritten(-1)) {}
-        std::this_thread::sleep_for(std::chrono::milliseconds(100));
+            qDebug() << "writing: " << message;
+            serial_port->write(message.toUtf8());
+            while(serial_port->waitForBytesWritten(-1)) {}
+            std::this_thread::sleep_for(std::chrono::milliseconds(200));
+        }
     }
 
     for (pParams &pump : *p_params) {
-        if (pump.enabled)
-            message = QString("%1 %2 %3 %4\n").
-                    arg(pump.name, QString::number(pump.enabled),
+        if (pump.enabled) {
+            message = QString("%1 %2 %3\n").
+                    arg(pump.name,
                         QString::number(pump.rate, 'f', 10),
                         pump.feedback);
-        else
-            message = QString("%1 0\n").arg(pump.name);
 
-        qDebug() << "writing: " << message;
-        serial_port->write(message.toUtf8());
-        while(serial_port->waitForBytesWritten(-1)) {}
-        std::this_thread::sleep_for(std::chrono::milliseconds(100));
+            qDebug() << "writing: " << message;
+            serial_port->write(message.toUtf8());
+            while(serial_port->waitForBytesWritten(-1)) {}
+            std::this_thread::sleep_for(std::chrono::milliseconds(200));
+        }
     }
 
     for(int i = 1; i < 5; i++) {
-        message = QString("C%1 1 %2 %3 %4\n").
+        message = QString("C%1 %2 %3 %4\n").
                 arg(QString::number(i),
                     QString::number(0.01),
                     QString::number(0.0025),
@@ -221,7 +230,7 @@ bool ComPort::sendParametersToDevice()
         qDebug() << "writing: " << message;
         serial_port->write(message.toUtf8());
         while(serial_port->waitForBytesWritten(-1)) {}
-        std::this_thread::sleep_for(std::chrono::milliseconds(100));
+        std::this_thread::sleep_for(std::chrono::milliseconds(200));
     }
 
     return true;
@@ -232,9 +241,9 @@ void ComPort::sendStartSignalToDevice()
     QString message = "Q\n";
     qDebug() << "writing:" << message;
     serial_port->write(message.toUtf8());
-    emit startPlotting();
     while(serial_port->waitForBytesWritten(-1)){}
-    std::this_thread::sleep_for(std::chrono::milliseconds(100));
+    std::this_thread::sleep_for(std::chrono::milliseconds(200));
+    emit startPlotting();
 }
 
 void ComPort::sendStopSignalToDevice()
@@ -244,7 +253,7 @@ void ComPort::sendStopSignalToDevice()
         qDebug() << "Writing:" << message;
         serial_port->write(message.toUtf8());
         while(serial_port->waitForBytesWritten(-1)){}
-        std::this_thread::sleep_for(std::chrono::milliseconds(100));
+        std::this_thread::sleep_for(std::chrono::milliseconds(200));
     }
 }
 // #################### Signals ####################
@@ -294,11 +303,11 @@ void ComPort::updatePumpParameter(QString pumpName, bool enabled, double flowrat
         if(feedback != "Pick") {
             QString message;
             if(enabled) {
-             message = QString("%1 1 %2 %3\n").arg(pumpName,
+                 message = QString("%1 %2 %3\n").arg(pumpName,
                                                       QString::number(flowrate),
                                                       feedback);
             } else {
-              message = QString("%1 0\n").arg(pumpName);
+                 message = QString("%1 0 NA\n").arg(pumpName);
             }
             qDebug() << "Writing: " << message;
             serial_port->write(message.toUtf8());
