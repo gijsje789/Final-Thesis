@@ -120,6 +120,8 @@ void DataGraph::createFlowGraph()
     flowChart->legend()->hide();
     flowChart->addSeries(lineSeries[0]);
     flowChart->createDefaultAxes();
+    flowChart->axes(Qt::Horizontal)[0]->setTitleText("Time [s]");
+    flowChart->axes(Qt::Vertical)[0]->setTitleText("Flow rate [L/min]");
 
     // Customize the title font
     QFont font;
@@ -143,6 +145,8 @@ void DataGraph::createPressureGraph()
     pressureChart->legend()->hide();
     pressureChart->addSeries(lineSeries[9]);
     pressureChart->createDefaultAxes();
+    pressureChart->axes(Qt::Horizontal)[0]->setTitleText("Time [s]");
+    pressureChart->axes(Qt::Vertical)[0]->setTitleText("Pressure [mmHg]");
 
     // Customize the title font
     QFont font;
@@ -250,7 +254,7 @@ void DataGraph::dataReadyForPlot(QStringList data)
     // qDebug() << data;
     for(int i = 0; i < recentData.size(); i++) {
         recentData[i] = (QPointF(static_cast<double>(data[0].toInt())/1000.0,
-                         static_cast<double>(data[i+1].toDouble())));
+                         static_cast<double>(data[i+1].toDouble())/10000.0));
     }
 }
 
@@ -291,7 +295,11 @@ void DataGraph::startPlotting()
         }
     }
     flowChart->createDefaultAxes();
+    flowChart->axes(Qt::Horizontal)[0]->setTitleText("Time [s]");
+    flowChart->axes(Qt::Vertical)[0]->setTitleText("Flow rate [L/min]");
     pressureChart->createDefaultAxes();
+    pressureChart->axes(Qt::Horizontal)[0]->setTitleText("Time [s]");
+    pressureChart->axes(Qt::Vertical)[0]->setTitleText("Pressure [mmHg]");
 
     plotTimer->start(100);
     for(QLineSeries* series : lineSeries) {
