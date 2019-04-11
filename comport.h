@@ -1,10 +1,12 @@
 #ifndef COMPORT_H
 #define COMPORT_H
 
-#define BAUDRATE 9600 // bits per second
+#define BAUDRATE 115200 // bits per second
 #define POLL_INPUT_TIME 100 // msec
 
 #define DATA_INPUT_LENGTH 11 // items (time stamp, 5 analogue sensor, 5 digital sensor).
+
+#include <math.h>
 
 #include <QSizePolicy>
 

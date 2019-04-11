@@ -98,6 +98,12 @@ private:
     PumpMenu *p3_menu = new PumpMenu("P3", p3_widget); /**< The actual class objects that creates the fields and handles all the functionality to define pump 3. */
     PumpMenu *p4_menu = new PumpMenu("P4", p4_widget); /**< The actual class objects that creates the fields and handles all the functionality to define pump 4. */
 
+    QLabel *UTLabel = new QLabel(centralWidget);
+    QLabel *RAMLabel = new QLabel(centralWidget);
+    QLabel *GijsLabel = new QLabel(centralWidget);
+    QLabel *QTLabel = new QLabel(centralWidget);
+
+
     ParameterInterface *param_interface = new ParameterInterface;
 
     /**
