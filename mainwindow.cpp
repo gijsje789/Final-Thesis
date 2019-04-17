@@ -45,17 +45,17 @@ MainWindow::MainWindow(QWidget *parent)
     graphs->setParameterInterface(param_interface);
     file_menu->setParameterInterface(param_interface);
 
-    QPixmap pix("../UserInterface/Images/universityoftwente.png");
+    QPixmap pix("./Images/universityoftwente.png");
     pix = pix.scaled(300, 200);
     UTLabel->setGeometry(((WINDOW_W-4*WIDGET_SPACE)/3)+20, SMENU_H+20, 300, 200);
     UTLabel->setPixmap(pix);
 
-    QPixmap pix2("../UserInterface/Images/RAMlogo.png");
+    QPixmap pix2("./Images/RAMlogo.png");
     //pix2 = pix2.scaled(147,200);
     RAMLabel->setGeometry((((WINDOW_W-4*WIDGET_SPACE)/3)+320), SMENU_H+100, 147, 55);
     RAMLabel->setPixmap(pix2);
 
-    QPixmap pix3("../UserInterface/Images/QTLOGO.png");
+    QPixmap pix3("./Images/QTLOGO.png");
     pix3 = pix3.scaledToHeight(55);
     QTLabel->setGeometry((((WINDOW_W-4*WIDGET_SPACE)/3)+500), SMENU_H+100, 200, 55);
     QTLabel->setPixmap(pix3);

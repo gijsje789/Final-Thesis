@@ -1,7 +1,7 @@
 #ifndef FILEOPERATION_H
 #define FILEOPERATION_H
 
-#define FILE_LOC "../UserInterface_outputFiles/"
+#define FILE_LOC "./Output/"
 
 #include <QWidget>
 #include <QDateTime>
