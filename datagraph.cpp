@@ -234,9 +234,9 @@ qreal DataGraph::getMinPresYRange()
 
 void DataGraph::removeAndCreateLineSeries()
 {
-    for(QLineSeries *line : lineSeries) {
-        line->clear();
-    }
+    /*for(QLineSeries *line : lineSeries) {
+        delete line;
+    }*/
 
     lineSeries.clear();
 

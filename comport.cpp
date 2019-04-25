@@ -221,25 +221,6 @@ bool ComPort::sendParametersToDevice()
         }
     }
 
-    double BETA = 7.5;
-    double WC = 0.1; // kleiner 0.5
-    double CUTOFF = 1.0;
-    double SAMPLING_RATE = 100.0;
-    double M = 2; // kleiner dan 1, demping invloed
-
-    double RC = 1.0 / (CUTOFF*2*3.14);
-    double DT = 1.0 / (SAMPLING_RATE);
-    double alpha = 0; // DT / (RC+DT);
-
-    double TZ = sqrt(BETA) * (1.0/WC);
-    double TP = 1.0/(sqrt(BETA)*WC);
-    double TI = sqrt(BETA) * (2.0/WC);
-    double KC = (M*WC*WC)/(sqrt(BETA));
-
-    double KP = KC * (1.0 + (TZ / TI));
-    double KI = KC / TI;
-    double KD = KC * TZ;
-
     for(int i = 1; i < 5; i++) {
         message = QString("C%1 %2 %3 %4 %5\n").
                 arg(QString::number(i),
