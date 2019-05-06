@@ -101,6 +101,9 @@ void FileOperation::startRecording()
 
         QString message = "";
 
+        message = QString("T[ms],");
+        outputFile->write(message.toUtf8());
+
         for(aParams &param : a_sensor_params) {
             message = QString("%1 %2 %3 %4 %5,").
                     arg(param.name, QString::number(param.type), QString::number(param.enabled),
