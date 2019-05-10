@@ -9,7 +9,7 @@
 %\usepackage{makeidx}				% Index support
 %\usepackage[totoc,justific=RaggedRight]{idxlayout}	% Make last page of index balanced and add index to toc
 \usepackage{caption}				% Provides means to style captions
-%\usepackage{subcaption}				% Provides support for (sub)figures and (sub)tables
+\usepackage{subcaption}				% Provides support for (sub)figures and (sub)tables
 \usepackage{float}					% Improved interface for floating objects (eg figures, tables, ...)
 \usepackage{enumitem}				% Add styling support to (enumerate) environments
 \usepackage{listings}				% Allows (external) source files to be shown in a syntax highlighted way
@@ -29,8 +29,10 @@
 \definecolor{Gray}{gray}{0.9}
 \usepackage{svg}
 \usepackage{tabularx}
+\usepackage{array}
+\newcolumntype{P}[1]{>{\centering\arraybackslash}p{#1}}
 
-\usepackage{relsize}
+\usepackage{changepage}
 
 \usepackage{xfrac}
 
@@ -38,7 +40,7 @@
 
 \usepackage{multicol}
 \usepackage{multirow}
-\usepackage{chngpage}
+%\usepackage{chngpage}
 
 \usepackage[bottom]{footmisc}
 
@@ -215,6 +217,12 @@
 	short	= SA,
 	long	= Short Axis,
 	class	= abbrev
+}
+
+\DeclareAcronym{MWCO}{
+	short 	= MWCO,
+	long	= Molecular Weight Cut Off,
+	class 	= abbrev
 }
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%% END ACRONYM %%%%%%%%%%%%%%%%%%%

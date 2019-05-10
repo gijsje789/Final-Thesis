@@ -1,0 +1,144 @@
+\chapter{Experiments}
+\label{ch:experiments}
+This section describes the outcome of the various experiments performed, both at the university as well as at the ZGT in Hengelo.
+
+The experiments are evaluated based on the average flow, see , the standard deviation, see , and the min and maximum measured flows.
+
+\begin{equation}
+	\mu = \frac{1}{K}\sum_{n=1}^{K}{x_i}, \text{ K = \# of samples}
+\end{equation}
+
+\begin{equation}
+	\sigma = \sqrt{\frac{\sum_{n=1}^{K}{(x_i - \mu)^2}}{K}}, \text{ K = \# of samples}
+\end{equation}
+
+
+\section{University experiments}
+The complete set-up is tested to verify the performance of the phantom before proceeding with the hospital experiments, its results are shown in table \ref{tab:university_first}.
+\begin{table}[H]
+\caption{Flow accuracies university experiment. Percentage relative to average flow. "Min" percentage is said percentage below average flow, whereas "Max" percentage is said percentage above average flow.}
+\label{tab:university_first}
+\begin{tabular}{lc|cccc|}
+					&    		& \multicolumn{2}{c}{Aorta} 					& \multicolumn{2}{c}{Myocardium} 	\\ \hline
+$\mu$ 		& [L/min]   & \multicolumn{2}{c}{4.964864 }	& \multicolumn{2}{c|}{0.459017} \\
+$\sigma$ (68.2\%) 	& [L/min]	& 0.01198 & 0.24129\%		& 0.003746 & 0.815983\%                          \\
+2$\sigma$ (95.4\%) 	& [L/min] 	& 0.023959 & 0.482579\%		& 0.007491 & 1.631967\%                         \\
+Min 				& [L/min]  	& 4.9324 & 0.653882\% & 0.4535 & 1.201867\% \\
+Max 				& [L/min]	& 4.9878 & 0.46196\%  & 0.4704 & 2.479916\%  \\ \cline{3-6} 
+\end{tabular}
+\end{table}
+\section{Hospital experiments}
+\subsection*{April 18, 2019}
+\begin{table}[H]
+\caption{Flow accuracies first hospital experiment. Percentage relative to average flow. "Min" percentage is said percentage below average flow, whereas "Max" percentage is said percentage above average flow.}
+\label{tab:hospital_first}
+\begin{tabular}{lc|cccc|}
+					&    		& \multicolumn{2}{c}{Aorta} 					& \multicolumn{2}{c}{Myocardium} 		\\ \hline
+$\mu$ 		& [L/min]   & \multicolumn{2}{c}{4.957553 } & \multicolumn{2}{c|}{0.08652323} \\
+$\sigma$ (68.2\%) 	& [L/min]	& 0.017964 & 0.362361\%		& 0.000914 & 1.0564\%                          	\\
+2$\sigma$ (95.4\%) 	& [L/min] 	& 0.035928 & 0.724722\%		& 0.001828 &  2.1128\%                         				\\
+Min 				& [L/min]  	& 4.8959 & -1.24362\% &  0.0856 & -1.06704\% \\
+Max 				& [L/min]	& 5.0051 & +0.959075\%  & 0.0879 & +1.591209\% \\ \cline{3-6} 
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\caption{Flow accuracies second hospital experiment. Percentage relative to average flow. "Min" percentage is said percentage below average flow, whereas "Max" percentage is said percentage above average flow.}
+\label{tab:hospital_second}
+\begin{tabular}{lc|cccc|}
+					&    		& \multicolumn{2}{c}{Aorta} 					& \multicolumn{2}{c}{Myocardium} 		\\ \hline
+$\mu$ 		& [L/min]   & \multicolumn{2}{c}{4.266208 } & \multicolumn{2}{c|}{0.2597461} \\
+$\sigma$ (68.2\%) 	& [L/min]	& 0.015116 & 0.354327\%		& 0.002062 & 0.793716\%                          	\\
+2$\sigma$ (95.4\%) 	& [L/min] 	& 0.030233 & 0.708654\%		& 0.004123 &  1.587431\%                         				\\
+Min 				& [L/min]  	& 4.2236 & -0.99873\% &  0.256 & -1.442222\% \\
+Max 				& [L/min]	& 4.3163 & +1.174156\%  & 0.2692 & +3.639662\% \\ \cline{3-6} 
+\end{tabular}
+\end{table}
+
+\subsection*{April 25, 2019}
+\begin{table}[H]
+\caption{Flow accuracies third hospital experiment. Percentage relative to average flow. "Min" percentage is said percentage below average flow, whereas "Max" percentage is said percentage above average flow.}
+\label{tab:hospital_third}
+\begin{tabular}{lc|cccc|}
+					&    		& \multicolumn{2}{c}{Aorta} 					& \multicolumn{2}{c}{Myocardium} 		\\ \hline
+$\mu$		& [L/min]   & \multicolumn{2}{c}{4.957478 } & \multicolumn{2}{c|}{0.078503} \\
+$\sigma$ (68.2\%) 	& [L/min]	& 0.017672 & 0.35647\%		& 0.000455 & 0.580096\%                          	\\
+2$\sigma$ (95.4\%) 	& [L/min] 	& 0.035344 & 0.712941\%		& 0.000911 &  1.160192\%                         				\\
+Min 				& [L/min]  	& 4.8890 & -1.3813\% &  0.0771 & -1.78664\% \\
+Max 				& [L/min]	& 5.0054 & +0.966664\%  & 0.0794 & +1.143198\% \\ \cline{3-6} 
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\caption{Flow accuracies fourth hospital experiment. Percentage relative to average flow. "Min" percentage is said percentage below average flow, whereas "Max" percentage is said percentage above average flow.}
+\label{tab:hospital_fourth}
+\begin{tabular}{lc|cccc|}
+					&    		& \multicolumn{2}{c}{Aorta} 					& \multicolumn{2}{c}{Myocardium} 		\\ \hline
+$\mu$ 		& [L/min]   & \multicolumn{2}{c}{1.958676 } & \multicolumn{2}{c|}{0.085269} \\
+$\sigma$ (68.2\%) 	& [L/min]	& 0.032411 & 1.654761\%		& 0.000728 & 0.85379\%                          	\\
+2$\sigma$ (95.4\%) 	& [L/min] 	& 0.064823 & 3.309521\%		& 0.001456 &  1.707581\%                         				\\
+Min 				& [L/min]  	& 1.8828 & -3.87382\% &  0.0839 & -1.6058\% \\
+Max 				& [L/min]	& 2.0123 & +2.737788\%  & 0.0883 & +3.554323\% \\ \cline{3-6} 
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\caption{Flow accuracies fifth hospital experiment. Percentage relative to average flow. "Min" percentage is said percentage below average flow, whereas "Max" percentage is said percentage above average flow.}
+\label{tab:hospital_fifth}
+\begin{tabular}{lc|cccc|}
+					&    		& \multicolumn{2}{c}{Aorta} 					& \multicolumn{2}{c}{Myocardium} 		\\ \hline
+$\mu$ 		& [L/min]   & \multicolumn{2}{c}{1.957693} & \multicolumn{2}{c|}{0.210906} \\
+$\sigma$ (68.2\%) 	& [L/min]	& 0.012358 & 0.631266\%		& 0.005557 & 2.634648\%                          	\\
+2$\sigma$ (95.4\%) 	& [L/min] 	& 0.024716 & 1.262531\%		& 0.0111113 &  5.269295\%                         				\\
+Min 				& [L/min]  	& 1.9192 & -1.96626\% &  0.201 & -4.69679\% \\
+Max 				& [L/min]	& 1.9827 & +1.277357\%  & 0.2349 & +11.37674\% \\ \cline{3-6} 
+\end{tabular}
+\end{table}
+
+\subsection*{May 2, 2019}
+
+\begin{table}[H]
+\caption{Flow accuracies sixth hospital experiment. Percentage relative to average flow. "Min" percentage is said percentage below average flow, whereas "Max" percentage is said percentage above average flow.}
+\label{tab:hospital_sixth}
+\begin{adjustwidth}{-0.25cm}{0cm}
+\begin{tabular}{ll|cccccccc|}
+                   &             & \multicolumn{2}{c}{Aorta} & \multicolumn{2}{c}{LCx}   & \multicolumn{2}{c}{LAD}   & \multicolumn{2}{c}{RCA}   \\ \hline
+$\mu$              & {[}L/min{]} & \multicolumn{2}{c}{2.449} & \multicolumn{2}{c}{0.223} & \multicolumn{2}{c}{0.177} & \multicolumn{2}{c|}{0.205} \\
+$\sigma$ (68.2\%)  & {[}L/min{]} & 0.010      & 0.409\%      & 0.0219     & 9.839\%      & 0.176     & 3.502\%       & 0.015      & 7.222\%      \\
+$2\sigma$ (95.4\%) & {[}L/min{]} & 0.020      & 0.817\%        & 0.043      & 19.679\%     & 0.012     & 7.004\%       & 0.030      & 14.444\%     \\
+Min                & {[}L/min{]} & 2.42       & 1.190\%     & 0.195      & 12.614\%    & 0.164     & 6.965\%      & 0.169     & 17.645\%    \\
+Max                & {[}L/min{]} & 2.472      & 0.925\%     & 0.299      & 34.220\%    & 0.199     & 12.810\%     & 0.244      & 19.186\%   \\
+\cline{3-10}
+\end{tabular}
+\end{adjustwidth}
+\end{table}
+
+\begin{table}[H]
+\caption{Flow accuracies seventh hospital experiment. Percentage relative to average flow. "Min" percentage is said percentage below average flow, whereas "Max" percentage is said percentage above average flow.}
+\label{tab:hospital_seven}
+\begin{adjustwidth}{-0.25cm}{0cm}
+\begin{tabular}{ll|cccccccc|}
+                   &             & \multicolumn{2}{c}{Aorta} & \multicolumn{2}{c}{LCx}   & \multicolumn{2}{c}{LAD}   & \multicolumn{2}{c}{RCA}   \\ \hline
+$\mu$              & {[}L/min{]} & \multicolumn{2}{c}{2.467} & \multicolumn{2}{c}{0.242} & \multicolumn{2}{c}{0.135} & \multicolumn{2}{c|}{0.227} \\
+$\sigma$ (68.2\%)  & {[}L/min{]} & 0.011     & 0.440\%       & 0.013      & 5.394\%      & 0.004      & 3.179\%      & 0.016    & 6.887\%      \\
+$2\sigma$ (95.4\%) & {[}L/min{]} & 0.022     & 0.880\%     & 0.0261     & 10.788\%     & 0.009      & 6.359\%      & 0.031      & 13.774\%     \\
+Min                & {[}L/min{]} & 2.443     & 0.937\%      & 0.220      & 8.882\%     & 0.127      & 5.594\%     & 0.197      & 13.033\%    \\
+Max                & {[}L/min{]} & 2.490     & 0.932\%      & 0.292      & 20.733\%    & 0.1468     & 9.038\%     & 0.271      & 19.503\%   \\ \cline{3-10}
+\end{tabular}
+\end{adjustwidth}
+\end{table}
+
+\begin{table}[H]
+\caption{Flow accuracies eighth hospital experiment. Percentage relative to average flow. "Min" percentage is said percentage below average flow, whereas "Max" percentage is said percentage above average flow.}
+\label{tab:hospital_eight}
+\begin{adjustwidth}{-0.25cm}{0cm}
+\begin{tabular}{ll|cccccccc|}
+                   &             & \multicolumn{2}{c}{Aorta} & \multicolumn{2}{c}{LCx}   & \multicolumn{2}{c}{LAD}   & \multicolumn{2}{c}{RCA}   \\ \hline
+$\mu$              & {[}L/min{]} & \multicolumn{2}{c}{2.440} & \multicolumn{2}{c}{0.252} & \multicolumn{2}{c}{0.241} & \multicolumn{2}{c|}{0.224} \\
+$\sigma$ (68.2\%)  & {[}L/min{]} & 0.014      & 0.571\%      & 0.013      & 5.229\%      & 0.007      & 3.006\%      & 0.013      & 5.920\%      \\
+$2\sigma$ (95.4\%) & {[}L/min{]} & 0.028      & 1.142\%      & 0.026      & 10.457\%     & 0.014      & 6.012\%      & 0.026      & 11.839\%     \\
+Min                & {[}L/min{]} & 2.408      & 1.300\%      & 0.230      & 8.778\%      & 0.217      & 10.036\%     & 0.195      & 12.608\%     \\
+Max                & {[}L/min{]} & 2.465      & 1.032\%      & 0.301      & 19.458\%     & 0.265      & 10.109\%     & 0.267      & 19.594\%    \\ \cline{3-10} 
+\end{tabular}
+\end{adjustwidth}
+\end{table}
