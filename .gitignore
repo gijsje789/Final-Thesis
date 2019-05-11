@@ -1,0 +1,11 @@
+*.log
+*.aux
+*.synctex.gz
+*.bbl
+*.blg
+*.rro
+*.out
+*.toc
+*.dvi
+*.bat
+*.DS_store
