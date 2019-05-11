@@ -68,18 +68,18 @@ Decisions and design choices are given in table \ref{tab:genflow_text}, quantita
 	TFR-GFQ02* 	& Lower limit myocardial perfusion. 				& = 				& 60 				& mL/min/100g \\
 	TFR-GFQ03* 	& Typical perfusion rate during stress. 	 		& > \spacing < 		& 190 \spacing 300 	& mL/min/100g \\
 	TFR-GFQ04*  	& Typical perfusion rate during rest. 			& > \spacing < 		& 60 \spacing 95 	& mL/min/100g \\
-	TFR-GFQ05**	& Upper limit cardiac output.				 		& =					& 8 				& L/min \\
-	TFR-GFQ06+		& Lower limit arterial pressure.				& =					& 56				& mmHg \\
-	TFR-GFQ07+		& Upper limit arterial pressure.				& = 				& 155				& mmHg \\
-	TFR-GFQ08		& Mean Arterial Pressure (MAP)\footnotemark. 	& = 				& 89				& mmHg \\
-	TFR-GFQ09		& Typical MAP.								 	& > \spacing <		& \invchar 70 \spacing 110	& mmHg \\
+	TFR-GFQ05**	& Upper limit cardiac output.				 		& =					& 5 				& L/min \\
+	\sout{TFR-GFQ06+}		& \sout{Lower limit arterial pressure.}			& \sout{=}					& \sout{56}			& \sout{mmHg} \\
+	\sout{TFR-GFQ07+}		& \sout{Upper limit arterial pressure.}				& \sout{=} 				& \sout{155}				&\sout{mmHg} \\
+	\sout{TFR-GFQ08}		& \sout{Mean Arterial Pressure (MAP)}\footnotemark. 	& \sout{=} 				& \sout{89}				&\sout{mmHg} \\
+	\sout{TFR-GFQ09}		& \sout{Typical MAP.}								 	& \sout{> \spacing <}		& \sout{\invchar 70 \spacing 110}	& \sout{mmHg} \\
 	TFR-GFQ10 	& Feedback control accuracy 						& =					& 5					& \% \\
 	\cline{2-5}
 \end{tabular} \\
 \raggedright
 \textit{* combined flow to myocardium, indicated by blue arrows in figure \ref{fig:sim_heart}.} \\
 \textit{** flow \textbf{not} entering the myocardium, indicated by red arrow in figure \ref{fig:sim_heart}.} \\
-\textit{+ based on diastolic and systolic blood pressures, respectively. Measured at dashed line P in figure \ref{fig:sim_heart}.}
+\sout{\textit{+ based on diastolic and systolic blood pressures, respectively. Measured at dashed line P in figure \ref{fig:sim_heart}.}}
 \end{table}
 
 \footnotetext{Calculated as: $MAP \simeq DP + \sfrac{1}{3} (SP-DP)$}
@@ -175,12 +175,12 @@ The injection of tracer into the flow set-up, is carried out by an external infu
 	\hline
 	TFR-ICT01 			& Tracer volume is variable. \\
 	TFR-ICT02			& Tracer activity is variable, also see TFR-ICQ03. \\
-	TFR-ICT03			& Tracer agent is variable. \\
+	\sout{TFR-ICT03}			& \sout{Tracer agent is variable.} \\
 	TFR-ICT04 			& Tracer injection is reproducible, also see TFR-ICT05.\\
 	TFR-ICT05 			& Tracer protocol should match the currently practised protocol. \\
 	\hspace{1.5cm} A) 	& See TFR-ICQ01. \\
 	\hspace{1.5cm} \sout{B)} 	& \sout{Tracer is injected, as bolus, via infusion pump.} \\
-	\hspace{1.5cm} C) 	& A pre-bolus is to precede the main bolus. \\
+	\hspace{1.5cm} \sout{C)} 	& \sout{A pre-bolus is to precede the main bolus.} \\
 	\cline{2-2}
 \end{tabular}
 \end{table}
@@ -194,7 +194,7 @@ The injection of tracer into the flow set-up, is carried out by an external infu
 	\makecell[l]{\textbf{Requirement} \\  \textbf{number}} & \multicolumn{1}{c}{\textbf{Description}} & \multicolumn{1}{c}{ } & \multicolumn{1}{c}{\textbf{Value}} & \multicolumn{1}{c}{\textbf{Unit}} \\
 	\hline
 	TFR-ICQ01 	& Tracer to be used. 					& = 			& \multicolumn{2}{p{35mm}|}{Technetium (\textsuperscript{99m}Tc) Tetrofosmin} \\
-	TFR-ICQ02 	& Pre-bolus activity.					& = 			& 37				& Mega Becquerel \\
+	\sout{TFR-ICQ02} 	& \sout{Pre-bolus activity.}					& \sout{=} 			& \sout{37}				& \sout{Mega Becquerel} \\
 	TFR-ICQ03*	& Typical main bolus activity.		 	& > \spacing < 	& 500 \spacing 700 	& Mega Becquerel \\
 	TFR-ICQ04+	& Typical main bolus volume. 			& > \spacing <	& 1 \spacing 2 		& Millilitre \\
 	TFR-ICQ05+	& Typical main bolus injection speed.	& > \spacing < 	& 1 \spacing 2		& Millilitre per second \\
@@ -255,23 +255,23 @@ This sections specifies the requirements on the physical aspects of the phantom 
 	\hline	
 	TR-PRQ01 & Short Axial diameter.		 						& < 			& 100 							& Millimetre \\
 	TR-PRQ02 & Weight on patient chair. 							& < 			& 171 							& Kilogram   \\
-	TR-PRQ03+ & Phantom's outer dimensions. 							& 				& 								& 			 \\
-	\hspace{1.5cm} A) & Basal-Apical distance. 						& $\approx$ 	& 120 							& Millimetre \\
-	\hspace{1.5cm} B) & Left-Right Lateral distance.				& $\approx$ 	& 80							& Millimetre \\
-	\hspace{1.5cm} C) & Anterior-Posterior distance. 				& $\approx$ 	& 60							& Millimetre \\
+	\sout{TR-PRQ03+} & \sout{Phantom's outer dimensions.} 							& 				& 								& 			 \\
+	\hspace{1.5cm} \sout{A)} & \sout{Basal-Apical distance.} 						& \sout{$\approx$} 	& \sout{120} 							& \sout{Millimetre} \\
+	\hspace{1.5cm} \sout{B)} & \sout{Left-Right Lateral distance.}				& \sout{$\approx$} 	& \sout{80}							& \sout{Millimetre} \\
+	\hspace{1.5cm} \sout{C)} & \sout{Anterior-Posterior distance}. 				& \sout{$\approx$} 	& \sout{60}							& \sout{Millimetre} \\
 	TR-PRQ04++ & Left ventricle dimensions.							& 				& 								& 			 \\
 	\hspace{1.5cm} A)* & Internal Apical-Annular distance.			& > \spacing < 	& \invchar 69.4 \spacing 105.8	& Millimetre \\
 	\hspace{1.5cm} B) & Internal Septal-Lateral distance. 			& > \spacing <	& 38.2 \spacing 55.6			& Millimetre \\
 	\hspace{1.5cm} C) & Internal Anterior-Inferior.					& > \spacing < 	& 46.9 \spacing 68.5 			& Millimetre \\
 	\hspace{1.5cm} D) & Myocardial wall thickness.					& > \spacing < 	& 4.8 \spacing 9.8				& Millimetre \\
 	\hspace{1.5cm} E)= & Internal volume.							& > \spacing < 	& \invchar 47 \spacing 156 	& Millilitre \\
-	TR-PRQ05++ & Right ventricle dimensions.							& 				&								&			 \\
-	\hspace{1.5cm} A) & Internal Apical-Annular distance.			& > \spacing <	& 44.8 \spacing 79.2 			& Millimetre \\
-	\hspace{1.5cm} B) & Internal Septal-Medial	distance.			& > \spacing < 	& 19.2 \spacing 40.0 			& Millimetre \\
-	\hspace{1.5cm} C) & Internal Anterior-Inferior distance.		& > \spacing < 	& 42.2 \spacing 73.6 			& Millimetre \\
-	\hspace{1.5cm} D) & Myocardial wall thickness.					& > \spacing <	& 1.0 \spacing 3.8				& Millimetre \\
-	\hspace{1.5cm} E)= & Internal volume. 							& > \spacing <	&  \invchar 24.9 \spacing 163.0 & Millilitre \\
-	TR-PRQ06+ 	& Phantom resembles weight of average human heart. 	& > \spacing <	& 250 \spacing 350 				& Gram \\
+	\sout{TR-PRQ05++} & \sout{Right ventricle dimensions.}							& 				&								&			 \\
+	\hspace{1.5cm} \sout{A)} & \sout{Internal Apical-Annular distance.}			& \sout{> \spacing <}	& \sout{44.8 \spacing 79.2} 			& \sout{Millimetre} \\
+	\hspace{1.5cm} \sout{B)} & \sout{Internal Septal-Medial	distance.}			& \sout{> \spacing <} 	& \sout{19.2 \spacing 40.0} 			& \sout{Millimetre} \\
+	\hspace{1.5cm} \sout{C)} & \sout{Internal Anterior-Inferior distance.}		& \sout{> \spacing <} 	& \sout{42.2 \spacing 73.6} 			& \sout{Millimetre} \\
+	\hspace{1.5cm} \sout{D)} & \sout{Myocardial wall thickness.}					& \sout{> \spacing <}	& \sout{1.0 \spacing 3.8}				& \sout{Millimetre} \\
+	\hspace{1.5cm} \sout{E)=} & \sout{Internal volume.} 							& \sout{> \spacing <}	&  \sout{\invchar 24.9 \spacing 163.0} & \sout{Millilitre} \\
+	\sout{TR-PRQ06+} 	& \sout{Phantom resembles weight of average human heart.} 	& \sout{> \spacing <}	& \sout{250 \spacing 350} 				& \sout{Gram}\\
 	TR-PRQ07	& Flow path height relative to platform (see figure \ref{fig:QRM_thorax} and \ref{fig:QRM_extension}).			& 				&								& \\
 	\hspace{1.5cm} A)	& Without extension rings.					& $\approx$ 	& 120 $\pm$ 10					& Millimetre \\
 	\hspace{1.5cm} B)	& With extension ring M.					& $\approx$ 	& 145 $\pm$ 10					& Millimetre \\
@@ -281,7 +281,7 @@ This sections specifies the requirements on the physical aspects of the phantom 
 \end{tabular} \\
 \raggedright
 \textit{* Annular $\rightarrow$ Annulus $\rightarrow$ assuming mitral valve level.} \\
-\textit{+ based on \cite{openstax2013anatomy}.} \\
+\sout{\textit{+ based on OpenStax College (2013).}} \\
 \textit{++ based on \cite{lin2008cardiac}.} \\
 \textit{= based on \cite{maceira2006normalizedleft} and \cite{maceira2006normalizedright}}
 \end{table}
