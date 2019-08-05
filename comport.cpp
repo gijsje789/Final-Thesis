@@ -218,12 +218,22 @@ bool ComPort::sendParametersToDevice()
             serial_port->write(message.toUtf8());
             while(serial_port->waitForBytesWritten(-1)) {}
             std::this_thread::sleep_for(std::chrono::milliseconds(200));
-            message = QString("%1 %2 %3 %4 %5\n").
-                    arg(pump.name,
-                        QString::number(350),
-                        QString::number(2),
-                        QString::number(20),
-                        QString::number(0));
+
+            if(pump.rate < 2.0) {
+                message = QString("%1 %2 %3 %4 %5\n").
+                        arg(pump.name,
+                            QString::number(100),
+                            QString::number(0.25),
+                            QString::number(16),
+                            QString::number(0));
+            } else {
+                message = QString("%1 %2 %3 %4 %5\n").
+                        arg(pump.name,
+                            QString::number(350),
+                            QString::number(2),
+                            QString::number(20),
+                            QString::number(0));
+            }
             message.replace(0, 1, 'C');
             qDebug() << "writing: " << message;
             serial_port->write(message.toUtf8());
